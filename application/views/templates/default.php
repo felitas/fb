@@ -14,9 +14,6 @@
     <link href="<?php echo base_url() ?>css/metro-icons.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>css/metro-responsive.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>css/metro-schemes.css" rel="stylesheet">
-    
-
-
     <link href="<?php echo base_url() ?>css/docs.css" rel="stylesheet">
 
     
@@ -288,41 +285,21 @@
   <body>
   
   <header>
+      <!--Horizontal Navbar-->
       <nav class="navbar navbar-default" style="margin-bottom: 0px !important;">
         <div class="container-fluid" style="padding-left: 15px; padding-right: 15px;">
-          <!-- Brand and toggle get grouped for better mobile display -->
-
           <div class="navbar-header">
-            
             <a class="navbar-brand" href="#">Logo</a>
           </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
             <ul class="nav navbar-nav navbar-right" style="hidden-sm">
               <li class="dropdown">
                   <a class="menu-a" style="cursor: pointer;" href="#"><span class="icon mif-user" style="margin-bottom: 4px;"></span> <span class="menu-text">Welcome, <?php echo $this->session->user_name?></span></a>
               </li>
-            </ul>
-              
-            
-           <!--Main menu ul ends-->
-             
-          
-        </div><!-- /.container-fluid -->
+            </ul>            
+        </div>
       </nav>
-      <div id="mySidenav" class="sidenav">
+       
 
-        <a href="javascript:void(0)" class="closebtn" onclick="triggerMenu()" style="border-bottom: none;font-size:25px!important; display: none;">&times;</a>
-        <a onclick="triggerMenu()" id="menu-button"><div class="icon-navbar"><i class="fa fa-bars" style="color: #fff!important; cursor: pointer" aria-hidden="true" ></i></div></a>
-        <a href="<?php echo base_url() ?>"><div class="icon-navbar"><i class="fa fa-home" aria-hidden="true"></i></div><span class="menu-text">Home</span></a>
-        <a href="#"><div class="icon-navbar"><i class="fa fa-calendar" aria-hidden="true"></i></div><span class="menu-text">Transaksi</span></a>
-          <ul></ul>
-        <a href="<?php echo base_url('new_budget/transaction') ?>"><div class="icon-navbar"><i class="fa fa-plus" aria-hidden="true"></i></div><span class="menu-text">Inventory</span></a>
-        <a href="<?php echo base_url('giro') ?>"><div class="icon-navbar"><i class="fa fa-money" aria-hidden="true"></i></div><span class="menu-text">Toko</span></a>
-        <a href="<?php echo base_url('main/cicilan_tahunan/') ?>"><div class="icon-navbar"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></div><span class="menu-text">Kontak</span></a>
-        <a href="<?php echo base_url('main/all_transactions/') ?>"><div class="icon-navbar"><i class="fa fa-dollar" aria-hidden="true"></i></div><span class="menu-text">Konfigurasi</span></a> 
-        
-      </div>
   </header>
   
 
