@@ -1020,7 +1020,7 @@ a.tag {
   margin-left: 102.12765%;
 }
 .grid .row.cells6 > .cell {
-  width: 14.893625%;
+  width: 14.893625% !important;
 }
 .grid .row.cells6 > .cell.colspan2 {
   width: 31.9149%;
@@ -1032,7 +1032,7 @@ a.tag {
   width: 65.95745%;
 }
 .grid .row.cells6 > .cell.colspan5 {
-  width: 82.978725%;
+  width: 82.978725% !important;
 }
 .grid .row.cells6 > .cell.colspan6 {
   width: 100%;
@@ -1494,22 +1494,22 @@ a.tag {
   margin-left: 100%;
 }
 .grid.condensed .row.cells6 > .cell {
-  width: 16.66666667%;
+  width: 16.66666667% !important;
 }
 .grid.condensed .row.cells6 > .cell.colspan2 {
-  width: 33.33333333%;
+  width: 33.33333333% !important;
 }
 .grid.condensed .row.cells6 > .cell.colspan3 {
-  width: 50%;
+  width: 50% !important;
 }
 .grid.condensed .row.cells6 > .cell.colspan4 {
-  width: 66.66666667%;
+  width: 66.66666667% !important;
 }
 .grid.condensed .row.cells6 > .cell.colspan5 {
-  width: 83.33333333%;
+  width: 83.33333333% !important;
 }
 .grid.condensed .row.cells6 > .cell.colspan6 {
-  width: 100%;
+  width: 100% !important;
 }
 .grid.condensed .row.cells6 > .cell.offset1 {
   margin-left: 16.66666667%;

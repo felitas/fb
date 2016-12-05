@@ -81,6 +81,8 @@
       /*Navbars*/
       .dropdown-toggle,.non-drop{
         padding-left: 6% !important;
+        padding-top: 5% !important;
+        padding-bottom: 5% !important;
       }
       .sidebar2>li>a{
         background-color: #2e363f !important;
@@ -98,7 +100,7 @@
         background-color: #2e363f !important;
         position: fixed;
         height: 100% !important;
-        width: 16.8%;
+        width: 17%;
         z-index: 6;
       }
       
@@ -110,6 +112,10 @@
       .sidebar2 li:hover a{
         background-color: #0f3a76 !important;
       }
+      .d-menu li:hover a{
+        background-color: #2C6BC2 !important;
+      }
+
 
       .d-menu>li>a{
         padding-left: 8% !important;
@@ -184,7 +190,7 @@
   <body>
   <div class="grid condensed" style="margin-top: 0px;">
     <div class="row cells6">
-      <div class="cell">
+      <div class="cell colspan1">
         <ul class="sidebar2">
             <li><a href="<?php echo base_url('home') ?>" class="menu-a non-drop"><div class="menu-icon"><i class="fa fa-home" aria-hidden="true"></i></div> <span class="menu-text">Home</span></a></li>
             <li>
