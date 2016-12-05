@@ -55,32 +55,11 @@
         font-size: 12px;
         line-height: 30px;
       }
-     
-      .navbar{
-        background-color: <?php echo $configuration->primary_color ?>;
-        height: 50px;
-        border:none;
-        border-radius: 0px;
-      }
       .bg-primary{
         background-color: <?php echo $configuration->primary_color ?> !important;
         color: white !important;
       }
-      .overlay{
-        position: fixed;
-        width: 100%;
-        height: 0;
-        z-index: 3;
-        left: 0;
-        top: 50px;
-        opacity: 0;
-        background-color:#fff;
-        overflow-x: hidden;
-        overflow-y: hidden;
-        -webkit-box-shadow: 0 7px 10px 0 #9E9E9E;
-        box-shadow: 0 7px 10px 0 #9E9E9E;
-        transition: 0.2s ease-in;
-      }
+      /*Toggle Currency pop up*/
       #kurstoggle{
         background-color: <?php echo $configuration->primary_color ?> !important;
         height: 70px;
@@ -98,88 +77,70 @@
       #currency_head{
         border-bottom: 0px;
       }
-      @media (max-width: 1127px){
-      .tile-group {
-        margin:0 !important;
-        float: left !important;
-      }}
-      @media(max-width: 500px){
-        .navbar-brand{
-          display: none;
-        }
+
+      /*Navbars*/
+      .dropdown-toggle,.non-drop{
+        padding-left: 6% !important;
+      }
+      .sidebar2>li>a{
+        background-color: #2e363f !important;
+        color: #fff;
+      }
+      .sidebar2 li{
+        border-top: none;
+      }
+      .sidebar2,.sidebar2>li{
+        border-top: 1px solid #37414b; 
+        border-bottom: 1px solid #1f262d;
+        border-left: none;
+      }
+      .sidebar2{
+        background-color: #2e363f !important;
+        position: fixed;
+        height: 100% !important;
+        width: 16.8%;
+        z-index: 6;
+      }
+      
+      .sidebar2 li li:not(:hover) a{
+        background-color: #1e242b !important;
+        color: white;
       }
 
+      .sidebar2 li:hover a{
+        background-color: #0f3a76 !important;
+      }
+
+      .d-menu>li>a{
+        padding-left: 8% !important;
+      }
+      .menu-text{
+        font-size: 12px;
+      }
+      .menu-icon{
+        display: inline-block;
+        width: 25px;
+      }
+      /*End of navbar setting*/
       @media(max-width: 425px){
         .tile-large,.tile,.tile-wide{
           width: 150px;
           height: 150px;
         }
-        .navbar-nav>li{
-          width: 14.27% !important;
-          text-align: center;
-        }
-        .navbar-nav{
-          width: 100%;
-        }
         .tile-group{
           width: 320px !important;
           margin: 0 3% !important;
         }
-        #transaksi-container{
-          margin:0 !important;
-        }
-        .navbar > .container-fluid{
-          padding: 0 !important;
-        }
       }
+
       .tile-group{
         margin: 0 12%;
-      }
-      .overlay-content{
-        position: relative;
-        top: 0%;
-        width: 100%;
-        text-align: center;
-        margin-top: 20px;
-      }
-      .navbar-nav>li{
-        border-right: 1px solid #fff;
-      }
-      .navbar-nav>li:hover{
-
-        background-color: white !important;
-        -webkit-transition: all 0.3s ease-in;
-        -moz-transition: all 0.3s ease-in;
-        transition: all 0.3s ease-in;
-      }
-      .navbar-nav>li:hover .menu-a {
-        color: <?php echo $configuration->primary_color ?> !important;
-      }
-      .navbar-nav>li>a{
-        color: white !important;
-      }
-      .navbar-brand{
-        border-right: 1px solid #fff; 
-        color: white !important;
       }
       .tile-group-title{
         color: black !important;
         text-transform: uppercase;
       }
-      .buka{
 
-        background-color: #FFFFFF !important;
-        -webkit-transition: all 0.3s ease-in;
-        -moz-transition: all 0.3s ease-in;
-        transition: all 0.3s ease-in;
-      }
-      .buka>a:visited,.buka>a:focus,.buka>a:active,.buka>a:hover{
-        color: <?php echo $configuration->primary_color ?> !important;
-        background-color: #FFFFFF;
-        -webkit-transition: all 0.3s ease-in;
-        -moz-transition: all 0.3s ease-in;
-        transition: all 0.3s ease-in;
-      }
       .input-control input, .input-control textarea, .input-control select{
         border-color: rgba(127, 140, 141,1.0);
       }
@@ -216,94 +177,87 @@
     }
 
 
-  /* The side navigation menu */
-   #mySidenav .fa
-    {
-      font-size:18px;
-    }
-
-    #mySidenav a
-    {
-      font-size:18px;
-    }
-    .sidenav {
-        height: 100%; /* 100% Full-height */
-        width: 220px; /* 0 width - change this with JavaScript */
-        position: fixed; /* Stay in place */
-        z-index: 30; /* Stay on top */
-        left: -8px;
-        background-color: #948a6a; /* Black*/
-        overflow-x: hidden; /* Disable horizontal scroll */
-        padding-top: 10px; /* Place content 60px from the top */
-        transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-
-    }
-
-    #menu-button{
-        color: #948a6a !important;
-    }
-
-
-    /* The navigation menu links */
-    .sidenav .icon-navbar{
-        display: inline-block;
-        width: 27px;
-        margin-left: -7px;
-    }
-
-    .sidenav a {
-        padding: 12px 8px 12px 22px;
-        text-decoration: none;
-        font-size: 15px !important;
-        color: #ecf0f1;
-        display: block;
-        transition: 0.3s
-    }
-
-    /* When you mouse over the navigation links, change their color */
-    .sidenav a:hover, .offcanvas a:focus{
-      background-color: rgba(0, 0, 0,0.5);
-        color: #f1f1f1;
-    }
-
-    /* Position and style the close button (top right corner) */
-    .sidenav .closebtn {
-        position: absolute;
-        top: 0;
-        right: 10px;
-        font-size: 36px;
-        margin-left: 100px;
-    }
-    .sidenav .closebtn:hover{
-      background-color: transparent;
-      color: #bdc3c7;
-    }
-
+  
     </style>
 
   </head>
   <body>
-  
-  <header>
-      <!--Horizontal Navbar-->
-      <nav class="navbar navbar-default" style="margin-bottom: 0px !important;">
-        <div class="container-fluid" style="padding-left: 15px; padding-right: 15px;">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">Logo</a>
-          </div>
-            <ul class="nav navbar-nav navbar-right" style="hidden-sm">
-              <li class="dropdown">
-                  <a class="menu-a" style="cursor: pointer;" href="#"><span class="icon mif-user" style="margin-bottom: 4px;"></span> <span class="menu-text">Welcome, <?php echo $this->session->user_name?></span></a>
-              </li>
-            </ul>            
-        </div>
-      </nav>
-       
+  <div class="grid condensed" style="margin-top: 0px;">
+    <div class="row cells6">
+      <div class="cell">
+        <ul class="sidebar2">
+            <li><a href="<?php echo base_url('home') ?>" class="menu-a non-drop"><div class="menu-icon"><i class="fa fa-home" aria-hidden="true"></i></div> <span class="menu-text">Home</span></a></li>
+            <li>
+                <a class="dropdown-toggle" href="#"><div class="menu-icon"><i class="fa fa-money" aria-hidden="true"></i></div> <span class="menu-text">Penjualan</span></a>
+                <ul class="d-menu" data-role="dropdown">
+                  <li><a><div class="menu-icon"><i class="fa fa-file-text" aria-hidden="true"></i></div> <span class="menu-text"> Daftar Penjualan</span></a></li>
+                  <li><a><div class="menu-icon"><i class="fa fa-plus-square" aria-hidden="true"></i></div> <span class="menu-text"> Penjualan Baru</span></a></li>
+                  <li><a><div class="menu-icon"><i class="fa fa-check-square" aria-hidden="true"></i></div> <span class="menu-text">Daftar Booking</span></a></li>
+                  <li><a><div class="menu-icon"><i class="fa fa-check-square-o" aria-hidden="true"></i></div> <span class="menu-text">Booking Baru</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#"><div class="menu-icon"><i class="fa fa-shopping-basket" aria-hidden="true"></i></div> <span class="menu-text">Pembelian</span></a>
+                <ul class="d-menu" data-role="dropdown">
+                  <li><a><div class="menu-icon"><i class="fa fa-file-text" aria-hidden="true"></i></div> <span class="menu-text"> Daftar Pembelian</span></a></li>
+                  <li><a><div class="menu-icon"><i class="fa fa-cart-plus" aria-hidden="true"></i></div> <span class="menu-text"> Pembelian Baru</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#"><div class="menu-icon"><i class="fa fa-mail-reply" aria-hidden="true"></i></div> <span class="menu-text">Buyback</span></a>
+                <ul class="d-menu" data-role="dropdown">
+                  <li><a><div class="menu-icon"><i class="fa fa-file-text" aria-hidden="true"></i></div> <span class="menu-text">Daftar Buyback</span></a></li>
+                  <li><a><div class="menu-icon"><i class="fa fa-plus-square" aria-hidden="true"></i></div> <span class="menu-text">Buyback Baru</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#"><div class="menu-icon"><i class="fa fa-cubes" aria-hidden="true"></i></div> <span class="menu-text">Inventori</span></a>
+                <ul class="d-menu" data-role="dropdown">
+                  <li><a><div class="menu-icon"><i class="fa fa-file-text" aria-hidden="true"></i></div> <span class="menu-text">Daftar Barang</span></a></li>
+                  <li><a href="<?php echo base_url('product/add_product') ?>"><div class="menu-icon"><i class="fa fa-plus-square" aria-hidden="true"></i></div> <span class="menu-text">Input Barang</span></a></li>
+                  <li><a><div class="menu-icon"><i class="fa fa-file-text" aria-hidden="true"></i></div> <span class="menu-text">Daftar Mutasi</span></a></li>
+                  <li><a><div class="menu-icon"><i class="fa fa-send" aria-hidden="true"></i></div> <span class="menu-text">Kirim Barang</span></a></li>
+                  <li><a><div class="menu-icon"><i class="fa fa-truck" aria-hidden="true"></i></div> <span class="menu-text">Terima Barang</span></a></li>
+                  <li><a><div class="menu-icon"><i class="fa fa-archive" aria-hidden="true"></i></div> <span class="menu-text">Stok Opnam</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#"><div class="menu-icon"><i class="fa fa-phone" aria-hidden="true"></i></div> <span class="menu-text">Kontak</span></a>
+                <ul class="d-menu" data-role="dropdown">
+                  <li><a><div class="menu-icon"><i class="fa fa-user-circle" aria-hidden="true"></i></div> <span class="menu-text">Kostumer</span></a></li>
+                  <li><a><div class="menu-icon"><i class="fa fa-university" aria-hidden="true"></i></div> <span class="menu-text">Supplier</span></a></li>
+                  <li><a><div class="menu-icon"><i class="fa fa-plus-square" aria-hidden="true"></i></div> <span class="menu-text">Tambah Kontak</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#"><div class="menu-icon"><i class="fa fa-wrench" aria-hidden="true"></i></div> <span class="menu-text">Konfigurasi</span></a>
+                <ul class="d-menu" data-role="dropdown">
+                  <li><a><div class="menu-icon"><i class="fa fa-file-text" aria-hidden="true"></i></div> <span class="menu-text">Daftar Baki</span></a></li>
+                  <li><a><div class="menu-icon"><i class="fa fa-tags" aria-hidden="true"></i></div> <span class="menu-text">Kategori Barang</span></a></li>
+                  <li><a><div class="menu-icon"><i class="fa fa-puzzle-piece" aria-hidden="true"></i></div> <span class="menu-text">Model Barang</span></a></li>
+                </ul>
+            </li>
 
-  </header>
+        </ul>      
+      </div>
+      <div class="cell colspan5">
+        <ul class="h-menu">          
+          <li class="place-right no-hovered">
+              <a href="#" class="dropdown-toggle">Welcome, <?php echo $this->session->user_name?></a>
+              <ul  class="d-menu" data-role="dropdown">
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Partners</a></li>
+              </ul>
+          </li>
+        </ul>
+        
+        <?php echo $body ?>      
+      </div>
+    </div>
+  </div>
   
 
-  <?php echo $body ?>
+  
   
   <button onclick="toggleMetroCharm('#charm_currency')" id="kurstoggle" class="button bg-primary"><span class="icon mif-dollar2 mif-2x" style="margin-bottom: 4px;"></span>Kurs</button>
   <?php $currencies = $this->crud_model->get_data('currency')->result();?>
