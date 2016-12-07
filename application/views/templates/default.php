@@ -149,7 +149,7 @@
           <li><a href="">Buyback Baru</a></li>
         </ul>
       </li>
-      <li class="submenu"> <a href="#"><i class="fa fa-cubes"></i><span>Outlet</span></a>
+      <li class="submenu"> <a href="#"><i class="fa fa-bank"></i><span>Outlet</span></a>
         <ul>
           <li><a href="<?php echo base_url('outlets') ?>">Daftar Outlet</a></li>
           <li><a href="<?php echo base_url('outlets/add_outlet') ?>">Outlet Baru</a></li>
@@ -160,25 +160,34 @@
       <li class="submenu"> <a href="#"><i class="fa fa-cubes"></i><span>Inventori</span></a>
         <ul>
           <li><a href="error403.html">Daftar Barang</a></li>
-          <li><a href="error404.html">Error 404</a></li>
-          <li><a href="error405.html">Error 405</a></li>
-          <li><a href="error500.html">Error 500</a></li>
+          <li><a href="<?php echo base_url('product/add_product') ?>l">Input Barang</a></li>
+          <li><a href="error405.html">Kirim</a></li>
+          <li><a href="error500.html">Terima</a></li>
+          <li><a href="<?php echo base_url('category') ?>">Kategori</a></li>
+          <li><a href="<?php echo base_url('model') ?>">Model</a></li>
+          <li><a href="<?php echo base_url('tray') ?>">Daftar Baki</a></li>
+          <li><a href="error500.html">Stok Opnam</a></li>
+
         </ul>
       </li>
-      <li class="submenu"> <a href="#"><i class="fa fa-cubes"></i><span>Kontak</span></a>
+      <li class="submenu"> <a href="#"><i class="fa fa-address-book"></i><span>Kontak</span></a>
         <ul>
-          <li><a href="error403.html">Error 403</a></li>
-          <li><a href="error404.html">Error 404</a></li>
-          <li><a href="error405.html">Error 405</a></li>
-          <li><a href="error500.html">Error 500</a></li>
+          <li><a href="<?php echo base_url('customer') ?>">Daftar Customer</a></li>
+          <li><a href="<?php echo base_url('supplier') ?>">Daftar Supplier</a></li>
+          <li><a href="<?php echo base_url('customer/add_customer') ?>">Tambah Customer</a></li>
+          <li><a href="<?php echo base_url('supplier/add_supplier') ?>">Tambah Supplier</a></li>
         </ul>
       </li>
-      <li class="submenu"> <a href="#"><i class="fa fa-cubes"></i><span>Konfigurasi</span></a>
+      <li class="submenu"> <a href="#"><i class="fa fa-gear"></i><span>Konfigurasi</span></a>
         <ul>
-          <li><a href="error403.html">Error 403</a></li>
-          <li><a href="error404.html">Error 404</a></li>
-          <li><a href="error405.html">Error 405</a></li>
-          <li><a href="error500.html">Error 500</a></li>
+          <li><a href="error403.html">Toko</a></li>
+          <li><a href="<?php echo base_url('configuration/Currency') ?>">Kurs</a></li>
+          <li><a href="<?php echo base_url('configuration/gold_amount') ?>">Gold</a></li>
+          <li><a href="error500.html">Diamond</a></li>
+          <li><a href="error500.html">Promo</a></li>
+          <li><a href="<?php echo base_url('configuration/color') ?>">Tampilan</a></li>
+          <li><a href="error500.html">Sales</a></li>
+          <li><a href="error500.html">Member</a></li>
         </ul>
       </li>
       <li class="content"> <span>Monthly Bandwidth Transfer</span>
