@@ -205,10 +205,12 @@
         <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
     </div>
   <!--End-breadcrumbs-->
-
   <!--Action boxes-->
     <div class="container-fluid">
-      <?php echo $body ?>
+    
+        <?php echo $body ?>  
+    </div>
+    
 
       
     </div>
