@@ -1,32 +1,20 @@
-<link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
-<link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
-<link href="<?php echo base_url() ?>css/footable.core.css" type="text/css" rel="stylesheet">
-<div class="container">
-	<div class="grid">
-		<div class="row">
-	        <div class="cell">
-	            <h3 style="display: inline-block;"><small><a href="<?php echo base_url() ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Menu</a></small></h3>
-	            <h3 style="display:inline-block;float:right;"><small><a href="<?php echo base_url('customer/add_customer') ?>">Tambah Customer <span class="fa fa-arrow-circle-o-right"></span></a></small></h3>
-	        </div>
-	    </div>
-		<div class="row form-title">
-	        <div class="cell">
-	            <h1 style="margin-bottom: 20px;">Daftar Customer</h1>
-	            <hr class="bg-primary">    
-	        </div>
-	    </div>
-	    <div class="row">
-	    	<div class="cell">
-	    		<div class="input-control text full-size">
-                    <input type="text" placeholder="Cari customer" id="filter" >
-                </div>
-	    	</div>
-	    </div>
-		<div class="row">
-			<div class="cell">
-				<div class="table-responsive toggle-circle-filled">
-				<table class="table table-condensed" id="table_customer" data-page-size="10" data-filter="#filter">
-					<thead>
+<div id="content-header">
+    <div id="breadcrumb"> 
+    	<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
+    	<a href="<?php echo base_url('customer/add_customer') ?>">Tambah Customer <span class="fa fa-arrow-circle-o-right"></span></a>
+    </div>
+    <h1 style="margin-bottom: 20px;">Daftar Customer</h1>
+</div>
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="input-control text full-size">
+		        <input type="text" placeholder="Cari Customer" id="filter" >
+		    </div>
+		    <div class="cell table-responsive toggle-circle-filled">
+		    	<table class="table hovered border table-condensed" id="table_customer" data-filter="#filter" data-page-size="10">
+		    		<thead>
 						<tr>
 							<th data-type="numeric">No</th>
 							<th>Nama</th>
@@ -63,14 +51,15 @@
 								<td colspan="8" class="text-center"><h3>Table kosong</h3></td>
 							</tr>
 						<?php endif; ?>
-					</tbody>
-				</table>
-				</div>
-			</div>
+					</tbody>	
+		    	</table>
+		    </div>
 		</div>
 	</div>
 </div>
 
+<link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
 <script src="<?php echo base_url() ?>js/footable.js"></script>
 <script src="<?php echo base_url() ?>js/footable.filter.js"></script>
@@ -78,12 +67,15 @@
 <script src="<?php echo base_url() ?>js/footable.sort.js" type="text/javascript"></script>
 
 <script>
-	$('#table_customer').footable();
 
     $(document).ready(function(){
         <?php if($this->session->flashdata('customer')): ?>
             <?php echo $this->session->flashdata('customer') ?>
         <?php endif; ?>
+
+        alert('felita');
+
+        $('#table_customer').footable();
     });
 
     

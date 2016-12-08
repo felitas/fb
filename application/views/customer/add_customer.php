@@ -20,7 +20,7 @@
             <div class="control-group">
                 <label class="control-label">Jenis Customer</label>
                 <div class="controls">
-                    <select name="" id="">
+                    <select name="customer_type" id="">
                         <option value="Regular">Customer Biasa</option>
                         <option value="Member">Member</option>
                     </select>
