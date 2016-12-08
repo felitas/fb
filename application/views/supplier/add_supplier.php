@@ -1,71 +1,51 @@
-<div class="container">
-    <div class="grid">
+<div id="content-header">
+    <div id="breadcrumb">
+        <a href="<?php echo base_url('supplier') ?>">
+        <span class="fa fa-arrow-circle-o-left"></span>Kembali ke daftar supplier
+        </a>
+    </div>
+    <h1 style="margin-bottom: 20px;">Tambah Supplier Baru</h1>
+</div>
 
-        <div class="row">
-            <div class="cell">
-                <h3 style="display:inline-block"><small><a href="<?php echo base_url('supplier') ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar supplier</a></small></h3>
-            </div>
-        </div>
-        <div class="row form-title">
-            <div class="cell">
-                <h1 style="margin-bottom: 20px;">Tambah Supplier Baru</h1>
-                <hr class="bg-primary">    
-            </div>
-        </div>
-        <?php echo form_open('supplier/add_supplier',array('data-role' =>  'validator','data-on-error-input' => 'notifyOnErrorInput','data-show-error-hint' => 'false'));?>
-        <div class="row">
-            <div class="cell">
-                <label>Nama Supplier</label>
-                <div class="input-control text full-size">
-                    <input type="text" placeholder="Nama Supplier" data-validate-func="required" data-validate-hint="Nama supplier harus diisi" name="supplier_name">
-                    
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <?php echo form_open('supplier/add_supplier',array('class'=>'form-horizontal')) ?>
+            <div class="control-group">
+                <label for="" class="control-label">Nama Supplier</label>
+                <div class="controls">
+                    <input type="text" placeholder="Nama Supplier" name="supplier_name" class="tip-bottom">
                 </div>
             </div>
-        </div>
-
-        <div class="row cells2">
-            <div class="cell">
-                <label>No. Telp</label>
-                <div class="input-control text full-size" data-role="input">
-                    <input type="text" placeholder="Nomor Telephone Supplier" name="supplier_phone" data-validate-func="digits" data-validate-hint="No. telp hanya terdiri dari angka">
-                    
+            <div class="control-group">
+                <label for="" class="control-label">No. Telepon</label>
+                <div class="controls">
+                    <input type="text" placeholder="Nomor Telepon Supplier" name="supplier_phone" class="tip-bottom">
                 </div>
             </div>
-            <div class="cell">
-                <label>E-mail</label>
-                <div class="input-control text full-size" data-role="input">
-                    <input type="email" placeholder="Email Supplier" name="supplier_email">
-                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+            <div class="control-group">
+                <label for="" class="control-label">Email</label>
+                <div class="controls">
+                    <input type="email" placeholder="Email Supplier" name="supplier_email" class="tip-bottom">
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="cell">
-                <label>Alamat</label>
-                <div class="input-control textarea full-size" data-role="input" data-text-auto-resize="true">
-                    <textarea name="supplier_address"></textarea>
+            <div class="control-group">
+                <label for="" class="control-label">Alamat</label>
+                <div class="controls">
+                    <textarea name="supplier_address" placeholder="Alamat Supplier" id="" cols="30" rows="10"></textarea>
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="cell">
-                <label>Keterangan</label>
-                <div class="input-control text full-size">
-                    <input type="text" placeholder="Keterangan Supplier" name="supplier_desc">
-                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+            <div class="control-group">
+                <label for="" class="control-label">Keterangan</label>
+                <div class="controls">
+                    <input type="text" placeholder="Keterangan Supplier" name="supplier_desc" class="tip-bottom">
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="cell text-center">
-                <input type="Submit" class="button bg-primary" value="Submit" name="submit">
+            <div class="form-actions">
+                <input type="submit" name="submit" class="btn btn-info" value="Submit">
             </div>
+            <?php echo form_close(); ?>
         </div>
-
-        <?php echo form_close()?>
     </div>
 </div>
 

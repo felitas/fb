@@ -1,7 +1,7 @@
 <div id="content-header">
     <div id="breadcrumb">
         <a href="<?php echo base_url('customer') ?>">
-        <span class="fa-arrow-circle-o-left"></span>Kembali ke daftar customer
+        <span class="fa fa-arrow-circle-o-left"></span>Kembali ke daftar customer
         </a>
     </div>
 </div>
