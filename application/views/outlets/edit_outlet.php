@@ -1,70 +1,71 @@
-<div class="container">
-    <?php echo form_open('outlets/edit_outlet/'.$outlet->id, array('data-role' =>  'validator','data-on-error-input' => 'notifyOnErrorInput','data-show-error-hint' => 'false')) ?>
-    <div class="grid">
-        <div class="row">
-            <div class="cell">
-                <h3><small><a href=""><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar outlet</a></small></h3>
+<div id="content-header">
+    <div id="breadcrumb"> <a href="<?php echo base_url('outlets') ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar outlet</a></div>
+    <h1 style="margin-bottom: 20px;">Edit Outlet <?php echo ucfirst($outlet->name) ?></h1>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        <?php echo form_open('outlets/edit_outlet/'.$outlet->id, array('class'=>'form-horizontal')) ?>
+        <div class="control-group">
+            <label class="control-label">Nama Toko</label>
+            <div class="controls">
+              <input type="text" placeholder="Nama Toko" name="outlet_name" title="Go to Home" class="tip-bottom" value="<?php echo $outlet->name ?>">
             </div>
         </div>
-
-        <div class="row form-title">	 
-            <div class="cell">
-            	<h1 style="margin-bottom: 20px;">Edit Outlet <?php echo ucfirst($outlet->name) ?></h1>
-                <hr class="bg-primary">	
+        <div class="control-group">
+            <label class="control-label">Kode Toko</label>
+            <div class="controls">
+              <input type="text" placeholder="Masukkan Kode Toko (2 Karakter)" title="Contoh : KM" name="outlet_code" value="<?php echo $outlet->code ?>">
+            </div>
+        </div>    
+        <div class="control-group">
+            <label class="control-label">Nama Manager Toko</label>
+            <div class="controls">
+              <input type="text" placeholder="Nama Lengkap Store Manager" name="outlet_manager" value="<?php echo $outlet->store_manager ?>">
             </div>
         </div>
-    	
-    	<div class="row cells2">
-    		<div class="cell">
-    			<label>Nama Toko</label>
-                <div class="input-control text full-size">
-                    <input type="text" placeholder="Nama Toko" name="outlet_name" value="<?php echo $outlet->name ?>" data-validate-func="required" data-validate-hint="Nama toko harus diisi">
+        <div class="control-group">
+            <label class="control-label">No. Telp</label>
+            <div class="controls">
+              <input type="text" placeholder="Nomor Telephone Outlet" name="outlet_phone" value="<?php echo $outlet->phone ?>">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Alamat</label>
+            <div class="controls">
+              <textarea name="outlet_address" placeholder="Alamat Toko"><?php echo $outlet->address ?></textarea>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Username</label>
+            <div class="controls">
+              <input type="text" placeholder="Username Outlet" name="outlet_username" onblur="check_username(this)" value="<?php echo $outlet->username ?>">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Password</label>
+            <div class="controls">
+              <input type="password" placeholder="Password" name="outlet_password">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Margin Toko</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="number" placeholder="Perbedaan Dasar Harga dengan Toko Utama" name="outlet_margin" class="span11">
+                    <span class="add-on">%</span>     
                 </div>
-    		</div>
-    		<div class="cell">
-    			<label>Kode Toko</label>
-                <div class="input-control text full-size">
-                    <input type="text" placeholder="Masukkan Kode Toko (2 Karakter)" value="<?php echo $outlet->code ?>" title="Contoh : KM" name="outlet_code" data-validate-func="required, maxlength" data-validate-arg=",2" data-validate-hint="Kode toko harus 2 huruf">
-                </div>
-    		</div>
-    	</div>
-
-    	<div class="row">
-        	<div class="cell">
-        		<label>Nama Store Manager</label>
-        		<div class="input-control text full-size" data-role="input">
-    			    <input type="text" placeholder="Nama Lengkap Store Manager" name="outlet_manager" value="<?php echo $outlet->store_manager ?>">
-    			    <button class="button helper-button clear"><span class="mif-cross"></span></button>
-    			</div>
-        	</div>
-        </div>
-
-    	<div class="row">
-        	<div class="cell">
-        		<label>No. Telp</label>
-        		<div class="input-control text full-size" data-role="input">
-    			    <input type="text" placeholder="Nomor Telephone Outlet" name="outlet_phone" value="<?php echo $outlet->phone ?>">
-    			    <button class="button helper-button clear"><span class="mif-cross"></span></button>
-    			</div>
-        	</div>
-        </div>
-
-        <div class="row">
-        	<div class="cell">
-        		<label>Alamat</label>
-        		<div class="input-control textarea full-size" data-role="input" data-text-auto-resize="true">
-    			    <textarea name="outlet_address" placeholder="Alamat Toko"><?php echo $outlet->address ?></textarea>
-    			</div>
-        	</div>
-        </div>
-
-        <div class="row cells2">
-            <div class="cell">
-                <label>Username</label>
-    			<div class="input-control text full-size" data-role="input"  style="margin-top: 9px;">
-    			    <input type="text" placeholder="Username Outlet" value="<?php echo $outlet->username ?>" name="outlet_username" onblur="check_username(this)" data-validate-func="required" data-validate-hint="Username harus diisi">
-    			</div>
             </div>
+        </div>
+        <div class="form-actions">
+            <input type="Submit" name="submit" class="btn btn-info" value="Submit">
+        </div>
+        <?php echo form_close() ?>
+    </div>
+  </div>    
+</div>
+
+
 
             <div class="cell">
                 <label class="switch">

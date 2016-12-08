@@ -1,12 +1,15 @@
-<div class="row-fluid">
+<div id="content-header">
+    <div id="breadcrumb"> <a href="<?php echo base_url('outlets') ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar outlet</a></div>
+    <h1 style="margin-bottom: 20px;">Tambah Outlet Baru</h1>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
       <div class="span12">
-        <h1 style="margin-bottom: 20px;">Tambah Outlet Baru</h1>
-        <hr>
         <?php echo form_open('outlets/add_outlet', array('class'=>'form-horizontal')) ?>
         <div class="control-group">
             <label class="control-label">Nama Toko</label>
             <div class="controls">
-              <input type="text" placeholder="Nama Toko" name="outlet_name">
+              <input type="text" placeholder="Nama Toko" name="outlet_name" title="Go to Home" class="tip-bottom">
             </div>
         </div>
         <div class="control-group">
@@ -49,7 +52,7 @@
             <label class="control-label">Margin Toko</label>
             <div class="controls">
                 <div class="input-append">
-                    <input type="number" placeholder="Perbedaan Dasar Harga dengan Toko Utama" name="outlet_margin" class="span12">
+                    <input type="number" placeholder="Perbedaan Dasar Harga dengan Toko Utama" name="outlet_margin" class="span11">
                     <span class="add-on">%</span>     
                 </div>
             </div>
@@ -59,6 +62,7 @@
         </div>
         <?php echo form_close() ?>
     </div>
+  </div>    
 </div>
 
 <script>
