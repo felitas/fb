@@ -83,8 +83,9 @@
 .gritter-light .gritter-bottom,
 .gritter-light .gritter-top,
 .gritter-light .gritter-close {
+	background-color: #2ECC71;
     background-image: url(../img/gritter-light.png);
-    color: #222;
+    color: #fff;
 }
 .gritter-light .gritter-title {
     text-shadow: none;

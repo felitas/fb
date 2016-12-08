@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap-wysihtml5.css" /> <!--Matrix-->
     <link href="<?php echo base_url() ?>css/matrix-style.css" rel="stylesheet"><!--Matrix-->
     <link href="<?php echo base_url() ?>css/matrix-media.css" rel="stylesheet"><!--Matrix-->
+    <link rel="stylesheet" href="<?php echo base_url() ?>css/jquery.gritter.css" /><!--Matrix Notification-->
     <link href="<?php echo base_url() ?>css/footable.core.css" type="text/css" rel="stylesheet"><!--Footable-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>    
     
@@ -26,6 +27,7 @@
     <script src="<?php echo base_url();?>js/matrix.interface.js"></script><!--Matrix-->
     <script src="<?php echo base_url();?>js/wysihtml5-0.3.0.js"></script>  <!--Matrix-->
     <script src="<?php echo base_url();?>js/bootstrap-wysihtml5.js"></script><!--Matrix-->
+    <script src="<?php echo base_url();?>js/jquery.gritter.min.js"></script> <!--Matrix Notification-->
     <script src="<?php echo base_url() ?>js/footable.js"></script><!--Footable-->
     <script src="<?php echo base_url() ?>js/footable.filter.js"></script><!--Footable-->
     <script src="<?php echo base_url() ?>js/footable.paginate.js"></script><!--Footable-->
@@ -70,15 +72,16 @@
       body{
         line-height: 20px;
       }
-
-      .segoe{
-        font-family: 'Segoe UI';
-        font-size: 12px;
-        line-height: 30px;
+      .row-fluid{
+        font-size: 13px !important;
       }
       .bg-primary{
         background-color: <?php echo $configuration->primary_color ?> !important;
         color: white !important;
+      }
+      .footable > thead > tr > th{
+        padding-top: 0px !important;
+        font-size: 13px !important;
       }
       /*Toggle Currency pop up*/
       #kurstoggle{
@@ -107,6 +110,9 @@
       background-color: #000 !important;
       margin-top: -1px;
     }
+    .navbar .nav>li>.dropdown-menu:after{
+      border:none !important;
+    }
 
 
   
@@ -118,13 +124,12 @@
   <!--top-Header-menu-->
   <div id="user-nav" class="navbar">
     <ul class="nav">
-      <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><span class="text">Welcome <?php echo $this->session->user_name ?></span><b class="caret"></b></a>
+      <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><span class="text">Welcome <?php echo $this->session->user_name ?></span> <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="#">My Profile</a></li>
-          <li><a href="login.html">Log Out</a></li>
         </ul>
       </li>
-      <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+      <li><a href="<?php echo base_url('accounts/logout') ?>"><i class="fa fa-power-off"></i> <span class="text">Logout</span></a></li>
     </ul>
   </div>
   <!--close-top-Header-menu--> 

@@ -52,10 +52,20 @@
 					$this->crud_model->insert_data('accounts',$data_account);
 
 					//success notification
-					$this->session->set_flashdata('outlet', "$.Notify({caption: 'Berhasil !', content: 'Toko berhasil dibuat', type: 'info'});");
+					$this->session->set_flashdata('outlet',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Toko berhasil dibuat!',
+				 		sticky: false
+				 	});");
 					
 				}else{
-					$this->session->set_flashdata('outlet', "$.Notify({caption: 'Toko Gagal Dibuat!', content: 'Periksa kembali data toko', type: 'alert'});");
+					$this->session->set_flashdata('outlet', 
+						"$.gritter.add({
+				 		title:	'Toko gagal dibuat',
+				 		text:	'Periksa kembali data toko',
+				 		sticky: false
+				 	});");
 				}				
 
 				redirect('outlets/add_outlet');
@@ -101,7 +111,12 @@
 				$this->crud_model->update_data('accounts',$data_account,array('outlet_id' => $outlet_id,'role' => 'manager'));
 
 				//success notification
-				$this->session->set_flashdata('outlet', "$.Notify({caption: 'Berhasil !', content: 'Toko berhasil diedit', type: 'info'});");
+				$this->session->set_flashdata('outlet', "$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Toko berhasil diubah!',
+				 		sticky: false
+				 	});");
 					
 								
 
@@ -125,7 +140,12 @@
 			//delete the outlet
 			$this->crud_model->delete_data('outlets',array('id' => $outlet_id));
 			//give notification
-			$this->session->set_flashdata('success',"$.Notify({caption: 'Berhasil !', content: 'Toko Berhasil Dihapus', type: 'info'});");
+			$this->session->set_flashdata('outlet',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Toko berhasil dihapus!',
+				 		sticky: false
+				 	});");
 			redirect('outlets');
 		}
 

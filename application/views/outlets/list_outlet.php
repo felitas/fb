@@ -41,7 +41,7 @@
 							<?php endforeach; ?>
 						<?php else:?>
 							<tr>
-								<td colspan="7" class="text-center"><h3>Table kosong</h3></td>
+								<td colspan="7" style="text-align: center;"><h3>Table kosong</h3></td>
 							</tr>
 						<?php endif; ?>
 					</tbody>
@@ -57,12 +57,17 @@
 
 <script>
 	function delete_outlet(id,name){
-		alertify.confirm("Apakah anda yakin ingin menghapus Toko "+name,
+		alertify.confirm("Apakah anda yakin ingin menghapus Toko "+name+"?",
 		  function(){
 		    window.location.assign("<?php echo base_url() ?>outlets/delete_outlet/"+id);
 		  },
 		  function(){
-		    $.Notify({caption: 'Gagal !', content: 'Toko gagal dihapus', type: 'alert'});
+		 	$.gritter.add({
+		 		title:	'Gagal!',
+		 		text:	'Toko tidak jadi dihapus',
+		 		sticky: false,
+
+		 	});		
 		  });
 	}
 
