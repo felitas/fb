@@ -8,11 +8,11 @@
 <div class="container-fluid">
     <div class="row-fluid">
       <div class="span12">
-		<div class="input-control text full-size">
+		<div class="input-control text">
             <input type="text" placeholder="Cari Outlet" id="filter" >
         </div>
-	    <div class="cell table-responsive toggle-circle-filled">
-				<table class="table hovered border table-condensed" id="table_outlet" data-filter="#filter" data-page-size="10">
+	    <div class="table-responsive toggle-circle-filled">
+				<table class="table table-bordered" id="table_outlet" data-filter="#filter" data-page-size="10">
 					<thead>
 						<tr>
 							<th data-type="numeric">No.</th>
@@ -50,13 +50,10 @@
 	</div>
 </div>
 </div>
+
 <link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
-<script src="<?php echo base_url() ?>js/footable.js"></script>
-<script src="<?php echo base_url() ?>js/footable.filter.js"></script>
-<script src="<?php echo base_url() ?>js/footable.paginate.js"></script>
-<script src="<?php echo base_url() ?>js/footable.sort.js" type="text/javascript"></script>
 
 <script>
 	function delete_outlet(id,name){
@@ -75,8 +72,6 @@
 	       <?php echo $this->session->flashdata('outlet') ?>
 
 	    <?php endif; ?>
-
-	    alert('felita');
 
 	    $('#table_outlet').footable();
 

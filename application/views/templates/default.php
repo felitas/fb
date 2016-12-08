@@ -10,25 +10,26 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.min.css">
     <link href="<?php echo base_url() ?>font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap-wysihtml5.css" />
-    <link href="<?php echo base_url() ?>css/matrix-style.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>css/matrix-media.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>css/jquery.gritter.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>css/footable.core.css" type="text/css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>css/bootstrap-responsive.min.css" rel="stylesheet"><!--Matrix-->
+    <link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap-wysihtml5.css" /> <!--Matrix-->
+    <link href="<?php echo base_url() ?>css/matrix-style.css" rel="stylesheet"><!--Matrix-->
+    <link href="<?php echo base_url() ?>css/matrix-media.css" rel="stylesheet"><!--Matrix-->
+    <link href="<?php echo base_url() ?>css/footable.core.css" type="text/css" rel="stylesheet"><!--Footable-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>    
     
 
     <script src="<?php echo base_url() ?>js/jquery-1.12.4.min.js"></script>
     <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url() ?>js/jquery.ui.custom.js"></script>
+    <script src="<?php echo base_url() ?>js/jquery.ui.custom.js"></script><!--Matrix-->
     <script src="<?php echo base_url();?>js/script.js"></script>
-    <script src="<?php echo base_url();?>js/matrix.js"></script>
-    <script src="<?php echo base_url();?>js/matrix.dashboard.js"></script>
-    <script src="<?php echo base_url();?>js/matrix.interface.js"></script>
-    <script src="<?php echo base_url();?>js/wysihtml5-0.3.0.js"></script>  
-    <script src="<?php echo base_url();?>js/bootstrap-wysihtml5.js"></script>
-    <script src="<?php echo base_url();?>js/jquery.gritter.min.js"></script>
+    <script src="<?php echo base_url();?>js/matrix.js"></script><!--Matrix-->
+    <script src="<?php echo base_url();?>js/matrix.interface.js"></script><!--Matrix-->
+    <script src="<?php echo base_url();?>js/wysihtml5-0.3.0.js"></script>  <!--Matrix-->
+    <script src="<?php echo base_url();?>js/bootstrap-wysihtml5.js"></script><!--Matrix-->
+    <script src="<?php echo base_url() ?>js/footable.js"></script><!--Footable-->
+    <script src="<?php echo base_url() ?>js/footable.filter.js"></script><!--Footable-->
+    <script src="<?php echo base_url() ?>js/footable.paginate.js"></script><!--Footable-->
+    <script src="<?php echo base_url() ?>js/footable.sort.js" type="text/javascript"></script><!--Footable-->
 
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -39,26 +40,36 @@
     <![endif]-->
     <?php $configuration = $this->crud_model->get_data('configuration')->row() ?>
     <style>
-      body{
-        line-height: 20px;
-      }
+
       /**alertify modal**/
       .alertify .ajs-header{
-        color: <?php echo $configuration->primary_color ?> !important;
-        background: white !important;
-        border-bottom: 1px solid <?php echo $configuration->primary_color ?> !important;
+        background:#efefef !important;
+        border-bottom: 1px solid #CDCDCD !important;
+        height: auto;
+        padding: 8px 15px 5px;
+        z-index: 99999;
       }
       .alertify .ajs-footer{
-        color: <?php echo $configuration->primary_color ?> !important;
-        background: white !important;
-        border-top: 1px solid <?php echo $configuration->primary_color ?> !important;
+        background:#efefef !important;
+        border-top: 1px solid #CDCDCD !important;
       }
 
       .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-ok{
-        background-color: <?php echo $configuration->primary_color ?> !important;
-        color: white !important;
+        background:#3FC380 !important;
+        border-radius: 5px !important;
+        color: #fff !important;
       }
+
+      .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-cancel{
+        background:#EC644B !important;
+        border-radius: 5px !important;
+        color: #fff !important;
+      }
+
       /** end of alertify **/
+      body{
+        line-height: 20px;
+      }
 
       .segoe{
         font-family: 'Segoe UI';
@@ -88,22 +99,6 @@
         border-bottom: 0px;
       }
 
-
-      .footable>thead>tr>th, .footable>thead>tr>td {       
-        background-color : #ecf0f1 !important;
-        border : 1px solid #999 !important;
-        color: #000 !important;
-      }
-
-   
-
-    .footable>tfoot>tr>th, .footable>tfoot>tr>td { 
-      background-color : #ecf0f1 !important;
-      border : 1px solid #999 !important;
-    }
-    .footable>tbody{
-      border: 1px solid #999 !important;
-    }
     /*Navbar*/
     .navbar a,#sidebar > ul > li > a{
       color: #fff !important;
