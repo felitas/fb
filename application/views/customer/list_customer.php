@@ -73,8 +73,6 @@
             <?php echo $this->session->flashdata('customer') ?>
         <?php endif; ?>
 
-        alert('felita');
-
         $('#table_customer').footable();
     });
 

@@ -5,143 +5,101 @@
         margin: auto;
     }
 </style>
-<div class="container">
-    <div class="grid">
-        <div class="row">
-            <div class="cell">
-                <h3 style="display:inline-block"><small><a href="<?php echo base_url('sales') ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar sales</a></small></h3>
 
-            </div>
-        </div>
+<div id="content-header">
+    <div id="breadcrumb">
+        <a href="<?php echo base_url('sales') ?>">
+        <span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar sales
+        </a>
+    </div>
+</div>
 
-        <div class="row form-title" style="margin-bottom: 0">     
-            <div class="cell">
-                <h1 style="margin-bottom: 20px;">Edit Sales <?php echo ucfirst($sales->name) ?></h1>
-                <hr class="bg-primary"> 
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <?php echo form_open_multipart('sales/edit_sales/'.$sales->id,array('class'=>'form-horizontal')) ?>
+            
+            <div class="control-group text-center">
+                <a href="<?php echo base_url().$sales->photo ?>" rel="group" class="fancybox"><img src="<?php echo base_url().$sales->photo ?>?timestamp=<?php echo rand(0,999999) ?>" data-role="fitImage" data-format="cycle"></a>    
             </div>
-        </div>
 
-    <?php //echo form_open_multipart('sales/add_sales',array('data-role' =>  'validator','data-on-error-input' => 'notifyOnErrorInput','data-show-error-hint' => 'false')) ?>
-    <?php echo form_open_multipart('sales/edit_sales/'.$sales->id,array('data-role' =>  'validator','data-on-error-input' => 'notifyOnErrorInput','data-show-error-hint' => 'false')) ?>
-        <div class="row">
-            <div class="cell">
-                <a href="<?php echo base_url().$sales->photo ?>" rel="group" class="fancybox"><img src="<?php echo base_url().$sales->photo ?>?timestamp=<?php echo rand(0,999999) ?>" data-role="fitImage" data-format="cycle"></a>
-            </div>
-        </div>    
-        <div class="row cells2">
-            <div class="cell">
-                <label>Nama</label>
-                <div class="input-control text full-size" data-role="input">
-                    <input type="text" placeholder="Nama Lengkap" name="sales_name" value="<?php echo $sales->name ?>" data-validate-func="required" data-validate-hint="Nama sales harus diisi">
-                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+            <div class="control-group">
+                <label for="" class="control-label">Nama Sales</label>
+                <div class="controls">
+                    <input type="text" placeholder="Nama Lengkap Sales" name="sales_name" class="tip-bottom" value="<?php echo $sales->name ?>">
                 </div>
             </div>
-            <div class="cell">
-                <label>Upload Photo</label>
-                    <div class="input-control file full-size" data-role="input">
-                        <input type="file" accept="image/*" name="capture" id="capture" capture="camera">
-                        <button class="button btn-file"><span class="mif-camera"></span></button>
-                    </div>
-                
-            </div>
-        </div>
-        <?php if (!$is_mobile): ?>
-            <div class="row">
-                <div class="cell">
-                    <label class="switch">
-                        <input type="checkbox" onchange="show_cam(this)">
-                        <span class="check"></span>
-                        <span class="caption">Ambil Foto</span>
-                    </label>
+            <div class="control-group">
+                <label for="" class="control-label">Upload Photo</label>
+                <div class="controls">
+                    <input type="file" accept="image/*" name="capture" id="capture" capture="camera">
                 </div>
             </div>
-            <div class="row cells2" id="snapshot" style="display: none">
-
-                <div class="cell text-center">
-                    <div id="my_camera" style="width:320px; height:240px; margin:auto"></div>
-                    
-                    <a class="button info bg-primary btn-teal" href="javascript:void(take_snapshot())"><span class="mif mif-camera"></span> Take Snapshot</a>
-                </div>
-                <div class="cell text-center">
-                    <div id="my_result" style="margin:auto"></div>    
-                </div>
-                
-                
-            </div>    
-        <?php endif ?>
-        
-
-        <div class="row cells2">
-            <div class="cell">
-                <label>No. Telp</label>
-                <div class="input-control text full-size" data-role="input">
-                    <input type="text" placeholder="Nomor Telephone Sales" name="sales_phone" value="<?php echo $sales->phone ?>">
-                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+            <?php if (!$is_mobile): ?>
+            <div class="control-group">
+                <label for="" class="control-label">Ambil Foto</label>
+                <div class="controls">
+                    <input type="checkbox" onchange="show_cam(this)">
                 </div>
             </div>
-            <div class="cell">
-                <label>E-mail</label>
-                <div class="input-control text full-size" data-role="input" >
-                    <input type="text" placeholder="Email Sales" name="sales_email" value="<?php echo $sales->email ?>">
-                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+            <div class="control-group" id="snapshot" style="display: none">
+                <div id="my_camera" style="width:320px; height:240px; margin:auto"></div>
+                <a class="button info bg-primary btn-teal" href="javascript:void(take_snapshot())"><span class="mif mif-camera"></span> Ambil Foto</a>
+                <div id="my_result" style="margin:auto"></div>    
+            </div>
+            <?php endif ?>        
+            <div class="control-group">
+                <label for="" class="control-label">No. Telepon</label>
+                <div class="controls">
+                    <input type="text" placeholder="Nomor Telephone Sales" name="sales_phone" value="<?php echo $sales->phone ?>" class="tip-bottom"> 
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="cell">
-                <label>Alamat</label>
-                <div class="input-control textarea full-size" data-role="input" data-text-auto-resize="true">
-                    <textarea placeholder="Alamat Sales" name="sales_address"><?php echo $sales->address ?></textarea>
+            <div class="control-group">
+                <label for="" class="control-label">Email</label>
+                <div class="controls">
+                    <input type="text" placeholder="Email Sales" name="sales_email" value="<?php echo $sales->email ?>" class="tip-bottom"> 
                 </div>
             </div>
-        </div>
-
-        <div class="row cells2">
-            <div class="cell">
-                <label>Username</label>
-                <div class="input-control text full-size" data-role="input" style="margin-top: 9px;">
-                    <input type="text" placeholder="Username Sales" onblur="check_username(this)" value="<?php echo $sales->username ?>" name="sales_username" data-validate-func="required" data-validate-hint="Username harus diisi">
-                    
+            <div class="control-group">
+                <label for="" class="control-label">Alamat</label>
+                <div class="controls">
+                    <textarea name="sales_address" placeholder="Alamat Sales" id="" cols="30" rows="10"><?php echo $sales->address ?></textarea> 
                 </div>
             </div>
-            <div class="cell">
-                <label class="switch">
+            <div class="control-group">
+                <label for="" class="control-label">Username</label>
+                <div class="controls">
+                    <input type="text" placeholder="Username Sales" onblur="check_username(this)" name="sales_username" value="<?php echo $sales->username ?>" disabled="disabled" class="tip-bottom"> 
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="" class="control-label">Ubah Password</label>
+                <div class="controls">
                     <input type="checkbox" onchange="change_password(this)">
-                    <span class="check"></span>
-                    <span class="caption"> Ubah Password</span>
-                </label>
-                <div class="input-control password full-size" data-role="input" style="display: none">
                     <input type="password" id="password" placeholder="Password" name="sales_password">
                     <button class="button helper-button reveal"><span class="mif-looks"></span></button>
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="cell">
-                <label>Tempat Bekerja</label>
-                <div class="input-control select full-size">
-                    <select data-validate-func="required" data-validate-hint="Nama toko harus diisi" name="sales_outlet">
+            <div class="control-group">
+                <label for="" class="control-label">Tempat Bekerja</label>
+                <div class="controls">
+                    <select name="sales_outlet" id="">
                         <option value="" selected="selected">--Pilih Outlet--</option>
                         <?php foreach ($outlets as $outlet): ?>
                             <option value="<?php echo $outlet->id ?>" <?php echo ($outlet->id == $sales->outlet_id) ? 'selected' : '' ?>><?php echo $outlet->name; ?></option>
                         <?php endforeach; ?>
                     </select>
-                </div>    
+                </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="cell text-center">
-               <input type="submit" name="submit" class="button bg-primary" value="Submit">
+            <div class="form-actions">
+                <input type="submit" name="submit" class="btn btn-info" value="Submit">
             </div>
-        </div>
-    </form>
-        
+            <?php echo form_close() ?>
+        </div>    
     </div>
 </div>
 
+<script src="<?php echo base_url() ?>js/webcam.min.js"></script>
 
 <link rel="stylesheet" href="<?php echo base_url() ?>fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
 <script type="text/javascript" src="<?php echo base_url() ?>fancybox/source/jquery.fancybox.pack.js"></script>

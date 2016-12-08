@@ -1,21 +1,19 @@
-<link href="<?php echo base_url() ?>css/footable.core.css" type="text/css" rel="stylesheet">
-<div class="container">
-	<div class="grid">
-		<div class="row">
-	        <div class="cell">
-	            <h3 style="display: inline-block;"><small><a href="<?php echo base_url() ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Menu</a></small></h3>
-	            <h3 style="display:inline-block;float:right;"><small><a href="<?php echo base_url('sales/add_sales') ?>">Tambah sales <span class="fa fa-arrow-circle-o-right"></span></a></small></h3>
-	        </div>
-	    </div>
-		<div class="row form-title">
-	        <div class="cell">
-	            <h1 style="margin-bottom: 20px;">Daftar Sales</h1>
-	            <hr class="bg-primary">    
-	        </div>
-	    </div>
-		<div class="row">
-				<div class="cell table-responsive toggle-circle-filled">
-				<table class="table table-condensed" id="table_sales" data-filter="#filter" data-page-size="10">
+<div id="content-header">
+    <div id="breadcrumb"> 
+    	<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
+    	<a href="<?php echo base_url('sales/add_sales') ?>">Tambah Sales <span class="fa fa-arrow-circle-o-right"></span></a>
+    </div>
+    <h1 style="margin-bottom: 20px;">Daftar Sales</h1>
+</div>
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="input-control text full-size">
+		        <input type="text" placeholder="Cari Sales" id="filter" >
+		    </div>
+			<div class="cell table-responsive toggle-circle-filled">
+				<table class="table hovered border table-condensed" id="table_sales" data-filter="#filter" data-page-size="10">
 					<thead>
 						<tr>
 							<th data-type="numeric">No.</th>
@@ -50,20 +48,20 @@
 						<?php endif; ?>
 					</tbody>
 				</table>
-				</div>
-		</div>
+			</div>
+		</div>	
 	</div>
 </div>
+
 <link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
-
+<script src="<?php echo base_url() ?>js/alertify.min.js"></script>
 <script src="<?php echo base_url() ?>js/footable.js"></script>
 <script src="<?php echo base_url() ?>js/footable.filter.js"></script>
 <script src="<?php echo base_url() ?>js/footable.paginate.js"></script>
 <script src="<?php echo base_url() ?>js/footable.sort.js" type="text/javascript"></script>
-<script src="<?php echo base_url() ?>js/alertify.min.js"></script>
+
 <script>
-	$('#table_sales').footable();
 	function delete_sales(id,name){
 		alertify.confirm("Apakah anda yakin ingin menghapus Sales "+name,
 		  function(){
@@ -79,6 +77,8 @@
 	       <?php echo $this->session->flashdata('sales') ?>
 
 	    <?php endif; ?>
+
+	    $('#table_sales').footable();
 	});
 	
 </script>
