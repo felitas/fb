@@ -43,7 +43,14 @@
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label">Password</label>
+            <label class="control-label">Ubah Password</label>
+                <div class="controls">
+                    <input type="checkbox" onchange="change_password(this)">    
+                </div>
+            </label>    
+        </div>
+        <div class="control-group" style="display: none;">
+            <label class="control-label" id="password">Password</label>
             <div class="controls">
               <input type="password" placeholder="Password" name="outlet_password">
             </div>
@@ -52,7 +59,7 @@
             <label class="control-label">Margin Toko</label>
             <div class="controls">
                 <div class="input-append">
-                    <input type="number" placeholder="Perbedaan Dasar Harga dengan Toko Utama" name="outlet_margin" class="span11">
+                    <input type="number" placeholder="Perbedaan Dasar Harga dengan Toko Utama" name="outlet_margin" class="span11" value="<?php echo $outlet->margin ?>">
                     <span class="add-on">%</span>     
                 </div>
             </div>
@@ -64,38 +71,6 @@
     </div>
   </div>    
 </div>
-
-
-
-            <div class="cell">
-                <label class="switch">
-                    <input type="checkbox" onchange="change_password(this)">
-                    <span class="check"></span>
-                    <span class="caption"> Ubah Password</span>
-                </label>
-    			<div class="input-control password full-size" data-role="input" style="display: none">
-    			    <input type="password" placeholder="Password" id="password" name="outlet_password">
-    			    <button class="button helper-button reveal"><span class="mif-looks"></span></button>
-    			</div>
-        	</div>
-        </div>
-
-        <div class="row cells2">
-        	<div class="cell">
-        		<label>Margin Toko</label>
-    			<div class="input-control text full-size" data-role="input">
-    			    <input type="number" placeholder="Perbedaan Dasar Harga dengan Toko Utama" name="outlet_margin" value="<?php echo $outlet->margin ?>" data-validate-func="required,min,max" data-validate-arg=",0,100" data-validate-hint="Margin toko harus diisi min: 0, max: 100">
-    			    <button class="button" style="border-color: rgba(127, 140, 141,1.0); cursor: default;"><span class="fa fa-percent" aria-hidden="true"></span></button>  
-    			</div>
-        	</div>
-        </div>
-
-    	<div class="row">
-            <div class="cell text-center">
-        	   <input type="Submit" name="submit" class="button info bg-primary btn-teal" value="Submit">
-            </div>
-        </div>    
-    </div>
     <?php echo form_close() ?>
 </div>
 

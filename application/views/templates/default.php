@@ -11,10 +11,13 @@
     <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.min.css">
     <link href="<?php echo base_url() ?>font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap-wysihtml5.css" />
     <link href="<?php echo base_url() ?>css/matrix-style.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>css/matrix-media.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>css/jquery.gritter.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>css/footable.core.css" type="text/css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>    
+    
 
     <script src="<?php echo base_url() ?>js/jquery-1.12.4.min.js"></script>
     <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
@@ -23,7 +26,10 @@
     <script src="<?php echo base_url();?>js/matrix.js"></script>
     <script src="<?php echo base_url();?>js/matrix.dashboard.js"></script>
     <script src="<?php echo base_url();?>js/matrix.interface.js"></script>
-    <script src="<?php echo base_url();?>js/matrix.popover.js"></script>
+    <script src="<?php echo base_url();?>js/wysihtml5-0.3.0.js"></script>  
+    <script src="<?php echo base_url();?>js/bootstrap-wysihtml5.js"></script>
+    <script src="<?php echo base_url();?>js/jquery.gritter.min.js"></script>
+
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -90,11 +90,11 @@ $(document).ready(function(){
 	$('.tip-top').tooltip({ placement: 'top' });	
 	$('.tip-bottom').tooltip({ placement: 'bottom' });	
 	
-	// === Search input typeahead === //
-	$('#search input[type=text]').typeahead({
-		source: ['Dashboard','Form elements','Common Elements','Validation','Wizard','Buttons','Icons','Interface elements','Support','Calendar','Gallery','Reports','Charts','Graphs','Widgets'],
-		items: 4
-	});
+	// // === Search input typeahead === //
+	// $('#search input[type=text]').typeahead({
+	// 	source: ['Dashboard','Form elements','Common Elements','Validation','Wizard','Buttons','Icons','Interface elements','Support','Calendar','Gallery','Reports','Charts','Graphs','Widgets'],
+	// 	items: 4
+	// });
 	
 	// === Fixes the position of buttons group in content header and top user navigation === //
 	function fix_position()
@@ -158,9 +158,9 @@ $(document).ready(function(){
 	});
 	
 
-	$('#lightbox').live('click', function() { 
-		$('#lightbox').hide(200);
-	});
+	// $('#lightbox').live('click', function() { 
+	// 	$('#lightbox').hide(200);
+	// });
 	
 });
 

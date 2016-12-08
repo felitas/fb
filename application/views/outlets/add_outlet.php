@@ -9,7 +9,7 @@
         <div class="control-group">
             <label class="control-label">Nama Toko</label>
             <div class="controls">
-              <input type="text" placeholder="Nama Toko" name="outlet_name" title="Go to Home" class="tip-bottom">
+              <input type="text" placeholder="Nama Toko" name="outlet_name">
             </div>
         </div>
         <div class="control-group">

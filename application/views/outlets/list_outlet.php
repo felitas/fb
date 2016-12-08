@@ -1,27 +1,17 @@
-<link href="<?php echo base_url() ?>css/footable.core.css" type="text/css" rel="stylesheet">
-<div class="container">
-	<div class="grid">
-		<div class="row">
-	        <div class="cell">
-	            <h3 style="display: inline-block;"><small><a href="<?php echo base_url() ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a></small></h3>
-	            <h3 style="display:inline-block;float:right;"><small><a href="<?php echo base_url('outlets/add_outlet') ?>">Tambah Outlet <span class="fa fa-arrow-circle-o-right"></span></a></small></h3>
-	        </div>
-	    </div>
-		<div class="row form-title">
-	        <div class="cell">
-	            <h1 style="margin-bottom: 20px;">Daftar Outlet</h1>
-	            <hr class="bg-primary">    
-	        </div>
-	    </div>
-	    <div class="row">
-	    	<div class="cell">
-	    		<div class="input-control text full-size">
-                    <input type="text" placeholder="Cari Outlet" id="filter" >
-                </div>
-	    	</div>
-	    </div>
-		<div class="row">
-			<div class="cell table-responsive toggle-circle-filled">
+<div id="content-header">
+    <div id="breadcrumb"> 
+    	<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
+    	<a href="<?php echo base_url('outlets/add_outlet') ?>">Tambah Outlet <span class="fa fa-arrow-circle-o-right"></span></a>
+    </div>
+    <h1 style="margin-bottom: 20px;">Daftar Outlet</h1>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+		<div class="input-control text full-size">
+            <input type="text" placeholder="Cari Outlet" id="filter" >
+        </div>
+	    <div class="cell table-responsive toggle-circle-filled">
 				<table class="table hovered border table-condensed" id="table_outlet" data-filter="#filter" data-page-size="10">
 					<thead>
 						<tr>
@@ -56,9 +46,9 @@
 						<?php endif; ?>
 					</tbody>
 				</table>
-			</div>
 		</div>
 	</div>
+</div>
 </div>
 <link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
@@ -85,6 +75,8 @@
 	       <?php echo $this->session->flashdata('outlet') ?>
 
 	    <?php endif; ?>
+
+	    alert('felita');
 
 	    $('#table_outlet').footable();
 
