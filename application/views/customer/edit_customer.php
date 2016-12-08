@@ -1,74 +1,53 @@
-<div class="container">
-    <div class="grid">
+<div id="content-header">
+    <div id="breadcrumb">
+        <a href="<?php echo base_url('customer') ?>">
+        <span class="fa-arrow-circle-o-left"></span>Kembali ke daftar customer
+        </a>
+    </div>
+</div>
 
-        <div class="row">
-            <div class="cell">
-                <h3 style="display:inline-block"><small><a href="<?php echo base_url('customer') ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar customer</a></small></h3>
-            </div>
-        </div>
-
-        <div class="row form-title" style="margin-bottom: 0">     
-            <div class="cell">
-                <h1 style="margin-bottom: 20px;">Edit Customer <?php echo ucfirst($customer->name) ?></h1>
-                <hr class="bg-primary"> 
-            </div>
-        </div>
-
-        <?php echo form_open('customer/edit_customer/'.$customer->id,array('data-role' =>  'validator','data-on-error-input' => 'notifyOnErrorInput','data-show-error-hint' => 'false')) ?>
-
-        <div class="row cells2">
-            <div class="cell">
-                <label>Nama Customer</label>
-                <div class="input-control text full-size">
-                    <input type="text" placeholder="Nama Customer" name="customer_name" value="<?php echo $customer->name ?>" data-validate-func="required" data-validate-hint="Nama customer harus diisi">
-                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <?php echo form_open('customer/edit_customer/'.$customer->id, array('class'=>'form-horizontal')) ?>
+            <div class="control-group">
+                <label for="" class="control-label">Nama Customer</label>
+                <div class="controls">
+                    <input type="text" placeholder="Nama Customer" name="customer_name" value="<?php echo $customer->name ?>" class="tip-bottom">
                 </div>
             </div>
-            <div class="cell">
-                <label>Jenis Customer</label>
-                <div class="input-control select full-size">
-                    <select name="customer_type" data-validate-func="required" data-validate-hint="Jenis customer harus diisi">
+            <div class="control-group">
+                <label class="control-label">Jenis Customer</label>
+                <div class="controls">
+                    <select name="" id="">
                         <option value="Regular" <?php echo ($customer->type == 'Regular') ? 'selected' : '' ?> >Customer Biasa</option>
                         <option value="Member" <?php echo ($customer->type == 'Member') ? 'selected' : '' ?> >Member</option>
                     </select>
-                </div>         
-            </div>
-        </div>
-
-        <div class="row cells2">
-            <div class="cell">
-                <label>No. Telp</label>
-                <div class="input-control text full-size" data-role="input">
-                    <input type="text" placeholder="Nomor Telephone Customer" name="customer_phone" value="<?php echo $customer->phone ?>">
-                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
                 </div>
             </div>
-            <div class="cell">
-                <label>E-mail</label>
-                <div class="input-control text full-size" data-role="input" >
-                    <input type="text" placeholder="Email Customer" name="customer_email" value="<?php echo $customer->email ?>">
-                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+            <div class="control-group">
+                <label class="control-label">No. Telepon</label>
+                <div class="controls">
+                    <input type="text" placeholder="Nomor Telepon Customer" name="customer_phone" value="<?php echo $customer->phone ?>" class="tip-bottom">
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="cell">
-                <label>Alamat</label>
-                <div class="input-control textarea full-size" data-role="input" data-text-auto-resize="true">
-                    <textarea name="customer_address"><?php echo $customer->address ?></textarea>
+            <div class="control-group">
+                <label for="" class="control-label">Email</label>
+                <div class="controls">
+                    <input type="email" placeholder="Email Customer" name="customer_email" value="<?php echo $customer->email ?>" class="tip-bottom">
                 </div>
             </div>
-        </div>  
-
-        <div class="row">
-            <div class="cell text-center">
-                <input type="submit" class="button bg-primary" name="submit" value="Submit">
+            <div class="control-group">
+                <label for="" class="control-label">Alamat</label>
+                <div class="controls">
+                    <textarea placeholder="Alamat Customer" name="customer_address"><?php echo $customer->address?></textarea>
+                </div>
             </div>
+            <div class="form-actions">
+                <input type="submit" name="submit" class="btn btn-info" value="Submit">
+            </div>
+            <?php echo form_close(); ?>
         </div>
-
-        <?php echo form_close(); ?>
-
     </div>
 </div>
 
