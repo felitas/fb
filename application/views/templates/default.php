@@ -22,9 +22,8 @@
     <script src="<?php echo base_url() ?>js/jquery-1.12.4.min.js"></script>
     <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
     <script src="<?php echo base_url() ?>js/jquery.ui.custom.js"></script><!--Matrix-->
-    <script src="<?php echo base_url();?>js/script.js"></script>
+    <script src="<?php echo base_url();?>js/script.js"></script><!--Get month name and get day name in Indonesian-->
     <script src="<?php echo base_url();?>js/matrix.js"></script><!--Matrix-->
-    <script src="<?php echo base_url();?>js/matrix.interface.js"></script><!--Matrix-->
     <script src="<?php echo base_url();?>js/wysihtml5-0.3.0.js"></script>  <!--Matrix-->
     <script src="<?php echo base_url();?>js/bootstrap-wysihtml5.js"></script><!--Matrix-->
     <script src="<?php echo base_url();?>js/jquery.gritter.min.js"></script> <!--Matrix Notification-->
@@ -42,6 +41,10 @@
     <![endif]-->
     <?php $configuration = $this->crud_model->get_data('configuration')->row() ?>
     <style>
+      /*Gritter*/
+      .gritter-close{
+        background:url('<?php echo base_url()?>assets/gritter.png') no-repeat left top !important;
+      }
 
       /**alertify modal**/
       .alertify .ajs-header{
