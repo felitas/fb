@@ -1,13 +1,8 @@
-<div id="content-header">
-    <div id="breadcrumb">
-        <a href="<?php echo base_url('customer') ?>">
-        <span class="fa fa-arrow-circle-o-left"></span>Kembali ke daftar customer
-        </a>
-    </div>
-    <h1 style="margin-bottom: 20px;">Tambah Customer Baru</h1>
-</div>
-
 <div class="container-fluid">
+    <div class="row-fluid">
+        <a href="<?php echo base_url('customer') ?>"><span class="fa fa-arrow-circle-o-left"></span>Kembali ke daftar customer</a>
+        <h2>Tambah Customer Baru</h2>
+    </div>
     <div class="row-fluid">
         <div class="span12">
             <?php echo form_open('customer/add_customer', array('class'=>'form-horizontal')) ?>

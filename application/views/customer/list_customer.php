@@ -1,12 +1,12 @@
-<div id="content-header">
-    <div id="breadcrumb"> 
-    	<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
-    	<a href="<?php echo base_url('customer/add_customer') ?>">Tambah Customer <span class="fa fa-arrow-circle-o-right"></span></a>
-    </div>
-    <h1 style="margin-bottom: 20px;">Daftar Customer</h1>
-</div>
-
+<link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
 <div class="container-fluid">
+	<div class="row-fluid">
+		<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
+    	<a href="<?php echo base_url('customer/add_customer') ?>" class="pull-right">Tambah Customer <span class="fa fa-arrow-circle-o-right"></span></a>
+    	<h2>Daftar Customer</h2>
+    	<hr>
+	</div>
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="input-control text full-size">
@@ -48,7 +48,7 @@
 							<?php endforeach; ?>
 						<?php else:?>
 							<tr>
-								<td colspan="8" class="text-center"><h3>Table kosong</h3></td>
+								<td colspan="8" class="nocontent"><h3>Table kosong</h3></td>
 							</tr>
 						<?php endif; ?>
 					</tbody>	
@@ -57,15 +57,7 @@
 		</div>
 	</div>
 </div>
-
-<link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
-<link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
-<script src="<?php echo base_url() ?>js/footable.js"></script>
-<script src="<?php echo base_url() ?>js/footable.filter.js"></script>
-<script src="<?php echo base_url() ?>js/footable.paginate.js"></script>
-<script src="<?php echo base_url() ?>js/footable.sort.js" type="text/javascript"></script>
-
 <script>
 
     $(document).ready(function(){

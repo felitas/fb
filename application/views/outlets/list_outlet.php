@@ -1,8 +1,10 @@
+<link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
 <div class="container-fluid">
 	<div class="row-fluid">
     	<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
     	<a href="<?php echo base_url('outlets/add_outlet') ?>" class="pull-right">Tambah Outlet <span class="fa fa-arrow-circle-o-right"></span></a>
-    	<h2 style="margin-bottom: 20px;">Daftar Outlet</h2>
+    	<h2>Daftar Outlet</h2>
     	<hr>
 	</div>
     <div class="row-fluid">
@@ -40,7 +42,7 @@
 							<?php endforeach; ?>
 						<?php else:?>
 							<tr>
-								<td colspan="7" style="text-align: center;"><h3>Table kosong</h3></td>
+								<td colspan="7" class="nocontent"><h3>Table kosong</h3></td>
 							</tr>
 						<?php endif; ?>
 					</tbody>
@@ -50,8 +52,7 @@
 </div>
 </div>
 
-<link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
-<link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
+
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
 
 <script>

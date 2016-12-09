@@ -1,12 +1,11 @@
-<div id="content-header">
-    <div id="breadcrumb"> 
-    	<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
-    	<a href="<?php echo base_url('supplier/add_supplier') ?>">Tambah Supplier <span class="fa fa-arrow-circle-o-right"></span></a>
-    </div>
-    <h1 style="margin-bottom: 20px;">Daftar Supplier</h1>
-</div>
 
 <div class="container-fluid">
+	<div class="row-fluid">
+		<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
+    	<a href="<?php echo base_url('supplier/add_supplier') ?>" class="pull-right">Tambah Supplier <span class="fa fa-arrow-circle-o-right"></span></a>
+    	<h2>Daftar Supllier</h2>
+    	<hr>
+	</div>
 	<div class="row-fluid">
 		<div class="span12">
 	    	<div class="input-control text full-size">
@@ -42,7 +41,7 @@
 							<?php endforeach; ?>
 						<?php else:?>
 							<tr>
-								<td colspan="7" class="text-center"><h3>Table kosong</h3></td>
+								<td colspan="7" class="text-center nocontent"><h3>Table kosong</h3></td>
 							</tr>
 						<?php endif ?>
 					</tbody>

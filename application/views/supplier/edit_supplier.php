@@ -1,12 +1,8 @@
-<div id="content-header">
-    <div id="breadcrumb">
-        <a href="<?php echo base_url('supplier') ?>">
-        <span class="fa fa-arrow-circle-o-left"></span>Kembali ke daftar supplier
-        </a>
-    </div>
-</div>
-
 <div class="container-fluid">
+    <div class="row-fluid">
+        <a href="<?php echo base_url('supplier') ?>"><span class="fa fa-arrow-circle-o-left"></span>Kembali ke daftar supplier</a>
+        <h2>Edit Supplier</h2>
+    </div>
     <div class="row-fluid">
         <div class="span12">
             <?php echo form_open('supplier/edit_supplier/'.$supplier->id,array('class'=>'form-horizontal')) ?>
