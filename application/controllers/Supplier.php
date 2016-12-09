@@ -98,8 +98,7 @@
 				 	});");
 			
 			redirect('supplier');
+			}
+
 		}
-
 	}
-
-?>

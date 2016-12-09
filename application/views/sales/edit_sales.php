@@ -69,7 +69,7 @@
             <div class="control-group">
                 <label for="" class="control-label">Username</label>
                 <div class="controls">
-                    <input type="text" placeholder="Username Sales" onblur="check_username(this)" name="sales_username" value="<?php echo $sales->username ?>" disabled="disabled" class="tip-bottom"> 
+                    <input type="text" placeholder="Username Sales" onblur="check_username(this)" name="sales_username" value="<?php echo $sales->username ?>" readonly="readonly" class="tip-bottom"> 
                 </div>
             </div>
             <div class="control-group">

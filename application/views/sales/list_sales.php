@@ -1,12 +1,10 @@
-<div id="content-header">
-    <div id="breadcrumb"> 
-    	<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
-    	<a href="<?php echo base_url('sales/add_sales') ?>">Tambah Sales <span class="fa fa-arrow-circle-o-right"></span></a>
-    </div>
-    <h1 style="margin-bottom: 20px;">Daftar Sales</h1>
-</div>
-
 <div class="container-fluid">
+	<div class="row-fluid">
+    	<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
+    	<a href="<?php echo base_url('sales/add_sales') ?>" class="pull-right">Tambah Sales <span class="fa fa-arrow-circle-o-right"></span></a>
+    	<h2 style="margin-bottom: 20px;">Daftar Sales</h2>
+    	<hr>
+	</div>s
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="input-control text full-size">
