@@ -106,7 +106,7 @@
       }
 
     /*Navbar*/
-    .navbar a,#sidebar > ul > li > a{
+    .navbar a,#sidebar > ul > li > a, #sidebar>ul>li>ul>li>a{
       color: #fff !important;
     }
     .dropdown-menu{
@@ -116,7 +116,9 @@
     .navbar .nav>li>.dropdown-menu:after{
       border:none !important;
     }
-
+    .faicon{
+      width: 20px !important;
+    }
 
   
     </style>
@@ -144,59 +146,63 @@
       <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-home"></i><span>Home</span></a> </li>
       <li class="submenu"> <a href="#"><i class="fa fa-shopping-bag"></i><span>Penjualan</span></a>
         <ul>
-          <li><a href="">Daftar Penjualan</a></li>
-          <li><a href="">Penjualan Baru</a></li>
-          <li><a href="">Daftar Booking</a></li>
-          <li><a href="">Booking Baru</a></li>
+          <li><a href=""><i class="fa fa-file-text faicon"></i> Daftar Penjualan</a></li>
+          <li><a href=""><i class="fa fa-plus-square faicon"></i> Penjualan Baru</a></li>
+          <li><a href=""><i class="fa fa-calendar-check-o faicon"></i> Daftar Booking</a></li>
+          <li><a href=""><i class="fa fa-check-square faicon"></i> Booking Baru</a></li>
         </ul>
       </li>
       <li class="submenu"> <a href="#"><i class="fa fa-shopping-cart"></i><span>Pembelian</span></a>
         <ul>
-          <li><a href="">Daftar Pembelian</a></li>
-          <li><a href="">Pembelian Baru</a></li>
-          <li><a href="">Daftar Buyback</a></li>
-          <li><a href="">Buyback Baru</a></li>
+          <li><a href=""><i class="fa fa-file-text faicon"></i> Daftar Pembelian</a></li>
+          <li><a href=""><i class="fa fa-cart-plus faicon"></i> Pembelian Baru</a></li>
+          <li><a href=""><i class="fa fa-exchange faicon"></i> Daftar Buyback</a></li>
+          <li><a href=""><i class="fa fa-arrows-h faicon"></i> Buyback Baru</a></li>
         </ul>
       </li>
       <li class="submenu"> <a href="#"><i class="fa fa-bank"></i><span>Outlet</span></a>
         <ul>
-          <li><a href="<?php echo base_url('outlets') ?>">Daftar Outlet</a></li>
-          <li><a href="<?php echo base_url('outlets/add_outlet') ?>">Outlet Baru</a></li>
-          <li><a href="<?php echo base_url('sales') ?>">Daftar Sales</a></li>
-          <li><a href="<?php echo base_url('sales/add_sales') ?>">Sales Baru</a></li>
+          <li><a href="<?php echo base_url('outlets') ?>"><i class="fa fa-file-text faicon"></i> Daftar Outlet</a></li>
+          <li><a href="<?php echo base_url('outlets/add_outlet') ?>"><i class="fa fa-plus-square faicon"></i> Outlet Baru</a></li>
+          <li><a href="<?php echo base_url('sales') ?>"><i class="fa fa-users faicon"></i> Daftar Sales</a></li>
+          <li><a href="<?php echo base_url('sales/add_sales') ?>"><i class="fa fa-user-plus faicon"></i> Sales Baru</a></li>
         </ul>
       </li>
       <li class="submenu"> <a href="#"><i class="fa fa-cubes"></i><span>Inventori</span></a>
         <ul>
-          <li><a href="error403.html">Daftar Barang</a></li>
-          <li><a href="<?php echo base_url('product/add_product') ?>l">Input Barang</a></li>
-          <li><a href="error405.html">Kirim</a></li>
-          <li><a href="error500.html">Terima</a></li>
-          <li><a href="<?php echo base_url('category') ?>">Kategori</a></li>
-          <li><a href="<?php echo base_url('model') ?>">Model</a></li>
-          <li><a href="<?php echo base_url('tray') ?>">Daftar Baki</a></li>
-          <li><a href="error500.html">Stok Opnam</a></li>
+          <li><a href="error403.html"><i class="fa fa-file-text faicon"></i> Daftar Barang</a></li>
+          <li><a href="<?php echo base_url('product/add_product') ?>"><i class="fa fa-plus-square faicon"></i> Input Barang</a></li>
+          <li><a href="<?php echo base_url('category') ?>"><i class="fa fa-puzzle-piece faicon"></i> Kategori</a></li>
+          <li><a href="<?php echo base_url('model') ?>"><i class="fa fa-tags faicon"></i> Model</a></li>
+          <li><a href="<?php echo base_url('tray') ?>"><i class="fa fa-file-text faicon"></i> Daftar Baki</a></li>
+          <li><a href="error500.html"><i class="fa fa-pencil-square faicon"></i> Stok Opnam</a></li>
 
+        </ul>
+      </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-archive"></i><span>Mutasi</span></a>
+        <ul>
+          <li><a href="error405.html"><i class="fa fa-paper-plane faicon"></i> Kirim</a></li>
+          <li><a href="error500.html"><i class="fa fa-truck faicon faicon"></i> Terima</a></li>
         </ul>
       </li>
       <li class="submenu"> <a href="#"><i class="fa fa-address-book"></i><span>Kontak</span></a>
         <ul>
-          <li><a href="<?php echo base_url('customer') ?>">Daftar Customer</a></li>
-          <li><a href="<?php echo base_url('supplier') ?>">Daftar Supplier</a></li>
-          <li><a href="<?php echo base_url('customer/add_customer') ?>">Tambah Customer</a></li>
-          <li><a href="<?php echo base_url('supplier/add_supplier') ?>">Tambah Supplier</a></li>
+          <li><a href="<?php echo base_url('customer') ?>"><i class="fa fa-user-circle faicon"></i> Daftar Customer</a></li>
+          <li><a href="<?php echo base_url('customer/add_customer') ?>"><i class="fa fa-user-plus faicon"></i> Tambah Customer</a></li>
+          <li><a href="<?php echo base_url('supplier') ?>"><i class="fa fa-file-text faicon"></i> Daftar Supplier</a></li>
+          <li><a href="<?php echo base_url('supplier/add_supplier') ?>"><i class="fa fa-male faicon"></i> Tambah Supplier</a></li>
         </ul>
       </li>
       <li class="submenu"> <a href="#"><i class="fa fa-gear"></i><span>Konfigurasi</span></a>
         <ul>
-          <li><a href="error403.html">Toko</a></li>
-          <li><a href="<?php echo base_url('configuration/Currency') ?>">Kurs</a></li>
-          <li><a href="<?php echo base_url('configuration/gold_amount') ?>">Gold</a></li>
-          <li><a href="error500.html">Diamond</a></li>
-          <li><a href="error500.html">Promo</a></li>
-          <li><a href="<?php echo base_url('configuration/color') ?>">Tampilan</a></li>
-          <li><a href="error500.html">Sales</a></li>
-          <li><a href="error500.html">Member</a></li>
+          <li><a href="error403.html"><i class="fa fa-bank faicon"></i> Toko</a></li>
+          <li><a href="<?php echo base_url('configuration/Currency') ?>"><i class="fa fa-dollar faicon"></i> Kurs</a></li>
+          <li><a href="<?php echo base_url('configuration/gold_amount') ?>"><i class="fa fa-gg faicon"></i> Gold</a></li>
+          <li><a href="error500.html"><i class="fa fa-diamond faicon"></i> Diamond</a></li>
+          <li><a href="error500.html"><i class="fa fa-opencart faicon"></i> Promo</a></li>
+          <li><a href="<?php echo base_url('configuration/color') ?>"><i class="fa fa-paint-brush faicon"></i> Tampilan</a></li>
+          <li><a href="error500.html"><i class="fa fa-users faicon"></i> Sales</a></li>
+          <li><a href="error500.html"><i class="fa fa-user-circle faicon"></i> Member</a></li>
         </ul>
       </li>
       <li class="content"> <span>Monthly Bandwidth Transfer</span>
@@ -218,6 +224,11 @@
   <!--sidebar-menu-->
   <!--main-container-part-->
   <div id="content">
+    <div id="content-header">
+      <div id="breadcrumb"> 
+        <a href="<?php echo base_url() ?>" ><div class="tile-group-title"><div id="txt"></div></div></a>
+      </div>
+    </div>
     <?php echo $body ?>
   </div>
   <!--end-main-container-part-->
@@ -225,3 +236,35 @@
   <footer style="height: 50px"></footer>
   </body>
 </html>
+<script type="text/javascript">
+$(document).ready(function(){
+  startTime();
+});
+
+  function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        var d = today.getDate();
+        var D = today.getDay();
+        var M = today.getMonth();
+        var Y = today.getFullYear();
+        h = checkTime(h);
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML =
+        getDayName(D) + ", "+ d + " " + getMonthName(M) + " " + Y + " " + h + ":" + m + ":" + s;
+        var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+    }
+
+    <?php if($this->session->userdata('success')): ?>
+
+       <?php echo $this->session->userdata('success') ?>
+
+    <?php endif; ?>
+</script>

@@ -120,7 +120,7 @@
 					
 								
 
-				redirect('outlets/add_outlet');
+				redirect('outlets');
 
 			}
 			//show the edit page

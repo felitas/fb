@@ -1,8 +1,8 @@
-<div id="content-header">
-    <div id="breadcrumb"> <a href="<?php echo base_url('outlets') ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar outlet</a></div>
-    <h1 style="margin-bottom: 20px;">Edit Outlet <?php echo ucfirst($outlet->name) ?></h1>
-</div>
 <div class="container-fluid">
+    <div class="row-fluid">
+        <a href="<?php echo base_url('outlets') ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar outlet</a>
+        <h2 style="margin-bottom: 20px;">Edit Outlet <?php echo ucfirst($outlet->name) ?></h2>
+    </div>
     <div class="row-fluid">
       <div class="span12">
         <?php echo form_open('outlets/edit_outlet/'.$outlet->id, array('class'=>'form-horizontal')) ?>
