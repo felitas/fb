@@ -1,12 +1,9 @@
-<div id="content-header">
-    <div id="breadcrumb">
-        <a href="<?php echo base_url('customer') ?>">
-        <span class="fa fa-arrow-circle-o-left"></span>Kembali ke daftar customer
-        </a>
-    </div>
-</div>
 
 <div class="container-fluid">
+    <div class="row-fluid">
+        <a href="<?php echo base_url('customer') ?>"><span class="fa fa-arrow-circle-o-left"></span>Kembali ke daftar customer</a>
+        <h2>Edit Customer</h2>
+    </div>
     <div class="row-fluid">
         <div class="span12">
             <?php echo form_open('customer/edit_customer/'.$customer->id, array('class'=>'form-horizontal')) ?>

@@ -90,6 +90,9 @@
         padding-top: 0px !important;
         font-size: 13px !important;
       }
+      .nocontent>h3{
+        text-align: center !important;
+      }
       /*Toggle Currency pop up*/
       #kurstoggle{
         background-color: <?php echo $configuration->primary_color ?> !important;

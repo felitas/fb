@@ -46,7 +46,7 @@
 							<?php endforeach; ?>
 						<?php else:?>
 							<tr>
-								<td colspan="8" class="text-center"><h3>Table kosong</h3></td>
+								<td colspan="8" class="nocontent"><h3>Table kosong</h3></td>
 							</tr>
 						<?php endif; ?>
 					</tbody>	
@@ -55,15 +55,7 @@
 		</div>
 	</div>
 </div>
-
-<link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
-<link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
-<script src="<?php echo base_url() ?>js/footable.js"></script>
-<script src="<?php echo base_url() ?>js/footable.filter.js"></script>
-<script src="<?php echo base_url() ?>js/footable.paginate.js"></script>
-<script src="<?php echo base_url() ?>js/footable.sort.js" type="text/javascript"></script>
-
 <script>
 
     $(document).ready(function(){
