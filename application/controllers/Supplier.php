@@ -28,11 +28,12 @@
 						'description' => $this->input->post('supplier_desc')
 					);
 	            $this->crud_model->insert_data('suppliers',$data);
-	            $this->session->set_flashdata('supplier',"$.Notify({
-				    caption: 'Berhasil',
-				    content: 'Supplier telah ditambahkan',
-				    type: 'success'
-				});");
+	            $this->session->set_flashdata('supplier',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Supplier berhasil dibuat!',
+				 		sticky: false
+				 	});");
 				redirect('supplier/add_supplier');
 			}else{
 				$data['title'] = 'Supplier';
@@ -54,17 +55,19 @@
 	            	);
 
 	            if($this->crud_model->update_data('suppliers',$data_supplier,array('id' => $supp_id))){
-	            	$this->session->set_flashdata('supplier',"$.Notify({
-					    caption: 'Berhasil',
-					    content: 'Berhasil edit supplier',
-					    type: 'success'
-					});");
+	            	$this->session->set_flashdata('supplier',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Supplier berhasil diubah!',
+				 		sticky: false
+				 	});");
 	            }else{
-	            	$this->session->set_flashdata('supplier',"$.Notify({
-					    caption: 'Gagal',
-					    content: 'Gagal edit supplier',
-					    type: 'success'
-					});");
+	            	$this->session->set_flashdata('supplier',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Gagal!',
+				 		text:	'Supplier gagal diubah!',
+				 		sticky: false
+				 	});");
 	            }
 	            
 	            redirect('supplier');
@@ -80,10 +83,19 @@
 		public function delete_supplier($supp_id = ''){
 		
 			if($this->crud_model->delete_data('suppliers',array('id' => $supp_id))){
-				$this->session->set_flashdata('supplier', "$.Notify({caption: 'Berhasil !', content: 'Supplier berhasil dihapus', type: 'info'});");
+				$this->session->set_flashdata('supplier',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Supplier berhasil dihapus!',
+				 		sticky: false
+				 	});");
 			}else{
-				$this->session->set_flashdata('supplier', "$.Notify({caption: 'Gagal !', content: 'Supplier gagal dihapus', type: 'alert'});");
-			}
+				$this->session->set_flashdata('supplier',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Gagal!',
+				 		text:	'Supplier gagal dihapus!',
+				 		sticky: false
+				 	});");
 			
 			redirect('supplier');
 		}

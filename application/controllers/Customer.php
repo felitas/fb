@@ -30,17 +30,19 @@
 	            	);
 
 	            if($this->crud_model->insert_data('customers',$data_customer)){
-	            	$this->session->set_flashdata('customer',"$.Notify({
-					    caption: 'Berhasil',
-					    content: 'Berhasil tambah customer',
-					    type: 'success'
-					});");	
+	            	$this->session->set_flashdata('customer', "$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Customer berhasil dibuat!',
+				 		sticky: false
+				 	});");	
 	            }else{
-	            	$this->session->set_flashdata('customer',"$.Notify({
-					    caption: 'Gagal',
-					    content: 'Gagal menambah customer',
-					    type: 'alert'
-					});");
+	            	$this->session->set_flashdata('customer', "$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Gagal!',
+				 		text:	'Customer gagal dibuat!',
+				 		sticky: false
+				 	});");
 	            }
 	            
 	            redirect('customer/add_customer');
@@ -65,17 +67,19 @@
 	            	);
 
 	            if($this->crud_model->update_data('customers',$data_customer,array('id' => $cust_id))){
-	            	$this->session->set_flashdata('customer',"$.Notify({
-					    caption: 'Berhasil',
-					    content: 'Berhasil edit customer',
-					    type: 'success'
-					});");
+	            	$this->session->set_flashdata('customer', "$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Customer berhasil diubah!',
+				 		sticky: false
+				 	});");
 	            }else{
-	            	$this->session->set_flashdata('Customer',"$.Notify({
-					    caption: 'Gagal',
-					    content: 'Gagal edit customer',
-					    type: 'success'
-					});");
+	            	$this->session->set_flashdata('customer', "$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Gagal!',
+				 		text:	'Customer gagal diubah!',
+				 		sticky: false
+				 	});");
 	            }
 	            
 	            redirect('customer');
@@ -91,9 +95,19 @@
 		public function delete_customer($cust_id = ''){
 		
 			if($this->crud_model->delete_data('customers',array('id' => $cust_id))){
-				$this->session->set_flashdata('customer', "$.Notify({caption: 'Berhasil !', content: 'Customer berhasil dihapus', type: 'info'});");
+				$this->session->set_flashdata('customer',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Customer berhasil dihapus!',
+				 		sticky: false
+				 	});");
 			}else{
-				$this->session->set_flashdata('customer', "$.Notify({caption: 'Gagal !', content: 'Customer gagal dihapus', type: 'alert'});");
+				$this->session->set_flashdata('customer',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Gagal!',
+				 		text:	'Customer gagal dihapus!',
+				 		sticky: false
+				 	});");
 			}
 			
 			redirect('customer');

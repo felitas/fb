@@ -76,7 +76,12 @@
 		    window.location.assign("<?php echo base_url() ?>supplier/delete_supplier/"+id);
 		  },
 		  function(){
-		    $.Notify({caption: 'Gagal !', content: 'Supplier gagal dihapus', type: 'alert'});
+		    $.gritter.add({
+		 		title:	'Gagal!',
+		 		text:	'Supplier tidak jadi dihapus',
+		 		sticky: false,
+
+		 	});		
 		  });
 	}
 </script>

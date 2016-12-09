@@ -112,9 +112,19 @@
 	            	);
 
 	            if($this->crud_model->insert_data('accounts',$data_sales)){
-	            	$this->session->set_flashdata('sales', "$.Notify({caption: 'Berhasil !', content: 'Sales berhasil ditambahkan', type: 'info'});");
+	            	$this->session->set_flashdata('sales',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Sales berhasil dibuat',
+				 		sticky: false
+				 	});");
 	            }else{
-	            	$this->session->set_flashdata('sales', "$.Notify({caption: 'Gagal !', content: 'Sales gagal ditambahkan', type: 'alert'});");
+	            	$this->session->set_flashdata('sales',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Gagal!',
+				 		text:	'Sales gagal dibuat',
+				 		sticky: false
+				 	});");
 	            }
 
 	            redirect('sales/add_sales');
@@ -197,9 +207,19 @@
 				}
 
 	            if($this->crud_model->update_data('accounts',$data_sales,array('id' => $sales_id))){
-	            	$this->session->set_flashdata('sales', "$.Notify({caption: 'Berhasil !', content: 'Sales berhasil diedit', type: 'info'});");	
+	            	$this->session->set_flashdata('sales',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Sales berhasil diubah',
+				 		sticky: false
+				 	});");	
 	            }else{
-	            	$this->session->set_flashdata('sales', "$.Notify({caption: 'Gagal !', content: 'Sales gagal diedit', type: 'alert'});");
+	            	$this->session->set_flashdata('sales',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Gagal!',
+				 		text:	'Sales gagal diubah',
+				 		sticky: false
+				 	});");
 	            }        
 
 	            redirect('sales');
@@ -220,12 +240,27 @@
 				unlink($sales->photo);
 				rmdir($dir);	
 				if($this->crud_model->delete_data('accounts',array('id' => $sales_id))){
-					$this->session->set_flashdata('sales', "$.Notify({caption: 'Berhasil !', content: 'Sales berhasil dihapus', type: 'info'});");
+					$this->session->set_flashdata('sales',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Sales berhasil dihapus!',
+				 		sticky: false
+				 	});");
 				}else{
-					$this->session->set_flashdata('sales', "$.Notify({caption: 'Gagal !', content: 'Sales gagal dihapus', type: 'alert'});");
+					$this->session->set_flashdata('sales',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Gagal!',
+				 		text:	'Sales gagal dihapus!',
+				 		sticky: false
+				 	});");
 				}
 			}else{
-				$this->session->set_flashdata('sales', "$.Notify({caption: 'Gagal !', content: 'Sales tidak ditemukan', type: 'alert'});");
+				$this->session->set_flashdata('sales',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Gagal!',
+				 		text:	'Sales tidak ditemukan',
+				 		sticky: false
+				 	});");
 			}
 			redirect('sales');
 

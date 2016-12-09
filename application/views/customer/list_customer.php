@@ -83,7 +83,11 @@
 		    window.location.assign("<?php echo base_url() ?>customer/delete_customer/"+id);
 		  },
 		  function(){
-		    $.Notify({caption: 'Gagal !', content: 'Customer gagal dihapus', type: 'alert'});
+		    $.gritter.add({
+		    	title: 'Gagal!',
+		    	text: 'Customer tidak jadi dihapus',
+		    	sticky: false
+		    });
 		  });
 	}
 </script>

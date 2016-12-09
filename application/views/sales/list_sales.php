@@ -68,7 +68,12 @@
 		    window.location.assign("<?php echo base_url() ?>sales/delete_sales/"+id);
 		  },
 		  function(){
-		    $.Notify({caption: 'Gagal !', content: 'Sales gagal dihapus', type: 'alert'});
+		    $.gritter.add({
+		 		title:	'Gagal!',
+		 		text:	'Sales tidak jadi dihapus',
+		 		sticky: false,
+
+		 	});		
 		  });
 	}
 	$(document).ready(function(){
