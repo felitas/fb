@@ -41,6 +41,10 @@
     <![endif]-->
     <?php $configuration = $this->crud_model->get_data('configuration')->row() ?>
     <style>
+      #header h1{
+        background: url("<?php echo base_url()?>assets/logo.png") no-repeat scroll 0 0 transparent !important;
+      }
+
       /*Gritter*/
       .gritter-close{
         background:url('<?php echo base_url()?>assets/gritter.png') no-repeat left top !important;
@@ -125,7 +129,9 @@
 
   </head>
   <body>
-  <div id="header"></div>
+  <div id="header">
+    <h1><a href="<?php echo base_url();?>">Fajar Baru</a></h1>
+  </div>
   <!--top-Header-menu-->
   <div id="user-nav" class="navbar">
     <ul class="nav">
@@ -205,7 +211,7 @@
           <li><a href="error500.html"><i class="fa fa-user-circle faicon"></i> Member</a></li>
         </ul>
       </li>
-      <li class="content"> <span>Monthly Bandwidth Transfer</span>
+      <!-- <li class="content"> <span>Monthly Bandwidth Transfer</span>
         <div class="progress progress-mini progress-danger active progress-striped">
           <div style="width: 77%;" class="bar"></div>
         </div>
@@ -218,7 +224,7 @@
         </div>
         <span class="percent">87%</span>
         <div class="stat">604.44 / 4000 MB</div>
-      </li>
+      </li> -->
     </ul>
   </div>
   <!--sidebar-menu-->
