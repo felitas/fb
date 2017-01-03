@@ -5,20 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Login - Victory</title>
+    <title>Login - Fajar Baru</title>
 
     <!-- Bootstrap -->
-    
-    
+    <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.min.css">
     <link href="<?php echo base_url() ?>font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>css/metro.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>css/metro-icons.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>css/metro-responsive.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>css/metro-schemes.css" rel="stylesheet">
-
-    <script src="<?php echo base_url() ?>js/jquery-1.12.4.min.js"></script>
-    <script src="<?php echo base_url() ?>js/metro.js"></script>
+    <link href="<?php echo base_url() ?>css/bootstrap-responsive.min.css" rel="stylesheet"><!--Matrix-->
+    <link rel="stylesheet" href="<?php echo base_url() ?>css/matrix-login.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>css/jquery.gritter.css" /><!--Matrix Notification-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>    
     
+    <script src="<?php echo base_url() ?>js/jquery-1.12.4.min.js"></script>
+    <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url() ?>js/jquery.ui.custom.js"></script><!--Matrix-->
+    <script src="<?php echo base_url();?>js/bootstrap-wysihtml5.js"></script><!--Matrix-->
+    <script src="<?php? echo base_url();?>js/matrix.login.js"></script> 
+    <script src="<?php echo base_url();?>js/jquery.gritter.min.js"></script> <!--Matrix Notification-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,98 +34,62 @@
       body{
         background: #f0eff0;
       }
-      .card{
-        text-align: center;
-        border: 1px solid #3498db;
+      #loginbox{
+        padding-top: 5%;
+      }
+      #loginform, .control-group{
+        background-color: #fff !important;
+      }
+      .form-actions,#loginform{
+        border:none;
+      }
+      input, .add-on{
+        border: 1px solid #002f8e !important;
+      }
+      .btn-success:hover{
+        background-color: rgba(52, 152, 219,1.0) !important;
+        border-color: rgba(52, 152, 219,1.0) !important;
+      }
+      input[type="submit"]{
+        padding: 7px 20px 7px !important;
+        background-color: #002f8e !important
+      }
 
-        
-      }
-      .card-header{
-        background-color: #3498db;
-        color: white;
-        padding: 20px 0;
-      }
-      .card-header h2{
-        margin:0;
-      }
-      .card-body{
-        background-color: white;
-        padding: 20px;
-      }
-      .btn-teal:hover{
-        background-color: #30D5F1!important;
-        -webkit-transition: all 0.3s ease-in;
-        -moz-transition: all 0.3s ease-in;
-        transition: all 0.3s ease-in;
-      }
-      form{
-        width: 40%;
-      }
-      @media (max-width: 768px){
-        form{
-          width: 90% !important;
-          margin:auto !important;
-        }
-      }
+
     </style>
 
   </head>
   <body>
-
-    <div class="container">
-      <div class="flex-grid" style="margin: 11% 0;">
-      <div class="row flex-just-center">
-        
-      
-        
-        
-        <?php echo form_open('accounts/login') ?>
-        <div class="cell">
-        
-          <div class="card">
-            <div class="card-header">
-              <h2>Kemenangan</h2>  
-            </div>
-            <div class="card-body">
-                <div class="cell" style="margin:auto">
-                  <div class="input-control modern text iconic" data-role="input">
-                    <input type="text" name="username" required="1">
-                    <span class="label">Username</span>
-                    <span class="informer">Please enter your username</span>
-                    <span class="placeholder">Username</span>
-                    <span class="icon mif-user"></span>
-                  </div>
-              
-                <div class="cell" style="margin:auto">
-                    <div class="input-control modern password iconic" data-role="input">
-                      <input type="password" name="password" required="1">
-                      <span class="label">Password</span>
-                      <span class="informer">Please enter your password</span>
-                      <span class="placeholder">Password</span>
-                      <span class="icon mif-lock"></span>
-                      <button class="button helper-button reveal"><span class="mif-looks"></span></button>
+  <div id="loginbox">
+        <?php echo form_open('accounts/login', array('id'=>'loginform','class'=>'form-vertical')) ?>
+              <div class="control-group normal_text"> <img src="<?php echo base_url('assets/FajarBaru.png') ?>" alt="Fajar Baru" height="60%" width="60%"/></div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_lb"><i class="fa fa-user"> </i></span><input type="text" placeholder="Username" name="username" required="1" />
+                        </div>
                     </div>
                 </div>
-              
-                <div class="cell" style="margin:auto">
-                  <input type="submit" name="submit" class="button info btn-teal" value="Log In" style="background-color: #3498DB">
+                <div class="control-group" style="padding-bottom: 10px !important">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_lb"><i class="fa fa-lock"></i></span><input type="password" placeholder="Password" name="password" required="1" />
+                        </div>
+                    </div>
                 </div>
-            </div>
-          </div>
-        <?php echo form_close() ?>
+                <div class="form-actions text-center">
+                    <input type="submit" name="submit" class="btn btn-success" value="Log In">
+                </div>
+          <?php echo form_close()?>
         </div>
-        </div>
-      </div>
-    </div>
-    
   </body>
 
   <script>
+    $(document).ready(function(){
+        <?php if($this->session->flashdata('login')): ?>
+            <?php echo $this->session->flashdata('login') ?>
+        <?php endif; ?>
+    });
 
-    <?php if($this->session->userdata('failed')): ?>
-
-       <?php echo $this->session->userdata('failed') ?>
-
-    <?php endif; ?>
   </script>
 </html>

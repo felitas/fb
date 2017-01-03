@@ -3,7 +3,7 @@ html, body {    width: 100%;    height: 100%;}
 
 body {
  overflow-x: hidden;
- margin-top: -10px;  font-family: 'Open Sans', sans-serif; font-size:12px; color:#666;
+ font-family: 'Open Sans', sans-serif; font-size:12px; color:#666;
 }
 a{color:#666;}
 a:hover, a:focus {
@@ -27,7 +27,7 @@ hr{ border-top-color:#dadada;}
 .label-important, .badge-important{ background:#f74d4d;}
 
 /*Metro Background color class*/
-.bg_lb{ background:#27a9e3;}
+.bg_lb{ background:#002f8e;}
 .bg_db{ background:#2295c9;}
 .bg_lg{ background:#28b779;}
 .bg_dg{ background:#28b779;}
@@ -39,12 +39,12 @@ hr{ border-top-color:#dadada;}
 .bg_lv{ background:#603bbc;}
 .bg_lh{ background:#b6b3b3;}
 
-body { background-color:#2E363F;    padding: 0;    margin-top:10%;}
+body { background-color:#2E363F;    padding: 0;}
 #logo, #loginbox {    width: 32%;    margin-left: auto;    margin-right: auto;    position: relative;}
 #logo img {  margin: 0 auto;    display: block;}
 #loginbox { overflow: hidden !important;    text-align: left;    position: relative; }
 #loginbox form{ width:100%; background:#2E363F; position:relative; top:0; left:0; }
-#loginbox .form-actions { padding: 14px 20px 15px;}
+#loginbox .form-actions { padding: 4px 20px 15px;}
 #loginbox .form-actions .pull-left { margin-top:0px;}
 #loginbox form#loginform { z-index: 200; display:block;}
 #loginbox form#recoverform { z-index: 100;     display:none;}

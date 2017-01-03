@@ -5,16 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title><?php echo $title ?> - Kemenangan</title>
+    <title><?php echo $title ?> - Fajar Baru</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.min.css">
     <link href="<?php echo base_url() ?>font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>css/bootstrap-responsive.min.css" rel="stylesheet"><!--Matrix-->
-    <link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap-wysihtml5.css" /> <!--Matrix-->
+    <link rel="stylesheet" href="<?php echo base_url() ?>css/jquery.gritter.css" /><!--Matrix Notification-->
+    <link href="<?php echo base_url() ?>css/uniform.css" rel="stylesheet"><!--Matrix Uniform-->
     <link href="<?php echo base_url() ?>css/matrix-style.css" rel="stylesheet"><!--Matrix-->
     <link href="<?php echo base_url() ?>css/matrix-media.css" rel="stylesheet"><!--Matrix-->
-    <link rel="stylesheet" href="<?php echo base_url() ?>css/jquery.gritter.css" /><!--Matrix Notification-->
+    <link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap-wysihtml5.css" /> <!--Matrix-->
     <link href="<?php echo base_url() ?>css/footable.core.css" type="text/css" rel="stylesheet"><!--Footable-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>    
     
@@ -27,6 +28,7 @@
     <script src="<?php echo base_url();?>js/wysihtml5-0.3.0.js"></script>  <!--Matrix-->
     <script src="<?php echo base_url();?>js/bootstrap-wysihtml5.js"></script><!--Matrix-->
     <script src="<?php echo base_url();?>js/jquery.gritter.min.js"></script> <!--Matrix Notification-->
+    <script src="<?php echo base_url();?>js/jquery.uniform.js"></script> <!--Matrix Uniform-->
     <script src="<?php echo base_url() ?>js/footable.js"></script><!--Footable-->
     <script src="<?php echo base_url() ?>js/footable.filter.js"></script><!--Footable-->
     <script src="<?php echo base_url() ?>js/footable.paginate.js"></script><!--Footable-->
@@ -126,7 +128,18 @@
     .faicon{
       width: 20px !important;
     }
-
+    /*Form*/
+    .form-actions{
+      background: transparent !important;
+    }
+    .top-control{
+      border-top: none !important
+    }
+    @media (max-width: 970px){
+     .control-group{
+        border: none !important;
+      } 
+    }
   
     </style>
 

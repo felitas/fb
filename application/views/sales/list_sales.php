@@ -4,7 +4,7 @@
     	<a href="<?php echo base_url('sales/add_sales') ?>" class="pull-right">Tambah Sales <span class="fa fa-arrow-circle-o-right"></span></a>
     	<h2 style="margin-bottom: 20px;">Daftar Sales</h2>
     	<hr>
-	</div>s
+	</div>
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="input-control text full-size">

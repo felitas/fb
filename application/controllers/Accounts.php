@@ -42,7 +42,12 @@
 					$this->session->set_userdata($data_session);
 
 					//success notification
-					$this->session->set_flashdata('success',"$.Notify({caption: 'Login Sukses !', content: 'Selamat Datang ,".$user->name."', type: 'info'});");
+					$this->session->set_flashdata('login',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Customer berhasil dihapus!',
+				 		sticky: false
+				 	});");
 
 					redirect('home');
 
@@ -50,7 +55,11 @@
 				//if user does not exist
 				else{
 					//failed notification
-					$this->session->set_flashdata('failed',"$.Notify({caption: 'Login Gagal !', content: 'Username atau Password salah', type: 'alert'});");
+					$this->session->set_flashdata('login',"$.gritter.add({
+				 		title:	'Gagal!',
+				 		text:	'Username atau password yang dimasukkan salah!',
+				 		sticky: false
+				 	});");
 
 					redirect('accounts/login');
 				}

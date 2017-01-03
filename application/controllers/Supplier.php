@@ -63,7 +63,6 @@
 				 	});");
 	            }else{
 	            	$this->session->set_flashdata('supplier',"$.gritter.add({
-						class_name : 'gritter-light',
 				 		title:	'Gagal!',
 				 		text:	'Supplier gagal diubah!',
 				 		sticky: false
@@ -91,7 +90,6 @@
 				 	});");
 			}else{
 				$this->session->set_flashdata('supplier',"$.gritter.add({
-						class_name : 'gritter-light',
 				 		title:	'Gagal!',
 				 		text:	'Supplier gagal dihapus!',
 				 		sticky: false
