@@ -1,58 +1,65 @@
+<!--Both are css for alertify-->
+<link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
+
 <div class="container-fluid">
 	<div class="row-fluid">
     	<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
     	<a href="<?php echo base_url('customer/add_customer') ?>" class="pull-right">Tambah Customer <span class="fa fa-arrow-circle-o-right"></span></a>
-    	<h2 style="margin-bottom: 20px;">Daftar Customer</h2>
-    	<hr>
+    	<h2>Daftar Customer</h2>
 	</div>
-	<div class="row-fluid">
-		<div class="span12">
-			<div class="input-control text full-size">
-		        <input type="text" placeholder="Cari Customer" id="filter" >
-		    </div>
-		    <div class="cell table-responsive toggle-circle-filled">
-		    	<table class="table hovered border table-condensed" id="table_customer" data-filter="#filter" data-page-size="10">
-		    		<thead>
-						<tr>
-							<th data-type="numeric">No</th>
-							<th>Nama</th>
-							<th data-hide="phone">Tipe</th>
-							<th data-hide="phone">Telephone</th>
-							<th data-hide="phone">Email</th>
-							<th data-hide="phone">Alamat</th>
-							<th data-hide="phone">Outlet</th>
-							<th data-hide="phone">Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php if($customers!=NULL): ?>
-							<?php $i=1; ?>
-							<?php foreach($customers as $customer): ?>
+	<div class="widget-box">
+	<div class="widget-content">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="input-control text full-size">
+			        <input type="text" placeholder="Cari Customer" id="filter" >
+			    </div>
+			    <div class="cell table-responsive toggle-circle-filled">
+			    	<table class="table table-bordered" id="table_customer" data-filter="#filter" data-page-size="10">
+			    		<thead>
 							<tr>
-								<td><?php echo $i ?></td>
-								<td><?php echo $customer->name ?></td>
-								<td><?php echo $customer->type ?></td>
-								<td><a href="tel:<?php echo $customer->phone ?>"><?php echo $customer->phone ?></a></td>
-								<td><?php echo $customer->email ?></td>
-								<td><?php echo $customer->address ?></td>
-								<td>
-									<?php $outlet = $this->crud_model->get_by_condition('outlets', array('id'=>$customer->outlet_id))->row('name');
-										echo $outlet;
-									?>
-								</td>
-								<td><a href="<?php echo base_url('customer/edit_customer/'.$customer->id) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_customer('<?php echo $customer->id ?>','<?php echo $customer->name ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
+								<th data-type="numeric">No</th>
+								<th>Nama</th>
+								<th data-hide="phone">Tipe</th>
+								<th data-hide="phone">Telephone</th>
+								<th data-hide="phone">Email</th>
+								<th data-hide="phone">Alamat</th>
+								<th data-hide="phone">Outlet</th>
+								<th data-hide="phone">Action</th>
 							</tr>
-							<?php $i++; ?>
-							<?php endforeach; ?>
-						<?php else:?>
-							<tr>
-								<td colspan="8" class="nocontent"><h3>Table kosong</h3></td>
-							</tr>
-						<?php endif; ?>
-					</tbody>	
-		    	</table>
-		    </div>
+						</thead>
+						<tbody>
+							<?php if($customers!=NULL): ?>
+								<?php $i=1; ?>
+								<?php foreach($customers as $customer): ?>
+								<tr>
+									<td><?php echo $i ?></td>
+									<td><?php echo $customer->name ?></td>
+									<td><?php echo $customer->type ?></td>
+									<td><a href="tel:<?php echo $customer->phone ?>"><?php echo $customer->phone ?></a></td>
+									<td><?php echo $customer->email ?></td>
+									<td><?php echo $customer->address ?></td>
+									<td>
+										<?php $outlet = $this->crud_model->get_by_condition('outlets', array('id'=>$customer->outlet_id))->row('name');
+											echo $outlet;
+										?>
+									</td>
+									<td><a href="<?php echo base_url('customer/edit_customer/'.$customer->id) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_customer('<?php echo $customer->id ?>','<?php echo $customer->name ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
+								</tr>
+								<?php $i++; ?>
+								<?php endforeach; ?>
+							<?php else:?>
+								<tr>
+									<td colspan="8" class="nocontent"><h3>Table kosong</h3></td>
+								</tr>
+							<?php endif; ?>
+						</tbody>	
+			    	</table>
+			    </div>
+			</div>
 		</div>
+	</div>
 	</div>
 </div>
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>

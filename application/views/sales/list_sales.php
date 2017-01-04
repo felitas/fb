@@ -1,5 +1,7 @@
+<!--Both are css for alertify-->
 <link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
+
 <div class="container-fluid">
 	<div class="row-fluid">
     	<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
