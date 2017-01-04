@@ -51,10 +51,15 @@
                     </div>
                 </div>
             </div>
-            <div class="control-group" id="snapshot" style="display: none">
-                <div id="my_camera" style="width:320px; height:240px; margin:auto"></div>
-                <a class="button info bg-primary btn-teal" href="javascript:void(take_snapshot())"><span class="mif mif-camera"></span> Ambil Foto</a>
-                <div id="my_result" style="margin:auto"></div>    
+            <div class="control-group text-center" id="snapshot" style="display: none">
+                <div class="span6">
+                    <div id="my_camera" style="width:320px; height:240px; margin:auto"></div>
+                    <a style="margin-top: 10px;margin-bottom: 10px;" class="btn btn-info bg_ls" href="javascript:void(take_snapshot())"><span class="mif mif-camera"></span> Ambil Foto</a>    
+                </div>
+                <div class="span6">
+                    <div id="my_result" style="margin:auto"></div>        
+                </div>            
+                
             </div>
             <?php endif ?>        
             <div class="control-group">

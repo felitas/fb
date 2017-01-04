@@ -46,6 +46,9 @@
       #header h1{
         background: url("<?php echo base_url()?>assets/logo.png") no-repeat scroll 0 0 transparent !important;
       }
+      h2{
+        margin-bottom: 0px !important;
+      }
 
       /*Gritter*/
       .gritter-close{
@@ -139,6 +142,13 @@
      .control-group{
         border: none !important;
       } 
+    }
+    .circleimg{
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      margin: auto;
+      margin-bottom: 10px;
     }
   
     </style>

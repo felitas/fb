@@ -1,101 +1,121 @@
-<style>
-    .image-frame{
-        height: 150px !important;
-        width: 150px !important;
-        margin: auto;
+<style type="text/css">
+    .circleimg{
+        background:url('<?php echo base_url().$sales->photo ?>?timestamp=<?php echo rand(0,999999) ?>');
+        background-size: cover;
     }
 </style>
-
-<div id="content-header">
-    <div id="breadcrumb">
-        <a href="<?php echo base_url('sales') ?>">
-        <span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar sales
-        </a>
-    </div>
-</div>
-
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span12">
-            <?php echo form_open_multipart('sales/edit_sales/'.$sales->id,array('class'=>'form-horizontal')) ?>
-            
-            <div class="control-group text-center">
-                <a href="<?php echo base_url().$sales->photo ?>" rel="group" class="fancybox"><img src="<?php echo base_url().$sales->photo ?>?timestamp=<?php echo rand(0,999999) ?>" data-role="fitImage" data-format="cycle"></a>    
-            </div>
+        <a href="<?php echo base_url('sales') ?>">
+            <span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar sales
+        </a>
+        <h2>Edit Sales <?php echo $sales->name ?></h2>
+    </div>
+    <div class="widget-box">
+    <div class="widget-content nopadding">
+        <div class="row-fluid">
+            <div class="span12">
+                <?php echo form_open_multipart('sales/edit_sales/'.$sales->id,array('class'=>'form-horizontal')) ?>
+                
+                <div class="control-group top-control">
+                    <div class="circleimg">
+                    </div>
+                </div>
 
-            <div class="control-group">
-                <label for="" class="control-label">Nama Sales</label>
-                <div class="controls">
-                    <input type="text" placeholder="Nama Lengkap Sales" name="sales_name" class="tip-bottom" value="<?php echo $sales->name ?>">
+                <div class="control-group">
+                    <div class="span6">
+                        <label for="" class="control-label">Nama Sales</label>
+                        <div class="controls">
+                            <input type="text" placeholder="Nama Lengkap Sales" name="sales_name" class="tip-bottom" value="<?php echo $sales->name ?>">
+                        </div>    
+                    </div>
+                    <div class="span6">
+                        <label for="" class="control-label">Username</label>
+                        <div class="controls">
+                            <input type="text" placeholder="Username Sales" onblur="check_username(this)" name="sales_username" value="<?php echo $sales->username ?>" readonly="readonly" class="tip-bottom"> 
+                        </div>  
+                    </div>
+                    
                 </div>
-            </div>
-            <div class="control-group">
-                <label for="" class="control-label">Upload Photo</label>
-                <div class="controls">
-                    <input type="file" accept="image/*" name="capture" id="capture" capture="camera">
+                <div class="control-group">
+                    <div class="span6">
+                        <label for="" class="control-label">Upload Photo</label>
+                        <div class="controls">
+                            <input type="file" accept="image/*" name="capture" id="capture" capture="camera">
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <label for="" class="control-label">Ubah Password</label>
+                        <div class="controls">
+                            <input type="checkbox" onchange="change_password(this)">
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <?php if (!$is_mobile): ?>
-            <div class="control-group">
-                <label for="" class="control-label">Ambil Foto</label>
-                <div class="controls">
-                    <input type="checkbox" onchange="show_cam(this)">
+                <div class="control-group" style="display: none;">
+                    <div class="span6"></div>
+                    <div class="span6" id="password">
+                        <label class="control-label">Password</label>
+                        <div class="controls">
+                          <input type="password" placeholder="Password" name="outlet_password">
+                        </div>    
+                    </div>
                 </div>
-            </div>
-            <div class="control-group" id="snapshot" style="display: none">
-                <div id="my_camera" style="width:320px; height:240px; margin:auto"></div>
-                <a class="button info bg-primary btn-teal" href="javascript:void(take_snapshot())"><span class="mif mif-camera"></span> Ambil Foto</a>
-                <div id="my_result" style="margin:auto"></div>    
-            </div>
-            <?php endif ?>        
-            <div class="control-group">
-                <label for="" class="control-label">No. Telepon</label>
-                <div class="controls">
-                    <input type="text" placeholder="Nomor Telephone Sales" name="sales_phone" value="<?php echo $sales->phone ?>" class="tip-bottom"> 
+                <?php if (!$is_mobile): ?>
+                <div class="control-group">
+                    <div class="span6">
+                        <label for="" class="control-label">Ambil Foto</label>
+                        <div class="controls">
+                            <input type="checkbox" onchange="show_cam(this)">
+                        </div>    
+                    </div>
+                    <div class="span6">
+                        <label for="" class="control-label">Tempat Bekerja</label>
+                        <div class="controls">
+                            <select name="sales_outlet" id="">
+                                <option value="" selected="selected">--Pilih Outlet--</option>
+                                <?php foreach ($outlets as $outlet): ?>
+                                    <option value="<?php echo $outlet->id ?>" <?php echo ($outlet->id == $sales->outlet_id) ? 'selected' : '' ?>><?php echo $outlet->name; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    
                 </div>
-            </div>
-            <div class="control-group">
-                <label for="" class="control-label">Email</label>
-                <div class="controls">
-                    <input type="text" placeholder="Email Sales" name="sales_email" value="<?php echo $sales->email ?>" class="tip-bottom"> 
+                <div class="control-group text-center" id="snapshot" style="display: none">
+                    <div class="span6">
+                        <div id="my_camera" style="width:320px; height:240px; margin:auto"></div>
+                        <a style="margin-top: 10px;margin-bottom: 10px;" class="btn btn-info bg_ls" href="javascript:void(take_snapshot())"><span class="mif mif-camera"></span> Ambil Foto</a>    
+                    </div>
+                    <div class="span6">
+                        <div id="my_result" style="margin:auto"></div>                        
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label for="" class="control-label">Alamat</label>
-                <div class="controls">
-                    <textarea name="sales_address" placeholder="Alamat Sales" id="" cols="30" rows="10"><?php echo $sales->address ?></textarea> 
+                <?php endif ?>        
+                <div class="control-group">
+                    <label for="" class="control-label">No. Telepon</label>
+                    <div class="controls">
+                        <input type="text" placeholder="Nomor Telephone Sales" name="sales_phone" value="<?php echo $sales->phone ?>" class="tip-bottom"> 
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label for="" class="control-label">Username</label>
-                <div class="controls">
-                    <input type="text" placeholder="Username Sales" onblur="check_username(this)" name="sales_username" value="<?php echo $sales->username ?>" readonly="readonly" class="tip-bottom"> 
+                <div class="control-group">
+                    <label for="" class="control-label">Email</label>
+                    <div class="controls">
+                        <input type="text" placeholder="Email Sales" name="sales_email" value="<?php echo $sales->email ?>" class="tip-bottom"> 
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label for="" class="control-label">Ubah Password</label>
-                <div class="controls">
-                    <input type="checkbox" onchange="change_password(this)">
-                    <input type="password" id="password" placeholder="Password" name="sales_password">
-                    <button class="button helper-button reveal"><span class="mif-looks"></span></button>
+                <div class="control-group">
+                    <label for="" class="control-label">Alamat</label>
+                    <div class="controls">
+                        <textarea name="sales_address" placeholder="Alamat Sales" id="" cols="30" rows="10"><?php echo $sales->address ?></textarea> 
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label for="" class="control-label">Tempat Bekerja</label>
-                <div class="controls">
-                    <select name="sales_outlet" id="">
-                        <option value="" selected="selected">--Pilih Outlet--</option>
-                        <?php foreach ($outlets as $outlet): ?>
-                            <option value="<?php echo $outlet->id ?>" <?php echo ($outlet->id == $sales->outlet_id) ? 'selected' : '' ?>><?php echo $outlet->name; ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                <div class="form-actions text-center">
+                    <input type="submit" name="submit" class="btn btn-info" value="Submit">
                 </div>
-            </div>
-            <div class="form-actions">
-                <input type="submit" name="submit" class="btn btn-info" value="Submit">
-            </div>
-            <?php echo form_close() ?>
-        </div>    
+                <?php echo form_close() ?>
+            </div>    
+        </div>
+    </div>
     </div>
 </div>
 
