@@ -38,19 +38,20 @@
 
 		public function delete_tray($id){
 			if($this->crud_model->delete_data('tray',array('id'=>$id))){
-				$this->session->set_flashdata('tray',"$.Notify({
-					caption: 'Berhasil',
-					content : 'Baki telah dihapus',
-					type: 'success'
+				$this->session->set_flashdata('tray',"$.gritter.add({
+					title: 'Berhasil',
+					text : 'Baki telah dihapus',
+					sticky: false
 				});");
-				redirect('tray');
+				
 			}else{
-				$this->session->set_flashdata('tray',"$.Notify({
-					caption: 'Gagal',
-					content : 'Baki gagal dihapus',
-					type : 'alert'
+				$this->session->set_flashdata('tray',"$.gritter.add({
+					title: 'Gagal',
+					text : 'Baki gagal dihapus',
+					sticky: false
 				});");
 			}
+			redirect('tray');
 		}
 		
 	}

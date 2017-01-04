@@ -10,7 +10,7 @@
     <div class="widget-content">
 	    <div class="row-fluid">
 	      <div class="span12">
-			<div class="input-control text">
+			<div class="control-group">
 	            <input type="text" placeholder="Cari Outlet" id="filter" >
 	        </div>
 		    <div class="table-responsive toggle-circle-filled">
