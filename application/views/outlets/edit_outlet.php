@@ -12,7 +12,7 @@
                 <div class="span6">
                     <label class="control-label">Nama Toko</label>
                     <div class="controls">
-                      <input type="text" placeholder="Nama Toko" name="outlet_name" title="Go to Home" class="tip-bottom" value="<?php echo $outlet->name ?>">
+                      <input type="text" placeholder="Nama Toko" name="outlet_name" value="<?php echo $outlet->name ?>">
                     </div>    
                 </div>
                 <div class="span6">
@@ -27,7 +27,7 @@
                 <div class="span6">
                     <label class="control-label">Kode Toko</label>
                     <div class="controls">
-                      <input type="text" placeholder="Masukkan Kode Toko (2 Karakter)" title="Contoh : KM" name="outlet_code" value="<?php echo $outlet->code ?>">
+                      <input type="text" placeholder="Masukkan Kode Toko (2 Karakter)" title="Masukkan 2 karakter Untuk kode toko. Contoh : FC" class="tip-bottom" name="outlet_code" value="<?php echo $outlet->code ?>">
                     </div>    
                 </div>
                 <div class="span6">
@@ -114,33 +114,21 @@ function check_username(el){
               cache : false,
               success: function(result){
                 if(result == 'taken'){
-                    $.Notify({
-                        caption: 'Error !',
-                        content: 'Username sudah terpakai',
-                        type: 'alert'
+                    $.gritter.add({
+                        title: 'Error !',
+                        text: 'Username sudah terpakai',
+                        sticky: 'false'
                     });
                     $(el).val('');
                     $(el).parent().addClass('error');
                     setTimeout(function(){$(el).parent().removeClass('error')},3000);
                 }else{
                     $(el).parent().addClass('success');
-                }
-               
-                
+                } 
               }
-            
             });    
         }
         
     }
 
-
-    function notifyOnErrorInput(input){
-        var message = input.data('validateHint');
-        $.Notify({
-            caption: 'Error',
-            content: message,
-            type: 'alert'
-        });
-    }
 </script>

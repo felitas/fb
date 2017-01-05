@@ -1,46 +1,48 @@
-<link href="<?php echo base_url() ?>css/footable.core.css" type="text/css" rel="stylesheet">
-<div class="container">
-    <div class="grid">
-        <div class="row">
-            <div class="cell">
-                <h3 style="display: inline-block;"><small><a href="<?php echo base_url() ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a></small></h3>
-                <h3 style="display:inline-block;float:right;"><small><a id="add_link" style="cursor: pointer;">Tambah kurs baru <span class="fa fa-plus-circle"></span></a></small></h3>
-            </div>
+<!--Both are css for alertify-->
+<link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
+        <a class="pull-right" id="add_link" style="cursor: pointer;">Tambah kurs baru <span class="fa fa-plus-circle"></span></a>
+        <h2>Daftar Nilai Kurs</h2>
+    </div>
+
+    <!--Field dollar insertion-->
+    <?php echo form_open('configuration/currency_add', array('class' =>  'form-horizontal') )?>
+    <div class="widget-box closed-add" id="append_kurs" style="display: none;">   
+        <div class="widget-title">
+            <h5>Tambah Kurs Baru</h5>
         </div>
-        <!--Field dollar insertion-->
-        <div class="row closed-add" id="append_kurs" style="display: none;">	 
-            <div class="cell">
-            	<h3 style="margin-bottom: 20px;">Tambah Kurs Baru</h3>
-                <hr class="bg-primary">	
-            </div>
-            <?php echo form_open('configuration/currency_add', array('data-role' =>  'validator','data-on-error-input' => 'notifyOnErrorInput','data-show-error-hint' => 'false')) ?>
-            <div class="row cells2">
-                <div class="cell">
-                    <label>Nama Kurs Baru</label>
-                    <div class="input-control text full-size">
-                        <input type="text" placeholder="Masukkan Nama Kurs Baru" name="currency_name" data-validate-func="required" data-validate-hint="Nilai dollar harus diisi">
-                    </div>
+        <div class="widget-content">
+            <div class="control-group top-control">
+                <label class="control-label">Nama Kurs Baru</label>
+                <div class="controls">
+                    <input type="text" placeholder="Masukkan Nama Kurs Baru" name="currency_name">
                 </div>
-                <div class="cell">
-                   <label>Nilai Kurs (dalam Rupiah)</label>
-                    <div class="input-control text full-size">
-                        <input type="number" placeholder="Nilai dari kurs baru dalam rupiah" name="currency_value" data-validate-func="required" data-validate-hint="Nilai dollar harus diisi">
-                    </div>
-                </div>    
             </div>
-            <div class="cell text-center">
-                <input type="Submit" name="submit" class="button bg-primary btn-teal" value="Submit"> 
+            <div class="control-group">
+                <label class="control-label">Nilai Kurs (dalam Rupiah)</label>
+                <div class="controls">
+                    <input type="number" placeholder="Nilai dari kurs baru dalam rupiah" name="currency_value">
+                </div>
+            </div>    
+            <div class="form-actions text-center">
+                <input type="Submit" name="submit" class="btn btn-primary" value="Submit"> 
             </div>
-            <?php echo form_close() ?>
         </div>
-        <!--Form End-->
+    </div>
+    <?php echo form_close() ?>
+    <!--Form End-->
+
+    <div class="widget-box">
+        <div class="widget-content">
+        
         <!--Daftar Kurs-->
-        <div class="row">     
-            <div class="cell">
-                <h3 style="margin-bottom: 20px;">Daftar Nilai Kurs</h3>
-                <hr class="bg-primary"> 
+        <div class="row-fluid">     
                 <div class="table-responsive toggle-circle-filled">
-                    <table class="table table-condensed" data-page-size="10" id="table_kurs">
+                    <table class="table table-bordered" data-page-size="10" id="table_kurs">
                         <thead>
                             <tr>
                                 <th>Nama Kurs</th>
@@ -67,23 +69,21 @@
                         </tbody>
                     </table>
                 </div>    
-            </div>
         </div>
-        <!--Row Daftar Kurs End-->
-        <!--History Kurs-->
-        <div class="row">     
-            <div class="cell">
-                <h3 style="margin-bottom: 20px;">Riwayat Nilai Kurs</h3>
-                <hr class="bg-primary"> 
-        
-                <div class="cell">
-                    <div class="input-control text full-size">
-                        <input type="text" placeholder="Cari..." id="filter" >
-                    </div>
+        </div>
+    </div>
+    <!--Widget Box Tabel Kurs End-->
+    <h2>Riwayat Nilai Kurs</h2>
+    <!--History Kurs-->
+    <div class="widget-box">
+        <div class="widget-content">     
+            <div class="row-fluid">
+                <div class="control-group">
+                    <input type="text" placeholder="Cari..." id="filter" >
                 </div>
         
                 <div class="table-responsive toggle-circle-filled">
-                    <table class="table table-condensed" data-page-size="10" id="table_history" data-filter="#filter">
+                    <table class="table table-bordered" data-page-size="10" id="table_history" data-filter="#filter">
                         <thead>
                             <tr>
                                 <th>Nama Kurs</th>
@@ -112,13 +112,6 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
-<link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
-
-<script src="<?php echo base_url() ?>js/footable.js"></script>
-<script src="<?php echo base_url() ?>js/footable.filter.js"></script>
-<script src="<?php echo base_url() ?>js/footable.paginate.js"></script>
-<script src="<?php echo base_url() ?>js/footable.sort.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
 
 <script>
@@ -140,20 +133,15 @@
             $('#append_kurs').addClass('closed-add');
         }
     });
-    
-    function notifyOnErrorInput(input){
-        var message = input.data('validateHint');
-        $.Notify({
-            caption: 'Error',
-            content: message,
-            type: 'alert'
-        });
-    }
 
     function delete_currency(id,name){
         alertify.confirm("Apakah anda ingin menghapus kurs "+name+"?",
             function(){ window.location.assign("<?php echo base_url()?>configuration/delete_currency/"+id); },
-            function(){ $.Notify({caption: 'Gagal!', content:'Kurs batal dihapus', type:'alert'}); }
+            function(){ $.gritter.add({
+                        title:  'Gagal!',
+                        text:   'Kurs gagal dihapus!',
+                        sticky: false
+            }); }
         );
     }
 

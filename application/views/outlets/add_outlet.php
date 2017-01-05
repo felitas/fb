@@ -1,3 +1,4 @@
+<script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
 <div class="container-fluid">
     <div class="row-fluid">
         <a href="<?php echo base_url('outlets') ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar outlet</a>
@@ -7,18 +8,18 @@
     <div class="widget-content nopadding">
         <div class="row-fluid">
           <div class="span12">
-            <?php echo form_open('outlets/add_outlet', array('class'=>'form-horizontal')) ?>
+            <?php echo form_open('outlets/add_outlet', array('class'=>'form-horizontal', 'novalidate'=>'novalidate', 'id'=>'outletform' )) ?>
             <div class="control-group top-control">
                 <div class="span6">
                     <label class="control-label">Nama Toko</label>
                     <div class="controls">
-                      <input type="text" placeholder="Nama Toko" name="outlet_name">
+                      <input type="text" placeholder="Nama Toko" name="outlet_name" required>
                     </div>    
                 </div>
                 <div class="span6">
                     <label class="control-label">Username</label>
                     <div class="controls">
-                      <input type="text" placeholder="Username Outlet" name="outlet_username" onblur="check_username(this)">
+                      <input type="text" placeholder="Username Outlet" name="outlet_username" onblur="check_username(this)" required>
                     </div>  
                 </div>
                 
@@ -27,14 +28,14 @@
                 <div class="span6">
                     <label class="control-label">Kode Toko</label>
                     <div class="controls">
-                      <input type="text" placeholder="Masukkan Kode Toko (2 Karakter)" title="Contoh : KM" name="outlet_code">
+                      <input type="text" placeholder="Masukkan Kode Toko (2 Karakter)" title="Contoh : KM" name="outlet_code" required>
                     </div>    
                 </div>
                 
                 <div class="span6">
                     <label class="control-label">Password</label>
                     <div class="controls">
-                      <input type="password" placeholder="Password" name="outlet_password">
+                      <input type="password" placeholder="Password" name="outlet_password" required>
                     </div>
                 </div>
             </div>    
@@ -80,13 +81,11 @@
 
 <script>
     <?php if($this->session->flashdata('outlet')): ?>
-
        <?php echo $this->session->flashdata('outlet') ?>
-
-    <?php endif; ?>
+   <?php endif; ?>
 </script>
 <script>
-
+$('#outletform').validate();
 function check_username(el){
         if($(el).val() != ''){
             $.ajax({

@@ -53,10 +53,11 @@
 					'date' => date('Y-m-d H:i:s')
 				);
 				$this->crud_model->insert_data('currency_history',$data_history);
-				$this->session->set_flashdata('currency',"$.Notify({
-				    caption: 'Berhasil',
-				    content: 'Kurs telah ditambahkan',
-				    type: 'success'
+				$this->session->set_flashdata('currency',"$.gritter.add({
+					class_name: 'gritter-light',
+				    title: 'Berhasil',
+				    text: 'Kurs telah ditambahkan',
+				    sticky: 'false'
 				});");
 				redirect('configuration/currency');
 			}
@@ -80,10 +81,11 @@
 					'date' => date('Y-m-d H:i:s')
 				);
 				$this->crud_model->insert_data('currency_history',$data_history);
-				$this->session->set_flashdata('currency',"$.Notify({
-				    caption: 'Berhasil',
-				    content: 'Kurs telah ditambahkan',
-				    type: 'success'
+				$this->session->set_flashdata('currency',"$.gritter.add({
+					class_name : 'gritter-light',
+					title: 'Berhasil',
+					text : 'Kurs berhasil diupdate',
+					sticky: 'false'
 				});");
 				redirect('configuration/currency');
 			}
@@ -97,17 +99,18 @@
 
 		public function delete_currency($id){
 			if($this->crud_model->delete_data('currency',array('id'=>$id))){
-				$this->session->set_flashdata('currency',"$.Notify({
-					caption: 'Berhasil',
-					content : 'Kurs telah dihapus',
-					type: 'success'
+				$this->session->set_flashdata('currency',"$.gritter.add({
+					class_name : 'gritter-light',
+					title: 'Berhasil',
+					text : 'Kurs berhasil dihapus',
+					sticky: 'false'
 				});");
 				redirect('configuration/currency');
 			}else{
-				$this->session->set_flashdata('currency',"$.Notify({
-					caption: 'Gagal',
-					content : 'Kurs gagal dihapus',
-					type : 'alert'
+				$this->session->set_flashdata('currency',"$.gritter.add({
+					title: 'Gagal!',
+					text : 'Kurs gagal dihapus',
+					sticky: 'false'
 				});");
 				redirect('configuration/currency');
 			}
