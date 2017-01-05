@@ -13,13 +13,13 @@
                 <div class="span6">
                     <label class="control-label">Nama Toko</label>
                     <div class="controls">
-                      <input type="text" placeholder="Nama Toko" name="outlet_name" required>
+                      <input type="text" placeholder="Nama Toko" name="outlet_name" id="outlet_name">
                     </div>    
                 </div>
                 <div class="span6">
                     <label class="control-label">Username</label>
                     <div class="controls">
-                      <input type="text" placeholder="Username Outlet" name="outlet_username" onblur="check_username(this)" required>
+                      <input type="text" placeholder="Username Outlet" name="outlet_username" id="outlet_username" onblur="check_username(this)" required>
                     </div>  
                 </div>
                 
@@ -28,14 +28,14 @@
                 <div class="span6">
                     <label class="control-label">Kode Toko</label>
                     <div class="controls">
-                      <input type="text" placeholder="Masukkan Kode Toko (2 Karakter)" title="Contoh : KM" name="outlet_code" required>
+                      <input type="text" placeholder="Masukkan Kode Toko (2 Karakter)" title="Masukkan 2 karakter sebagai kode toko. Contoh: KC" class="tip-bottom" name="outlet_code" id="outlet_code">
                     </div>    
                 </div>
                 
                 <div class="span6">
                     <label class="control-label">Password</label>
                     <div class="controls">
-                      <input type="password" placeholder="Password" name="outlet_password" required>
+                      <input type="password" placeholder="Password" name="outlet_password">
                     </div>
                 </div>
             </div>    
@@ -50,7 +50,7 @@
                     <label class="control-label">Margin Toko</label>
                     <div class="controls">
                         <div class="input-append">
-                            <input type="number" placeholder="Perbedaan Dasar Harga dengan Toko Utama" name="outlet_margin" class="span11">
+                            <input type="number" placeholder="Perbedaan Dasar Harga" name="outlet_margin" class="span11">
                             <span class="add-on">%</span>     
                         </div>
                     </div>   
@@ -85,7 +85,19 @@
    <?php endif; ?>
 </script>
 <script>
-$('#outletform').validate();
+$(document).ready(function(){
+    $('#outletform').validate({
+        rules:{
+            outlet_name: "required",
+            outlet_username: "required",
+            outlet_code:{
+                required: true,
+                maxlength: 2
+            },
+            outlet_password: "required"
+        }
+    });
+});
 function check_username(el){
         if($(el).val() != ''){
             $.ajax({
@@ -94,10 +106,10 @@ function check_username(el){
               cache : false,
               success: function(result){
                 if(result == 'taken'){
-                    $.Notify({
-                        caption: 'Error !',
-                        content: 'Username sudah terpakai',
-                        type: 'alert'
+                    $.gritter.add({
+                        title: 'Error !',
+                        text: 'Username sudah terpakai',
+                        sticky: 'false'
                     });
                     $(el).val('');
                     $(el).parent().addClass('error');
@@ -112,14 +124,6 @@ function check_username(el){
             });    
         }
         
-    }
+}
 
-    function notifyOnErrorInput(input){
-        var message = input.data('validateHint');
-        $.Notify({
-            caption: 'Error',
-            content: message,
-            type: 'alert'
-        });
-    }
 </script>
