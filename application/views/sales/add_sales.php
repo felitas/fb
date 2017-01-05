@@ -1,3 +1,4 @@
+<script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
 <div class="container-fluid">
     <div class="row-fluid">
         <a href="<?php echo base_url('sales') ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar sales</a>
@@ -5,20 +6,20 @@
     </div>
     <div class="widget-box">
     <div class="widget-content nopadding">
-    <?php echo form_open_multipart('sales/add_sales',array('class'=>'form-horizontal')) ?>    
+    <?php echo form_open_multipart('sales/add_sales',array('class'=>'form-horizontal','id'=>'salesform')) ?>    
     <div class="row-fluid">
         <div class="span12">
             <div class="control-group top-control">
                 <div class="span6">
                     <label for="" class="control-label">Nama Sales</label>
                     <div class="controls">
-                        <input type="text" placeholder="Nama Lengkap Sales" name="sales_name" class="tip-bottom">
+                        <input type="text" placeholder="Nama Lengkap Sales" name="sales_name">
                     </div>
                 </div>
                 <div class="span6">
                     <label for="" class="control-label">Username</label>
                     <div class="controls">
-                        <input type="text" placeholder="Username Sales" onblur="check_username(this)" name="sales_username" class="tip-bottom"> 
+                        <input type="text" placeholder="Username Sales" onblur="check_username(this)" name="sales_username"> 
                     </div>    
                 </div>
             </div>
@@ -32,7 +33,7 @@
                 <div class="span6">
                     <label for="" class="control-label">Password</label>
                     <div class="controls">
-                        <input type="text" placeholder="Password Sales" name="sales_password" class="tip-bottom"> 
+                        <input type="password" placeholder="Password Sales" name="sales_password"> 
                     </div>        
                 </div>
             </div>
@@ -47,7 +48,7 @@
                 <div class="span6">
                     <label for="" class="control-label">Email</label>
                     <div class="controls">
-                        <input type="text" placeholder="Email Sales" name="sales_email" class="tip-bottom"> 
+                        <input type="email" placeholder="Email Sales" name="sales_email"> 
                     </div>
                 </div>
             </div>
@@ -66,7 +67,7 @@
                 <div class="span6">
                     <label for="" class="control-label">No. Telepon</label>
                     <div class="controls">
-                        <input type="text" placeholder="Nomor Telephone Sales" name="sales_phone" class="tip-bottom"> 
+                        <input type="text" placeholder="Nomor Telephone Sales" name="sales_phone"> 
                     </div>    
                 </div>
                 <div class="span6">
@@ -112,24 +113,22 @@
               cache : false,
               success: function(result){
                 if(result == 'taken'){
-                    $.Notify({
-                        caption: 'Error !',
-                        content: 'Username sudah terpakai',
-                        type: 'alert'
+                    $.gritter.add({
+                        title: 'Error !',
+                        text: 'Username sudah terpakai',
+                        sticky: false
                     });
-                    $(el).val('');
-                    $(el).parent().addClass('error');
-                    setTimeout(function(){$(el).parent().removeClass('error')},3000);
                 }else{
-                    $(el).parent().addClass('success');
+                    $.gritter.add({
+                        class_name:'gritter-light',
+                        title: 'Success !',
+                        text: 'Username bisa dipakai',
+                        sticky: false
+                    });
                 }
-               
-                
               }
-            
             });    
         }
-        
     }
 
     function show_cam(el){
@@ -143,23 +142,18 @@
             Webcam.reset();            
         }
       }
-
-    function notifyOnErrorInput(input){
-        var message = input.data('validateHint');
-        $.Notify({
-            caption: 'Error',
-            content: message,
-            type: 'alert'
-        });
-    }
-
     <?php if($this->session->flashdata('sales')): ?>
-
        <?php echo $this->session->flashdata('sales') ?>
-
     <?php endif; ?>
-
-
+    $(document).ready(function(){
+        $('#salesform').validate({
+            rules:{
+                sales_name:"required",
+                sales_username:"required",
+                sales_password:"required"
+            }
+        });
+    });
 </script>
 
 <script language="JavaScript">

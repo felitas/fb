@@ -80,11 +80,9 @@
 </div>
 
 <script>
-    <?php if($this->session->flashdata('outlet')): ?>
-       <?php echo $this->session->flashdata('outlet') ?>
-   <?php endif; ?>
-</script>
-<script>
+<?php if($this->session->flashdata('outlet')): ?>
+   <?php echo $this->session->flashdata('outlet') ?>
+<?php endif; ?>
 $(document).ready(function(){
     $('#outletform').validate({
         rules:{

@@ -1,3 +1,4 @@
+<script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
 <div class="container-fluid">
     <div class="row-fluid">
         <a href="<?php echo base_url('outlets') ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar outlet</a>
@@ -7,7 +8,7 @@
     <div class="widget-content nopadding">
         <div class="row-fluid">
           <div class="span12">
-            <?php echo form_open('outlets/edit_outlet/'.$outlet->id, array('class'=>'form-horizontal')) ?>
+            <?php echo form_open('outlets/edit_outlet/'.$outlet->id, array('class'=>'form-horizontal','id'=>'outletform')) ?>
             <div class="control-group top-control">
                 <div class="span6">
                     <label class="control-label">Nama Toko</label>
@@ -97,6 +98,19 @@
     <?php endif; ?>
 </script>
 <script>
+$(document).ready(function(){
+    $('#outletform').validate({
+        rules:{
+            outlet_name: "required",
+            outlet_username: "required",
+            outlet_code:{
+                required: true,
+                maxlength: 2
+            },
+            outlet_password: "required"
+        }
+    });
+});
 function change_password(el){
     if($(el).is(":checked") ){
         $('#password').parent().show();
@@ -117,13 +131,14 @@ function check_username(el){
                     $.gritter.add({
                         title: 'Error !',
                         text: 'Username sudah terpakai',
-                        sticky: 'false'
+                        sticky: false
                     });
-                    $(el).val('');
-                    $(el).parent().addClass('error');
-                    setTimeout(function(){$(el).parent().removeClass('error')},3000);
                 }else{
-                    $(el).parent().addClass('success');
+                    $.gritter.add({
+                        class_name:'gritter-light',
+                        title: 'Username Bisa Dipakai',
+                        sticky: false
+                    });
                 } 
               }
             });    
