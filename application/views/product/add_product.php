@@ -1,154 +1,136 @@
-<div class="container">
-	<div class="grid">
-		<div class="row">
-			<div class="cell">
-				<h3><small><a href=""><span class="fa fa-arrow-circle-o-left"></span>Kembali ke daftar barang</a></small></h3>
-			</div>
-		</div>
-
-		<div class="row form-title">
-			<div class="cell">
-				<h1 style="margin-bottom: 20px">Tambah barang baru</h1>
-				<hr class="bg-primary">
-			</div>
-		</div>
-
-		<div class="row cells8">
-			<div class="cell colspan7">
-				<label for="">Nama Barang</label>
-				<div class="input-control text full-size">
-					<input type="text" placeholder="Nama Barang" name="product_name" data-validate-func="required" data-validate-hint="Nama barang harus diisi">
-				</div>
-			</div>
-			<div class="cell">
-				<label class="input-control checkbox place-right" style="margin-top: 20px;">
-					
-				    <input type="checkbox">
-				    <span class="check"></span>
-				    <span class="caption">Buyback</span>
-				</label> 
-			</div>
-		</div>
-		
-		<div class="row cells2">
-			<div class="cell">
-				<label for="">Kode Produk</label>
-				<div class="input-control text full-size">
-					<input type="text" placeholder="Kode Produk" name="product_code" readonly="readonly">
-				</div>
-			</div>
-			<div class="cell">
-				<label for="">Kode Model</label>
-				<div class="input-control text full-size">
-					<input type="text" placeholder="Kode Model" name="product_model_code">
-				</div>
-			</div>
-		</div>
-
-		<div class="row cells2">
-			<div class="cell">
-				<label for="">Baki</label>
-				<div class="input-control select full-size">
-					<select name="product_tray" id="" data-validate-func="required" data-validate-hint="Baki harus dipilih">
-						<option value="">--Pilih Tipe--</option>
-					</select>
-				</div>
-			</div>
-			<div class="cell">
-				<label for="">Tipe</label>
-				<div class="input-control select full-size">
-					<select name="product_type" id="" data-validate-func="required" data-validate-hint="Jenis barang harus diisi">
-						<option value="">--Pilih Tipe--</option>
-						<option value="1">Emas</option>
-						<option value="2">Berlian</option>
-					</select>
-				</div>
-			</div>
-		</div>
-
-		<div class="row cells2">
-			<div class="cell">
-				<!-- Category -->
-				<label for="">Kategori</label>
-				<div class="input-control select full-size">
-					<select name="product_category" id="" data-validate-func="required" data-validate-hint="Kategori harus diisi">
-						<option value="">--Pilih Kategori--</option>
-					</select>
-				</div>				
-			</div>
-			<div class="cell">
-				<!-- Model -->
-				<label for="">Model</label>
-				<div class="input-control select full-size">
-					<select name="product_model" id="" data-validate-func="required" data-validate-hint="Model harus diisi">
-						<option value="">--Pilih Model--</option>
-					</select>
-				</div>
-			</div>
-		</div>
-
-		<div class="row cells2">
-			<div class="cell">
-				<label for="">Harga Beli</label>
-				<div class="input-control text full-size">
-					<input type="text" placeholder="Harga Beli" name="product_purchase_price">
-				</div>
-			</div>
-			<div class="cell">
-				<label for="">Harga Jual</label>
-				<div class="input-control text full-size">
-					<input type="text" placeholder="Harga Jual" name="product_selling_price">
-				</div>
-			</div>
-		</div>
-
-		<div class="row cells2">
-			<div class="cell">
-				<label for="">Kadar</label>
-				<div class="input-control text full-size">
-					<input type="text" placeholder="Kadar" name="product_amount">
-				</div>
-			</div>
-			<div class="cell">
-                <label>Upload Photo</label>
-                <div class="input-control file full-size" data-role="input">
-                    <input type="file" accept="image/*" name="capture" id="capture" capture="camera">
-                    <button class="button btn-file"><span class="mif-camera"></span></button>
-                </div>
-			</div>
-		</div>
-		<?php if (!$is_mobile): ?>
-            <div class="row">
-                <div class="cell">
-                    <label class="switch">
-                        <input type="checkbox" onchange="show_cam(this)">
-                        <span class="check"></span>
-                        <span class="caption">Ambil Foto</span>
-                    </label>
-                </div>
-            </div>
-            <div class="row cells2" id="snapshot" style="display: none">
-
-                <div class="cell text-center">
-                    <div id="my_camera" style="width:320px; height:240px; margin:auto"></div>
-                    
-                    <a class="button info bg-primary btn-teal" href="javascript:void(take_snapshot())"><span class="mif mif-camera"></span> Ambil Foto</a>
-                </div>
-                <div class="cell text-center">
-                    <div id="my_result" style="margin:auto"></div>    
-                </div>
-                
-                
-            </div>    
-        <?php endif ?>
-        
-		<div class="row">
-            <div class="cell text-center">
-        	   <input type="submit" name="submit" class="button bg-primary" value="Submit">
-            </div>
-        </div>
-
+<div class="container-fluid">
+	
+	<div class="row-fluid">
+		<a href=""><span class="fa fa-arrow-circle-o-left"></span>Kembali ke daftar barang</a></small>
+		<h2>Tambah barang baru</h2>
 	</div>
+	<div class="widget-box">
+	<div class="widget-content">
+		<form class="form-horizontal">
+			<div class="row-fluid">
+					<div class="control-group top-control">
+						<div class="span12">
+							<label for="" class="control-label">Nama Barang</label>
+							<div class="controls">
+								<input type="text" placeholder="Nama Barang" name="product_name" class="span6">
+							</div>	
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="span6">
+							<label for="" class="control-label">Kode Produk</label>
+							<div class="controls">
+								<input type="text" placeholder="Kode Produk" name="product_code" readonly="readonly">
+							</div>	
+						</div>
+						<div class="span6">
+							<label for="" class="control-label">Kode Model</label>
+							<div class="controls">
+								<input type="text" placeholder="Kode Model" name="product_model_code">
+							</div>	
+						</div>	
+					</div>
+					<div class="control-group">
+						<div class="span6">
+							<label for="" class="control-label">Baki</label>
+							<div class="controls">
+								<select name="product_tray" id="">
+									<option value="">--Pilih Tipe--</option>
+								</select>
+							</div>	
+						</div>
+						<div class="span6">
+							<label for="" class="control-label">Tipe</label>
+							<div class="controls">
+								<select name="product_type" id="" data-validate-func="required" data-validate-hint="Jenis barang harus diisi">
+									<option value="">--Pilih Tipe--</option>
+									<option value="1">Emas</option>
+									<option value="2">Berlian</option>
+								</select>
+							</div>	
+						</div>	
+					</div>
+
+					<div class="control-group">
+						<div class="span6">
+							<label for="" class="control-label">Kategori</label>
+							<div class="controls">
+								<select name="product_category" id="" data-validate-func="required" data-validate-hint="Kategori harus diisi">
+									<option value="">--Pilih Kategori--</option>
+								</select>
+							</div>	
+						</div>
+						<div class="span6">
+							<label for="" class="control-label">Model</label>
+							<div class="controls">
+								<select name="product_model" id="" data-validate-func="required" data-validate-hint="Model harus diisi">
+									<option value="">--Pilih Model--</option>
+								</select>
+							</div>	
+						</div>	
+					</div>
+
+					<div class="control-group">
+						<div class="span6">
+							<label for="" class="control-label">Harga Beli</label>
+							<div class="controls">
+								<input type="text" placeholder="Harga Beli" name="product_purchase_price">
+							</div>	
+						</div>
+						<div class="span6">
+							<label for="" class="control-label">Harga Jual</label>
+							<div class="controls">
+								<input type="text" placeholder="Harga Jual" name="product_selling_price">
+							</div>	
+						</div>	
+					</div>
+
+					<div class="control-group">
+						
+							<label for="" class="control-label">Kadar</label>
+							<div class="controls">
+								<input type="text" placeholder="Kadar" name="product_amount">
+							</div>	
+						
+					</div>
+				
+				<div class="control-group">
+						
+					<label for="" class="control-label">Upload Photo</label>
+					<div class="controls">
+						<input type="file" accept="image/*" name="capture" id="capture" capture="camera">
+					</div>	
+						
+
+				</div>
+				<div class="control-group">
+					<label class="control-label">Ambil Foto</label>
+					<div class="controls">
+		                <input type="checkbox" onchange="show_cam(this)">
+		                <span class="check"></span>
+		            </div>
+				</div>
+			
+				<?php if (!$is_mobile): ?>
+	            <div class="control-group text-center" id="snapshot" style="display: none">
+	                <div class="span6">
+	                    <div id="my_camera" style="width:320px; height:240px; margin:auto"></div>
+	                    <a style="margin-top: 10px;margin-bottom: 10px;" class="btn btn-info bg_ls" href="javascript:void(take_snapshot())"><span class="mif mif-camera"></span> Ambil Foto</a>    
+	                </div>
+	                <div class="span6">
+	                    <div id="my_result" style="margin:auto"></div>        
+	                </div> 
+	            </div>
+	        	<?php endif ?>
+	        
+				<div class="form-actions text-center">
+		        	<input type="submit" name="submit" class="btn btn-primary" value="Submit">
+		        </div>
+		        </div>
+		   	</div>
+        </form>
+    </div>
+    </div>
 </div>
 
 <script src="<?php echo base_url() ?>js/webcam.min.js"></script>

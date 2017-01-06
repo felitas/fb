@@ -1,6 +1,8 @@
+
 <!--Both are css for alertify-->
 <link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
+
 
 <div class="container-fluid">
     <div class="row-fluid">
@@ -10,7 +12,7 @@
     </div>
 
     <!--Field dollar insertion-->
-    <?php echo form_open('configuration/currency_add', array('class' =>  'form-horizontal') )?>
+    <?php echo form_open('configuration/currency_add', array('class' =>  'form-horizontal','id'=>'kursform') )?>
     <div class="widget-box closed-add" id="append_kurs" style="display: none;">   
         <div class="widget-title">
             <h5>Tambah Kurs Baru</h5>
@@ -19,13 +21,13 @@
             <div class="control-group top-control">
                 <label class="control-label">Nama Kurs Baru</label>
                 <div class="controls">
-                    <input type="text" placeholder="Masukkan Nama Kurs Baru" name="currency_name">
+                    <input type="text" placeholder="Masukkan Nama Kurs Baru" name="currency_name" class="span8">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Nilai Kurs (dalam Rupiah)</label>
                 <div class="controls">
-                    <input type="number" placeholder="Nilai dari kurs baru dalam rupiah" name="currency_value">
+                    <input type="number" placeholder="Nilai dari kurs baru dalam rupiah" name="currency_value" class="span8">
                 </div>
             </div>    
             <div class="form-actions text-center">
@@ -113,9 +115,16 @@
     </div>
 </div>
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
+<script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
 
 <script>
     $(document).ready(function(){
+        $('#kursform').validate({
+            rules:{
+               currency_name: "required",
+               currency_value: "required"
+            }
+        });
         $('#table_kurs').footable();
         $('#table_history').footable();
         <?php if($this->session->flashdata('currency')): ?>
