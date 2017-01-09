@@ -107,12 +107,18 @@ function check_username(el){
                     $.gritter.add({
                         title: 'Error !',
                         text: 'Username sudah terpakai',
-                        sticky: 'false'
+                        time: 2000
                     });
                     $(el).val('');
                     $(el).parent().addClass('error');
                     setTimeout(function(){$(el).parent().removeClass('error')},3000);
                 }else{
+                    $.gritter.add({
+                        class_name:'gritter-light',
+                        title: 'Available !',
+                        text: 'Username '+$(el).val()+' bisa dipakai',
+                        time: 2000
+                    });
                     $(el).parent().addClass('success');
                 }
                

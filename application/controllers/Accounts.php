@@ -2,7 +2,7 @@
 
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
-	class Accounts extends MY_Controller{
+	class Accounts extends CI_Controller{
 
 		function __construct(){
 			parent::__construct();
@@ -45,8 +45,8 @@
 					$this->session->set_flashdata('login',"$.gritter.add({
 						class_name : 'gritter-light',
 				 		title:	'Berhasil!',
-				 		text:	'Customer berhasil dihapus!',
-				 		sticky: false
+				 		text:	'Login berhasil!',
+				 		time: 2000
 				 	});");
 
 					redirect('home');
@@ -58,7 +58,7 @@
 					$this->session->set_flashdata('login',"$.gritter.add({
 				 		title:	'Gagal!',
 				 		text:	'Username atau password yang dimasukkan salah!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 
 					redirect('accounts/login');

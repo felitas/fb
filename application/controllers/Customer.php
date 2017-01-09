@@ -49,13 +49,13 @@
 						class_name : 'gritter-light',
 				 		title:	'Berhasil!',
 				 		text:	'Customer berhasil dibuat!',
-				 		sticky: false
+				 		time: 2000
 				 	});");	
 	            }else{
 	            	$this->session->set_flashdata('customer', "$.gritter.add({
 				 		title:	'Gagal!',
 				 		text:	'Customer gagal dibuat!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 	            }
 	            
@@ -99,14 +99,14 @@
 						class_name : 'gritter-light',
 				 		title:	'Berhasil!',
 				 		text:	'Customer berhasil diubah!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 	            }else{
 	            	$this->session->set_flashdata('customer', "$.gritter.add({
 						class_name : 'gritter-light',
 				 		title:	'Gagal!',
 				 		text:	'Customer gagal diubah!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 	            }
 	            
@@ -127,13 +127,13 @@
 						class_name : 'gritter-light',
 				 		title:	'Berhasil!',
 				 		text:	'Customer berhasil dihapus!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 			}else{
 				$this->session->set_flashdata('customer',"$.gritter.add({
 				 		title:	'Gagal!',
 				 		text:	'Customer gagal dihapus!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 			}
 			
