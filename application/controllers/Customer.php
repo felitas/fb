@@ -10,6 +10,7 @@
 			//customer main page
 			
 			$data['title'] = 'Customer';
+			$data['role']= $this->session_role; //admin can see, add and edit customer grade
 			$data['is_mobile'] = $this->is_mobile;
 			$data['customers'] = $this->crud_model->get_data('customers')->result();
 			$this->template->load($this->default,'customer/list_customer',$data);
@@ -17,17 +18,31 @@
 		}
 
 		public function add_customer(){
+			$data['role']= $this->session_role; //admin can see, add and edit customer grade
 			if($this->input->post()){
-	            $data_customer = array(
-
+				if($data['role']=='admin'){
+					$data_customer = array(
 	            		'name' => $this->input->post('customer_name'),
+	            		'birthday'=> $this->input->post('customer_birthday'),
+	            		'type' => $this->input->post('customer_type'),
+	            		'phone' => $this->input->post('customer_phone'),
+	            		'email' => $this->input->post('customer_email'),
+	            		'address' =>$this->input->post('customer_address'),
+	            		'grade'=> $this->input->post('customer_grade'),
+	            		'outlet_id' => $this->session->user_outlet
+	            	);	
+				}else{
+					$data_customer = array(
+	            		'name' => $this->input->post('customer_name'),
+	            		'birthday'=> $this->input->post('customer_birthday'),
 	            		'type' => $this->input->post('customer_type'),
 	            		'phone' => $this->input->post('customer_phone'),
 	            		'email' => $this->input->post('customer_email'),
 	            		'address' =>$this->input->post('customer_address'),
 	            		'outlet_id' => $this->session->user_outlet
-
 	            	);
+				}
+	            
 
 	            if($this->crud_model->insert_data('customers',$data_customer)){
 	            	$this->session->set_flashdata('customer', "$.gritter.add({
@@ -54,16 +69,30 @@
 		}
 
 		public function edit_customer($cust_id = ''){
+			$data['role']= $this->session_role; //admin can see, add and edit customer grade
 			if($this->input->post()){
-	            $data_customer = array(
-
+	            if($data['role']=='admin'){
+					$data_customer = array(
 	            		'name' => $this->input->post('customer_name'),
+	            		'birthday'=> $this->input->post('customer_birthday'),
 	            		'type' => $this->input->post('customer_type'),
 	            		'phone' => $this->input->post('customer_phone'),
 	            		'email' => $this->input->post('customer_email'),
-	            		'address' =>$this->input->post('customer_address')
-
+	            		'address' =>$this->input->post('customer_address'),
+	            		'grade'=> $this->input->post('customer_grade'),
+	            		'outlet_id' => $this->session->user_outlet
+	            	);	
+				}else{
+					$data_customer = array(
+	            		'name' => $this->input->post('customer_name'),
+	            		'birthday'=> $this->input->post('customer_birthday'),
+	            		'type' => $this->input->post('customer_type'),
+	            		'phone' => $this->input->post('customer_phone'),
+	            		'email' => $this->input->post('customer_email'),
+	            		'address' =>$this->input->post('customer_address'),
+	            		'outlet_id' => $this->session->user_outlet
 	            	);
+				}
 
 	            if($this->crud_model->update_data('customers',$data_customer,array('id' => $cust_id))){
 	            	$this->session->set_flashdata('customer', "$.gritter.add({

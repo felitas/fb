@@ -21,11 +21,15 @@
 							<tr>
 								<th data-type="numeric">No</th>
 								<th>Nama</th>
+								<th>Tanggal Lahir</th>
 								<th data-hide="phone">Tipe</th>
 								<th data-hide="phone">Telephone</th>
 								<th data-hide="phone">Email</th>
 								<th data-hide="phone">Alamat</th>
 								<th data-hide="phone">Outlet</th>
+								<?php if($role=='admin'):?>
+									<th data-hide="phone">Grade</th>
+								<?php endif?>
 								<th data-hide="phone">Action</th>
 							</tr>
 						</thead>
@@ -36,6 +40,13 @@
 								<tr>
 									<td><?php echo $i ?></td>
 									<td><?php echo $customer->name ?></td>
+									<td>
+										<?php if($customer->birthday!=NULL):?>
+											<?php echo date('d M Y',strtotime($customer->birthday)) ?>
+										<?php else:?>
+											<?php echo '-' ?>
+										<?php endif;?>
+									</td>
 									<td><?php echo $customer->type ?></td>
 									<td><a href="tel:<?php echo $customer->phone ?>"><?php echo $customer->phone ?></a></td>
 									<td><?php echo $customer->email ?></td>
@@ -45,6 +56,9 @@
 											echo $outlet;
 										?>
 									</td>
+									<?php if($role=='admin'):?>
+										<td data-hide="phone"><?php echo $customer->grade ?></td>
+									<?php endif?>
 									<td><a href="<?php echo base_url('customer/edit_customer/'.$customer->id) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_customer('<?php echo $customer->id ?>','<?php echo $customer->name ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
 								</tr>
 								<?php $i++; ?>

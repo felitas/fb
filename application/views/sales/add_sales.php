@@ -37,14 +37,15 @@
                     </div>        
                 </div>
             </div>
-            <?php if (!$is_mobile): ?>
             <div class="control-group">
+            <?php if (!$is_mobile): ?>
                 <div class="span6">
                     <label for="" class="control-label">Ambil Foto</label>
                     <div class="controls">
                         <input type="checkbox" onchange="show_cam(this)">
                     </div>    
                 </div>
+            <?php endif ?>        
                 <div class="span6">
                     <label for="" class="control-label">Email</label>
                     <div class="controls">
@@ -62,7 +63,7 @@
                 </div>            
                 
             </div>
-            <?php endif ?>        
+            
             <div class="control-group">
                 <div class="span6">
                     <label for="" class="control-label">No. Telepon</label>

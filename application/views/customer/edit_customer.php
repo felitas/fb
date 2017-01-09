@@ -42,6 +42,18 @@
                         <textarea placeholder="Alamat Customer" name="customer_address"><?php echo $customer->address?></textarea>
                     </div>
                 </div>
+                <?php if($role=='admin'):?>
+                    <div class="control-group">
+                        <label for="" class="control-label">Grade</label>
+                        <div class="controls">
+                            <select name="customer_grade" id="">
+                                <option value="regular" <?php echo ($customer->grade == 'Regular') ? 'selected' : '' ?>>Regular</option>
+                                <option value="gold" <?php echo ($customer->grade == 'Gold') ? 'selected' : '' ?>>Gold</option>
+                                <option value="platinum" <?php echo ($customer->grade == 'Platinum') ? 'selected' : '' ?>>Platinum</option>
+                            </select>
+                        </div>
+                    </div>
+                <?php endif?>
                 <div class="form-actions text-center">
                     <input type="submit" name="submit" class="btn btn-info" value="Submit">
                 </div>
