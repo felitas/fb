@@ -56,7 +56,7 @@
 						class_name : 'gritter-light',
 				 		title:	'Berhasil!',
 				 		text:	'Toko berhasil dibuat!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 					
 				}else{
@@ -64,7 +64,7 @@
 						"$.gritter.add({
 				 		title:	'Toko gagal dibuat',
 				 		text:	'Periksa kembali data toko',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 				}				
 
@@ -115,7 +115,7 @@
 						class_name : 'gritter-light',
 				 		title:	'Berhasil!',
 				 		text:	'Toko berhasil diubah!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 					
 								
@@ -144,7 +144,7 @@
 						class_name : 'gritter-light',
 				 		title:	'Berhasil!',
 				 		text:	'Toko berhasil dihapus!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 			redirect('outlets');
 		}

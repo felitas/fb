@@ -32,7 +32,7 @@
 						class_name : 'gritter-light',
 				 		title:	'Berhasil!',
 				 		text:	'Supplier berhasil dibuat!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 				redirect('supplier/add_supplier');
 			}else{
@@ -59,13 +59,13 @@
 						class_name : 'gritter-light',
 				 		title:	'Berhasil!',
 				 		text:	'Supplier berhasil diubah!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 	            }else{
 	            	$this->session->set_flashdata('supplier',"$.gritter.add({
 				 		title:	'Gagal!',
 				 		text:	'Supplier gagal diubah!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 	            }
 	            
@@ -86,13 +86,13 @@
 						class_name : 'gritter-light',
 				 		title:	'Berhasil!',
 				 		text:	'Supplier berhasil dihapus!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 			}else{
 				$this->session->set_flashdata('supplier',"$.gritter.add({
 				 		title:	'Gagal!',
 				 		text:	'Supplier gagal dihapus!',
-				 		sticky: false
+				 		time: 2000
 				 	});");
 			
 			redirect('supplier');
