@@ -230,7 +230,7 @@
           <li><a href="error403.html"><i class="fa fa-bank faicon"></i> Toko</a></li>
           <li><a href="<?php echo base_url('configuration/Currency') ?>"><i class="fa fa-dollar faicon"></i> Kurs</a></li>
           <li><a href="<?php echo base_url('configuration/gold_amount') ?>"><i class="fa fa-gg faicon"></i> Gold</a></li>
-          <li><a href="error500.html"><i class="fa fa-diamond faicon"></i> Diamond</a></li>
+          <li><a href="<?php echo base_url('configuration/list_add_diamond_type')?>"><i class="fa fa-diamond faicon"></i> Diamond</a></li>
           <li><a href="error500.html"><i class="fa fa-opencart faicon"></i> Promo</a></li>
           <li><a href="<?php echo base_url('configuration/color') ?>"><i class="fa fa-paint-brush faicon"></i> Tampilan</a></li>
           <li><a href="error500.html"><i class="fa fa-users faicon"></i> Sales</a></li>

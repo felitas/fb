@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	
 	<div class="row-fluid">
-		<a href=""><span class="fa fa-arrow-circle-o-left"></span>Kembali ke daftar barang</a></small>
+		<a href=""><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar barang</a></small>
 		<h2>Tambah barang baru</h2>
 	</div>
 	<div class="widget-box">
@@ -54,8 +54,9 @@
 							<div class="controls">
 								<select name="product_type" id="" data-validate-func="required" data-validate-hint="Jenis barang harus diisi">
 									<option value="">--Pilih Tipe--</option>
-									<option value="1">Emas</option>
-									<option value="2">Berlian</option>
+									<option value="1">Perhiasan Emas</option>
+									<option value="2">Emas Antam</option>
+									<option value="3">Berlian</option>
 								</select>
 							</div>	
 						</div>	
@@ -113,22 +114,13 @@
 					<div class="control-group">
 							<label for="" class="control-label"><b>Spesifikasi</b></label>
 							<div class="controls">
-								<a class="btn btn-info bg_ls">Tambah Spesifikasi</a>
+								<a class="btn btn-info bg_ls" onclick="add_spec()">Tambah Spesifikasi</a>
 							</div>	
 						</div>
 						
 					<div class="control-group">
-						<div class="span12">
-							<div class="controls">
-								<input type="number" placeholder="Jenis Batu" name="stone_type">
-								<input type="number" placeholder="Jumlah Batu" name="stone_amount">
-								<input type="number" placeholder="Jumlah Karat" name="stone_weight">
-							</div>	
-							<div class="controls">
-								<input type="number" placeholder="Jenis Batu" name="stone_type">
-								<input type="number" placeholder="Jumlah Batu" name="stone_amount">
-								<input type="number" placeholder="Jumlah Karat" name="stone_weight">
-							</div>
+						<div class="span12" id="specifications">
+						<!--Later appended-->
 						</div>
 					</div>
 				
@@ -194,6 +186,11 @@
      		$('#product_tray').removeAttr("disabled");
      	}
      }
+
+     function add_spec(){
+     	$('#specifications').append("<div class='controls'><select name='diamond_type[]'><option>--Jenis Diamond--</option><?php foreach ($diamond_types as $diamond_type): ?><option value='<?php echo $diamond_type->code?>''><?php echo $diamond_type->name?></option><?php endforeach ?></select><input type='number' placeholder='Jumlah Diamond' name='stone_amount[]'><input type='number' placeholder='Jumlah Karat' name='stone_weight[]'></div>")
+     }
+
 
     <?php if($this->session->flashdata('product')): ?>
 

@@ -104,24 +104,42 @@
 					class_name : 'gritter-light',
 					title: 'Berhasil',
 					text : 'Kurs berhasil dihapus',
-					sticky: 'false'
+					time: 2000
 				});");
 				redirect('configuration/currency');
 			}else{
 				$this->session->set_flashdata('currency',"$.gritter.add({
 					title: 'Gagal!',
 					text : 'Kurs gagal dihapus',
-					sticky: 'false'
+					time : 2000
 				});");
 				redirect('configuration/currency');
 			}
 		}
 		/*End currency*/
 		/*Diamond*/
-		public function add_diamond_type(){
-			$data['title'] = 'Tambah Tipe Diamond';
-			$data['gold_amount'] = $this->crud_model->get_data('gold_amount')->result();
-			$this->template->load($this->default,'configuration/diamond/add_diamond_type',$data);
+		public function list_add_diamond_type(){
+			if($this->input->post('submit')){
+				$data=array(
+					'code'=>$this->input->post('diamond_code'),
+					'name'=>$this->input->post('diamond_name')
+				);
+				$this->crud_model->insert_data('diamond_type',$data);
+				$this->session->set_flashdata('diamond_type',"$.gritter.add({
+					class_name : 'gritter-light',
+					title:'Success',
+					text:'Tipe diamond telah ditambahkan',
+					time: 2000
+				});");
+				redirect('configuration/list_add_diamond_type');
+			}
+			else{
+				$data['title'] = 'Tipe Diamond';
+				$data['diamonds'] = $this->crud_model->get_data('diamond_type')->result();
+				$this->template->load($this->default,'configuration/diamond/list_add_diamond_type',$data);	
+
+			}
+			
 		}
 
 	}
