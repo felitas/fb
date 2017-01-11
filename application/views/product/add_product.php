@@ -9,11 +9,18 @@
 		<form class="form-horizontal">
 			<div class="row-fluid">
 					<div class="control-group top-control">
-						<div class="span12">
+						<div class="span6">
 							<label for="" class="control-label">Nama Barang</label>
 							<div class="controls">
-								<input type="text" placeholder="Nama Barang" name="product_name" class="span6">
+								<input type="text" placeholder="Nama Barang" name="product_name" class="span12">
 							</div>	
+						</div>
+						<div class="span6">
+							<label class="control-label">Masuk Brankas</label>
+							<div class="controls">
+				                <input type="checkbox" onchange="warehouse(this)">
+				                <span class="check"></span>
+				            </div>
 						</div>
 					</div>
 					<div class="control-group">
@@ -32,10 +39,13 @@
 					</div>
 					<div class="control-group">
 						<div class="span6">
-							<label for="" class="control-label">Baki</label>
+							<label for="" class="control-label">Tray</label>
 							<div class="controls">
-								<select name="product_tray" id="">
-									<option value="">--Pilih Tipe--</option>
+								<select name="product_tray" id="product_tray">
+									<option value="">--Pilih Tray--</option>
+									<?php foreach ($trays as $tray): ?>
+										<option value="<?php echo $tray->id?>"><?php echo $tray->code?></option>	
+									<?php endforeach ?>
 								</select>
 							</div>	
 						</div>
@@ -74,24 +84,52 @@
 						<div class="span6">
 							<label for="" class="control-label">Harga Beli</label>
 							<div class="controls">
-								<input type="text" placeholder="Harga Beli" name="product_purchase_price">
+								<input type="number" placeholder="Harga Beli" name="product_purchase_price">
 							</div>	
 						</div>
 						<div class="span6">
 							<label for="" class="control-label">Harga Jual</label>
 							<div class="controls">
-								<input type="text" placeholder="Harga Jual" name="product_selling_price">
+								<input type="number" placeholder="Harga Jual" name="product_selling_price">
 							</div>	
 						</div>	
 					</div>
 
 					<div class="control-group">
-						
+						<div class="span6">
 							<label for="" class="control-label">Kadar</label>
 							<div class="controls">
-								<input type="text" placeholder="Kadar" name="product_amount">
+								<input type="number" placeholder="Kadar emas" name="product_amount">
 							</div>	
+						</div>
+						<div class="span6">
+							<label for="" class="control-label">Berat</label>
+							<div class="controls">
+								<input type="number" placeholder="Berat Perhiasan" name="product_weight">
+							</div>	
+						</div>
+					</div>
+
+					<div class="control-group">
+							<label for="" class="control-label"><b>Spesifikasi</b></label>
+							<div class="controls">
+								<a class="btn btn-info bg_ls">Tambah Spesifikasi</a>
+							</div>	
+						</div>
 						
+					<div class="control-group">
+						<div class="span12">
+							<div class="controls">
+								<input type="number" placeholder="Jenis Batu" name="stone_type">
+								<input type="number" placeholder="Jumlah Batu" name="stone_amount">
+								<input type="number" placeholder="Jumlah Karat" name="stone_weight">
+							</div>	
+							<div class="controls">
+								<input type="number" placeholder="Jenis Batu" name="stone_type">
+								<input type="number" placeholder="Jumlah Batu" name="stone_amount">
+								<input type="number" placeholder="Jumlah Karat" name="stone_weight">
+							</div>
+						</div>
 					</div>
 				
 				<div class="control-group">
@@ -146,22 +184,23 @@
             $('#capture').removeAttr('disabled');
             Webcam.reset();            
         }
-      }
+     }
 
-    function notifyOnErrorInput(input){
-        var message = input.data('validateHint');
-        $.Notify({
-            caption: 'Error',
-            content: message,
-            type: 'alert'
-        });
-    }
+     function warehouse(el){
+     	if($(el).is(":checked")){
+     		$('#product_tray').attr("disabled","disabled");
+     	}
+     	else{
+     		$('#product_tray').removeAttr("disabled");
+     	}
+     }
 
     <?php if($this->session->flashdata('product')): ?>
 
        <?php echo $this->session->flashdata('product') ?>
 
     <?php endif; ?>
+
 
 
 </script>

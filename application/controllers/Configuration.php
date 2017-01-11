@@ -12,7 +12,7 @@
 				redirect('home');
 			}
 		}
-
+		/*Color*/
 		public function color(){
 
 			$data['title'] = 'Ubah Warna';
@@ -28,13 +28,14 @@
 				echo 'success';
 			}
 		}
-
+		/*Color ENds*/
+		/*Currency*/
 		public function currency(){
 			$data['title'] = 'Kurs';
 			$data['is_mobile'] = $this->is_mobile;
 			$data['currencies'] = $this->crud_model->get_data('currency')->result();
 			$data['histories'] = $this->configuration_model->get_currency_history();
-			$this->template->load('default','currency/list_add_currency',$data);
+			$this->template->load('default','configuration/currency/list_add_currency',$data);
 		}
 
 		public function currency_add(){
@@ -93,7 +94,7 @@
 				$data['title'] = 'Update Kurs';
 				$data['currency'] = $this->crud_model->get_by_condition('currency',array('id'=>$id))->row();
 				$data['histories'] = $this->crud_model->get_by_condition('currency_history',array('currency_id'=>$id))->result();
-				$this->template->load($this->default,'currency/update_currency',$data);
+				$this->template->load($this->default,'configuration/currency/update_currency',$data);
 			}
 		}
 
@@ -115,11 +116,12 @@
 				redirect('configuration/currency');
 			}
 		}
-
-		public function gold_amount(){
-			$data['title'] = 'Kadar Emas';
+		/*End currency*/
+		/*Diamond*/
+		public function add_diamond_type(){
+			$data['title'] = 'Tambah Tipe Diamond';
 			$data['gold_amount'] = $this->crud_model->get_data('gold_amount')->result();
-			$this->template->load($this->default,'configuration/gold_amount',$data);
+			$this->template->load($this->default,'configuration/diamond/add_diamond_type',$data);
 		}
 
 	}

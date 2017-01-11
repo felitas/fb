@@ -206,7 +206,7 @@
           <li><a href="<?php echo base_url('product/add_product') ?>"><i class="fa fa-plus-square faicon"></i> Input Barang</a></li>
           <li><a href="<?php echo base_url('category') ?>"><i class="fa fa-puzzle-piece faicon"></i> Kategori</a></li>
           <li><a href="<?php echo base_url('model') ?>"><i class="fa fa-tags faicon"></i> Model</a></li>
-          <li><a href="<?php echo base_url('tray') ?>"><i class="fa fa-file-text faicon"></i> Daftar Baki</a></li>
+          <li><a href="<?php echo base_url('tray') ?>"><i class="fa fa-file-text faicon"></i> Daftar Tray</a></li>
           <li><a href="error500.html"><i class="fa fa-pencil-square faicon"></i> Stok Opnam</a></li>
 
         </ul>
