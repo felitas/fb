@@ -149,6 +149,7 @@
 				$data['title'] = 'Product';
 				// $data['stone_type'] = $this->db->get('diamond_type')->result();
 				$data['is_mobile'] = $this->is_mobile;
+				$data['types']= $this->crud_model->get_data('type')->result();
 				$data['trays'] = $this->db->get_where('tray', array('outlet_id' => $this->session_outlet))->result();
 				$data['diamond_types'] = $this->crud_model->get_data('diamond_type')->result();
 				// $data['gold_amount'] = $this->db->get('gold_amount')->result();

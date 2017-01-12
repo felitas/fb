@@ -1,8 +1,8 @@
 
 <div class="container-fluid">
         <div class="row-fluid">
-            <a href="<?php echo base_url('configuration/product_type') ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar tipe produk</a>
-            <h2>Edit Tipe Produk <?php echo ucfirst($type->name) ?></h2>
+            <a href="<?php echo base_url('configuration/product_type') ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar tipe diamond</a>
+            <h2>Edit Tipe Diamond <?php echo ucfirst($type->name) ?></h2>
         </div>
         <?php echo form_open('configuration/edit_product_type/'.$type->id, array('class'=>'form-horizontal','id'=>'product_type_form')) ?>
         <div class="widget-box">	 

@@ -117,7 +117,8 @@
 			}
 		}
 		/*End currency*/
-		/*Diamond Type LIST ADD EDIT*/
+		/*Diamond Type*/
+		/*LIST ADD DIAMOND TYPE*/
 		public function diamond_type(){
 			if($this->input->post('submit')){
 				$data=array(
@@ -134,12 +135,23 @@
 				redirect('configuration/list_add_diamond_type');
 			}
 			else{
-				$data['title'] = 'Tipe Diamond';
+				$data['title'] = 'Tipe Berlian untuk Spesifikasi';
 				$data['diamonds'] = $this->crud_model->get_data('diamond_type')->result();
 				$this->template->load($this->default,'configuration/diamond/list_add_diamond_type',$data);	
 
 			}
 			
+		}
+		/*Edit diamond type*/
+		public function edit_diamond_type($id){
+			if($this->input->post('submit')){
+
+			}
+			else{
+				$data['title']='Edit Tipe Berlian';
+				$data['diamond_type']=$this->crud_model->get_by_condition('diamond_type',array('id'=>$id))->row();
+				$this->template->load($this->default,'configuration/diamond/edit_diamond_type',$data);
+			}
 		}
 		/*End Diamond Type*/
 		/*Product Type*/

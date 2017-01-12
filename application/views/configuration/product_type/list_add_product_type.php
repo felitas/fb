@@ -8,7 +8,7 @@
         <h2><?php echo $title?></h2>
 	</div>
 	<!--Form Add Tray-->
-	<?php echo form_open('configuration/product_type',array('class'=>'form-horizontal'))?>
+	<?php echo form_open('configuration/product_type',array('class'=>'form-horizontal','id'=>'product_type_form'))?>
 	<div class="widget-box closed-add" id="append_type" style="display: none">
 	<div class="widget-title">
 			<h5>Tambah tipe produk baru</h5>
@@ -19,13 +19,13 @@
 				<div class="span6">
 					<label class="control-label">Kode Tipe Produk</label>
 					<div class="controls">
-		                <input type="text" placeholder="Masukkan 1 huruf sebagai kode untuk tipe produk" name="product_type_code" class="span12">
+		                <input type="text" placeholder="Masukkan 1 huruf sebagai kode untuk tipe produk" name="product_type_code" id="product_type_code" class="span12">
 					</div>
 				</div>
 				<div class="span6">
 					<label class="control-label">Tipe Produk</label>
 					<div class="controls">
-		                <input type="text" placeholder="Masukkan keterangan tipe produk" name="product_type_name" class="span12">
+		                <input type="text" placeholder="Masukkan keterangan tipe produk" name="product_type_name" id="product_type_name" class="span12">
 					</div>
 				</div>
 			</div>
@@ -89,6 +89,7 @@
 </div>
 
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
+<script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
 
 <script>
 	
@@ -98,6 +99,13 @@
             <?php echo $this->session->flashdata('type') ?>
         <?php endif; ?>
         $('#table_type').footable();
+        $('#product_type_form').validate({
+        	rules:{
+        		product_type_code: {required: true, maxlength:1},
+        		product_type_name: {required: true}
+        	}
+        });
+
     });
 
     $('#add_link').click(function(){
@@ -119,9 +127,10 @@
 		  },
 		  function(){
 		    $.gritter.add({
+		    			class_name: 'gritter-light',
 				 		title:	'Gagal!',
 				 		text:	'Tipe produk gagal dihapus!',
-				 		sticky: false
+				 		time: 2000
 			});
 		  });
 	}

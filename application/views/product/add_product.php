@@ -53,10 +53,9 @@
 							<label for="" class="control-label">Tipe</label>
 							<div class="controls">
 								<select name="product_type" id="" data-validate-func="required" data-validate-hint="Jenis barang harus diisi">
-									<option value="">--Pilih Tipe--</option>
-									<option value="1">Perhiasan Emas</option>
-									<option value="2">Emas Antam</option>
-									<option value="3">Berlian</option>
+									<?php foreach ($types as $type): ?>
+										<option value="<?php echo $type->id?>"><?php echo $type->code?> - <?php echo $type->name?></option>	
+									<?php endforeach ?>
 								</select>
 							</div>	
 						</div>	

@@ -69,7 +69,7 @@
 									#echo $outlet;
 								?>
 							</td> -->
-							<td><a href="<?php echo base_url() ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_tray('<?php echo $diamond->id ?>','<?php echo $diamond->code ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
+							<td><a href="<?php echo base_url('configuration/edit_diamond_type/'.$diamond->id) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_tray('<?php echo $diamond->id ?>','<?php echo $diamond->code ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
 						</tr>
 						<?php $i++; ?>
 						<?php endforeach; ?>
