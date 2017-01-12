@@ -85,7 +85,7 @@
         line-height: 20px;
       }
       .row-fluid{
-        font-size: 13px !important;
+        font-size: 15px !important;
       }
       .bg-primary{
         background-color: <?php echo $configuration->primary_color ?> !important;
@@ -202,13 +202,10 @@
       </li>
       <li class="submenu"> <a href="#"><i class="fa fa-cubes"></i><span>Inventori</span></a>
         <ul>
-          <li><a href="error403.html"><i class="fa fa-file-text faicon"></i> Daftar Barang</a></li>
-          <li><a href="<?php echo base_url('product/add_product') ?>"><i class="fa fa-plus-square faicon"></i> Input Barang</a></li>
-          <li><a href="<?php echo base_url('category') ?>"><i class="fa fa-puzzle-piece faicon"></i> Kategori</a></li>
-          <li><a href="<?php echo base_url('model') ?>"><i class="fa fa-tags faicon"></i> Model</a></li>
-          <li><a href="<?php echo base_url('tray') ?>"><i class="fa fa-file-text faicon"></i> Daftar Tray</a></li>
+          <li><a href="error403.html"><i class="fa fa-file-text faicon"></i> Daftar Produk</a></li>
+          <li><a href="<?php echo base_url('product/add_product') ?>"><i class="fa fa-plus-square faicon"></i> Input Produk</a></li>
           <li><a href="error500.html"><i class="fa fa-pencil-square faicon"></i> Stok Opnam</a></li>
-
+          <li><a href="<?php echo base_url('tray') ?>"><i class="fa fa-file-text faicon"></i> Daftar Tray</a></li>
         </ul>
       </li>
       <li class="submenu"> <a href="#"><i class="fa fa-archive"></i><span>Mutasi</span></a>
@@ -230,9 +227,13 @@
           <li><a href="error403.html"><i class="fa fa-bank faicon"></i> Toko</a></li>
           <li><a href="<?php echo base_url('configuration/Currency') ?>"><i class="fa fa-dollar faicon"></i> Kurs</a></li>
           <li><a href="<?php echo base_url('configuration/gold_amount') ?>"><i class="fa fa-gg faicon"></i> Gold</a></li>
-          <li><a href="<?php echo base_url('configuration/list_add_diamond_type')?>"><i class="fa fa-diamond faicon"></i> Diamond</a></li>
+          <li><a href="<?php echo base_url('configuration/diamond_type')?>"><i class="fa fa-diamond faicon"></i> Diamond</a></li>
+          <!--the 3 below are essential for product barcode-->
+          <li><a href="<?php echo base_url('configuration/product_type') ?>"><i class="fa fa-empire faicon"></i> Tipe Produk</a></li>
+          <li><a href="<?php echo base_url('configuration/category') ?>"><i class="fa fa-puzzle-piece faicon"></i> Kategori Produk</a></li>
+          <li><a href="<?php echo base_url('model') ?>"><i class="fa fa-tags faicon"></i> Model Perhiasan</a></li>
+          <!--End barcode elements-->
           <li><a href="error500.html"><i class="fa fa-opencart faicon"></i> Promo</a></li>
-          <li><a href="<?php echo base_url('configuration/color') ?>"><i class="fa fa-paint-brush faicon"></i> Tampilan</a></li>
           <li><a href="error500.html"><i class="fa fa-users faicon"></i> Sales</a></li>
           <li><a href="error500.html"><i class="fa fa-user-circle faicon"></i> Member</a></li>
         </ul>

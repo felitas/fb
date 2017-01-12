@@ -117,8 +117,8 @@
 			}
 		}
 		/*End currency*/
-		/*Diamond*/
-		public function list_add_diamond_type(){
+		/*Diamond Type LIST ADD EDIT*/
+		public function diamond_type(){
 			if($this->input->post('submit')){
 				$data=array(
 					'code'=>$this->input->post('diamond_code'),
@@ -141,7 +141,108 @@
 			}
 			
 		}
+		/*End Diamond Type*/
+		/*Product Type*/
+		/*List and add product type*/
+		public function product_type(){
+			if($this->input->post('submit')){
+				$data=array(
+					'code'=>$this->input->post('product_type_code'),
+					'name'=>$this->input->post('product_type_name')
+				);
+				$this->crud_model->insert_data('type',$data);
+				$this->session->set_flashdata('type',"$.gritter.add({
+					class_name : 'gritter-light',
+					title:'Success',
+					text:'Tipe produk telah ditambahkan',
+					time: 2000
+				});");
+				redirect('configuration/product_type');
+			}
+			else{
+				$data['title'] = 'Tipe Produk';
+				$data['types'] = $this->crud_model->get_data('type')->result();
+				$this->template->load($this->default,'configuration/product_type/list_add_product_type',$data);	
 
+			}
+			
+		}
+		/*Delete product type*/
+		public function delete_product_type($id){
+			if($this->crud_model->delete_data('type',array('id'=>$id))){
+				$this->session->set_flashdata('type',"$.gritter.add({
+					class_name: 'gritter-light',
+					title: 'Success',
+					text: 'Tipe produk berhasil dihapus',
+					time:2000
+				});");
+				redirect('configuration/product_type');
+			}
+			else{
+				$this->session->set_flashdata('type',"$.gritter.add({
+					title: 'Success',
+					text: 'Tipe produk gagal dihapus',
+					time:2000
+				});");
+			}		
+		}
+		/*Edit Product Type*/
+		public function edit_product_type($id){
+			if($this->input->post('submit')){
+				$data=array(
+					'code'=>$this->input->post('product_type_code'),
+					'name'=>$this->input->post('product_type_name')
+				);
+				if($this->crud_model->update_data('type',$data,array('id'=>$id))){
+					$this->session->set_flashdata('type',"$.gritter.add({
+						class_name:'gritter-light',
+						title:'Success!',
+						text:'Tipe produk berhasil di edit',
+						time:2000
+					});");
+					redirect('configuration/product_type');
+				}
+				else{
+					$this->session->set_flashdata('type',"$.gritter.add({
+						title:'Gagal!',
+						text:'Tipe produk gagal di edit',
+						time:2000
+					});");
+				}
+
+			}
+			else{
+				$data['title'] = "Edit Tipe Produk";
+				$data['type'] = $this->crud_model->get_by_condition('type',array('id'=>$id))->row();
+				$this->template->load('default','configuration/product_type/edit_product_type',$data);
+
+			}
+		}
+		/*End Product Type*/
+		/*Category LIST ADD EDIT*/
+		public function category(){
+			if($this->input->post('submit')){
+				$data= array(
+						'name'	=> $this->input->post('category_name'),
+						'code' => ucfirst($this->input->post('category_code')),
+						'type_id'=> $this->input->post('category_type')
+				);
+	            $this->crud_model->insert_data('category',$data);
+	            $this->session->set_flashdata('category',"$.Notify({
+				    caption: 'Berhasil',
+				    content: 'Kategori telah ditambahkan',
+				    type: 'success'
+				});");
+				redirect('category');
+			}else{
+				$data['title'] = 'Daftar Kategori';
+				$data['is_mobile'] = $this->is_mobile;
+				$data['category_diamond'] = $this->crud_model->get_by_condition('category',array('type_id' => 2))->result();
+				$data['category_gold'] = $this->crud_model->get_by_condition('category',array('type_id' => 1))->result();
+				$this->template->load($this->default,'configuration/category/list_category',$data);
+			}
+		}
+		/*End Category*/
 	}
 
  ?>

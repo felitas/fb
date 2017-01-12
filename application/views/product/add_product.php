@@ -64,7 +64,7 @@
 
 					<div class="control-group">
 						<div class="span6">
-							<label for="" class="control-label">Kategori</label>
+							<label for="" class="control-label">Kategori Barang</label>
 							<div class="controls">
 								<select name="product_category" id="" data-validate-func="required" data-validate-hint="Kategori harus diisi">
 									<option value="">--Pilih Kategori--</option>
@@ -91,7 +91,7 @@
 						<div class="span6">
 							<label for="" class="control-label">Harga Jual</label>
 							<div class="controls">
-								<input type="number" placeholder="Harga Jual" name="product_selling_price">
+								<input type="number" placeholder="Harga Jual" name="product_selling_price" id="product_selling_price">
 							</div>	
 						</div>	
 					</div>
@@ -181,9 +181,11 @@
      function warehouse(el){
      	if($(el).is(":checked")){
      		$('#product_tray').attr("disabled","disabled");
+     		$('#product_selling_price').attr("disabled","disabled");
      	}
      	else{
      		$('#product_tray').removeAttr("disabled");
+     		$('#product_selling_price').removeAttr("disabled");
      	}
      }
 
