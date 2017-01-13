@@ -132,7 +132,7 @@
 					text:'Tipe diamond telah ditambahkan',
 					time: 2000
 				});");
-				redirect('configuration/list_add_diamond_type');
+				redirect('configuration/diamond_type');
 			}
 			else{
 				$data['title'] = 'Tipe Berlian untuk Spesifikasi';
@@ -145,7 +145,12 @@
 		/*Edit diamond type*/
 		public function edit_diamond_type($id){
 			if($this->input->post('submit')){
-
+				$data=array(
+					'code'=>$this->input->post('diamond_type_code'),
+					'name'=>$this->input->post('diamond_type_name')
+				);
+				$this->crud_model->update_data('diamond_type',$data,array('id'=>$id));
+				redirect('configuration/diamond_type');
 			}
 			else{
 				$data['title']='Edit Tipe Berlian';

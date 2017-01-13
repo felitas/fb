@@ -22,6 +22,7 @@
 			if($this->input->post('submit')){
 				$data= array(
 						'code' => $this->input->post('new_tray'),
+						'description'=>$this->input->post('tray_desc'),
 						'outlet_id'=> $this->session_outlet
 				);
 	            $this->crud_model->insert_data('tray',$data);

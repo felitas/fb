@@ -8,7 +8,7 @@
         <h2><?php echo $title?></h2>
 	</div>
 	<!--Form Add Tray-->
-	<?php echo form_open('configuration/list_add_diamond_type',array('class'=>'form-horizontal'))?>
+	<?php echo form_open('configuration/list_add_diamond_type',array('class'=>'form-horizontal','id'=>'diamond_type_form'))?>
 	<div class="widget-box closed-add" id="append_tray" style="display: none">
 	<div class="widget-title">
 			<h5>Tambah tipe diamond baru</h5>
@@ -19,7 +19,7 @@
 				<div class="span6">
 					<label class="control-label">Kode Tipe Diamond</label>
 					<div class="controls">
-		                <input type="text" placeholder="Masukkan kode untuk tipe diamond" name="diamond_code" class="span12">
+		                <input type="text" placeholder="Masukkan 2 karakter kode untuk tipe diamond" name="diamond_code" class="span12">
 					</div>
 				</div>
 				<div class="span6">
@@ -89,6 +89,7 @@
 </div>
 
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
+<script src="<?php echo base_url() ?>js/jquery.validate.js"></script>
 
 <script>
 	
@@ -98,6 +99,12 @@
             <?php echo $this->session->flashdata('tray') ?>
         <?php endif; ?>
         $('#table_tray').footable();
+        $('#diamond_type_form').validate({
+        	rules:{
+        		diamond_code:{required:true,maxlength:2},
+        		diamond_name:"required"
+        	}
+        });
     });
 
     $('#add_link').click(function(){

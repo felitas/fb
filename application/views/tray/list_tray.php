@@ -5,28 +5,36 @@
 	<div class="row-fluid">
 		<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
         <a id="add_link" style="cursor: pointer;" class="pull-right">Tambah baki baru <span class="fa fa-plus-circle"></span></a>
-        <h2>Daftar Baki</h2>
+        <h2>Daftar Nampan</h2>
 	</div>
 	<!--Form Add Tray-->
-	<?php echo form_open('Tray/add_tray',array('class'=>'form-horizontal'))?>
+	<?php echo form_open('Tray/add_tray',array('class'=>'form-horizontal','id'=>'tray_form'))?>
 	<div class="widget-box closed-add" id="append_tray" style="display: none">
 	<div class="widget-title">
-			<h5>Tambah Baki Baru</h5>
+			<h5>Tambah Nampan Baru</h5>
 	</div>
 	<div class="widget-content">
-		
-			<div class="control-group top-control">
-				<label class="control-label">Kode Baki</label>
-				<div class="controls">
-	                <input type="text" placeholder="Masukkan kode untuk baki baru" name="new_tray">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="control-group top-control">
+					<label class="control-label">Kode Nampan</label>
+					<div class="controls">
+		                <input type="text" placeholder="Masukkan kode untuk baki baru" name="new_tray" class="span12">
+					</div>
+				</div>
+				<div class="control-group top-control">
+					<label class="control-label">Keterangan</label>
+					<div class="controls">
+						<textarea name="tray_desc" class="span12"></textarea>
+					</div>
+				</div>
+			
+			
+				<div class="form-actions text-center">
+					<input type="Submit" name="submit" class="btn btn-info" value="Submit">
 				</div>
 			</div>
-		
-		
-			<div class="form-actions text-center">
-				<input type="Submit" name="submit" class="btn btn-info" value="Submit">
-			</div>
-		
+		</div>
 	</div>
 	</div>
 	<?php echo form_close()?>
@@ -43,6 +51,7 @@
 					<tr>
 						<th data-type="numeric">No</th>
 						<th data-type="numeric">Kode Baki</th>
+						<th data-hide="phone">Keterangan</th>
 						<th data-hide="phone">Action</th>
 					</tr>
 				</thead>
@@ -53,6 +62,7 @@
 						<tr>
 							<td><?php echo $i ?></td>
 							<td><?php echo $tray->code ?></td>
+							<td><?php echo $tray->description ?></td>
 							<!-- <td>
 								<?php #$outlet = $this->crud_model->get_by_condition('outlets', array('id'=>$customer->outlet_id))->row('name');
 									#echo $outlet;
@@ -64,7 +74,7 @@
 						<?php endforeach; ?>
 					<?php else: ?>
 						<tr>
-							<td colspan="3"><h3  class="text-center">Table kosong</h3></td>
+							<td colspan="4"><h3  class="text-center">Table kosong</h3></td>
 						</tr>
 					<?php endif; ?>
 
@@ -78,6 +88,7 @@
 </div>
 
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
+<script src="<?php echo base_url() ?>js/jquery.validate.js"></script>
 
 <script>
 	
@@ -87,6 +98,11 @@
             <?php echo $this->session->flashdata('tray') ?>
         <?php endif; ?>
         $('#table_tray').footable();
+        $('#tray_form').validate({
+        	rules:{
+        		new_tray:"required"
+        	}	
+        });
     });
 
     $('#add_link').click(function(){
