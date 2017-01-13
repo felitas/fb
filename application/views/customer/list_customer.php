@@ -68,7 +68,14 @@
 									<td colspan="8" class="nocontent"><h3>Table kosong</h3></td>
 								</tr>
 							<?php endif; ?>
-						</tbody>	
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="8">
+									<div class="pagination pagination-centered"></div>
+								</td>
+							</tr>
+						</tfoot>	
 			    	</table>
 			    </div>
 			</div>

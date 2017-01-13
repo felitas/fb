@@ -79,6 +79,13 @@
 					<?php endif; ?>
 
 				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="5">
+							<div class="pagination pagination-centered"></div>
+						</td>
+					</tr>
+				</tfoot>
 			</table>
 			</div>
 			

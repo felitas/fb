@@ -69,6 +69,13 @@
                                 </tr>
                             <?php endif; ?>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="pagination pagination-centered"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>    
         </div>
@@ -108,6 +115,13 @@
                                 </tr>
                             <?php endif; ?>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="pagination pagination-centered"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>    
             </div>

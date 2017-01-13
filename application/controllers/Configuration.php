@@ -245,18 +245,75 @@
 						'type_id'=> $this->input->post('category_type')
 				);
 	            $this->crud_model->insert_data('category',$data);
-	            $this->session->set_flashdata('category',"$.Notify({
-				    caption: 'Berhasil',
-				    content: 'Kategori telah ditambahkan',
-				    type: 'success'
+	            $this->session->set_flashdata('category',"$.gritter.add({
+	            	class_name:'gritter-light',
+				    title: 'Success!',
+				    text: 'Kategori telah ditambahkan',
+				    time:2000
 				});");
-				redirect('category');
+				redirect('configuration/category');
 			}else{
 				$data['title'] = 'Daftar Kategori';
 				$data['is_mobile'] = $this->is_mobile;
-				$data['category_diamond'] = $this->crud_model->get_by_condition('category',array('type_id' => 2))->result();
-				$data['category_gold'] = $this->crud_model->get_by_condition('category',array('type_id' => 1))->result();
+				$data['types']=$this->crud_model->get_data('type')->result();
+				$data['categories'] = $this->crud_model->get_data('category')->result();
 				$this->template->load($this->default,'configuration/category/list_category',$data);
+			}
+		}
+		/*Edit*/
+		public function edit_category($id){
+			if($this->input->post('submit')){
+				$data=array(
+					'code'=>$this->input->post('category_code'),
+					'name'=>$this->input->post('category_name'),
+					'type_id'=>$this->input->post('category_type')
+				);
+				if($this->crud_model->update_data('category',$data,array('id'=>$id))){
+					$this->session->set_flashdata('category',"$.gritter.add({
+						class_name:'gritter-light',
+						title:'Success',
+						text:'Kategori telah diubah',
+						time:1500
+					});");
+					redirect('configuration/category');	
+				}
+				else{
+					$this->session->set_flashdata('category',"$.gritter.add({
+						title:'Gagal',
+						text:'Kategori gagal diubah',
+						time:1500
+					});");
+					redirect('configuration/category');		
+				}
+				
+			}
+			else{
+				$data['title']='Edit Kategori';
+				$data['is_mobile']=$this->is_mobile;
+				$data['category']=$this->crud_model->get_by_condition('category',array('id'=>$id))->row();
+				$data['types']=$this->crud_model->get_data('type')->result();
+				$this->template->load($this->default,'configuration/category/edit_category',$data);
+			}
+		}
+		/*Delet*/
+		public function delete_category($id){
+			if($this->crud_model->delete_data('category',array('id'=>$id))){
+				$this->session->set_flashdata('category',"$.gritter.add({
+					class_name:'gritter-light',
+					title:'Success',
+					text:'Kategori telah sukses dihapus',
+					time:1500
+				})");
+				redirect('configuration/category');
+			}
+			else{
+				$this->session->set_flashdata('category',"
+					$.gritter.add({
+						title:'Gagal',
+						text:'Kategori gagal sukses dihapus',
+						time:1500
+					})");
+				redirect('configuration/category');
 			}
 		}
 		/*End Category*/
