@@ -317,6 +317,82 @@
 			}
 		}
 		/*End Category*/
+		/*MODEL STARS*/
+		public function model(){
+			if($this->input->post('submit')){
+				$data= array(
+						'name'	=> $this->input->post('model_name'),
+						'code' => ucfirst($this->input->post('model_code')),
+				);
+	            $this->crud_model->insert_data('model',$data);
+	            $this->session->set_flashdata('model',"$.gritter.add({
+	            	class_name:'gritter-light',
+				    title: 'Success!',
+				    text: 'Model telah ditambahkan',
+				    time:2000
+				});");
+				redirect('configuration/model');
+			}else{
+				$data['title'] = 'Daftar Koleksi';
+				$data['is_mobile'] = $this->is_mobile;
+				$data['models']=$this->crud_model->get_data('model')->result();
+				$this->template->load($this->default,'configuration/model/list_add_model',$data);
+			}
+		}
+		/*Edit*/
+		public function edit_model($id){
+			if($this->input->post('submit')){
+				$data= array(
+						'name'	=> $this->input->post('model_name'),
+						'code' => ucfirst($this->input->post('model_code')),
+				);
+				if($this->crud_model->update_data('model',$data,array('id'=>$id))){
+					$this->session->set_flashdata('model',"$.gritter.add({
+						class_name:'gritter-light',
+						title:'Success',
+						text:'Model telah diubah',
+						time:1500
+					});");
+					redirect('configuration/model');	
+				}
+				else{
+					$this->session->set_flashdata('model',"$.gritter.add({
+						title:'Gagal',
+						text:'Model gagal diubah',
+						time:1500
+					});");
+					redirect('configuration/model');		
+				}
+				
+			}
+			else{
+				$data['title']='Edit Model';
+				$data['is_mobile']=$this->is_mobile;
+				$data['model']=$this->crud_model->get_by_condition('model',array('id'=>$id))->row();
+				$this->template->load($this->default,'configuration/model/edit_model',$data);
+			}
+		}
+		/*Delet*/
+		public function delete_model($id){
+			if($this->crud_model->delete_data('model',array('id'=>$id))){
+				$this->session->set_flashdata('model',"$.gritter.add({
+					class_name:'gritter-light',
+					title:'Success',
+					text:'Kategori telah sukses dihapus',
+					time:1500
+				})");
+				redirect('configuration/model');
+			}
+			else{
+				$this->session->set_flashdata('model',"
+					$.gritter.add({
+						title:'Gagal',
+						text:'Kategori gagal sukses dihapus',
+						time:1500
+					})");
+				redirect('configuration/model');
+			}
+		}
 	}
 
  ?>

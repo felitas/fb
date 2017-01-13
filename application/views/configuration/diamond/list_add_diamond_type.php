@@ -75,14 +75,14 @@
 						<?php endforeach; ?>
 					<?php else: ?>
 						<tr>
-							<td colspan="3"><h3  class="text-center">Table kosong</h3></td>
+							<td colspan="4"><h3  class="text-center">Table kosong</h3></td>
 						</tr>
 					<?php endif; ?>
 
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="3">
+						<td colspan="4">
 							<div class="pagination pagination-centered"></div>
 						</td>
 					</tr>
@@ -108,7 +108,7 @@
         $('#table_tray').footable();
         $('#diamond_type_form').validate({
         	rules:{
-        		diamond_code:{required:true,maxlength:2},
+        		diamond_code:{required:true,maxlength:2,minlength:2},
         		diamond_name:"required"
         	}
         });

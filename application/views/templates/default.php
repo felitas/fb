@@ -231,7 +231,7 @@
           <!--the 3 below are essential for product barcode-->
           <li><a href="<?php echo base_url('configuration/product_type') ?>"><i class="fa fa-empire faicon"></i> Tipe Produk</a></li>
           <li><a href="<?php echo base_url('configuration/category') ?>"><i class="fa fa-puzzle-piece faicon"></i> Kategori Produk</a></li>
-          <li><a href="<?php echo base_url('model') ?>"><i class="fa fa-tags faicon"></i> Koleksi/Model Perhiasan</a></li>
+          <li><a href="<?php echo base_url('configuration/model') ?>"><i class="fa fa-tags faicon"></i> Koleksi/Model Perhiasan</a></li>
           <!--End barcode elements-->
           <li><a href="error500.html"><i class="fa fa-opencart faicon"></i> Promo</a></li>
           <li><a href="error500.html"><i class="fa fa-users faicon"></i> Sales</a></li>
