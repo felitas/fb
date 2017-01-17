@@ -28,7 +28,7 @@
 						<div class="span6">
 							<label class="control-label">Tipe</label>
 							<div class="controls">
-								<select name="product_type" id="product_type" onchange="getcategory(this)">
+								<select name="product_type" id="product_type" onchange="get_category(this)">
 									<option value="x">--Pilih Tipe--</option>
 									<?php foreach ($types as $type): ?>
 										<option value="<?php echo $type->id?>"><?php echo $type->code?> - <?php echo $type->name?></option>	
@@ -57,6 +57,23 @@
 									<?php endforeach?>
 								</select>
 							</div>	
+						</div>
+						<div class="span6">
+							<label for="" class="control-label">Kode Model</label>
+							<div class="controls">
+								<input type="text" name="model_code[]" readonly="readonly" class="span3">
+								<input type="text" name="model_code[]" readonly="readonly" class="span3">
+								<input type="text" name="model_code[]" readonly="readonly" class="span3">
+								<input type="text" name="model_code[]" readonly="readonly" class="span3">
+							</div>	
+						</div>	
+					</div>
+					<div class="control-group">
+						<div class="span12">
+							<label for="" class="control-label">Kode Produk</label>
+							<div class="controls">
+								<input type="text" name="product_code" readonly="readonly" class="span12" placeholder="Kode Produk">
+							</div>
 						</div>	
 					</div>
 					<div class="control-group">
@@ -64,7 +81,7 @@
 						<div class="span6">
 							<label for="" class="control-label">Outlets</label>
 							<div class="controls">
-								<select name="product_outlet" id="product_outlet">
+								<select name="product_outlet" id="product_outlet" onchange="get_tray(this)">
 									<?php foreach ($outlets as $outlet): ?>
 										<option value="<?php echo $outlet->id?>"><?php echo $outlet->name?></option>	
 									<?php endforeach ?>
@@ -85,14 +102,7 @@
 						</div>
 					</div>
 
-					<div class="control-group">
-						<div class="span6">
-							<label for="" class="control-label">Kode Produk</label>
-							<div class="controls">
-								<input type="text" placeholder="Kode Produk" name="product_code" readonly="readonly" class="span12">
-							</div>	
-						</div>	
-					</div>
+					
 
 					<div class="control-group">
 						<div class="span6">
@@ -131,7 +141,7 @@
 							</div>	
 						</div>
 						
-					<div class="control-group">
+					<div class="control-group top-control">
 						<div class="span12" id="specifications">
 						<!--Later appended-->
 						</div>
@@ -204,11 +214,12 @@
      	}
      }
 
+
      function add_spec(){
      	$('#specifications').append("<div class='controls'><select name='diamond_type[]'><option>--Jenis Diamond--</option><?php foreach ($diamond_types as $diamond_type): ?><option value='<?php echo $diamond_type->code?>''><?php echo $diamond_type->name?></option><?php endforeach ?></select><input type='number' placeholder='Jumlah Diamond' name='stone_amount[]'><input type='number' placeholder='Jumlah Karat' name='stone_weight[]'></div>")
      }
 
-     function getcategory(el){
+     function get_category(el){
      	if($(el).val()=='x'){
 			$('#category').empty();
             $('#category').append("<option value=''>--Pilih Tipe Terlebih Dahulu--</option>");
@@ -232,6 +243,29 @@
 		}
 		
      }
+
+     function get_tray(el){
+		if($(el).val() != ''){
+			$.ajax({
+              url: "<?php echo base_url('product/get_tray_data/')?>" + $(el).val(),
+              type: 'GET',
+              cache : false,
+              success: function(result){
+              	if (result != 'Toko ini belum punya baki') {
+              		$('#product_tray').empty();
+              		$('#product_tray').append("<option value=''>--Pilih Baki--</option>");
+              		$('#product_tray').append(result);
+              	}
+
+				else{
+		      		$('#product_tray').empty();
+		      		$('#product_tray').append("<option value=''>--Tidak ada tray--</option>");	
+		      	}
+              }
+			});
+		}
+
+	}
 
 
     <?php if($this->session->flashdata('product')): ?>

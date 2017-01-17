@@ -159,41 +159,40 @@
 				$this->template->load($this->default,'product/add_product',$data);
 			}
 		}
-		/*ajax for insert product*/
-		
-		public function get_data_new_product($tray_id = ''){
-			$this->load->model('tray_model');
-			$outlet_code = $this->db->get_where('outlets',array('id' => $this->session_outlet))->row('code');
-			$tray = $this->tray_model->get_specific_tray($tray_id);
-			$code = $this->db->get_where('code',array('code' => $outlet_code.$tray->code))->row();
-			if($code){
-				$data = (array) $tray;
-				$data['product_code'] = $code->code.sprintf("%05d", $code->count);
-				$data['hidden_code'] = $code->code;
-				$data['hidden_count'] = $code->count;
-				$data = (Object) $data;
-				echo json_encode($data);
-			}else{
-				$this->db->insert('code',array('code' => $outlet_code.$tray->code,'count' => 1));
-				$data = (array) $tray;
-				$data['product_code'] = $outlet_code.$tray->code.sprintf("%05d", 1);
-				$data['hidden_code'] = $outlet_code.$tray->code;
-				$data['hidden_count'] = 1;
-				$data = (Object) $data;
-				echo json_encode($data);
+		/*ajax for insert product*/		
+		// public function get_data_new_product($tray_id = ''){
+		// 	$this->load->model('tray_model');
+		// 	$outlet_code = $this->db->get_where('outlets',array('id' => $this->session_outlet))->row('code');
+		// 	$tray = $this->tray_model->get_specific_tray($tray_id);
+		// 	$code = $this->db->get_where('code',array('code' => $outlet_code.$tray->code))->row();
+		// 	if($code){
+		// 		$data = (array) $tray;
+		// 		$data['product_code'] = $code->code.sprintf("%05d", $code->count);
+		// 		$data['hidden_code'] = $code->code;
+		// 		$data['hidden_count'] = $code->count;
+		// 		$data = (Object) $data;
+		// 		echo json_encode($data);
+		// 	}else{
+		// 		$this->db->insert('code',array('code' => $outlet_code.$tray->code,'count' => 1));
+		// 		$data = (array) $tray;
+		// 		$data['product_code'] = $outlet_code.$tray->code.sprintf("%05d", 1);
+		// 		$data['hidden_code'] = $outlet_code.$tray->code;
+		// 		$data['hidden_count'] = 1;
+		// 		$data = (Object) $data;
+		// 		echo json_encode($data);
 				
-			}
-		}
+		// 	}
+		// }
 		/* end of ajax */
 
 		/*ajax for insert product*/
-		public function count_gold_amount($gold_amount_id = ''){
-			$gold_amount = $this->db->get_where('gold_amount',array('id'=>$gold_amount_id))->row();
-			$gold_amount = (array) $gold_amount;
-			$gold_amount['gold_price'] = $this->db->get_where('currency',array('id' => 2))->row('value');
-			echo json_encode($gold_amount);
+		// public function count_gold_amount($gold_amount_id = ''){
+		// 	$gold_amount = $this->db->get_where('gold_amount',array('id'=>$gold_amount_id))->row();
+		// 	$gold_amount = (array) $gold_amount;
+		// 	$gold_amount['gold_price'] = $this->db->get_where('currency',array('id' => 2))->row('value');
+		// 	echo json_encode($gold_amount);
 
-		}
+		// }
 
 
 		/* end of ajax */
@@ -212,6 +211,21 @@
 				echo $output;
 			}else{
 				echo 'Belum ada kategori';
+			}
+		}
+
+		/*Ajax to get tray data*/
+		public function get_tray_data($outlet_id = ''){
+			$this->load->model('configuration_model');
+			$tray = $this->configuration_model->get_tray($outlet_id);
+			$output = '';
+			if($tray){
+				foreach($tray as $row){
+					$output .= "<option value='".$row->id."'>".$row->code." - ".$row->description."</option>";
+				}
+				echo $output;
+			}else{
+				echo 'Toko ini belum punya baki';
 			}
 		}
 

@@ -17,6 +17,14 @@
 			return $this->db->get()->result();
 		}
 
+		function get_tray($outlet_id = ''){
+			$this->db->select('tray.*');
+			$this->db->from('tray');
+			$this->db->where('tray.outlet_id',$outlet_id);
+			$this->db->order_by('tray.code','asc');
+			return $this->db->get()->result();
+		}
+
 	}
 
  ?>
