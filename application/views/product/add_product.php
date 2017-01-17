@@ -23,21 +23,55 @@
 				            </div>
 						</div>
 					</div>
+					
 					<div class="control-group">
 						<div class="span6">
-							<label for="" class="control-label">Kode Produk</label>
+							<label class="control-label">Tipe</label>
 							<div class="controls">
-								<input type="text" placeholder="Kode Produk" name="product_code" readonly="readonly">
+								<select name="product_type" id="product_type" onchange="getcategory(this)">
+									<option value="x">--Pilih Tipe--</option>
+									<?php foreach ($types as $type): ?>
+										<option value="<?php echo $type->id?>"><?php echo $type->code?> - <?php echo $type->name?></option>	
+									<?php endforeach ?>
+								</select>
 							</div>	
 						</div>
 						<div class="span6">
-							<label for="" class="control-label">Kode Model</label>
+							<label for="" class="control-label">Kategori Barang</label>
 							<div class="controls">
-								<input type="text" placeholder="Kode Model" name="product_model_code">
+								<select name="product_category" id="category">
+									<option value="">--Pilih tipe terlebih dahulu--</option>
+								</select>
+							</div>	
+						</div>	
+					</div>
+
+					<div class="control-group">
+						<div class="span6">
+							<label for="" class="control-label">Model</label>
+							<div class="controls">
+								<select name="product_model" id="">
+									<option value="">--Pilih Model--</option>
+									<?php foreach($models as $model): ?>
+										<option value="<?php echo $model->id?>"><?php echo $model->code?> - <?php echo $model->name?></option>
+									<?php endforeach?>
+								</select>
 							</div>	
 						</div>	
 					</div>
 					<div class="control-group">
+						<?php if ($role =='admin'):?>
+						<div class="span6">
+							<label for="" class="control-label">Outlets</label>
+							<div class="controls">
+								<select name="product_outlet" id="product_outlet">
+									<?php foreach ($outlets as $outlet): ?>
+										<option value="<?php echo $outlet->id?>"><?php echo $outlet->name?></option>	
+									<?php endforeach ?>
+								</select>
+							</div>	
+						</div>
+						<?php endif;?>
 						<div class="span6">
 							<label for="" class="control-label">Tray</label>
 							<div class="controls">
@@ -49,33 +83,13 @@
 								</select>
 							</div>	
 						</div>
-						<div class="span6">
-							<label for="" class="control-label">Tipe</label>
-							<div class="controls">
-								<select name="product_type" id="" data-validate-func="required" data-validate-hint="Jenis barang harus diisi">
-									<?php foreach ($types as $type): ?>
-										<option value="<?php echo $type->id?>"><?php echo $type->code?> - <?php echo $type->name?></option>	
-									<?php endforeach ?>
-								</select>
-							</div>	
-						</div>	
 					</div>
 
 					<div class="control-group">
 						<div class="span6">
-							<label for="" class="control-label">Kategori Barang</label>
+							<label for="" class="control-label">Kode Produk</label>
 							<div class="controls">
-								<select name="product_category" id="" data-validate-func="required" data-validate-hint="Kategori harus diisi">
-									<option value="">--Pilih Kategori--</option>
-								</select>
-							</div>	
-						</div>
-						<div class="span6">
-							<label for="" class="control-label">Model</label>
-							<div class="controls">
-								<select name="product_model" id="" data-validate-func="required" data-validate-hint="Model harus diisi">
-									<option value="">--Pilih Model--</option>
-								</select>
+								<input type="text" placeholder="Kode Produk" name="product_code" readonly="readonly" class="span12">
 							</div>	
 						</div>	
 					</div>
@@ -180,16 +194,43 @@
      function warehouse(el){
      	if($(el).is(":checked")){
      		$('#product_tray').attr("disabled","disabled");
+     		$('#product_outlet').attr("disabled","disabled");
      		$('#product_selling_price').attr("disabled","disabled");
      	}
      	else{
      		$('#product_tray').removeAttr("disabled");
+     		$('#product_outlet').removeAttr("disabled");
      		$('#product_selling_price').removeAttr("disabled");
      	}
      }
 
      function add_spec(){
      	$('#specifications').append("<div class='controls'><select name='diamond_type[]'><option>--Jenis Diamond--</option><?php foreach ($diamond_types as $diamond_type): ?><option value='<?php echo $diamond_type->code?>''><?php echo $diamond_type->name?></option><?php endforeach ?></select><input type='number' placeholder='Jumlah Diamond' name='stone_amount[]'><input type='number' placeholder='Jumlah Karat' name='stone_weight[]'></div>")
+     }
+
+     function getcategory(el){
+     	if($(el).val()=='x'){
+			$('#category').empty();
+            $('#category').append("<option value=''>--Pilih Tipe Terlebih Dahulu--</option>");
+		}     	
+		else if($(el).val()!=''){
+			$.ajax({
+              url: "<?php echo base_url('product/get_category_data/')?>" + $(el).val(),
+              type: 'GET',
+              cache : false,
+              success: function(result){
+              	if (result != 'Belum ada kategori') {
+              		$('#category').empty();
+              		$('#category').append(result);
+              	}
+              	else{
+              		$('#category').empty();
+              		$('#category').append("<option value=''>--Tidak ada kategori--</option>");	
+              	}
+              }
+			});
+		}
+		
      }
 
 

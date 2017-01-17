@@ -65,13 +65,13 @@
 								<?php endforeach; ?>
 							<?php else:?>
 								<tr>
-									<td colspan="8" class="nocontent"><h3>Table kosong</h3></td>
+									<td colspan="10" class="nocontent"><h3>Table kosong</h3></td>
 								</tr>
 							<?php endif; ?>
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="8">
+								<td colspan="10">
 									<div class="pagination pagination-centered"></div>
 								</td>
 							</tr>

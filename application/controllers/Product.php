@@ -152,6 +152,9 @@
 				$data['types']= $this->crud_model->get_data('type')->result();
 				$data['trays'] = $this->db->get_where('tray', array('outlet_id' => $this->session_outlet))->result();
 				$data['diamond_types'] = $this->crud_model->get_data('diamond_type')->result();
+				$data['models'] = $this->crud_model->get_data('model')->result();
+				$data['outlets']=$this->crud_model->get_data('outlets')->result();
+				$data['role']=$this->session_role;
 				// $data['gold_amount'] = $this->db->get('gold_amount')->result();
 				$this->template->load($this->default,'product/add_product',$data);
 			}
@@ -191,7 +194,28 @@
 			echo json_encode($gold_amount);
 
 		}
+
+
 		/* end of ajax */
+
+		/*Ajax to get item category*/
+		public function get_category_data($type_id=''){
+			$this->load->model('configuration_model');
+			$type=$this->db->get_where('type',array('id'=>$type_id))->row();
+			$categories = $this->configuration_model->get_category($type_id);	
+			$output='';
+			if($categories){
+				// $output.="<option value=''>--Pilih Kategori ".$type->name."--</option>";
+				foreach ($categories as $category) {
+					$output.="<option value=' ".$category->id."'>".$category->code." - ".$category->name."</option>";
+				}
+				echo $output;
+			}else{
+				echo 'Belum ada kategori';
+			}
+		}
+
+
 		/****ADD NEW ITEM END****/
 }
 ?>

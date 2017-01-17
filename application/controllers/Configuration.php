@@ -317,7 +317,7 @@
 			}
 		}
 		/*End Category*/
-		/*MODEL STARS*/
+		/*MODEL STARTS*/
 		public function model(){
 			if($this->input->post('submit')){
 				$data= array(
