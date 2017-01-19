@@ -130,7 +130,7 @@
 	function delete_type(id,code){
 		alertify.confirm("Apakah anda yakin ingin menghapus tipe "+code+"?",
 		  function(){
-		    window.location.assign("<?php echo base_url() ?>Configuration/delete_product_type/"+id);
+		    window.location.assign("<?php echo base_url() ?>configuration/delete_product_type/"+id);
 		  },
 		  function(){
 		    $.gritter.add({

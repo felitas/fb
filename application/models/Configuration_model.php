@@ -9,11 +9,11 @@
 			return $this->db->get()->result();
 		} 
 		//obtain category according to the types
-		function get_category($type_id=''){
+		function get_category($type_code=''){
 			$this->db->select('category.*,type.name as type_name');
 			$this->db->from('category');
-			$this->db->join('type','category.type_id=type.id');
-			$this->db->where('category.type_id',$type_id);
+			$this->db->join('type','category.type_code=type.code');
+			$this->db->where('category.type_code',$type_code);
 			return $this->db->get()->result();
 		}
 
@@ -39,6 +39,14 @@
 			}else{
 				return false;
 			}
+		}
+
+		function check_model_code($model_code){
+			if($this->db->get_where('model',array('code'=>$model_code))->num_rows()>0 ){
+				return true;
+			}else{
+				return false;
+			}	
 		}
 
 	}

@@ -341,6 +341,23 @@
 			}
 		}
 
+		/*Ajax to get item category IN ADD PRODUCT PAGE*/
+		public function get_category_data($type_code=''){
+			$this->load->model('configuration_model');
+			$type=$this->db->get_where('type',array('code'=>$type_code))->row();
+			$categories = $this->configuration_model->get_category($type_code);	
+			$output='';
+			if($categories){
+				// $output.="<option value=''>--Pilih Kategori ".$type->name."--</option>";
+				foreach ($categories as $category) {
+					$output.="<option value='".$category->code."'>".$category->code." - ".$category->name."</option>";
+				}
+				echo $output;
+			}else{
+				echo 'Belum ada kategori';
+			}
+		}
+
 		/*End Category*/
 		/*MODEL STARTS*/
 		public function model(){
@@ -397,7 +414,7 @@
 				$this->template->load($this->default,'configuration/model/edit_model',$data);
 			}
 		}
-		/*Delet*/
+		/*Delete*/
 		public function delete_model($id){
 			if($this->crud_model->delete_data('model',array('id'=>$id))){
 				$this->session->set_flashdata('model',"$.gritter.add({
@@ -418,6 +435,19 @@
 				redirect('configuration/model');
 			}
 		}
+
+		/*Check model uniqueness*/
+		public function check_model_code($model_code){
+			if ($model_code != '') {
+				if ($this->configuration_model->check_model_code($model_code)) {
+					echo 'taken';
+				}
+				else{
+					echo 'available';
+				}
+			}
+		}
+
 	}
 
  ?>

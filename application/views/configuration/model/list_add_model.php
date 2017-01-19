@@ -18,7 +18,7 @@
 					<div class="span6">
 						<label class="control-label">Kode Model</label>
 							<div class="controls">
-				                <input type="text" placeholder="Masukkan kode untuk model (2 Huruf/Angka)" name="model_code" class="span12">
+				                <input type="text" placeholder="Masukkan kode untuk model (2 Huruf/Angka)" name="model_code" class="span12" onblur="check_model_code(this)">
 							</div>
 					</div>
 					
@@ -124,7 +124,6 @@
     		$('#append_model').hide();	
 			$('#append_model').addClass('closed-add');
     	}
-    	
     });
     
 	function delete_model(id,name){
@@ -137,5 +136,37 @@
 		    	title: 'Gagal !', text: 'Kategori gagal dihapus', time:1500
 		    });
 		  });
+	}
+
+	function check_model_code(el){
+		if($(el).val()!=''){
+			$.ajax({
+				url:"<?php echo base_url('configuration/check_model_code/') ?>"+$(el).val(),
+				type: 'GET',
+				cache : false,
+		        success: function(result){
+		            if(result == 'taken'){
+		                $.gritter.add({
+		                    title: 'Error !',
+		                    text: 'Kode model sudah terpakai',
+		                    time: 1200
+		                });
+		                $(el).val('');
+		                $(el).parent().addClass('error');
+		                setTimeout(function(){$(el).parent().removeClass('error')},3000);
+		            }else{
+		                $.gritter.add({
+		                    class_name:'gritter-light',
+		                    title: 'Available !',
+		                    text: 'Kode model '+$(el).val()+' bisa dipakai',
+		                    time: 1200
+		                });
+		                $(el).parent().addClass('success');
+		            }   
+		         }
+
+
+			})
+		}
 	}
 </script>

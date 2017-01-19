@@ -197,22 +197,7 @@
 
 		/* end of ajax */
 
-		/*Ajax to get item category*/
-		public function get_category_data($type_id=''){
-			$this->load->model('configuration_model');
-			$type=$this->db->get_where('type',array('id'=>$type_id))->row();
-			$categories = $this->configuration_model->get_category($type_id);	
-			$output='';
-			if($categories){
-				// $output.="<option value=''>--Pilih Kategori ".$type->name."--</option>";
-				foreach ($categories as $category) {
-					$output.="<option value=' ".$category->id."'>".$category->code." - ".$category->name."</option>";
-				}
-				echo $output;
-			}else{
-				echo 'Belum ada kategori';
-			}
-		}
+		
 
 		/*Ajax to get tray data*/
 		public function get_tray_data($outlet_id = ''){
