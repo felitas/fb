@@ -19,7 +19,7 @@
 				<div class="span6">
 					<label class="control-label">Kode Tipe Produk</label>
 					<div class="controls">
-		                <input type="text" placeholder="Masukkan 1 huruf sebagai kode untuk tipe produk" name="product_type_code" id="product_type_code" class="span12">
+		                <input type="text" placeholder="Masukkan 1 huruf sebagai kode untuk tipe produk" name="product_type_code" id="product_type_code" class="span12" onblur="check_type_code(this)">
 					</div>
 				</div>
 				<div class="span6">
@@ -141,4 +141,37 @@
 			});
 		  });
 	}
+	function check_type_code(el){
+        if($(el).val() != ''){
+            $.ajax({
+              url: "<?php echo base_url('configuration/check_type_code/')?>" + $(el).val(),
+              type: 'GET',
+              cache : false,
+              success: function(result){
+                if(result == 'taken'){
+                    $.gritter.add({
+                        title: 'Error !',
+                        text: 'Kode tipe sudah terpakai',
+                        time: 1500
+                    });
+                    $(el).val('');
+                    $(el).parent().addClass('error');
+                    setTimeout(function(){$(el).parent().removeClass('error')},3000);
+                }else{
+                    $.gritter.add({
+                        class_name:'gritter-light',
+                        title: 'Available !',
+                        text: 'Kode tipe '+$(el).val()+' bisa dipakai',
+                        time: 1500
+                    });
+                    $(el).parent().addClass('success');
+                }
+               
+                
+              }
+            
+            });    
+        }
+        
+}
 </script>

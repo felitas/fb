@@ -61,10 +61,9 @@
 						<div class="span6">
 							<label for="" class="control-label">Kode Model</label>
 							<div class="controls">
-								<input type="text" name="model_code[]" readonly="readonly" class="span3">
-								<input type="text" name="model_code[]" readonly="readonly" class="span3">
-								<input type="text" name="model_code[]" readonly="readonly" class="span3">
-								<input type="text" name="model_code[]" readonly="readonly" class="span3">
+								<input type="text" name="model_code[0]" readonly="readonly" class="span3">
+								<input type="text" name="model_code[1]" readonly="readonly" class="span3">
+								<input type="text" name="model_code[2]" readonly="readonly" class="span4">
 							</div>	
 						</div>	
 					</div>
@@ -223,6 +222,7 @@
      	if($(el).val()=='x'){
 			$('#category').empty();
             $('#category').append("<option value=''>--Pilih Tipe Terlebih Dahulu--</option>");
+            $("input[name='model_code[0]']").val('');
 		}     	
 		else if($(el).val()!=''){
 			$.ajax({
@@ -233,11 +233,14 @@
               	if (result != 'Belum ada kategori') {
               		$('#category').empty();
               		$('#category').append(result);
+
+
               	}
               	else{
               		$('#category').empty();
               		$('#category').append("<option value=''>--Tidak ada kategori--</option>");	
               	}
+              	$("input[name='model_code[0]']").val($(el).val());
               }
 			});
 		}

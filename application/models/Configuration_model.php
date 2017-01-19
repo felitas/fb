@@ -24,6 +24,22 @@
 			$this->db->order_by('tray.code','asc');
 			return $this->db->get()->result();
 		}
+		//ajax to check type uniqueness in database
+		function check_type_code($type_code){
+			if($this->db->get_where('type',array('code' => $type_code))->num_rows() > 0){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		//ajax to check category uniqueness in each type in database
+		function check_category_code($type_code,$category_code){
+			if($this->db->get_where('category',array('type_code'=>$type_code,'code'=>$category_code))->num_rows()>0 ){
+				return true;
+			}else{
+				return false;
+			}
+		}
 
 	}
 

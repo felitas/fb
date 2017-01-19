@@ -235,14 +235,26 @@
 
 			}
 		}
+		/*Check product type code uniqueness*/
+		public function check_type_code($type_code){
+			if ($type_code != '') {
+				if ($this->configuration_model->check_type_code($type_code)) {
+					echo 'taken';
+				}
+				else{
+					echo 'available';
+				}
+			}
+		}
+
 		/*End Product Type*/
-		/*Category LIST ADD EDIT*/
+		/*Category LIST ADD EDIT CHECK*/
 		public function category(){
 			if($this->input->post('submit')){
 				$data= array(
 						'name'	=> $this->input->post('category_name'),
 						'code' => ucfirst($this->input->post('category_code')),
-						'type_id'=> $this->input->post('category_type')
+						'type_code'=> $this->input->post('category_type')
 				);
 	            $this->crud_model->insert_data('category',$data);
 	            $this->session->set_flashdata('category',"$.gritter.add({
@@ -295,7 +307,7 @@
 				$this->template->load($this->default,'configuration/category/edit_category',$data);
 			}
 		}
-		/*Delet*/
+		/*DeletE*/
 		public function delete_category($id){
 			if($this->crud_model->delete_data('category',array('id'=>$id))){
 				$this->session->set_flashdata('category',"$.gritter.add({
@@ -316,6 +328,19 @@
 				redirect('configuration/category');
 			}
 		}
+		/*Check*/
+		//ajax to check category uniqueness in database
+		public function check_category_code($type_code,$category_code){
+			if ($category_code != '') {
+				if ($this->configuration_model->check_category_code($type_code,$category_code)) {
+					echo 'taken';
+				}
+				else{
+					echo 'available';
+				}
+			}
+		}
+
 		/*End Category*/
 		/*MODEL STARTS*/
 		public function model(){

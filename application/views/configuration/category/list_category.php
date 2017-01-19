@@ -17,9 +17,9 @@
 				<div class="row-fluid">
 					<label class="control-label">Tipe Produk</label>
 					<div class="controls">
-		                <select class="span12" name="category_type">
+		                <select class="span12" name="category_type" id="category_type">
 		                	<?php foreach ($types as $type): ?>
-		                		<option value="<?php echo $type->id ?>"><?php echo $type->name?></option>
+		                		<option value="<?php echo $type->code ?>"><?php echo $type->name?></option>
 		                	<?php endforeach ?>
 		                </select>
 					</div>
@@ -30,7 +30,7 @@
 					<div class="span6">
 						<label class="control-label">Kode Kategori</label>
 							<div class="controls">
-				                <input type="text" placeholder="Masukkan kode untuk kategori (1 Huruf/Angka)" name="category_code" class="span12">
+				                <input type="text" placeholder="Masukkan kode untuk kategori (1 Huruf/Angka)" name="category_code" class="span12" onblur="check_category_code(this)">
 							</div>
 					</div>
 					
@@ -77,7 +77,7 @@
 							<?php if($categories!=NULL): ?>
 								<?php $i=1; ?>
 								<?php foreach($categories as $category): ?>
-									<?php if($category->type_id==$type->id):?>
+									<?php if($category->type_code==$type->code):?>
 									<tbody>
 									<tr>
 										<td><?php echo $i ?></td>
@@ -91,14 +91,6 @@
 									<?php endif;?>
 								<?php endforeach; ?>
 							<?php else: ?>
-								<thead>
-									<tr>
-										<th data-type="numeric">No</th>
-										<th data-type="numeric">Kode Kategori</th>
-										<th data-type="numeric">Kategori</th>
-										<th data-hide="phone">Action</th>
-									</tr>
-								</thead>
 								<tbody>
 									<tr>
 										<td colspan="5"><h3  class="text-center">Table kosong</h3></td>
@@ -107,14 +99,7 @@
 							<?php endif; ?>
 						<?php endforeach;?>
 					<?php else: ?>
-						<thead>
-							<tr>
-								<th data-type="numeric">No</th>
-								<th data-type="numeric">Kode Kategori</th>
-								<th data-type="numeric">Kategori</th>
-								<th data-hide="phone">Action</th>
-							</tr>
-						</thead>
+						
 						<tbody>
 							<tr>
 								<td colspan="4"><h3  class="text-center">Table kosong</h3></td>
@@ -167,7 +152,7 @@
     	}
     	
     });
-    
+    //CALL DELETE MODAL
 	function delete_category(id,name){
 		alertify.confirm("Apakah anda yakin ingin menghapus kategori "+name+" ?",
 		  function(){
@@ -179,4 +164,37 @@
 		    });
 		  });
 	}
+	//AJAX
+	function check_category_code(el){
+        if($(el).val() != ''){
+            $.ajax({
+              url: "<?php echo base_url('configuration/check_category_code/')?>" + $('#category_type').val()+"/"+$(el).val(),
+              type: 'GET',
+              cache : false,
+              success: function(result){
+                if(result == 'taken'){
+                    $.gritter.add({
+                        title: 'Error !',
+                        text: 'Kode kategori sudah terpakai',
+                        time: 1500
+                    });
+                    $(el).val('');
+                    $(el).parent().addClass('error');
+                    setTimeout(function(){$(el).parent().removeClass('error')},3000);
+                }else{
+                    $.gritter.add({
+                        class_name:'gritter-light',
+                        title: 'Available !',
+                        text: 'Kode kategori '+$(el).val()+' bisa dipakai',
+                        time: 1500
+                    });
+                    $(el).parent().addClass('success');
+                }
+               
+                
+              }
+            
+            });    
+        }
+    }
 </script>
