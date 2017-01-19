@@ -1,4 +1,3 @@
-<link rel="stylesheet" src="<?php echo base_url() ?>css/select2.css">
 <div class="container-fluid">
 	
 	<div class="row-fluid">
@@ -206,13 +205,12 @@
 </div>
 
 <script src="<?php echo base_url() ?>js/webcam.min.js"></script>
-<script src="<?php echo base_url() ?>js/select2.min.js"></script>
 
 <script>
 	//SELECT2
-	$(document).ready(function(){
-		$('#product_barcode').select2();
-	});	
+	
+	
+	
 	//TURN ON THE WEB CAM TO TAKE PHOTO OF PRODUCT
     function show_cam(el){
         if($(el).is(":checked") ){
