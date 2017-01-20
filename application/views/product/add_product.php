@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/selectize.css')?>">
 <div class="container-fluid">
 	
 	<div class="row-fluid">
@@ -203,12 +204,13 @@
     </div>
     </div>
 </div>
-
+<script src="<?php echo base_url() ?>js/selectize.min.js"></script>
 <script src="<?php echo base_url() ?>js/webcam.min.js"></script>
 
 <script>
-	//SELECT2
-	
+	$(document).ready(function(){
+		$('#product_barcode').selectize();
+	});
 	
 	
 	//TURN ON THE WEB CAM TO TAKE PHOTO OF PRODUCT
@@ -295,8 +297,10 @@
 
      //AJAX FUNCTION TO GENERATE BARCODE
      function generate_barcode(el){
+     	var count = 1;
      	$('#product_code').val('');
      	$('#product_code').val($("input[name='model_code[0]']").val()+$("input[name='model_code[1]']").val()+$("input[name='model_code[2]']").val()+'00001' );
+
      }
 
      //AJAX FUNCTION TO GET TRAY FROM RELATED OUTLET
