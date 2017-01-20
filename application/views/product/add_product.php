@@ -35,6 +35,10 @@
 							<div class="controls">
 								<select name="product_barcode" id="product_barcode">
 									<option>Value</option>
+									<option>Valueas</option>
+									<option>Valueasd</option>
+									<option>Valueasdd</option>
+									<option>Valueasddd</option>
 								</select>
 							</div>
 						</div>
