@@ -254,7 +254,6 @@
 				$data= array(
 						'name'	=> $this->input->post('category_name'),
 						'code' => ucfirst($this->input->post('category_code')),
-						'type_code'=> $this->input->post('category_type')
 				);
 	            $this->crud_model->insert_data('category',$data);
 	            $this->session->set_flashdata('category',"$.gritter.add({
@@ -267,7 +266,6 @@
 			}else{
 				$data['title'] = 'Daftar Kategori';
 				$data['is_mobile'] = $this->is_mobile;
-				$data['types']=$this->crud_model->get_data('type')->result();
 				$data['categories'] = $this->crud_model->get_data('category')->result();
 				$this->template->load($this->default,'configuration/category/list_category',$data);
 			}
@@ -278,7 +276,6 @@
 				$data=array(
 					'code'=>$this->input->post('category_code'),
 					'name'=>$this->input->post('category_name'),
-					'type_id'=>$this->input->post('category_type')
 				);
 				if($this->crud_model->update_data('category',$data,array('id'=>$id))){
 					$this->session->set_flashdata('category',"$.gritter.add({
@@ -330,9 +327,9 @@
 		}
 		/*Check*/
 		//ajax to check category uniqueness in database
-		public function check_category_code($type_code,$category_code){
+		public function check_category_code($category_code){
 			if ($category_code != '') {
-				if ($this->configuration_model->check_category_code($type_code,$category_code)) {
+				if ($this->configuration_model->check_category_code($category_code)) {
 					echo 'taken';
 				}
 				else{

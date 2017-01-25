@@ -33,8 +33,8 @@
 			}
 		}
 		//ajax to check category uniqueness in each type in database
-		function check_category_code($type_code,$category_code){
-			if($this->db->get_where('category',array('type_code'=>$type_code,'code'=>$category_code))->num_rows()>0 ){
+		function check_category_code($category_code){
+			if($this->db->get_where('category',array('code'=>$category_code))->num_rows()>0 ){
 				return true;
 			}else{
 				return false;

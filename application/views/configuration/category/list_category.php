@@ -15,18 +15,6 @@
 	<div class="widget-content">
 			<div class="control-group top-control">
 				<div class="row-fluid">
-					<label class="control-label">Tipe Produk</label>
-					<div class="controls">
-		                <select class="span12" name="category_type" id="category_type">
-		                	<?php foreach ($types as $type): ?>
-		                		<option value="<?php echo $type->code ?>"><?php echo $type->name?></option>
-		                	<?php endforeach ?>
-		                </select>
-					</div>
-				</div>
-			</div>
-			<div class="control-group top-control">
-				<div class="row-fluid">
 					<div class="span6">
 						<label class="control-label">Kode Kategori</label>
 							<div class="controls">
@@ -58,54 +46,35 @@
             </div>
 			<div class="table-responsive toggle-circle-filled">
 			<table class="table table-bordered" id="table_category" data-paging="true" data-page-size="100" data-filter="#filter">
-				
-				
-					<?php if($types!=NULL):?>
-						<?php foreach($types as $type):?>
 						<thead>
-							<tr>
-								<th colspan="5" style="text-align: left;background-color: #2e363f !important;border-color:#2e363f !important; color: #fff;"><h5>Tipe Barang : <?php echo $type->name?></h5></th>
-							</tr>
 							<tr>
 								<th data-type="numeric">No</th>
 								<th data-type="numeric">Kode Kategori</th>
 								<th data-type="numeric">Kategori</th>
-								<th data-hide="phone">Tipe</th>
 								<th data-hide="phone">Action</th>
 							</tr>
 						</thead>
 							<?php if($categories!=NULL): ?>
 								<?php $i=1; ?>
 								<?php foreach($categories as $category): ?>
-									<?php if($category->type_code==$type->code):?>
 									<tbody>
 									<tr>
 										<td><?php echo $i ?></td>
 										<td><?php echo $category->code ?></td>
 										<td><?php echo $category->name ?></td>
-										<td><?php echo $type->name ?></td>
 										<td><a href="<?php echo base_url('configuration/edit_category/'.$category->id) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_category('<?php echo $category->id ?>','<?php echo $category->name ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
 									</tr>
 									</tbody>
 									<?php $i++; ?>
-									<?php endif;?>
 								<?php endforeach; ?>
 							<?php else: ?>
+								
 								<tbody>
 									<tr>
-										<td colspan="5"><h3  class="text-center">Table kosong</h3></td>
+										<td colspan="4"><h3  class="text-center">Table kosong</h3></td>
 									</tr>
 								</tbody>
-							<?php endif; ?>
-						<?php endforeach;?>
-					<?php else: ?>
-						
-						<tbody>
-							<tr>
-								<td colspan="4"><h3  class="text-center">Table kosong</h3></td>
-							</tr>
-						</tbody>
-					<?php endif;?>	
+							<?php endif;?>	
 				<tfoot>
 					<tr>
 						<td colspan="5">
@@ -168,7 +137,7 @@
 	function check_category_code(el){
         if($(el).val() != ''){
             $.ajax({
-              url: "<?php echo base_url('configuration/check_category_code/')?>" + $('#category_type').val()+"/"+$(el).val(),
+              url: "<?php echo base_url('configuration/check_category_code/')?>" + $(el).val(),
               type: 'GET',
               cache : false,
               success: function(result){

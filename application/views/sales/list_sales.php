@@ -21,11 +21,11 @@
 							<tr>
 								<th data-type="numeric">No.</th>
 								<th>Nama</th>
-								<th data-hide="phone" data-toggle>Telephone</th>
-								<th data-hide="phone">Email</th>
-								<th data-hide="phone">Alamat</th>
-								<th data-hide="phone">Outlet</th>
-								<th data-hide="phone">Action</th>
+								<th data-hide="phone" data-toggle="phone">Telephone</th>
+								<th data-hide="phone" data-toggle="phone">Email</th>
+								<th data-hide="phone" data-toggle="phone">Alamat</th>
+								<th data-hide="phone" data-toggle="phone">Outlet</th>
+								<th data-hide="phone" data-toggle="phone">Action</th>
 							</tr>
 						</thead>
 						<tbody>

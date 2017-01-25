@@ -9,6 +9,7 @@
 		public function index(){
 			$data['title'] = 'Product';
 			$data['is_mobile'] = $this->is_mobile;
+			$data['products'] = $this->crud_model->get_data('products')->result();
 			$this->template->load($this->default,'product/list_product',$data);
 		}
 
@@ -99,19 +100,27 @@
 
 	            		'name'			=> $this->input->post('product_name'),
 	            		// 'product_code'	=> $this->input->post('product_code'),
-	            		'type'			=> $this->input->post('product_type'),
+	            		'product_type'			=> $this->input->post('product_type'),
 	            		// 'category'		=> $this->input->post('product_category'),
 	            		// 'real_weight'	=> $this->input->post('product_real_weight'),
 	            		// 'rounded_weight'=> $this->input->post('product_rounded_weight'),
-	            		// 'selling_price'	=> $this->input->post('product_selling_price'),
-	            		// 'gold_amount'	=> $this->input->post('gold_amount'),
-	            		// 'tray_id'		=> $this->input->post('product_tray'),
-	            		// 'photo'			=> $photo,
-	            		// 'outlet_id'		=> $this->session_outlet,
+	            		'purchase_price'	=> $this->input->post('product_purchase_price'),
+	            		'sell_price'	=> $this->input->post('product_selling_price'),
+	            		'gold_amount'	=> $this->input->post('product_gold_amount'),
+	            		'weight' => $this->input->post('product_weight'),
+	            		'photo'			=> $photo,
+	            		'outlet_id'		=> $this->input->post('product_outlet'),
+	            		'tray_code'		=> $this->input->post('product_tray'),
+	            		'barcode_code'	=> $this->input->post('product_barcode_code'),
+	            		'product_code' 	=> $this->input->post('product_code')
 
 	            	);
+	            $data_code = array(
+	            		'code' => $this->input->post('product_barcode'),
+	            		'count'=> $this->input->post('product_count')
 
-	            $this->db->update('code',array('count' => $this->input->post('count')+1),array('code' => $this->input->post('code')));
+	            	);
+	            // $this->db->update('code',array('count' => $this->input->post('count')+1),array('code' => $this->input->post('code')));
 
 	            // if($this->input->post('product_type') == 'Berlian'){
 	            // 	for($i = 0; $i < count($this->input->post('stone_type')); $i++){
@@ -150,6 +159,7 @@
 				// $data['stone_type'] = $this->db->get('diamond_type')->result();
 				$data['is_mobile'] = $this->is_mobile;
 				$data['types']= $this->crud_model->get_data('type')->result();
+				$data['categories']=$this->crud_model->get_data('category')->result();
 				$data['trays'] = $this->db->get_where('tray', array('outlet_id' => $this->session_outlet))->result();
 				$data['diamond_types'] = $this->crud_model->get_data('diamond_type')->result();
 				$data['models'] = $this->crud_model->get_data('model')->result();

@@ -2,12 +2,12 @@
 <div class="container-fluid">
 	
 	<div class="row-fluid">
-		<a href=""><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar barang</a></small>
+		<a href="<?php echo base_url('product') ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar barang</a></small>
 		<h2>Tambah barang baru</h2>
 	</div>
 	<div class="widget-box">
 	<div class="widget-content">
-		<form class="form-horizontal">
+		<?php echo form_open_multipart('product/add_product',array('class'=>'form-horizontal','id'=>'productform')) ?>    
 			<div class="row-fluid">
 					<div class="control-group top-control">
 						<div class="span6">
@@ -29,7 +29,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="control-group">
+					<div class="control-group" id="product_barcode_row">
 						<div class="span6">
 							<label class="control-label">Kode Barcode</label>
 							<div class="controls">
@@ -40,11 +40,12 @@
 						</div>
 						
 					</div>
+					<!--NEW BARCODE FIELDS-->
 					<div class="control-group new-barcode" style="display: none;">
 						<div class="span6">
 							<label class="control-label">Tipe</label>
 							<div class="controls">
-								<select name="product_type" id="product_type" onchange="get_category(this)">
+								<select name="product_type" id="product_type" onchange="fill_type(this)">
 									<option value="x">--Pilih Tipe--</option>
 									<?php foreach ($types as $type): ?>
 										<option value="<?php echo $type->code?>"><?php echo $type->code?> - <?php echo $type->name?></option>	
@@ -56,7 +57,10 @@
 							<label for="" class="control-label">Kategori Barang</label>
 							<div class="controls">
 								<select name="product_category" id="category" onchange="fill_category(this)">
-									<option value="">--Pilih tipe terlebih dahulu--</option>
+									<option value="x">--Pilih Kategori--</option>
+									<?php foreach ($categories as $category): ?>
+										<option value="<?php echo $category->code?>"><?php echo $category->code?> - <?php echo $category->name?></option>	
+									<?php endforeach ?>
 								</select>
 							</div>	
 						</div>	
@@ -86,6 +90,11 @@
 							<a class="btn btn-info bg_ls span9" style="margin-top: 10px;" onclick="generate_barcode(this)">Generate Kode Produk</a>
 						</div>
 					</div>
+					<!--END FIELDS-->
+					<!--INPUT TYPE HIDDEN TO COUNT FOR JEWELLERY IN EACH BARCODE-->
+					<input type="hidden" name="product_barcode_code" id="product_barcode_code">
+					<input type="hidden" name="product_count" id="product_count">
+					<!--END INPUT-->
 					<div class="control-group">
 						<div class="span12">
 							<label for="" class="control-label">Kode Produk</label>
@@ -99,8 +108,8 @@
 						<div class="span6">
 							<label for="" class="control-label">Outlets</label>
 							<div class="controls">
-								<select name="product_outlet" id="product_outlet" onchange="get_tray(this)">
-									<option value="">--Pilih Outlet--</option>	
+								<select name="product_outlet" id="product_outlet" onchange="get_tray(this)" class="span12">
+									<option value="0">--Pilih Outlet--</option>	
 									<?php foreach ($outlets as $outlet): ?>
 										<option value="<?php echo $outlet->id?>"><?php echo $outlet->name?></option>	
 									<?php endforeach ?>
@@ -111,8 +120,8 @@
 						<div class="span6">
 							<label for="" class="control-label">Tray</label>
 							<div class="controls">
-								<select name="product_tray" id="product_tray">
-									<option value="">--Pilih Nampan--</option>
+								<select name="product_tray" id="product_tray" class="span12">
+									<option value="0">--Pilih Nampan--</option>
 									<?php foreach ($trays as $tray): ?>
 										<option value="<?php echo $tray->id?>"><?php echo $tray->code?></option>	
 									<?php endforeach ?>
@@ -127,13 +136,13 @@
 						<div class="span6">
 							<label for="" class="control-label">Harga Beli</label>
 							<div class="controls">
-								<input type="number" placeholder="Harga Beli" name="product_purchase_price">
+								<input type="number" placeholder="Harga Beli" name="product_purchase_price" class="span12">
 							</div>	
 						</div>
 						<div class="span6">
-							<label for="" class="control-label">Harga Jual</label>
+							<label for="" class="control-label" class="span12">Harga Jual</label>
 							<div class="controls">
-								<input type="number" placeholder="Harga Jual" name="product_selling_price" id="product_selling_price">
+								<input type="number" placeholder="Harga Jual" name="product_selling_price" id="product_selling_price" class="span12">
 							</div>	
 						</div>	
 					</div>
@@ -142,13 +151,13 @@
 						<div class="span6">
 							<label for="" class="control-label">Kadar</label>
 							<div class="controls">
-								<input type="number" placeholder="Kadar emas" name="product_amount">
+								<input type="number" placeholder="Kadar emas" name="product_gold_amount" class="span12">
 							</div>	
 						</div>
 						<div class="span6">
 							<label for="" class="control-label">Berat</label>
 							<div class="controls">
-								<input type="number" placeholder="Berat Perhiasan" name="product_weight">
+								<input type="number" placeholder="Berat Perhiasan" name="product_weight" class="span12">
 							</div>	
 						</div>
 					</div>
@@ -200,7 +209,7 @@
 		        </div>
 		        </div>
 		   	</div>
-        </form>
+        <?php echo form_close() ?>
     </div>
     </div>
 </div>
@@ -213,10 +222,12 @@
 		//function to show all new barcoode fields
 		$('#new_barcode').change(function(){
 			if(this.checked){
+				$('#product_barcode_row').hide();
 				$('.new-barcode').show();
 				$('#product_barcode')[0].selectize.disable();
 			}
 			else{
+				$('#product_barcode_row').show();
 				$('.new-barcode').hide();
 				$('#product_barcode')[0].selectize.enable();
 			}
@@ -243,13 +254,10 @@
      		$('#product_tray').attr("disabled","disabled");
      		$('#product_outlet').val('');
      		$('#product_outlet').attr("disabled","disabled");
-     		$('#product_selling_price').val('');
-     		$('#product_selling_price').attr("disabled","disabled");
      	}
      	else{
      		$('#product_tray').removeAttr("disabled");
      		$('#product_outlet').removeAttr("disabled");
-     		$('#product_selling_price').removeAttr("disabled");
      	}
      }
 
@@ -259,42 +267,24 @@
      }
 
 
-     //AJAX FUNCTIONS PRIOR TO GENERATING BARCODE
-     function get_category(el){
+     //AJAX FUNCTIONS PRIOR TO GENERATING BARCODE, FILLING THE TEXT FIELDS AND FETCHING THE DATA WITH AJAX
+     function fill_type(el){
      	if($(el).val()=='x'){
-			$('#category').empty();
-            $('#category').append("<option value=''>--Pilih Tipe Terlebih Dahulu--</option>");
             $("input[name='model_code[0]']").val('');
-            $("input[name='model_code[1]']").val('');
 		}     	
 		else if($(el).val()!=''){
-			$.ajax({
-              url: "<?php echo base_url('configuration/get_category_data/')?>" + $(el).val(),
-              type: 'GET',
-              cache : false,
-              success: function(result){
-              	if (result != 'Belum ada kategori') {
-              		$('#category').empty();
-              		$('#category').append(result);
-              		$("input[name='model_code[1]']").val($('#category').val());
-
-              	}
-              	else{
-              		$('#category').empty();
-              		$('#category').append("<option value=''>--Tidak ada kategori--</option>");	
-              		$("input[name='model_code[1]']").val('');
-              	}
-              	$("input[name='model_code[0]']").val($(el).val());
-              }
-			});
+            $("input[name='model_code[0]']").val($(el).val());
 		}
 		
      }
 
      function fill_category(el){
-     	if($(el).val()!=''){
-     		$("input[name='model_code[1]']").val($(el).val());
-     	}
+     	if($(el).val()=='x'){
+            $("input[name='model_code[1]']").val('');
+		}     	
+		else if($(el).val()!=''){
+            $("input[name='model_code[1]']").val($(el).val());
+		}
      }
 
      function fill_model(el){
@@ -309,8 +299,20 @@
      //AJAX FUNCTION TO GENERATE BARCODE
      function generate_barcode(el){
      	var count = 1;
-     	$('#product_code').val('');
-     	$('#product_code').val($("input[name='model_code[0]']").val()+$("input[name='model_code[1]']").val()+$("input[name='model_code[2]']").val()+'00001' );
+     	$('#product_code').val(); //empty the product code first
+     	$('#product_barcode_code').val($("input[name='model_code[0]']").val()+$("input[name='model_code[1]']").val()+$("input[name='model_code[2]']").val());
+     	$('#product_count').val('1');
+     	if($("input[name='model_code[0]']").val()!=''){
+     		$('#product_code').val($("#product_barcode_code").val()+'0000'+ $('#product_count').val());	
+     	}
+     	else{
+     		$.gritter.add({
+     			title: 'Gagal',
+     			text: 'Belum ada kode barcode',
+     			time: 1500
+     		});
+     	}
+     	
 
      }
 
@@ -330,7 +332,7 @@
 
 				else{
 		      		$('#product_tray').empty();
-		      		$('#product_tray').append("<option value=''>--Tidak ada nampan--</option>");	
+		      		$('#product_tray').append("<option value='0'>--Tidak ada nampan--</option>");	
 		      	}
               }
 			});
