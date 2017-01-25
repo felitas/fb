@@ -27,9 +27,10 @@
 				);
 	            $this->crud_model->insert_data('tray',$data);
 	            $this->session->set_flashdata('tray',"$.Notify({
+	            	class_name:'gritter-light',
 				    caption: 'Berhasil',
-				    content: 'Baki telah ditambahkan',
-				    type: 'success'
+				    content: 'Nampan telah ditambahkan',
+				    time: 1200
 				});");
 				redirect('tray');
 			}else{
@@ -40,19 +41,44 @@
 		public function delete_tray($id){
 			if($this->crud_model->delete_data('tray',array('id'=>$id))){
 				$this->session->set_flashdata('tray',"$.gritter.add({
+					class_name:'gritter-light',
 					title: 'Berhasil',
-					text : 'Baki telah dihapus',
-					sticky: false
+					text : 'Nampan telah dihapus',
+					time: 1200
 				});");
 				
 			}else{
 				$this->session->set_flashdata('tray',"$.gritter.add({
+					
 					title: 'Gagal',
-					text : 'Baki gagal dihapus',
-					sticky: false
+					text : 'Nampan gagal dihapus',
+					time: 1200
 				});");
 			}
 			redirect('tray');
+		}
+
+		public function edit_tray($id){
+			if($this->input->post('submit')){
+				$data= array(
+						'code' => $this->input->post('new_tray'),
+						'description'=>$this->input->post('tray_desc'),
+						'outlet_id'=> $this->session_outlet
+				);
+	            $this->crud_model->update_data('tray',$data,array('id'=>$id));
+	            $this->session->set_flashdata('tray',"$.gritter.add({
+	            	class_name:'gritter-light',
+				    title:'Berhasil',
+				    text: 'Nampan telah di edit',
+				    time: 1200
+				});");
+				redirect('tray');
+			}else{
+				$data['title'] = 'Edit Baki';
+				$data['is_mobile'] = $this->is_mobile;
+				$data['tray']=$this->crud_model->get_by_condition('tray',array('id'=>$id))->row();
+				$this->template->load($this->default,'tray/edit_tray',$data);
+			}
 		}
 		
 	}

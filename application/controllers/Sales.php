@@ -215,7 +215,6 @@
 				 	});");	
 	            }else{
 	            	$this->session->set_flashdata('sales',"$.gritter.add({
-						class_name : 'gritter-light',
 				 		title:	'Gagal!',
 				 		text:	'Sales gagal diubah',
 				 		time: 2000
@@ -248,7 +247,6 @@
 				 	});");
 				}else{
 					$this->session->set_flashdata('sales',"$.gritter.add({
-						class_name : 'gritter-light',
 				 		title:	'Gagal!',
 				 		text:	'Sales gagal dihapus!',
 				 		time: 2000
@@ -256,7 +254,6 @@
 				}
 			}else{
 				$this->session->set_flashdata('sales',"$.gritter.add({
-						class_name : 'gritter-light',
 				 		title:	'Gagal!',
 				 		text:	'Sales tidak ditemukan',
 				 		time: 2000

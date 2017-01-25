@@ -4,7 +4,7 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
-        <a id="add_link" style="cursor: pointer;" class="pull-right">Tambah baki baru <span class="fa fa-plus-circle"></span></a>
+        <a id="add_link" style="cursor: pointer;" class="pull-right">Tambah nampan baru <span class="fa fa-plus-circle"></span></a>
         <h2>Daftar Nampan</h2>
 	</div>
 	<!--Form Add Tray-->

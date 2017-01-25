@@ -25,7 +25,7 @@
 						<div class="span3">
 							<label class="control-label">Kode Barcode Baru</label>
 							<div class="controls">
-								<input type="checkbox" name="">
+								<input type="checkbox" name="" id="new_barcode">
 							</div>
 						</div>
 					</div>
@@ -34,17 +34,13 @@
 							<label class="control-label">Kode Barcode</label>
 							<div class="controls">
 								<select name="product_barcode" id="product_barcode">
-									<option>Value</option>
-									<option>Valueas</option>
-									<option>Valueasd</option>
-									<option>Valueasdd</option>
-									<option>Valueasddd</option>
+									<option>--Pilih Kode Barcode--</option>
 								</select>
 							</div>
 						</div>
 						
 					</div>
-					<div class="control-group">
+					<div class="control-group new-barcode" style="display: none;">
 						<div class="span6">
 							<label class="control-label">Tipe</label>
 							<div class="controls">
@@ -66,7 +62,7 @@
 						</div>	
 					</div>
 
-					<div class="control-group">
+					<div class="control-group new-barcode" style="display: none;">
 						<div class="span4">
 							<label for="" class="control-label">Nama Koleksi</label>
 							<div class="controls">
@@ -164,7 +160,7 @@
 							</div>	
 						</div>
 						
-					<div class="control-group top-control">
+					<div class="control-group">
 						<div class="span12" id="specifications">
 						<!--Later appended-->
 						</div>
@@ -214,6 +210,17 @@
 <script>
 	$(document).ready(function(){
 		$('#product_barcode').selectize();
+		//function to show all new barcoode fields
+		$('#new_barcode').change(function(){
+			if(this.checked){
+				$('.new-barcode').show();
+				$('#product_barcode')[0].selectize.disable();
+			}
+			else{
+				$('.new-barcode').hide();
+				$('#product_barcode')[0].selectize.enable();
+			}
+		})
 	});
 	
 	
