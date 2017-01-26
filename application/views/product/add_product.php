@@ -11,16 +11,15 @@
 			<div class="row-fluid">
 					<div class="control-group top-control">
 						<div class="span6">
-							<label for="" class="control-label">Nama Barang</label>
+							<label class="control-label">Kode Barcode</label>
 							<div class="controls">
-								<input type="text" placeholder="Nama Barang" name="product_name" class="span12">
-							</div>	
-						</div>
-						<div class="span3">
-							<label class="control-label">Masuk Brankas</label>
-							<div class="controls">
-				                <input type="checkbox" onchange="warehouse(this)" name="product_warehouse">
-				            </div>
+								<select name="product_barcode" id="product_barcode" onchange="get_barcode(this)">
+									<option>--Pilih Kode Barcode--</option>
+									<?php foreach ($codes as $code): ?>
+										<option value="<?php echo $code->code?>"><?php echo $code->code?></option>
+									<?php endforeach ?>
+								</select>
+							</div>
 						</div>
 						<div class="span3">
 							<label class="control-label">Kode Barcode Baru</label>
@@ -28,24 +27,27 @@
 								<input type="checkbox" name="" id="new_barcode">
 							</div>
 						</div>
+						<div class="span3">
+							<label class="control-label">Masuk Brankas</label>
+							<div class="controls">
+				                <input type="checkbox" onchange="warehouse(this)" name="product_warehouse">
+				            </div>
+						</div>
 					</div>
 					<div class="control-group" id="product_barcode_row">
-						<div class="span6">
-							<label class="control-label">Kode Barcode</label>
+						<div class="span12">
+							<label for="" class="control-label">Nama Barang</label>
 							<div class="controls">
-								<select name="product_barcode" id="product_barcode">
-									<option>--Pilih Kode Barcode--</option>
-								</select>
-							</div>
+								<input type="text" placeholder="Nama Barang" name="product_name" class="span11">
+							</div>	
 						</div>
-						
 					</div>
 					<!--NEW BARCODE FIELDS-->
 					<div class="control-group new-barcode" style="display: none;">
 						<div class="span6">
 							<label class="control-label">Tipe</label>
 							<div class="controls">
-								<select name="product_type" id="product_type" onchange="fill_type(this); specification(this)">
+								<select name="product_type" id="product_type" onchange="fill_type(this)">
 									<option value="x">--Pilih Tipe--</option>
 									<?php foreach ($types as $type): ?>
 										<option value="<?php echo $type->code?>"><?php echo $type->code?> - <?php echo $type->name?></option>	
@@ -165,7 +167,7 @@
 					
 					
 						
-     				<div class="control-group" id="spec" style="display: none">
+     				<div class="control-group" id="spec">
 							<label for="" class="control-label"><b>Spesifikasi</b></label>
 							<div class="controls">
 								<a class="btn btn-info bg_ls" onclick="add_spec()">Tambah Spesifikasi</a>
@@ -266,18 +268,10 @@
      	}
      }
 
-     function specification(el){
-     	if($(el).val() == 'B'){
-     		$('#spec').show();
-     	}
-     	else{
-     		$('#spec').hide();
-     	}
-     }
 
      //ADDING SPECIFICATIONS OF JEWELLERY
      function add_spec(){
-     	$('#specifications').append("<div class='controls'><select name='diamond_type[]'><option>--Jenis Diamond--</option><?php foreach ($diamond_types as $diamond_type): ?><option value='<?php echo $diamond_type->code?>''><?php echo $diamond_type->name?></option><?php endforeach ?></select><input type='number' placeholder='Jumlah Diamond' name='stone_amount[]'><input type='number' placeholder='Jumlah Karat' name='stone_weight[]'></div>")
+     	$('#specifications').append("<div class='controls'><select name='stone_type[]'><option>--Jenis Diamond--</option><?php foreach ($diamond_types as $diamond_type): ?><option value='<?php echo $diamond_type->code?>'><?php echo $diamond_type->name?></option><?php endforeach ?></select><input type='number' placeholder='Jumlah Diamond' name='stone_amount[]'><input type='number' placeholder='Jumlah Karat' name='stone_ct[]'></div>");
      }
 
 
@@ -309,7 +303,20 @@
      		$("input[name='model_code[2]']").val("");	
      	}	
      }
-
+     //AJAX FUNCTION TO TAKE COUNT VALUE FROM SELECT OPTION
+     function get_barcode(el){
+     	$('#product_code').val();
+     	$.ajax({
+     		url: "<?php echo base_url('product/get_code_count/')?>" + $(el).val(),
+            type: 'GET',
+            cache : false,
+            success: function(result){ 
+            	count = +result + +1;
+              	$('#product_count').val(count);
+              	$('#product_code').val($(el).val()+'0000'+ $('#product_count').val());	
+            }
+     	});
+     }
      //AJAX FUNCTION TO GENERATE BARCODE
      function generate_barcode(el){
      	var count = 1;

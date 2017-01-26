@@ -115,26 +115,26 @@
 	            		'product_code' 			=> $this->input->post('product_code')
 
 	            	);
-	            $data_code = array(
-	            		'code' => $this->input->post('product_barcode_code'),
-	            		'count'=> $this->input->post('product_count')
+	            // $data_code = array(
+	            // 		'code' => $this->input->post('product_barcode_code'),
+	            // 		'count'=> $this->input->post('product_count')
 
-	            	);
-	            // $this->db->update('code',array('count' => $this->input->post('count')+1),array('code' => $this->input->post('code')));
+	            // 	);
+	            //$this->db->update('code',array('count' => $this->input->post('count')+1),array('code' => $this->input->post('code')));
 
-	            // if($this->input->post('product_type') == 'Berlian'){
-	            // 	for($i = 0; $i < count($this->input->post('stone_type')); $i++){
-	            // 		$data_spec = array(
-	            // 			'product_code' => $this->input->post('product_code'),
-	            // 			'stone_type' => $this->input->post('stone_type')[$i],
-	            // 			'stone_amount' => $this->input->post('stone_amount')[$i],
-	            // 			'stone_ct' => $this->input->post('stone_ct')[$i]
+	            if($this->input->post('product_type') == 'B'){
+	            	for($i = 0; $i < count($this->input->post('stone_type')); $i++){
+	            		$data_spec = array(
+	            			'product_code' => $this->input->post('product_code'),
+	            			'stone_type' => $this->input->post('stone_type')[$i],
+	            			'stone_amount' => $this->input->post('stone_amount')[$i],
+	            			'stone_ct' => $this->input->post('stone_ct')[$i]
 
-	            // 		);
+	            		);
 
-	            // 		$this->db->insert('specification',$data_spec);
-	            // 	}
-	            // }
+	            		$this->db->insert('specification',$data_spec);
+	            	}
+	            }
 	          	$code_count = array(
 	          			'code' => $this->input->post('product_barcode_code'),
 	          			'count'=> 1
@@ -174,6 +174,7 @@
 				$data['models'] = $this->crud_model->get_data('model')->result();
 				$data['outlets']=$this->crud_model->get_data('outlets')->result();
 				$data['role']=$this->session_role;
+				$data['codes'] = $this->crud_model->get_data('code')->result();
 				// $data['gold_amount'] = $this->db->get('gold_amount')->result();
 				$this->template->load($this->default,'product/add_product',$data);
 			}
@@ -217,6 +218,25 @@
 		/* end of ajax */
 
 		
+		/*DELETE PRODUCT AJAX*/
+		public function delete_product($id=''){
+			if($this->crud_model->delete_data('products',array('id'=>$id))){
+				$this->session->set_flashdata('product',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Produk berhasil dihapus!',
+				 		time: 1500
+				});");
+			}
+			else{
+				$this->session->set_flashdata('product',"$.gritter.add({
+				 		title:	'Gagal',
+				 		text:	'Produk gagal dihapus!',
+				 		time: 1500
+				});");	
+			}
+			redirect('product');
+		}
 
 		/*Ajax to get tray data*/
 		public function get_tray_data($outlet_id = ''){

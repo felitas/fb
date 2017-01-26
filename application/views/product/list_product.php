@@ -13,7 +13,7 @@
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="control-group">
-			        <input type="text" placeholder="Cari Sales" id="filter" >
+			        <input type="text" placeholder="Cari Produk" id="filter" class="span12">
 			    </div>
 				<div class="table-responsive toggle-circle-filled">
 					<table class="table table-bordered" id="table_product" data-filter="#filter" data-page-size="10">
@@ -76,7 +76,7 @@
 
 
 <script>
-	function delete_sales(id,name){
+	function delete_product(id,name){
 		alertify.confirm("Apakah anda yakin ingin menghapus produk "+name,
 		  function(){
 		    window.location.assign("<?php echo base_url() ?>product/delete_product/"+id);
