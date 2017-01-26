@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2017 at 04:05 AM
+-- Generation Time: Jan 26, 2017 at 03:06 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -57,19 +57,18 @@ INSERT INTO `accounts` (`id`, `name`, `username`, `password`, `role`, `address`,
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `code` char(1) NOT NULL,
-  `type_code` varchar(11) NOT NULL
+  `code` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `name`, `code`, `type_code`) VALUES
-(11, 'Anting', 'A', 'E'),
-(12, 'Cincin', 'C', 'B'),
-(13, 'Gelang', 'G', 'E'),
-(14, 'Emas Lokal', 'L', 'A');
+INSERT INTO `category` (`id`, `name`, `code`) VALUES
+(11, 'Anting', 'A'),
+(12, 'Cincin', 'C'),
+(13, 'Gelang', 'G'),
+(15, 'Kalung', 'K');
 
 -- --------------------------------------------------------
 
@@ -241,6 +240,36 @@ INSERT INTO `outlets` (`id`, `code`, `name`, `phone`, `address`, `store_manager`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `product_type` varchar(30) NOT NULL,
+  `barcode_code` varchar(30) NOT NULL,
+  `product_code` varchar(30) NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `purchase_price` double DEFAULT NULL,
+  `sell_price` double DEFAULT NULL,
+  `gold_amount` double NOT NULL,
+  `weight` double NOT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `outlet_id` int(11) DEFAULT NULL,
+  `tray_code` varchar(50) DEFAULT NULL,
+  `status` enum('available','booked','terjual','rusak') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `product_type`, `barcode_code`, `product_code`, `name`, `purchase_price`, `sell_price`, `gold_amount`, `weight`, `photo`, `outlet_id`, `tray_code`, `status`) VALUES
+(4, 'B', 'BK', 'BK00001', 'June', 9000000, 9200000, 8, 46, 'uploads/photo/product//BK00001.jpg', NULL, NULL, 'available'),
+(5, 'E', 'ECKR', 'ECKR00001', 'Cincin MK', 7800000, 7900000, 9, 67, '', 1, '1', 'available');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `specification`
 --
 
@@ -292,7 +321,8 @@ CREATE TABLE `tray` (
 --
 
 INSERT INTO `tray` (`id`, `code`, `outlet_id`, `description`) VALUES
-(1, 'TR001', 1, 'Isi koleksi Korea');
+(1, 'TR001', 1, 'Isi koleksi Korea'),
+(3, 'TR003', 0, 'Isi gelang kalung koleksi Dubai');
 
 -- --------------------------------------------------------
 
@@ -312,7 +342,6 @@ CREATE TABLE `type` (
 
 INSERT INTO `type` (`id`, `name`, `code`) VALUES
 (1, 'Emas', 'E'),
-(2, 'Emas Antam', 'A'),
 (3, 'Berlian', 'B');
 
 --
@@ -374,6 +403,12 @@ ALTER TABLE `outlets`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `suppliers`
 --
 ALTER TABLE `suppliers`
@@ -404,7 +439,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `code`
 --
@@ -441,6 +476,11 @@ ALTER TABLE `model`
 ALTER TABLE `outlets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
@@ -449,7 +489,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `tray`
 --
 ALTER TABLE `tray`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `type`
 --
