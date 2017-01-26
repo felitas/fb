@@ -98,25 +98,25 @@
 
 	            $data_product = array(
 
-	            		'name'			=> $this->input->post('product_name'),
+	            		'name'					=> $this->input->post('product_name'),
 	            		// 'product_code'	=> $this->input->post('product_code'),
 	            		'product_type'			=> $this->input->post('product_type'),
 	            		// 'category'		=> $this->input->post('product_category'),
 	            		// 'real_weight'	=> $this->input->post('product_real_weight'),
 	            		// 'rounded_weight'=> $this->input->post('product_rounded_weight'),
-	            		'purchase_price'	=> $this->input->post('product_purchase_price'),
-	            		'sell_price'	=> $this->input->post('product_selling_price'),
-	            		'gold_amount'	=> $this->input->post('product_gold_amount'),
-	            		'weight' => $this->input->post('product_weight'),
-	            		'photo'			=> $photo,
-	            		'outlet_id'		=> $this->input->post('product_outlet'),
-	            		'tray_code'		=> $this->input->post('product_tray'),
-	            		'barcode_code'	=> $this->input->post('product_barcode_code'),
-	            		'product_code' 	=> $this->input->post('product_code')
+	            		'purchase_price'		=> $this->input->post('product_purchase_price'),
+	            		'sell_price'			=> $this->input->post('product_selling_price'),
+	            		'gold_amount'			=> $this->input->post('product_gold_amount'),
+	            		'weight' 				=> $this->input->post('product_weight'),
+	            		'photo'					=> $photo,
+	            		'outlet_id'				=> $this->input->post('product_outlet'),
+	            		'tray_code'				=> $this->input->post('product_tray'),
+	            		'barcode_code'			=> $this->input->post('product_barcode_code'),
+	            		'product_code' 			=> $this->input->post('product_code')
 
 	            	);
 	            $data_code = array(
-	            		'code' => $this->input->post('product_barcode'),
+	            		'code' => $this->input->post('product_barcode_code'),
 	            		'count'=> $this->input->post('product_count')
 
 	            	);
@@ -135,8 +135,17 @@
 	            // 		$this->db->insert('specification',$data_spec);
 	            // 	}
 	            // }
-
+	          	$code_count = array(
+	          			'code' => $this->input->post('product_barcode_code'),
+	          			'count'=> 1
+	          		);
 	            if($this->crud_model->insert_data('products',$data_product)){
+	            	if($this->db->get_where('code',array('code'=>$this->input->post('product_barcode_code')))->num_rows()>0){
+	            		$count = $this->db->get_where('code',array('code'=>$this->input->post('product_barcode_code')))->row('count');
+	            		$this->db->update('code',array('count'=> $count+1),array('code'=>$this->input->post('product_barcode_code')));
+		            }else{
+		            	$this->crud_model->insert_data('code',$code_count);
+		            }
 	            	$this->session->set_flashdata('product',"$.gritter.add({
 	            		class_name : 'gritter-light',
 					    title: 'Berhasil',
@@ -222,6 +231,11 @@
 			}else{
 				echo 'Toko ini belum punya baki';
 			}
+		}
+
+		/*ajax to get code count*/
+		public function get_code_count($product_barcode_code = ''){
+			echo $this->db->get_where('code',array('code' => $product_barcode_code))->row('count');
 		}
 
 

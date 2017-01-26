@@ -301,17 +301,30 @@
      	var count = 1;
      	$('#product_code').val(); //empty the product code first
      	$('#product_barcode_code').val($("input[name='model_code[0]']").val()+$("input[name='model_code[1]']").val()+$("input[name='model_code[2]']").val());
-     	$('#product_count').val('1');
-     	if($("input[name='model_code[0]']").val()!=''){
-     		$('#product_code').val($("#product_barcode_code").val()+'0000'+ $('#product_count').val());	
-     	}
-     	else{
-     		$.gritter.add({
-     			title: 'Gagal',
-     			text: 'Belum ada kode barcode',
-     			time: 1500
-     		});
-     	}
+
+     	
+     	$.ajax({
+              url: "<?php echo base_url('product/get_code_count/')?>" + $('#product_barcode_code').val(),
+              type: 'GET',
+              cache : false,
+              success: function(result){
+              	count = +result + +1;
+
+              	$('#product_count').val(count);
+              	if($("input[name='model_code[0]']").val()!=''){
+		     		$('#product_code').val($("#product_barcode_code").val()+'0000'+ $('#product_count').val());	
+		     	}
+		     	else{
+		     		$.gritter.add({
+		     			title: 'Gagal',
+		     			text: 'Belum ada kode barcode',
+		     			time: 1500
+		     		});
+		     	}
+              }
+			});
+     	
+     	
      	
 
      }
