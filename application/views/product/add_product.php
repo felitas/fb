@@ -45,7 +45,7 @@
 						<div class="span6">
 							<label class="control-label">Tipe</label>
 							<div class="controls">
-								<select name="product_type" id="product_type" onchange="fill_type(this)">
+								<select name="product_type" id="product_type" onchange="fill_type(this); specification(this)">
 									<option value="x">--Pilih Tipe--</option>
 									<?php foreach ($types as $type): ?>
 										<option value="<?php echo $type->code?>"><?php echo $type->code?> - <?php echo $type->name?></option>	
@@ -162,18 +162,23 @@
 						</div>
 					</div>
 
-					<div class="control-group">
+					
+					
+						
+     				<div class="control-group" id="spec" style="display: none">
 							<label for="" class="control-label"><b>Spesifikasi</b></label>
 							<div class="controls">
 								<a class="btn btn-info bg_ls" onclick="add_spec()">Tambah Spesifikasi</a>
 							</div>	
-						</div>
-						
+					</div>	
 					<div class="control-group">
 						<div class="span12" id="specifications">
 						<!--Later appended-->
 						</div>
 					</div>
+				
+
+					
 				
 				<div class="control-group">
 						
@@ -258,6 +263,15 @@
      	else{
      		$('#product_tray').removeAttr("disabled");
      		$('#product_outlet').removeAttr("disabled");
+     	}
+     }
+
+     function specification(el){
+     	if($(el).val() == 'B'){
+     		$('#spec').show();
+     	}
+     	else{
+     		$('#spec').hide();
      	}
      }
 
