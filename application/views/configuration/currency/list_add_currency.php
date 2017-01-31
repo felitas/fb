@@ -88,7 +88,7 @@
         <div class="widget-content">     
             <div class="row-fluid">
                 <div class="control-group">
-                    <input type="text" placeholder="Cari..." id="filter" >
+                    <input type="text" placeholder="Cari..." id="filter" class="span12">
                 </div>
         
                 <div class="table-responsive toggle-circle-filled">

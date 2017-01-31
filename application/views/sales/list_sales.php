@@ -13,7 +13,7 @@
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="control-group">
-			        <input type="text" placeholder="Cari Sales" id="filter" >
+			        <input type="text" placeholder="Cari Sales" id="filter" class="span12">
 			    </div>
 				<div class="table-responsive toggle-circle-filled">
 					<table class="table table-bordered" id="table_sales" data-filter="#filter" data-page-size="10">
@@ -46,13 +46,13 @@
 							
 							<?php else:?>
 								<tr>
-									<td colspan="7" class="text-center"><h3>Table kosong</h3></td>
+									<td colspan="7" class="text-center"><h3 class="text-center">Table kosong</h3></td>
 								</tr>
 							<?php endif; ?>
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="5">
+								<td colspan="7">
 									<div class="pagination pagination-centered"></div>
 								</td>
 							</tr>

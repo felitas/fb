@@ -13,7 +13,7 @@
 		<div class="row-fluid">
 			<div class="span12">
 		    	<div class="control-group">
-			        <input type="text" placeholder="Cari Supplier" id="filter" >
+			        <input type="text" placeholder="Cari Supplier" id="filter" class="span12">
 			    </div>
 				<div class="cell table-responsive toggle-circle-filled">
 					<table class="table table-bordered" id="supplier_table" data-filter="#filter" data-page-size="10">

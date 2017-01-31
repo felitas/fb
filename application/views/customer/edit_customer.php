@@ -18,7 +18,7 @@
                 <div class="control-group">
                     <label class="control-label">Jenis Customer</label>
                     <div class="controls">
-                        <select name="" id="">
+                        <select name="customer_type" id="">
                             <option value="Regular" <?php echo ($customer->type == 'Regular') ? 'selected' : '' ?> >Customer Biasa</option>
                             <option value="Member" <?php echo ($customer->type == 'Member') ? 'selected' : '' ?> >Member</option>
                         </select>

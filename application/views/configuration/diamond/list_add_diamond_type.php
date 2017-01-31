@@ -44,7 +44,7 @@
 	<div class="widget-content">
 		<div class="row-fluid">
     		<div class="control-group">
-                <input type="text" placeholder="Cari..." id="filter" >
+                <input type="text" placeholder="Cari..." id="filter" class="span12">
             </div>
 			<div class="table-responsive toggle-circle-filled">
 			<table class="table table-bordered" id="table_tray" data-page-size="10" data-filter="#filter">

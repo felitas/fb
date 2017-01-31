@@ -11,7 +11,7 @@
 	    <div class="row-fluid">
 	      <div class="span12">
 			<div class="control-group">
-	            <input type="text" placeholder="Cari Outlet" id="filter" >
+	            <input type="text" placeholder="Cari Outlet" id="filter" class="span12">
 	        </div>
 		    <div class="table-responsive toggle-circle-filled">
 					<table class="table table-bordered" id="table_outlet" data-filter="#filter" data-page-size="10">

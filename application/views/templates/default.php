@@ -210,7 +210,7 @@
       </li>
       <li class="submenu"> <a href="#"><i class="fa fa-archive"></i><span>Mutasi</span></a>
         <ul>
-          <li><a href="error405.html"><i class="fa fa-paper-plane faicon"></i> Kirim</a></li>
+          <li><a href="<?php echo base_url('mutation')?>"><i class="fa fa-paper-plane faicon"></i> Kirim</a></li>
           <li><a href="error500.html"><i class="fa fa-truck faicon faicon"></i> Terima</a></li>
         </ul>
       </li>
@@ -227,7 +227,7 @@
           <li><a href="error403.html"><i class="fa fa-bank faicon"></i> Toko</a></li>
           <li><a href="<?php echo base_url('configuration/Currency') ?>"><i class="fa fa-dollar faicon"></i> Kurs</a></li>
           <li><a href="<?php echo base_url('configuration/gold_amount') ?>"><i class="fa fa-gg faicon"></i> Gold</a></li>
-          <li><a href="<?php echo base_url('configuration/diamond_type')?>"><i class="fa fa-diamond faicon"></i> Diamond</a></li>
+          <li><a href="<?php echo base_url('configuration/diamond_type')?>"><i class="fa fa-diamond faicon"></i>Spesifikasi Diamond</a></li>
           <!--the 3 below are essential for product barcode-->
           <li><a href="<?php echo base_url('configuration/product_type') ?>"><i class="fa fa-empire faicon"></i> Tipe Produk</a></li>
           <li><a href="<?php echo base_url('configuration/category') ?>"><i class="fa fa-puzzle-piece faicon"></i> Kategori Produk</a></li>
