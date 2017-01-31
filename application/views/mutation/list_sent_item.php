@@ -5,7 +5,8 @@
 <div class="container-fluid">
 	<div class="row-fluid">
     	<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
-    	<h2>Daftar Pengiriman Penerimaan Barang</h2>
+    	<a href="<?php echo base_url('mutation/add_mutation') ?>" class="pull-right">Kirim Barang <span class="fa fa-arrow-circle-o-right"></span></a>
+    	<h2>Daftar Pengiriman Barang</h2>
 	</div>
 	<div class="widget-box">
 	<div class="widget-content">
@@ -31,20 +32,20 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php if($mutations!=NULL): ?>
+							<?php if($sent_items!=NULL): ?>
 								<?php $i=1; ?>
-								<?php foreach($mutations as $mutation): ?>
+								<?php foreach($sent_items as $sent_item): ?>
 								<tr>
 									<td><?php echo $i ?></td>
-									<td><?php echo $mutation->code ?></td>
-									<td><?php echo $mutation->date ?></td>
+									<td><?php echo $sent_item->code ?></td>
+									<td><?php echo $sent_item->date ?></td>
 									
-									<td><?php echo $mutation->outlet_from ?></td>
-									<td><?php echo $mutation->outlet_to ?></td>
-									<td><?php echo $mutation->status ?></td>
+									<td><?php echo $sent_item->outlet_from ?></td>
+									<td><?php echo $sent_item->outlet_to ?></td>
+									<td><?php echo $sent_item->status ?></td>
 									
 									<?php if($role=='admin'):?>
-										<td><a href="<?php echo base_url('mutation/edit_mutation/'.$mutation->code) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_mutation('<?php echo $mutation->id ?>','<?php echo $mutation->code ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
+										<td><a href="<?php echo base_url('mutation/edit_mutation/'.$sent_item->code) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_mutation('<?php echo $sent_item->id ?>','<?php echo $sent_item->code ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
 									<?php endif?>
 									
 								</tr>
