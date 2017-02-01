@@ -22,13 +22,15 @@
 								<th data-type="numeric">No.</th>
 								<th>Nama</th>
 								<th data-hide="phone" data-toggle="phone">Tipe</th>
+								<th data-hide="phone" data-toggle="phone">Kategori</th>
+								<th data-hide="phone" data-toggle="phone">Koleksi</th>
 								<th data-hide="phone" data-toggle="phone">Kode Barang</th>
-								<th data-hide="phone" data-toggle="phone">Harga Beli</th>
-								<th data-hide="phone" data-toggle="phone">Harga Jual</th>
 								<th data-hide="phone" data-toggle="phone">Kadar</th>
 								<th data-hide="phone" data-toggle="phone">Berat</th>
 								<th data-hide="phone" data-toggle="phone">Outlet</th>
 								<th data-hide="phone" data-toggle="phone">Tray</th>
+								<th data-hide="phone" data-toggle="phone">Harga Beli</th>
+								<th data-hide="phone" data-toggle="phone">Harga Jual</th>
 								<th data-hide="phone" data-toggle="phone">Action</th>
 							</tr>
 						</thead>
@@ -40,13 +42,15 @@
 										<td><?php echo $i ?></td>
 										<td><?php echo $product->name ?></td>
 										<td><?php echo $product->type ?></td>
+										<td><?php echo $product->category ?></td>
+										<td><?php echo $product->model ?></td>
 										<td><?php echo $product->product_code ?></td>
-										<td><?php echo $product->purchase_price ?></td>
-										<td><?php echo $product->sell_price ?></td>
 										<td><?php echo $product->gold_amount ?> %</td>
 										<td><?php echo $product->weight ?> gram</td>
 										<td><?php echo $product->outlet ?></td>
 										<td><?php echo $product->tray ?></td>
+										<td><?php echo $product->purchase_price ?></td>
+										<td><?php echo $product->sell_price ?></td>
 										<td><a href="<?php echo base_url('product/edit_product/'.$product->id) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_product('<?php echo $product->id ?>','<?php echo $product->name ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
 									</tr>
 								<?php $i++; ?>
@@ -54,13 +58,13 @@
 							
 							<?php else:?>
 								<tr>
-									<td colspan="11" class="text-center"><h3 class="text-center">Table kosong</h3></td>
+									<td colspan="13" class="text-center"><h3 class="text-center">Table kosong</h3></td>
 								</tr>
 							<?php endif; ?>
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="11">
+								<td colspan="13">
 									<div class="pagination pagination-centered"></div>
 								</td>
 							</tr>

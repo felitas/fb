@@ -102,7 +102,8 @@
 	            		'name'					=> $this->input->post('product_name'),
 	            		// 'product_code'	=> $this->input->post('product_code'),
 	            		'product_type'			=> $this->input->post('product_type'),
-	            		// 'category'		=> $this->input->post('product_category'),
+	            		'product_category'		=> $this->input->post('product_category'),
+	            		'product_collection'	=> $this->input->post('product_model'),
 	            		// 'real_weight'	=> $this->input->post('product_real_weight'),
 	            		// 'rounded_weight'=> $this->input->post('product_rounded_weight'),
 	            		'purchase_price'		=> $this->input->post('product_purchase_price'),
@@ -111,7 +112,7 @@
 	            		'weight' 				=> $this->input->post('product_weight'),
 	            		'photo'					=> $photo,
 	            		'outlet_id'				=> $this->input->post('product_outlet'),
-	            		'tray_code'				=> $this->input->post('product_tray'),
+	            		'tray_id'				=> $this->input->post('product_tray'),
 	            		'barcode_code'			=> $this->input->post('product_barcode_code'),
 	            		'product_code' 			=> $this->input->post('product_code')
 
