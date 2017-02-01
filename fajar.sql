@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2017 at 03:06 AM
+-- Generation Time: Feb 01, 2017 at 08:33 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -81,6 +81,14 @@ CREATE TABLE `code` (
   `code` varchar(15) NOT NULL,
   `count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `code`
+--
+
+INSERT INTO `code` (`id`, `code`, `count`) VALUES
+(7, 'EA', 1),
+(8, 'EAKR', 1);
 
 -- --------------------------------------------------------
 
@@ -173,7 +181,15 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`id`, `name`, `birthday`, `phone`, `email`, `address`, `type`, `grade`, `outlet_id`) VALUES
 (2, 'Rini', NULL, '082342123432', 'rini@rini.co', 'Pulogadung', 'Member', 'Gold', 1),
 (3, 'Tono', '1992-03-09', '0812712483', 'tono@ton.co', 'Pulomas', 'Regular', 'Gold', 1),
-(4, 'Michael', '1990-02-16', '08234431234', 'michael@gmail.co', 'Kemanggisan', 'Member', 'Platinum', 1);
+(4, 'Michael', '1990-02-16', '08234431234', 'michael@gmail.co', 'Kemanggisan', 'Member', 'Platinum', 1),
+(5, 'Harry', '1997-09-08', '08243243214', 'harry@gmod.com', 'Pekanbaru', 'Regular', 'Regular', 0),
+(6, 'Milla', '1998-03-14', '0726473247', 'milla@mil.com', 'Harapan Baru', 'Regular', 'Regular', 0),
+(7, 'Christie', '1786-09-24', '', '', '', 'Regular', 'Regular', 0),
+(8, 'George', NULL, '', '', '', 'Member', 'Regular', 0),
+(9, 'Killian', '1876-05-06', '', '', '', 'Regular', 'Regular', 0),
+(10, 'Margaret', '1888-06-18', '', '', '', 'Regular', 'Regular', 0),
+(11, 'Trisha', '1995-07-06', '', '', '', 'Member', 'Regular', 0),
+(12, 'Kristian', NULL, '', '', '', '', 'Gold', 0);
 
 -- --------------------------------------------------------
 
@@ -216,6 +232,35 @@ INSERT INTO `model` (`id`, `name`, `code`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mutation`
+--
+
+CREATE TABLE `mutation` (
+  `id` int(11) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `product_qty` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `from_outlet` int(11) NOT NULL,
+  `to_outlet` int(11) NOT NULL,
+  `status` enum('Pending','Diterima','','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mutation_product`
+--
+
+CREATE TABLE `mutation_product` (
+  `id` int(11) NOT NULL,
+  `mutation_code` varchar(100) NOT NULL,
+  `product_code` varchar(100) NOT NULL,
+  `status` enum('OK','Rusak','','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `outlets`
 --
 
@@ -246,16 +291,18 @@ INSERT INTO `outlets` (`id`, `code`, `name`, `phone`, `address`, `store_manager`
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `product_type` varchar(30) NOT NULL,
+  `product_category` varchar(30) DEFAULT NULL,
+  `product_collection` varchar(30) DEFAULT NULL,
   `barcode_code` varchar(30) NOT NULL,
   `product_code` varchar(30) NOT NULL,
   `name` varchar(60) NOT NULL,
   `purchase_price` double DEFAULT NULL,
   `sell_price` double DEFAULT NULL,
-  `gold_amount` double NOT NULL,
-  `weight` double NOT NULL,
+  `gold_amount` double DEFAULT NULL,
+  `weight` double DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `outlet_id` int(11) DEFAULT NULL,
-  `tray_code` varchar(50) DEFAULT NULL,
+  `tray_id` int(50) DEFAULT NULL,
   `status` enum('available','booked','terjual','rusak') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -263,9 +310,9 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `product_type`, `barcode_code`, `product_code`, `name`, `purchase_price`, `sell_price`, `gold_amount`, `weight`, `photo`, `outlet_id`, `tray_code`, `status`) VALUES
-(4, 'B', 'BK', 'BK00001', 'June', 9000000, 9200000, 8, 46, 'uploads/photo/product//BK00001.jpg', NULL, NULL, 'available'),
-(5, 'E', 'ECKR', 'ECKR00001', 'Cincin MK', 7800000, 7900000, 9, 67, '', 1, '1', 'available');
+INSERT INTO `products` (`id`, `product_type`, `product_category`, `product_collection`, `barcode_code`, `product_code`, `name`, `purchase_price`, `sell_price`, `gold_amount`, `weight`, `photo`, `outlet_id`, `tray_id`, `status`) VALUES
+(11, 'B', NULL, NULL, 'B', 'B00001', 'HHH', 9200, 9300, 70, 34, '', 1, 1, 'available'),
+(12, 'E', 'A', 'KR', 'EAKR', 'EAKR00001', '', 1400000, 1500000, 40, 4, '', 0, 0, 'available');
 
 -- --------------------------------------------------------
 
@@ -276,10 +323,17 @@ INSERT INTO `products` (`id`, `product_type`, `barcode_code`, `product_code`, `n
 CREATE TABLE `specification` (
   `id` int(11) NOT NULL,
   `product_code` varchar(20) NOT NULL,
-  `stone_type` int(11) NOT NULL,
-  `stone_amount` int(11) NOT NULL,
+  `stone_type` varchar(10) NOT NULL,
+  `stone_amount` double NOT NULL,
   `stone_ct` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `specification`
+--
+
+INSERT INTO `specification` (`id`, `product_code`, `stone_type`, `stone_amount`, `stone_ct`) VALUES
+(1, 'B00002', 'RD', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -397,6 +451,18 @@ ALTER TABLE `model`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `mutation`
+--
+ALTER TABLE `mutation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mutation_product`
+--
+ALTER TABLE `mutation_product`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `outlets`
 --
 ALTER TABLE `outlets`
@@ -406,6 +472,12 @@ ALTER TABLE `outlets`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `specification`
+--
+ALTER TABLE `specification`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -444,7 +516,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `code`
 --
 ALTER TABLE `code`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `configuration`
 --
@@ -464,12 +536,22 @@ ALTER TABLE `currency_history`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `model`
 --
 ALTER TABLE `model`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `mutation`
+--
+ALTER TABLE `mutation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `mutation_product`
+--
+ALTER TABLE `mutation_product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `outlets`
 --
@@ -479,7 +561,12 @@ ALTER TABLE `outlets`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `specification`
+--
+ALTER TABLE `specification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `suppliers`
 --
