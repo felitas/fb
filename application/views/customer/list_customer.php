@@ -15,7 +15,7 @@
 				<div class="control-group">
 			        <input type="text" placeholder="Cari Customer" id="filter" class="span12">
 			    </div>
-			    <div class="cell table-responsive toggle-circle-filled">
+			    <div class="table-responsive toggle-circle-filled">
 			    	<table class="table table-bordered" id="table_customer" data-filter="#filter" data-page-size="10">
 			    		<thead>
 							<tr>

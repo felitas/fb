@@ -4,12 +4,13 @@
 	class Product extends MY_Controller{
 		function __construct(){
 			parent::__construct();
+			$this->load->model('product_model');
 		}
 
 		public function index(){
 			$data['title'] = 'Product';
 			$data['is_mobile'] = $this->is_mobile;
-			$data['products'] = $this->crud_model->get_data('products')->result();
+			$data['products'] = $this->product_model->get_product_all_outlet();
 			$this->template->load($this->default,'product/list_product',$data);
 		}
 
@@ -257,6 +258,22 @@
 		public function get_code_count($product_barcode_code = ''){
 			echo $this->db->get_where('code',array('code' => $product_barcode_code))->row('count');
 		}
+
+		/*AJAX TO GET PRODUCT THRU BARCODE - USED FOR MUTATION AND SELL ITEM */
+		public function get_product_by_code($product_code = '',$outlet_id=''){
+			$product = $this->product_model->get_product_by_code($product_code,$outlet_id);
+			
+			if($product == NULL){
+				echo 'not found';
+			}else{
+				
+				$product = (array) $product;
+				$product['sell_price'] = number_format($product['sell_price'],0,',','.');
+				$product = (Object) $product;
+				echo json_encode($product);	
+			}
+		}
+
 
 
 		/****ADD NEW ITEM END****/

@@ -2,7 +2,7 @@
 	
 class Mutation_model extends CI_Model{
 
-	function get_sent_items($id = ''){
+	function get_sent_transactions($id = ''){
 		$this->db->select('mutation.*, o1.name as from_outlet, o2.name as to_outlet');
 		$this->db->from('mutation');
 		$this->db->join('outlets as o1','mutation.from_outlet = o1.id');

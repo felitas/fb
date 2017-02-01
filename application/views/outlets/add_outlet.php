@@ -8,7 +8,7 @@
     <div class="widget-content nopadding">
         <div class="row-fluid">
           <div class="span12">
-            <?php echo form_open('outlets/add_outlet', array('class'=>'form-horizontal', 'novalidate'=>'novalidate', 'id'=>'outletform' )) ?>
+            <?php echo form_open('outlets/add_outlet', array('class'=>'form-horizontal', 'id'=>'outletform' )) ?>
             <div class="control-group top-control">
                 <div class="span6">
                     <label class="control-label">Nama Toko</label>

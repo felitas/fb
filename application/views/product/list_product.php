@@ -16,12 +16,12 @@
 			        <input type="text" placeholder="Cari Produk" id="filter" class="span12">
 			    </div>
 				<div class="table-responsive toggle-circle-filled">
-					<table class="table table-bordered" id="table_product" data-filter="#filter" data-page-size="10">
+					<table class="table table-bordered" id="table_product" data-filter="#filter" data-page-size="20">
 						<thead>
 							<tr>
 								<th data-type="numeric">No.</th>
 								<th>Nama</th>
-								<th data-hide="phone" data-toggle="phone">Kode Barcode</th>
+								<th data-hide="phone" data-toggle="phone">Tipe</th>
 								<th data-hide="phone" data-toggle="phone">Kode Barang</th>
 								<th data-hide="phone" data-toggle="phone">Harga Beli</th>
 								<th data-hide="phone" data-toggle="phone">Harga Jual</th>
@@ -39,14 +39,14 @@
 									<tr>
 										<td><?php echo $i ?></td>
 										<td><?php echo $product->name ?></td>
-										<td><?php echo $product->barcode_code ?></td>
+										<td><?php echo $product->type ?></td>
 										<td><?php echo $product->product_code ?></td>
 										<td><?php echo $product->purchase_price ?></td>
 										<td><?php echo $product->sell_price ?></td>
 										<td><?php echo $product->gold_amount ?> %</td>
 										<td><?php echo $product->weight ?> gram</td>
-										<td><?php echo $product->outlet_id ?></td>
-										<td><?php echo $product->tray_code ?></td>
+										<td><?php echo $product->outlet ?></td>
+										<td><?php echo $product->tray ?></td>
 										<td><a href="<?php echo base_url('product/edit_product/'.$product->id) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_product('<?php echo $product->id ?>','<?php echo $product->name ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
 									</tr>
 								<?php $i++; ?>
