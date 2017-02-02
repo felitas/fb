@@ -2,15 +2,17 @@
 	
 class Product_model extends CI_Model{
 	//TO GET PRODUCT DETAIL ALONG WITH TRAY AND OUTLET NAME AND TYPE
+	//collection is other phrase for model
 	function get_product_all_outlet(){
-		$this->db->select('products.*,outlets.name as outlet, tray.code as tray,type.name as type,category.name as category');
+		$this->db->select('products.*,outlets.name as outlet, tray.code as tray,type.name as type,category.name as category,model.name as model');
 		$this->db->from('products');
-		$this->db->join('outlets','outlets.id = products.outlet_id');
-		$this->db->join('tray','tray.id = products.tray_id');
-		$this->db->join('type','type.code = products.product_type');
-		$this->db->join('category','category.code = products.product_category');
+		$this->db->join('outlets','outlets.id = products.outlet_id','left');
+		$this->db->join('tray','tray.id = products.tray_id','left');
+		$this->db->join('type','type.code = products.product_type','left');
+		$this->db->join('category','category.code = products.product_category','left');
+		$this->db->join('model','model.code = products.product_collection','left');
 		$this->db->where('products.status','available');
-		$this->db->order_by('products.status','asc');
+		$this->db->order_by('products.name','asc');
 		return $this->db->get()->result();
 	}
 

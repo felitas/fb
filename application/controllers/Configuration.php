@@ -120,7 +120,7 @@
 		/*Diamond Type*/
 		/*LIST ADD DIAMOND TYPE*/
 		public function diamond_type(){
-			if($this->input->post('submit')){
+			if($this->input->post()){
 				$data=array(
 					'code'=>$this->input->post('diamond_code'),
 					'name'=>$this->input->post('diamond_name')

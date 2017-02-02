@@ -51,7 +51,7 @@
 										<td><?php echo $product->tray ?></td>
 										<td><?php echo $product->purchase_price ?></td>
 										<td><?php echo $product->sell_price ?></td>
-										<td><a href="<?php echo base_url('product/edit_product/'.$product->id) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_product('<?php echo $product->id ?>','<?php echo $product->name ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
+										<td><a href="<?php echo base_url('product/edit_product/'.$product->product_code) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_product('<?php echo $product->id ?>','<?php echo $product->name ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
 									</tr>
 								<?php $i++; ?>
 								<?php endforeach ?>

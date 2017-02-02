@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/selectize.css')?>">
 <div class="container-fluid">
 	
@@ -38,7 +39,7 @@
 						<div class="span12">
 							<label for="" class="control-label">Nama Barang</label>
 							<div class="controls">
-								<input type="text" placeholder="Nama Barang" name="product_name" class="span11">
+								<input type="text" placeholder="Nama Barang" name="product_name" id="product_name" class="span11">
 							</div>	
 						</div>
 					</div>
@@ -105,7 +106,7 @@
 							</div>
 						</div>	
 					</div>
-					<div class="control-group">
+					<div class="control-group" id="outlet_tray">
 						<?php if ($role =='admin'):?>
 						<div class="span6">
 							<label for="" class="control-label">Outlets</label>
@@ -123,9 +124,11 @@
 							<label for="" class="control-label">Tray</label>
 							<div class="controls">
 								<select name="product_tray" id="product_tray" class="span12">
-									<option value="0">--Pilih Nampan--</option>
+									<?php if($role=='admin'):?>
+										<option value="0">Pilih Outlet Terlebih Dahulu</option>
+									<?php endif?>
 									<?php foreach ($trays as $tray): ?>
-										<option value="<?php echo $tray->id?>"><?php echo $tray->code?></option>	
+										<option value="<?php echo $tray->id?>"><?php echo $tray->code?> - <?php echo $tray->description?></option>	
 									<?php endforeach ?>
 								</select>
 							</div>	
@@ -220,6 +223,7 @@
     </div>
     </div>
 </div>
+<script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
 <script src="<?php echo base_url() ?>js/selectize.min.js"></script>
 <script src="<?php echo base_url() ?>js/webcam.min.js"></script>
 
@@ -238,7 +242,17 @@
 				$('.new-barcode').hide();
 				$('#product_barcode')[0].selectize.enable();
 			}
-		})
+		});
+		//validate form
+		$('#productform').validate({
+	        rules:{
+	            product_name: "required",
+	            product_code: "required",
+	        },
+	        messages:{
+	        	product_code: "Pilih kode produk yang sudah ada atau generate barcode baru"
+	        }
+	    });
 	});
 	
 	
@@ -257,14 +271,18 @@
      //IF MASUK BRANKAS IS CHECKED, NORMALIZE AND DISABLE ALL UNNECESSARY FIELDS
      function warehouse(el){
      	if($(el).is(":checked")){
-     		$('#product_tray').val('');
-     		$('#product_tray').attr("disabled","disabled");
-     		$('#product_outlet').val('');
+     		$('#product_outlet').val('0');
      		$('#product_outlet').attr("disabled","disabled");
+     		$('#product_tray').val('0');
+     		$('#product_tray').empty();
+     		$('#product_tray').append("<option>Pilih Outlet terlebih dahulu</option>");
+     		$('#product_tray').attr("disabled","disabled");
+     		$('#outlet_tray').hide();
      	}
      	else{
      		$('#product_tray').removeAttr("disabled");
      		$('#product_outlet').removeAttr("disabled");
+     		$('#outlet_tray').show();
      	}
      }
 
@@ -354,7 +372,7 @@
      function get_tray(el){
 		if($(el).val() != ''){
 			$.ajax({
-              url: "<?php echo base_url('product/get_tray_data/')?>" + $(el).val(),
+              url: "<?php echo base_url('tray/get_tray_data/')?>" + $(el).val(),
               type: 'GET',
               cache : false,
               success: function(result){

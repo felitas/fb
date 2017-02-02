@@ -1,4 +1,4 @@
-<script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
+
 <div class="container-fluid">
     <div class="row-fluid">
         <a href="<?php echo base_url('outlets') ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar outlet</a>
@@ -78,7 +78,7 @@
     </div>
   </div>    
 </div>
-
+<script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
 <script>
 <?php if($this->session->flashdata('outlet')): ?>
    <?php echo $this->session->flashdata('outlet') ?>

@@ -8,7 +8,7 @@
         <h2><?php echo $title?></h2>
 	</div>
 	<!--Form Add Tray-->
-	<?php echo form_open('configuration/list_add_diamond_type',array('class'=>'form-horizontal','id'=>'diamond_type_form'))?>
+	<?php echo form_open('configuration/diamond_type',array('class'=>'form-horizontal','id'=>'diamond_type_form'))?>
 	<div class="widget-box closed-add" id="append_tray" style="display: none">
 	<div class="widget-title">
 			<h5>Tambah tipe diamond baru</h5>

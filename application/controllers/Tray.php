@@ -80,6 +80,20 @@
 				$this->template->load($this->default,'tray/edit_tray',$data);
 			}
 		}
+		/*Ajax to get tray data*/
+		public function get_tray_data($outlet_id = ''){
+			$this->load->model('configuration_model');
+			$tray = $this->configuration_model->get_tray($outlet_id);
+			$output = '';
+			if($tray){
+				foreach($tray as $row){
+					$output .= "<option value='".$row->id."'>".$row->code." - ".$row->description."</option>";
+				}
+				echo $output;
+			}else{
+				echo 'Toko ini belum punya baki';
+			}
+		}
 		
 	}
 
