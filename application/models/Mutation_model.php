@@ -1,6 +1,14 @@
 <?php 
 	
 class Mutation_model extends CI_Model{
+	//FOR ADMIN
+	function get_all_sent_transactions(){
+		$this->db->select('mutation.*, o1.name as from_outlet, o2.name as to_outlet');
+		$this->db->from('mutation');
+		$this->db->join('outlets as o1','mutation.from_outlet = o1.id');
+		$this->db->join('outlets as o2','mutation.to_outlet = o2.id');
+		return $this->db->get()->result();
+	}
 
 	function get_sent_transactions($id = ''){
 		$this->db->select('mutation.*, o1.name as from_outlet, o2.name as to_outlet');
@@ -8,6 +16,15 @@ class Mutation_model extends CI_Model{
 		$this->db->join('outlets as o1','mutation.from_outlet = o1.id');
 		$this->db->join('outlets as o2','mutation.to_outlet = o2.id');
 		$this->db->where('mutation.from_outlet',$id);
+		return $this->db->get()->result();
+	}
+
+	function get_all_received_transactions(){
+		$this->db->select('mutation.*, o1.name as from_outlet, o2.name as to_outlet');
+		$this->db->from('mutation');
+		$this->db->join('outlets as o1','mutation.from_outlet = o1.id');
+		$this->db->join('outlets as o2','mutation.to_outlet = o2.id');
+		$this->db->order_by('mutation.status','desc');
 		return $this->db->get()->result();
 	}
 

@@ -14,7 +14,7 @@
 				<div class="control-group">
 			        <input type="text" placeholder="Cari..." id="filter" class="span12">
 			    </div>
-			    <div class="cell table-responsive toggle-circle-filled">
+			    <div class="table-responsive toggle-circle-filled">
 			    	<table class="table table-bordered" id="table_sent" data-filter="#filter" data-page-size="5">
 			    		<thead>
 							<tr>
@@ -31,29 +31,52 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php if($sent_transactions!=NULL): ?>
-								<?php $i=1; ?>
-								<?php foreach($sent_transactions as $sent_transaction): ?>
-								<tr>
-									<td><?php echo $i ?></td>
-									<td><?php echo $sent_transaction->code ?></td>
-									<td><?php echo $sent_transaction->date ?></td>
-									
-									<td><?php echo $sent_transaction->outlet_from ?></td>
-									<td><?php echo $sent_transaction->outlet_to ?></td>
-									<td><?php echo $sent_transaction->status ?></td>
-									
-									<?php if($role=='admin'):?>
+							<!-- ADMIN CAN SEE ALL THE MUTATION HAPPENING -->
+							<?php if($role=='admin'):?>
+								<?php if($all_sents!=NULL): ?>
+									<?php $i=1; ?>
+									<?php foreach($all_sents as $sent): ?>
+									<tr>
+										<td><?php echo $i ?></td>
+										<td><?php echo $sent->code ?></td>
+										<td><?php echo date('d-M-Y H:i:s',strtotime($sent->date)) ?></td>
+										<td><?php echo $sent->product_qty?></td>
+										<td><?php echo $sent->from_outlet ?></td>
+										<td><?php echo $sent->to_outlet ?></td>
+										<td><?php echo $sent->status ?></td>
+										<td><a href="<?php echo base_url('mutation/edit_mutation/'.$sent->code) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_mutation('<?php echo $sent->id ?>','<?php echo $sent->code ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
+									</tr>
+									<?php $i++; ?>
+									<?php endforeach; ?>
+								<?php else:?>
+									<tr>
+										<td colspan="10" class="nocontent"><h3>Table kosong</h3></td>
+									</tr>
+								<?php endif;?>
+							<!--IF NOT ADMIN-->
+							<?php else: ?>
+								<?php if($sent_transactions!=NULL): ?>
+									<?php $i=1; ?>
+									<?php foreach($sent_transactions as $sent_transaction): ?>
+									<tr>
+										<td><?php echo $i ?></td>
+										<td><?php echo $sent_transaction->code ?></td>
+										<td><?php echo date('d-M-Y H:i:s',strtotime($sent_transaction->date)) ?></td>
+										<td><?php echo $sent_transaction->product_qty?></td>
+										<td><?php echo $sent_transaction->from_outlet ?></td>
+										<td><?php echo $sent_transaction->to_outlet ?></td>
+										<td><?php echo $sent_transaction->status ?></td>
 										<td><a href="<?php echo base_url('mutation/edit_mutation/'.$sent_transaction->code) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_mutation('<?php echo $sent_transaction->id ?>','<?php echo $sent_transaction->code ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
-									<?php endif?>
 									
-								</tr>
-								<?php $i++; ?>
-								<?php endforeach; ?>
-							<?php else:?>
-								<tr>
-									<td colspan="10" class="nocontent"><h3>Table kosong</h3></td>
-								</tr>
+										
+									</tr>
+									<?php $i++; ?>
+									<?php endforeach; ?>
+								<?php else:?>
+									<tr>
+										<td colspan="10" class="nocontent"><h3>Table kosong</h3></td>
+									</tr>
+								<?php endif; ?>
 							<?php endif; ?>
 						</tbody>
 						<tfoot>

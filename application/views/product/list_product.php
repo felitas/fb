@@ -1,7 +1,11 @@
 <!--Both are css for alertify-->
 <link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
-
+<style>
+	.red{
+		color: red !important;
+	}
+</style>
 <div class="container-fluid">
 	<div class="row-fluid">
     	<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
@@ -22,16 +26,19 @@
 								<th data-type="numeric">No.</th>
 								<th>Nama</th>
 								<th data-hide="phone" data-toggle="phone">Tipe</th>
-								<th data-hide="phone" data-toggle="phone">Kategori</th>
-								<th data-hide="phone" data-toggle="phone">Koleksi</th>
+								<!-- <th data-hide="phone" data-toggle="phone">Kategori</th> -->
+								<!-- <th data-hide="phone" data-toggle="phone">Koleksi</th> -->
 								<th data-hide="phone" data-toggle="phone">Kode Barang</th>
 								<th data-hide="phone" data-toggle="phone">Kadar</th>
 								<th data-hide="phone" data-toggle="phone">Berat</th>
-								<th data-hide="phone" data-toggle="phone">Outlet</th>
+								
 								<th data-hide="phone" data-toggle="phone">Tray</th>
 								<th data-hide="phone" data-toggle="phone">Harga Beli</th>
 								<th data-hide="phone" data-toggle="phone">Harga Jual</th>
+								<th data-hide="phone" data-toggle="phone">Status</th>
+								<th data-hide="phone" data-toggle="phone">Lokasi</th>
 								<th data-hide="phone" data-toggle="phone">Action</th>
+
 							</tr>
 						</thead>
 						<tbody>
@@ -42,15 +49,21 @@
 										<td><?php echo $i ?></td>
 										<td><?php echo $product->name ?></td>
 										<td><?php echo $product->type ?></td>
-										<td><?php echo $product->category ?></td>
-										<td><?php echo $product->model ?></td>
+										<!-- <td><?php #echo $product->category ?></td> -->
+										<!-- <td><?php #echo $product->model ?></td> -->
 										<td><?php echo $product->product_code ?></td>
 										<td><?php echo $product->gold_amount ?> %</td>
 										<td><?php echo $product->weight ?> gram</td>
-										<td><?php echo $product->outlet ?></td>
+								
 										<td><?php echo $product->tray ?></td>
-										<td><?php echo $product->purchase_price ?></td>
-										<td><?php echo $product->sell_price ?></td>
+										<td><?php echo 'Rp '. number_format($product->purchase_price,2,',','.') ?></td>
+										<td><?php echo 'Rp '. number_format($product->sell_price,2,',','.') ?></td>
+										<td>
+
+											<p class="<?php echo ($product->status!='available')? 'red':'' ?>"><?php echo $product->status ?></p>
+												
+										</td>
+										<td><?php echo $product->outlet ?></td>
 										<td><a href="<?php echo base_url('product/edit_product/'.$product->product_code) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_product('<?php echo $product->id ?>','<?php echo $product->name ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
 									</tr>
 								<?php $i++; ?>
@@ -64,7 +77,7 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="13">
+								<td colspan="12">
 									<div class="pagination pagination-centered"></div>
 								</td>
 							</tr>

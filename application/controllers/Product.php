@@ -10,7 +10,9 @@
 		public function index(){
 			$data['title'] = 'Product';
 			$data['is_mobile'] = $this->is_mobile;
+			$data['role']=$this->session_role;
 			$data['products'] = $this->product_model->get_product_all_outlet();
+
 			$this->template->load($this->default,'product/list_product',$data);
 		}
 
@@ -120,20 +122,19 @@
 
 	            // 	);
 	            //$this->db->update('code',array('count' => $this->input->post('count')+1),array('code' => $this->input->post('code')));
+            
+            	for($i = 0; $i < count($this->input->post('stone_type')); $i++){
+            		$data_spec = array(
+            			'product_code' => $this->input->post('product_code'),
+            			'stone_type' => $this->input->post('stone_type')[$i],
+            			'stone_amount' => $this->input->post('stone_amount')[$i],
+            			'stone_ct' => $this->input->post('stone_ct')[$i]
 
-	            if($this->input->post('product_type') == 'B'){
-	            	for($i = 0; $i < count($this->input->post('stone_type')); $i++){
-	            		$data_spec = array(
-	            			'product_code' => $this->input->post('product_code'),
-	            			'stone_type' => $this->input->post('stone_type')[$i],
-	            			'stone_amount' => $this->input->post('stone_amount')[$i],
-	            			'stone_ct' => $this->input->post('stone_ct')[$i]
+            		);
 
-	            		);
+            		$this->db->insert('specification',$data_spec);
+            	}
 
-	            		$this->db->insert('specification',$data_spec);
-	            	}
-	            }
 	          	$code_count = array(
 	          			'code' => $this->input->post('product_barcode_code'),
 	          			'count'=> 1
@@ -149,14 +150,13 @@
 	            		class_name : 'gritter-light',
 					    title: 'Berhasil',
 					    text: 'Berhasil tambah produk',
-					    time: 2000
+					    time: 1200
 					});");	
 	            }else{
 	            	$this->session->set_flashdata('product',"$.gritter.add({
-					    class_name : 'gritter-light',
-					    title: 'Berhasil',
-					    text: 'Berhasil tambah produk',
-					    time: 2000
+					    title: 'Gagal',
+					    text: 'Produk tidak berhasil diinput',
+					    time: 1200
 					});");
 	            }
 	            
@@ -264,14 +264,7 @@
 				}
 
 	            $data_product = array(
-
 	            		'name'					=> $this->input->post('product_name'),
-	            		// 'product_code'	=> $this->input->post('product_code'),
-	            		'product_type'			=> $this->input->post('product_type'),
-	            		'product_category'		=> $this->input->post('product_category'),
-	            		'product_collection'	=> $this->input->post('product_model'),
-	            		// 'real_weight'	=> $this->input->post('product_real_weight'),
-	            		// 'rounded_weight'=> $this->input->post('product_rounded_weight'),
 	            		'purchase_price'		=> $this->input->post('product_purchase_price'),
 	            		'sell_price'			=> $this->input->post('product_selling_price'),
 	            		'gold_amount'			=> $this->input->post('product_gold_amount'),
@@ -279,16 +272,7 @@
 	            		'photo'					=> $photo,
 	            		'outlet_id'				=> $this->input->post('product_outlet'),
 	            		'tray_id'				=> $this->input->post('product_tray'),
-	            		'barcode_code'			=> $this->input->post('product_barcode_code'),
-	            		'product_code' 			=> $this->input->post('product_code')
-
 	            	);
-	            // $data_code = array(
-	            // 		'code' => $this->input->post('product_barcode_code'),
-	            // 		'count'=> $this->input->post('product_count')
-
-	            // 	);
-	            //$this->db->update('code',array('count' => $this->input->post('count')+1),array('code' => $this->input->post('code')));
 
 	            if($this->input->post('product_type') == 'B'){
 	            	for($i = 0; $i < count($this->input->post('stone_type')); $i++){
@@ -299,37 +283,30 @@
 	            			'stone_ct' => $this->input->post('stone_ct')[$i]
 
 	            		);
-
 	            		$this->db->insert('specification',$data_spec);
 	            	}
 	            }
 	          	$code_count = array(
 	          			'code' => $this->input->post('product_barcode_code'),
 	          			'count'=> 1
-	          		);
-	            if($this->crud_model->insert_data('products',$data_product)){
-	            	if($this->db->get_where('code',array('code'=>$this->input->post('product_barcode_code')))->num_rows()>0){
-	            		$count = $this->db->get_where('code',array('code'=>$this->input->post('product_barcode_code')))->row('count');
-	            		$this->db->update('code',array('count'=> $count+1),array('code'=>$this->input->post('product_barcode_code')));
-		            }else{
-		            	$this->crud_model->insert_data('code',$code_count);
-		            }
+	          	);
+
+	            if($this->crud_model->update_data('products',$data_product,array('product_code'=>$code)) ){
 	            	$this->session->set_flashdata('product',"$.gritter.add({
 	            		class_name : 'gritter-light',
 					    title: 'Berhasil',
-					    text: 'Berhasil tambah produk',
-					    time: 2000
+					    text: 'Data produk telah di edit',
+					    time: 1500
 					});");	
 	            }else{
 	            	$this->session->set_flashdata('product',"$.gritter.add({
-					    class_name : 'gritter-light',
-					    title: 'Berhasil',
-					    text: 'Berhasil tambah produk',
-					    time: 2000
+					    title: 'Gagal',
+					    text: 'Data produk tidak berhasil di edit',
+					    time: 1500
 					});");
 	            }
 	            
-	            redirect('product/add_product');
+	            redirect('product');
 
 			}else{
 				$data['product']= $this->crud_model->get_by_condition('products',array('product_code'=>$code))->row();

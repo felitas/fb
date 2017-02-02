@@ -8,7 +8,7 @@
     <div class="widget-content nopadding">
         <div class="row-fluid">
           <div class="span12">
-            <?php echo form_open('mutation/send_mutation', array('class'=>'form-horizontal', 'id'=>'sendingform' )) ?>
+            <?php echo form_open('mutation/send_item', array('class'=>'form-horizontal', 'id'=>'mutationform' )) ?>
             <div class="control-group top-control">
                 <!--ADMIN HAS FREEDOM TO CHOOSE TO AND FROM WHERE THE MUTATION GOES-->
                 <?php if($role=='admin'): ?>
@@ -53,13 +53,13 @@
             <div class="control-group">    
                 <label class="control-label">Kode Produk</label>
                 <div class="controls">
-                  <input type="text" placeholder="Scan atau ketik kode produk" name="product_code" class="span10" onblur="get_product(this)">
+                  <input type="text" placeholder="Scan atau ketik kode produk" name="product_code" class="span11" onblur="get_product(this)">
                 </div>    
             </div>    
 
             <div class="control-group">                
                 <div class="controls">
-                    <div class="span10">
+                    <div class="span11">
                         <div class="control-group" style="margin-bottom: 6px;">
                             <input type="text" placeholder="Cari..." id="filter" class="span12">
                         </div>
@@ -151,12 +151,12 @@ function get_product(el){
                             time: 1500
                         });
                     }else{
-                        $('#table_body').append("<tr><td>"+no+"</td><td>"+data.product_code+"</td><td>"+data.name+"</td><td>"+data.tray+"</td><td>"+data.type+"</td><td>"+data.category+"</td><td>"+data.gold_amount+"</td><td>"+data.weight+"</td><td>"+data.sell_price+"</td>")
+                        $('#table_body').append("<tr><td>"+no+"</td><td>"+data.product_code+"</td><td>"+data.name+"</td><td>"+data.tray+"</td><td>"+data.type+"</td><td>"+data.category+"</td><td>"+data.gold_amount+"</td><td>"+data.weight+"</td><td>"+data.sell_price+"</td><td>&times;</td>")
                         // $('#table_body').append("<tr><td>"+no+"</td><td><a class='photobox' href='<?php echo base_url() ?>"+data.photo+"'><img width='20' src='<?php echo base_url() ?>"+data.photo+"' alt=''/></a></td><td>"+data.product_code+"</td><td>"+data.name+"</td><td>"+data.tray+"</td><td>"+data.type+"</td><td>"+data.category+"</td><td>"+data.real_weight+"</td><td>"+data.rounded_weight+"</td><td>"+data.selling_price+"</td><td>"+data.amount_type+data.original+"->"+data.marked_up+"</td><td>"+data.outlet+"</td></tr>");
 
-                        // $('#form_mutation').append("<input type='hidden' name='product_code[]' value='"+data.product_code+"'>");
-                        //     product_code.push(data.product_code);
-                        //     no++;
+                        $('#mutationform').append("<input type='hidden' name='product_code[]' value='"+data.product_code+"'>");
+                             product_code.push(data.product_code);
+                             no++;
                         
                     }
                         

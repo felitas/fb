@@ -11,7 +11,7 @@ class Product_model extends CI_Model{
 		$this->db->join('type','type.code = products.product_type','left');
 		$this->db->join('category','category.code = products.product_category','left');
 		$this->db->join('model','model.code = products.product_collection','left');
-		$this->db->where('products.status','available');
+		//$this->db->where('products.status','available');
 		$this->db->order_by('products.name','asc');
 		return $this->db->get()->result();
 	}
@@ -40,12 +40,10 @@ class Product_model extends CI_Model{
 		$this->db->from('products');
 		$this->db->join('outlets','outlets.id = products.outlet_id');
 		$this->db->join('tray','tray.id = products.tray_id');
-		$this->db->join('type','type.code = products.product_type');
-		$this->db->join('category','category.code = products.product_category');
+		$this->db->join('type','type.code = products.product_type','left');
+		$this->db->join('category','category.code = products.product_category','left');
 		$this->db->where('products.product_code',$product_code);
-		if($outlet_id != 0){
-			$this->db->where('products.outlet_id',$outlet_id);	
-		}
+		$this->db->where('products.outlet_id',$outlet_id);
 		$this->db->where('products.status','available');
 		$this->db->order_by('products.status','asc');
 		return $this->db->get()->row();
