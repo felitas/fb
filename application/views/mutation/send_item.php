@@ -115,13 +115,7 @@ $(document).ready(function(){
     $('#table_send').footable();
     $('#sendingform').validate({
         rules:{
-            outlet_name: "required",
-            outlet_username: "required",
-            outlet_code:{
-                required: true,
-                maxlength: 2
-            },
-            outlet_password: "required"
+            to_outlet: "required"
         }
     });
 });

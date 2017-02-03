@@ -48,9 +48,11 @@ class Mutation_model extends CI_Model{
 	}
 
 	function get_received_items($code = ''){
-		$this->db->select('mutation_product.*, p.name, p.real_weight, p.rounded_weight, p.photo');
+		$this->db->select('mutation_product.*, p.name, p.weight, p.photo, p.gold_amount, type.name as type, category.name as category');
 		$this->db->from('mutation_product');
 		$this->db->join('products as p','mutation_product.product_code = p.product_code','left');
+		$this->db->join('type','type.code = p.product_type','left');
+		$this->db->join('category','category.code = p.product_category','left');
 		$this->db->where('mutation_product.mutation_code',$code);
 		return $this->db->get()->result();
 	}

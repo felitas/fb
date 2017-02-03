@@ -88,28 +88,43 @@
 			if($this->session_role == 'sales'){
 				redirect('home');	
 			}
-			if($mutation_code == ''){
-				$data['title'] = "Penerimaan Barang";
-				$data['mutation'] = $this->mutation_model->get_mutation_location($mutation_code);
-				$data['receives'] = $this->mutation_model->get_received_transactions($this->session_outlet);
-				$data['transaction_count'] = count($data['receives']);
-				$this->template->load($this->default,'mutation/receive_item',$data);
-			}else{
+			else{
 				$mutation = $this->db->get_where('mutation',array('code' => $mutation_code))->row();
-
-				if($mutation->to_outlet == $this->session_outlet){
-					$this->load->model('tray_model');
+				//store manager can only see mutation from their store and to their store
+				if($this->session_role!='admin'){
+					if($mutation->to_outlet == $this->session_outlet){
+						$this->load->model('configuration_model');
+						$data['title'] = "Penerimaan Barang";
+						$data['trays'] = $this->configuration_model->get_tray($this->session_outlet);
+						$data['mutation'] = $this->mutation_model->get_mutation_location($mutation_code);
+						$data['received_items'] = $this->mutation_model->get_received_items($mutation_code);
+						$this->template->load($this->default,'mutation/receive_item',$data);
+					}
+					else{
+						redirect('mutation');
+					}	
+				}
+				//admin can do whatever
+				else{
+					$this->load->model('configuration_model');
 					$data['title'] = "Penerimaan Barang";
-					$data['trays'] = $this->tray_model->get_tray($this->session_outlet);
-					$data['mutation'] = $this->mutation_model->get_mutation_location($mutation->mutation_code);
-					$data['receives'] = $this->mutation_model->get_received_items($mutation->mutation_code);
+					$admin_outlet = $mutation->to_outlet;
+					$data['trays'] = $this->configuration_model->get_tray($admin_outlet);
+					$data['mutation'] = $this->mutation_model->get_mutation_location($mutation_code);
+					$data['received_items'] = $this->mutation_model->get_received_items($mutation_code);
 					$this->template->load($this->default,'mutation/receive_item',$data);
-				}else{
-					redirect('mutation/receive_item');
 				}
 			}
-			
 		}
 
+		public function get_product_from_mutation($product_code = '',$mutation_code = ''){
+			$product = $this->mutation_model->get_mutation_product($product_code, $mutation_code);
+			if($product == NULL){
+				echo 'not found';
+			}else{
+				$product = (Object) $product;
+				echo json_encode($product);	
+			}
+		}
 	}
 ?>
