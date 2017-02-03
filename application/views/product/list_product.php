@@ -1,6 +1,8 @@
 <!--Both are css for alertify-->
 <link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
+<link  href="<?php echo base_url() ?>fancybox/source/jquery.fancybox.css" rel="stylesheet">
+<script src="<?php echo base_url() ?>fancybox/source/jquery.fancybox.js"></script>
 <style>
 	.red{
 		color: red !important;
@@ -52,7 +54,7 @@
 								<?php foreach($products as $product): ?>
 									<tr>
 										<td><?php echo $i ?></td>
-										<td><img width="30" src="<?php echo base_url().$product->photo ?>" alt=""/></td>
+										<td><a id="product_image" href="<?php echo base_url().$product->photo ?>"><img width="30" src="<?php echo base_url().$product->photo ?>" alt=""/></a></td>
 										<td><?php echo $product->name ?></td>
 										<td><?php echo $product->type ?></td>
 										<!-- <td><?php #echo $product->category ?></td> -->
@@ -121,6 +123,7 @@
 	    <?php endif; ?>
 
 	    $('#table_product').footable();
+	    $("#product_image").fancybox();
 	});
 	
 </script>
