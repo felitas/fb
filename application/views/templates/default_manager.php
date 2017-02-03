@@ -5,26 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title><?php echo $title ?> - Kemenangan</title>
+    <title><?php echo $title ?> - Fajar Baru</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.min.css">
     <link href="<?php echo base_url() ?>font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>css/metro.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>css/metro-icons.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>css/metro-responsive.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>css/metro-schemes.css" rel="stylesheet">
-    
-    <link href="<?php echo base_url() ?>css/docs.css" rel="stylesheet">
-
-    
+    <link href="<?php echo base_url() ?>css/bootstrap-responsive.min.css" rel="stylesheet"><!--Matrix-->
+    <link rel="stylesheet" href="<?php echo base_url() ?>css/jquery.gritter.css" /><!--Matrix Notification-->
+    <link href="<?php echo base_url() ?>css/uniform.css" rel="stylesheet"><!--Matrix Uniform-->
+    <link href="<?php echo base_url() ?>css/matrix-style.css" rel="stylesheet"><!--Matrix-->
+    <link href="<?php echo base_url() ?>css/matrix-media.css" rel="stylesheet"><!--Matrix-->
+    <link rel="stylesheet" href="<?php echo base_url() ?>css/bootstrap-wysihtml5.css" /> <!--Matrix-->
+    <link href="<?php echo base_url() ?>css/footable.core.css" type="text/css" rel="stylesheet"><!--Footable-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>    
     
 
     <script src="<?php echo base_url() ?>js/jquery-1.12.4.min.js"></script>
     <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url() ?>js/metro.js"></script>
-    <script src="<?php echo base_url() ?>js/webcam.min.js"></script>
-    <script src="<?php echo base_url();?>js/script.js"></script>
+    <script src="<?php echo base_url() ?>js/jquery.ui.custom.js"></script><!--Matrix-->
+    <script src="<?php echo base_url();?>js/script.js"></script><!--Get month name and get day name in Indonesian-->
+    <script src="<?php echo base_url();?>js/matrix.js"></script><!--Matrix-->
+    <script src="<?php echo base_url();?>js/wysihtml5-0.3.0.js"></script>  <!--Matrix-->
+    <script src="<?php echo base_url();?>js/bootstrap-wysihtml5.js"></script><!--Matrix-->
+    <script src="<?php echo base_url();?>js/jquery.gritter.min.js"></script> <!--Matrix Notification-->
+    <script src="<?php echo base_url();?>js/jquery.uniform.js"></script> <!--Matrix Uniform-->
+    <script src="<?php echo base_url() ?>js/footable.js"></script><!--Footable-->
+    <script src="<?php echo base_url() ?>js/footable.filter.js"></script><!--Footable-->
+    <script src="<?php echo base_url() ?>js/footable.paginate.js"></script><!--Footable-->
+    <script src="<?php echo base_url() ?>js/footable.sort.js" type="text/javascript"></script><!--Footable-->
+
+    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -33,423 +43,262 @@
     <![endif]-->
     <?php $configuration = $this->crud_model->get_data('configuration')->row() ?>
     <style>
+      #header h1{
+        background: url("<?php echo base_url()?>assets/logo.png") no-repeat scroll 0 0 transparent !important;
+      }
+      h2{
+        margin-bottom: 0px !important;
+      }
+
+      /*Gritter*/
+      .gritter-close{
+        background:url('<?php echo base_url()?>assets/gritter.png') no-repeat left top !important;
+      }
+
       /**alertify modal**/
       .alertify .ajs-header{
-        color: <?php echo $configuration->primary_color ?> !important;
-        background: white !important;
-        border-bottom: 1px solid <?php echo $configuration->primary_color ?> !important;
+        background:#efefef !important;
+        border-bottom: 1px solid #CDCDCD !important;
+        height: auto;
+        padding: 8px 15px 5px;
+        z-index: 99999;
       }
       .alertify .ajs-footer{
-        color: <?php echo $configuration->primary_color ?> !important;
-        background: white !important;
-        border-top: 1px solid <?php echo $configuration->primary_color ?> !important;
+        background:#efefef !important;
+        border-top: 1px solid #CDCDCD !important;
       }
 
       .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-ok{
-        background-color: <?php echo $configuration->primary_color ?> !important;
-        color: white !important;
+        background:#3FC380 !important;
+        border-radius: 5px !important;
+        color: #fff !important;
       }
-      /** end of alertify **/
 
-      .segoe{
-        font-family: 'Segoe UI';
-        font-size: 12px;
-        line-height: 30px;
+      .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-cancel{
+        background:#EC644B !important;
+        border-radius: 5px !important;
+        color: #fff !important;
       }
-     
-      .navbar{
-        background-color: <?php echo $configuration->primary_color ?>;
-        height: 50px;
-        border:none;
-        border-radius: 0px;
+
+      /** end of alertify **/
+      body{
+        line-height: 20px;
+      }
+      .row-fluid{
+        font-size: 15px !important;
       }
       .bg-primary{
         background-color: <?php echo $configuration->primary_color ?> !important;
         color: white !important;
       }
-      .overlay{
-        position: fixed;
-        width: 100%;
-        height: 0;
-        z-index: 3;
-        left: 0;
-        top: 50px;
-        opacity: 0;
-        background-color:#fff;
-        overflow-x: hidden;
-        overflow-y: hidden;
-        -webkit-box-shadow: 0 7px 10px 0 #9E9E9E;
-        box-shadow: 0 7px 10px 0 #9E9E9E;
-        transition: 0.2s ease-in;
-        
+      .footable > thead > tr > th{
+        padding-top: 0px !important;
+        font-size: 13px !important;
       }
-      @media (max-width: 1127px){
-      .tile-group {
-        margin:0 !important;
-        float: left !important;
-      }}
-      @media(max-width: 500px){
-        .navbar-brand{
-          display: none;
-        }
+      .nocontent>h3{
+        text-align: center !important;
       }
-
-      @media(max-width: 425px){
-        .tile-large,.tile,.tile-wide{
-          width: 150px;
-          height: 150px;
-        }
-        .navbar-nav>li{
-          width: 14.27% !important;
-          text-align: center;
-        }
-        .navbar-nav{
-          width: 100%;
-        }
-        .tile-group{
-          width: 320px !important;
-          margin: 0 3% !important;
-        }
-        #transaksi-container{
-          margin:0 !important;
-        }
-        .navbar > .container-fluid{
-          padding: 0 !important;
-        }
+      /*Toggle Currency pop up*/
+      #kurstoggle{
+        background-color: <?php echo $configuration->primary_color ?> !important;
+        height: 70px;
+        width: 70px;
+        border-radius: 50%;
+        position: fixed; 
+        right: 20px; 
+        z-index: 1; 
+        top: 560px;
       }
-      @media (max-width: 968px){
-        .menu-text{
-          display: none;
-        }
+      #charm_currency{
+          height: 100px;        
+          background-color: <?php echo $configuration->primary_color ?> !important;
       }
-      .tile-group{
-        margin: 0 12%;
-      }
-      .overlay-content{
-        position: relative;
-        top: 0%;
-        width: 100%;
-        text-align: center;
-        margin-top: 20px;
-      }
-      .navbar-nav>li{
-        border-right: 1px solid #fff;
-      }
-      .navbar-nav>li:hover{
-
-        background-color: white !important;
-        -webkit-transition: all 0.3s ease-in;
-        -moz-transition: all 0.3s ease-in;
-        transition: all 0.3s ease-in;
-      }
-      .navbar-nav>li:hover .menu-a {
-        color: <?php echo $configuration->primary_color ?> !important;
-      }
-      .navbar-nav>li>a{
-        color: white !important;
-      }
-      .navbar-brand{
-        border-right: 1px solid #fff; 
-        color: white !important;
-      }
-      .tile-group-title{
-        color: black !important;
-        text-transform: uppercase;
-      }
-      .buka{
-
-        background-color: #FFFFFF !important;
-        -webkit-transition: all 0.3s ease-in;
-        -moz-transition: all 0.3s ease-in;
-        transition: all 0.3s ease-in;
-      }
-      .buka>a:visited,.buka>a:focus,.buka>a:active,.buka>a:hover{
-        color: <?php echo $configuration->primary_color ?> !important;
-        background-color: #FFFFFF;
-        -webkit-transition: all 0.3s ease-in;
-        -moz-transition: all 0.3s ease-in;
-        transition: all 0.3s ease-in;
-      }
-      .input-control input, .input-control textarea, .input-control select{
-        border-color: rgba(127, 140, 141,1.0);
-      }
-      .btn-file{
-        border-color: rgba(127, 140, 141,1.0);
-      }
-      .btn-teal:hover{
-        background-color: white !important;
-        -webkit-transition: all 0.3s ease-in;
-        -moz-transition: all 0.3s ease-in;
-        transition: all 0.3s ease-in;
-        color: <?php echo $configuration->primary_color ?> !important;
-        border: 1px solid <?php echo $configuration->primary_color ?> !important;
-        font-weight: bold
-      }
-      .form-title{
-        padding-bottom: 10px;
-        padding-top: 5px;
+      #currency_head{
+        border-bottom: 0px;
       }
 
+    /*Navbar*/
+    .navbar a,#sidebar > ul > li > a, #sidebar>ul>li>ul>li>a{
+      color: #fff !important;
+    }
+    .dropdown-menu{
+      background-color: #000 !important;
+      margin-top: -1px;
+    }
+    .navbar .nav>li>.dropdown-menu:after{
+      border:none !important;
+    }
+    .faicon{
+      width: 20px !important;
+    }
+    /*Form*/
+    .form-actions{
+      background: transparent !important;
+    }
+    .top-control{
+      border-top: none !important
+    }
+    @media (max-width: 970px){
+     .control-group{
+        border: none !important;
+      } 
+    }
+    .circleimg{
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      margin: auto;
+      margin-bottom: 10px;
+    }
+  
     </style>
 
   </head>
   <body>
-  
-  <header>
-      <nav class="navbar navbar-default">
-        <div class="container-fluid" style="padding-left: 15px; padding-right: 15px;">
-          <!-- Brand and toggle get grouped for better mobile display -->
+  <div id="header">
+    <h1><a href="<?php echo base_url();?>">Fajar Baru</a></h1>
+  </div>
+  <!--top-Header-menu-->
+  <div id="user-nav" class="navbar">
+    <ul class="nav">
+      <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><span class="text">Welcome <?php echo $this->session->user_name ?></span> <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">My Profile</a></li>
+        </ul>
+      </li>
+      <li><a href="<?php echo base_url('accounts/logout') ?>"><i class="fa fa-power-off"></i> <span class="text">Logout</span></a></li>
+    </ul>
+  </div>
+  <!--close-top-Header-menu--> 
 
-          <div class="navbar-header">
-            
-            <a class="navbar-brand" href="#">Logo</a>
-          </div>
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          
-            <ul class="nav navbar-nav">
-              <li><a href="<?php echo base_url('home') ?>" class="menu-a" ><i class="fa fa-home" aria-hidden="true"></i> <span class="menu-text">Home</span></a></li>
-              <!--Menu+dropdown Transaksi-->
-              <li><a href="#" onclick="openNav(this)" class="menu-a"><i class="fa fa-money" aria-hidden="true"></i> <span class="menu-text">Transaksi</span></a>
-                  <div class="container-fluid overlay" style="padding-top: 0px">
-                    <div class="overlay-content" >
-                      <div class="grid">
-                        <div class="row cells2">
-                          <div class="cell">
-                            <div class="tile-group triple">
-                              <span class="tile-group-title">Penjualan</span>
-                                <div class="tile-container"><!--Container Penjualan begins-->
-                                    <div class="tile-large fg-white" data-role="tile" style="background-color: #734ACC">
-                                      <div class="tile-content iconic">
-                                        <span class="icon mif-coins mif-ani-slow mif-ani-bounce"></span>
-                                        <span class="tile-label">Daftar Penjualan</span>
-                                      </div>
-                                    </div>
-                                    <div class="tile fg-white" data-role="tile" style="background-color: #905CFF">
-                                      <div class="tile-content iconic">
-                                        <span class="icon mif-plus"></span>
-                                        <span class="tile-label">Penjualan Baru</span>
-                                      </div>
-                                    </div>    
-                                    <div class="tile fg-white" data-role="tile" style="background-color:  #4383E8">
-                                      <div class="tile-content iconic">
-                                        <span class="icon mif-checkmark"></span>
-                                        <span class="tile-label">Booking Baru</span>
-                                      </div>
-                                    </div>    
-                                    <div class="tile-wide tile-big-x fg-white" data-role="tile" style="background-color: #3466B5">
-                                      <div class="tile-content iconic">
-                                        <span class="icon mif-clipboard mif-ani-slow mif-ani-heartbeat"></span>
-                                        <span class="tile-label">Daftar Booking</span>
-                                      </div>
-                                    </div>
-                                </div><!--Container ends-->
-                            </div>    
-                          </div>
-                          
-                          <div class="cell">
-                            <div class="tile-group triple" >
-                              <span class="tile-group-title">Buyback</span>
-                                <div class="tile-container"><!--Container Buyback begins-->
-                                    <div class="tile-wide fg-white" data-role="tile" style="background-color: #A7857E">
-                                      <div class="tile-content iconic">
-                                        <span class="icon mif-file-text mif-ani-slow mif-ani-vertical"></span>
-                                        <span class="tile-label">Daftar Buyback</span>
-                                      </div>
-                                    </div>
-                                    <div class="tile fg-white" data-role="tile" style="background-color: #E0A194">
-                                      <div class="tile-content iconic">
-                                        <span class="icon mif-plus"></span>
-                                        <span class="tile-label">Buyback Baru</span>
-                                      </div>
-                                    </div>
-                                </div><!--Container ends-->
-                            </div>
-                            <div class="tile-group triple" >
-                                <span class="tile-group-title">Pembelian</span>
-                                <div class="tile-container"><!--Container Pembelian begins-->
-                                    <div class="tile-wide fg-white" data-role="tile" style="background-color: #3AB2A5">
-                                      <div class="tile-content iconic">
-                                        <span class="icon mif-file-text mif-ani-slow mif-ani-vertical"></span>
-                                        <span class="tile-label">Daftar Pembelian</span>
-                                      </div>
-                                    </div>
-                                    <div class="tile fg-white" data-role="tile" style="background-color: #3DBD8B">
-                                      <div class="tile-content iconic">
-                                        <span class="icon mif-plus"></span>
-                                        <span class="tile-label">Pembelian Baru</span>
-                                      </div>
-                                    </div>
-                                </div><!--Container ends-->
-                            </div>  
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </li><!--Transaksi ends-->
-              <!--Menu + Dropdown Inventory-->
-              <li><a href="#" onclick="openNav(this)" class="menu-a"><i class="fa fa-dropbox" aria-hidden="true"></i> <span class="menu-text">Inventory</span></a>
-                  <div class="container-fluid overlay">
-                    <div class="overlay-content">
-                      <div class="grid">
-                        <div class="row">
-                          <div class="cell">
-                            <div class="tile-group">
-                              <span class="tile-group-title">Inventory</span>
-                              <div class="tile-container"><!--Container begins-->
-                                <div class="tile-large tile-big-y bg-amber fg-white" data-role="tile">
-                                  <div class="tile-content iconic"><span class="icon mif-list  mif-ani-float"></span><span class="tile-label">Daftar Barang</span></div>
-                                </div>
-                                <div class="tile-large bg-orange fg-white" data-role="tile">
-                                  <div class="tile-content iconic"><span class="icon mif-plus"></span><span class="tile-label">Input Barang</span></div>
-                                </div>
-                                <div class="tile tile-wide-y bg-red fg-white" data-role="tile">
-                                  <div class="tile-content iconic"><span class="icon mif-truck mif-ani-pass"></span><span class="tile-label">Kirim</span></div>
-                                </div>
-                                <div class="tile tile-wide-y bg-lightRed fg-white" data-role="tile">
-                                  <div class="tile-content iconic"><span class="icon fa fa-check-square-o"></span><span class="tile-label">Terima</span></div>
-                                </div>
-
-                                <a class="tile bg-green fg-white" data-role="tile" href="<?php echo base_url('tray')?>">
-                                  <div class="tile-content iconic"><span class="icon mif-shopping-basket mif-ani-bounce mif-ani-fast"></span><span class="tile-label">Daftar Baki</span></div>
-                                </a>
-                                <a class="tile bg-lime fg-white" data-role="tile" href="<?php echo base_url('tray')?>">
-                                  <div class="tile-content iconic"><span class="icon mif-search"></span><span class="tile-label">Stok Opnam</span></div>
-                                </a>
-                                <div class="tile tile-wide-x bg-magenta fg-white" data-role="tile">
-                                  <div class="tile-content iconic"><span class="icon mif-versions mif-ani-horizontal"></span><span class="tile-label">Daftar Transaksi Barang</span></div>
-                                </div>
-                              </div><!--Container ends-->
-                            </div>      
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </li>
-              <!--Inventory ends-->
-              <!--Menu + Dropdown Outlets-->
-              <li><a href="#" onclick="openNav(this)" class="menu-a"><span class="icon mif-shop"></span> <span class="menu-text">Outlets</span></a>
-                  <div class="container-fluid overlay">
-                    <div class="overlay-content">
-                      <div class="grid">
-                        <div class="row">
-                          <div class="cell">
-                            <div class="tile-group">
-                              <div class="tile-group-title">Outlet</div>
-                                <div class="tile-container"><!--Container begin-->
-                                  <a href="<?php echo base_url('outlets') ?>" class="tile-large tile-big-y bg-lime fg-white" data-role="tile">
-                                    <div class="tile-content iconic"><span class="icon mif-shop mif-ani-shake"></span><span class="tile-label">Daftar Outlet</span></div>
-                                  </a>
-                                  <a href="<?php echo base_url('sales/add_sales') ?>" class="tile tile-super-x bg-green fg-white" data-role="tile">
-                                    <div class="tile-content iconic"><span class="icon mif-user-plus"></span><span class="tile-label">Tambah Sales Baru</span></div>
-                                  </a>
-                                  <a href="<?php echo base_url('sales') ?>" class="tile tile-super-x tile-wide-y bg-darkEmerald fg-white" data-role="tile">
-                                    <div class="tile-content iconic"><span class="icon mif-users  mif-ani-float"></span><span class="tile-label">Daftar Sales</span></div>
-                                  </a>
-                                </div><!--Container ends-->
-                            </div>    
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </li>
-              <!--Outlet ends-->
-              <!--Menu + Dropdown Kontak-->
-              <li><a href="#" onclick="openNav(this)" class="menu-a"><i class="fa fa-phone" aria-hidden="true"></i> <span class="menu-text">Kontak</span></a>
-                  <div class="container-fluid overlay">
-                    <div class="overlay-content">
-                      <div class="grid">
-                        <div class="row">
-                          <div class="cell">
-                            <div class="tile-group">
-                              <span class="tile-group-title">DAFTAR KONTAK</span>
-                              <div class="tile-container"> <!--Tile container begins-->
-                                <a href="<?php echo base_url('customer') ?>" class="tile-large tile-big-y bg-darkCobalt fg-white" data-role="tile">
-                                  <div class="tile-content iconic">
-                                    <span class="icon mif-users mif-ani-bounce"></span>
-                                    <span class="tile-label">Daftar Customer</span>
-                                  </div>
-                                </a>
-                                <a class="tile tile-super-x tile-wide-y bg-cobalt fg-white" data-role="tile" href="<?php echo base_url('supplier') ?>">
-                                  <div class="tile-content iconic">
-                                    <span class="icon mif-file-text  mif-ani-heartbeat"></span>
-                                    <span class="tile-label ">Daftar Supplier</span>
-                                  </div>
-                                </a>
-                                <a class="tile tile-wide-x bg-darkBlue fg-white" data-role="tile" href="<?php echo base_url('customer/add_customer') ?>">
-                                  <div class="tile-content iconic">
-                                    <span class="icon mif-user-plus"></span>
-                                    <span class="tile-label">Tambah Customer</span>
-                                  </div>
-                                </a>
-                                <a class="tile tile-wide-x bg-lightBlue fg-white" data-role="tile" href="<?php echo base_url('supplier/add_supplier') ?>">
-                                  <div class="tile-content iconic">
-                                    <span class="icon mif-user-plus"></span>
-                                    <span class="tile-label">Tambah Supplier</span>
-                                  </div>
-                                </a>
-                              </div><!--Container Ends-->
-                            </div>  
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </li>
-              <!--Kontak ends-->
-              <li><a href="<?php echo base_url('accounts/logout') ?>" class="menu-a"><i class="fa fa-power-off"></i> <span class="menu-text">Logout</span></a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right" style="hidden-sm">
-              <li class="dropdown">
-                  <a class="menu-a" style="cursor: pointer;" href="#"><span class="icon mif-user" style="margin-bottom: 4px;"></span> <span class="menu-text">Welcome, <?php echo $this->session->user_name?></span></a>
-              </li>
-            </ul>
-              
-            
-           <!--Main menu ul ends-->
-             
-          
-        </div><!-- /.container-fluid -->
-      </nav>
-  </header>
-  
+  <!--sidebar-menu-->
+  <div id="sidebar"><a href="<?php echo base_url('home') ?>" class="visible-phone"><i class="fa fa-home"></i> Home</a>
+    <ul>
+      <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-home"></i><span>Home</span></a> </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-shopping-bag"></i><span>Penjualan</span></a>
+        <ul>
+          <li><a href=""><i class="fa fa-file-text faicon"></i> Daftar Penjualan</a></li>
+          <li><a href=""><i class="fa fa-plus-square faicon"></i> Penjualan Baru</a></li>
+          <li><a href=""><i class="fa fa-calendar-check-o faicon"></i> Daftar Booking</a></li>
+          <li><a href=""><i class="fa fa-check-square faicon"></i> Booking Baru</a></li>
+        </ul>
+      </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-shopping-cart"></i><span>Pembelian</span></a>
+        <ul>
+          <li><a href=""><i class="fa fa-file-text faicon"></i> Daftar Pembelian</a></li>
+          <li><a href=""><i class="fa fa-cart-plus faicon"></i> Pembelian Baru</a></li>
+          <li><a href=""><i class="fa fa-exchange faicon"></i> Daftar Buyback</a></li>
+          <li><a href=""><i class="fa fa-arrows-h faicon"></i> Buyback Baru</a></li>
+        </ul>
+      </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-bank"></i><span>Outlet</span></a>
+        <ul>
+          <li><a href="<?php echo base_url('outlets') ?>"><i class="fa fa-file-text faicon"></i> Daftar Outlet</a></li>
+          <li><a href="<?php echo base_url('outlets/add_outlet') ?>"><i class="fa fa-plus-square faicon"></i> Outlet Baru</a></li>
+          <li><a href="<?php echo base_url('sales') ?>"><i class="fa fa-users faicon"></i> Daftar Sales</a></li>
+          <li><a href="<?php echo base_url('sales/add_sales') ?>"><i class="fa fa-user-plus faicon"></i> Sales Baru</a></li>
+        </ul>
+      </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-cubes"></i><span>Inventori</span></a>
+        <ul>
+          <li><a href="<?php echo base_url('product') ?>"><i class="fa fa-file-text faicon"></i> Daftar Produk</a></li>
+          <li><a href="<?php echo base_url('product/add_product') ?>"><i class="fa fa-plus-square faicon"></i> Input Produk</a></li>
+          <li><a href="error500.html"><i class="fa fa-pencil-square faicon"></i> Stok Opnam</a></li>
+          <li><a href="<?php echo base_url('tray') ?>"><i class="fa fa-file-text faicon"></i> Daftar Nampan</a></li>
+        </ul>
+      </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-archive"></i><span>Mutasi</span></a>
+        <ul>
+          <li><a href="<?php echo base_url('mutation/send_item')?>"><i class="fa fa-paper-plane faicon"></i> Kirim</a></li>
+          <li><a href="<?php echo base_url('mutation/received_item')?>"><i class="fa fa-truck faicon faicon"></i> Terima</a></li>
+          <li><a href="<?php echo base_url('mutation')?>"><i class="fa fa-truck faicon faicon"></i> Daftar Mutasi</a></li>
+        </ul>
+      </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-address-book"></i><span>Kontak</span></a>
+        <ul>
+          <li><a href="<?php echo base_url('customer') ?>"><i class="fa fa-user-circle faicon"></i> Daftar Customer</a></li>
+          <li><a href="<?php echo base_url('customer/add_customer') ?>"><i class="fa fa-user-plus faicon"></i> Tambah Customer</a></li>
+          <li><a href="<?php echo base_url('supplier') ?>"><i class="fa fa-file-text faicon"></i> Daftar Supplier</a></li>
+          <li><a href="<?php echo base_url('supplier/add_supplier') ?>"><i class="fa fa-male faicon"></i> Tambah Supplier</a></li>
+        </ul>
+      </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-gear"></i><span>Konfigurasi</span></a>
+        <ul>
+          <li><a href="error403.html"><i class="fa fa-bank faicon"></i> Toko</a></li>
+          <li><a href="<?php echo base_url('configuration/Currency') ?>"><i class="fa fa-dollar faicon"></i> Kurs</a></li>
+          <li><a href="<?php echo base_url('configuration/gold_amount') ?>"><i class="fa fa-gg faicon"></i> Gold</a></li>
+          <li><a href="<?php echo base_url('configuration/diamond_type')?>"><i class="fa fa-diamond faicon"></i>Spesifikasi Diamond</a></li>
+          <!--the 3 below are essential for product barcode-->
+          <li><a href="<?php echo base_url('configuration/product_type') ?>"><i class="fa fa-empire faicon"></i> Tipe Produk</a></li>
+          <li><a href="<?php echo base_url('configuration/category') ?>"><i class="fa fa-puzzle-piece faicon"></i> Kategori Produk</a></li>
+          <li><a href="<?php echo base_url('configuration/model') ?>"><i class="fa fa-tags faicon"></i> Koleksi/Model Perhiasan</a></li>
+          <!--End barcode elements-->
+          <li><a href="error500.html"><i class="fa fa-opencart faicon"></i> Promo</a></li>
+          <li><a href="error500.html"><i class="fa fa-users faicon"></i> Sales</a></li>
+          <li><a href="error500.html"><i class="fa fa-user-circle faicon"></i> Member</a></li>
+        </ul>
+      </li>
+      <!-- <li class="content"> <span>Monthly Bandwidth Transfer</span>
+        <div class="progress progress-mini progress-danger active progress-striped">
+          <div style="width: 77%;" class="bar"></div>
+        </div>
+        <span class="percent">77%</span>
+        <div class="stat">21419.94 / 14000 MB</div>
+      </li>
+      <li class="content"> <span>Disk Space Usage</span>
+        <div class="progress progress-mini active progress-striped">
+          <div style="width: 87%;" class="bar"></div>
+        </div>
+        <span class="percent">87%</span>
+        <div class="stat">604.44 / 4000 MB</div>
+      </li> -->
+    </ul>
+  </div>
+  <!--sidebar-menu-->
+  <!--main-container-part-->
+  <div id="content">
+    <div id="content-header">
+      <div id="breadcrumb"> 
+        <a href="<?php echo base_url() ?>" ><div class="tile-group-title"><div id="txt"></div></div></a>
+      </div>
+    </div>
     <?php echo $body ?>
+  </div>
+  <!--end-main-container-part-->
   
-  
-  <footer></footer>
-
-    <script>
-      function openNav(el){
-        if($(el).parent('li').hasClass('buka')){
-          $(el).parent('li').find('.overlay').css('height', 0);
-          $(el).parent('li').find('.overlay').css('overflow-y', 'hidden');
-          $(el).parent('li').find('.overlay').css('overflow-x', 'hidden');
-          $(el).parent('li').find('.overlay').css('opacity', 0);
-          $(el).parent('li').find('.overlay').css('padding-bottom', '0px');
-          $('body').css('overflow-y','scroll');
-          $(el).parent('li').removeClass('buka');
-        }else{
-          $('body').css('overflow-y','hidden');
-          $('.navbar-nav').find('.overlay').css('overflow-x', 'hidden');
-          $('.navbar-nav').find('.overlay').css('opacity', 0);
-          $('.navbar-nav').find('.overlay').css('overflow-y', 'hidden');
-          $('.navbar-nav').find('.overlay').css('padding-bottom', '0px');
-          $('.navbar-nav').find('li').removeClass('buka');
-          $('.navbar-nav').find('.overlay').css('height', 0);
-          $(el).parent('li').find('.overlay').css('padding-bottom', '50px');
-          $(el).parent('li').find('.overlay').css('overflow-y', 'scroll');
-          $(el).parent('li').find('.overlay').css('overflow-x', 'scroll');
-          $(el).parent('li').find('.drop').css('overflow-y', 'hidden');
-          $(el).parent('li').find('.drop').css('overflow-x', 'hidden');
-          $(el).parent('li').find('.overlay').css('opacity', '1');
-          $(el).parent('li').addClass('buka');
-          $(el).parent('li').find('.overlay').css('height','100%');
-        } 
-        
-      }
-    </script>
+  <footer style="height: 50px"></footer>
   </body>
 </html>
+<script type="text/javascript">
+$(document).ready(function(){
+  startTime();
+});
+
+  function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        var d = today.getDate();
+        var D = today.getDay();
+        var M = today.getMonth();
+        var Y = today.getFullYear();
+        h = checkTime(h);
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML =
+        getDayName(D) + ", "+ d + " " + getMonthName(M) + " " + Y + " " + h + ":" + m + ":" + s;
+        var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+    }
+
+    <?php if($this->session->userdata('success')): ?>
+
+       <?php echo $this->session->userdata('success') ?>
+
+    <?php endif; ?>
+</script>

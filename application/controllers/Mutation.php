@@ -85,6 +85,7 @@
 		}
 
 		public function receive_item($mutation_code = ''){
+			$this->load->model('configuration_model');
 			if($this->session_role == 'sales'){
 				redirect('home');	
 			}
@@ -93,7 +94,6 @@
 				//store manager can only see mutation from their store and to their store
 				if($this->session_role!='admin'){
 					if($mutation->to_outlet == $this->session_outlet){
-						$this->load->model('configuration_model');
 						$data['title'] = "Penerimaan Barang";
 						$data['trays'] = $this->configuration_model->get_tray($this->session_outlet);
 						$data['mutation'] = $this->mutation_model->get_mutation_location($mutation_code);
@@ -106,7 +106,6 @@
 				}
 				//admin can do whatever
 				else{
-					$this->load->model('configuration_model');
 					$data['title'] = "Penerimaan Barang";
 					$admin_outlet = $mutation->to_outlet;
 					//this part makes the whole get product script doesnt work

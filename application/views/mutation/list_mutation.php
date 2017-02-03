@@ -116,9 +116,8 @@
 						<th data-hide="phone">Asal</th>
 						<th data-hide="phone">Tujuan</th>
 						<th data-hide="phone">Status</th>
-						<?php if($role=='admin'):?>
-							<th data-hide="phone">Action</th>
-						<?php endif?>
+						<th data-hide="phone">Action</th>
+						
 					</tr>
 				</thead>
 				<tbody>
@@ -152,15 +151,12 @@
 							<tr>
 								<td><?php echo $i ?></td>
 								<td><?php echo $received_transaction->code ?></td>
-								<td><?php echo $received_transaction->date ?></td>
-								
-								<td><?php echo $received_transaction->outlet_from ?></td>
-								<td><?php echo $received_transaction->outlet_to ?></td>
+								<td><?php echo date('d-M-Y H:i:s',strtotime($received_transaction->date)) ?></td>
+								<td><?php echo $received_transaction->product_qty ?></td>
+								<td><?php echo $received_transaction->from_outlet ?></td>
+								<td><?php echo $received_transaction->to_outlet ?></td>
 								<td><p class="<?php echo ($received_transaction->status=='Pending')? 'red':'' ?>"><?php echo $received_transaction->status ?></p></td>
-								
-								<?php if($role=='admin'):?>
-									<td><a href="<?php echo base_url('mutation/edit_mutation/'.$received_transaction->code) ?>"><span class="mif mif-pencil"></span> Accept</a>
-								<?php endif?>
+								<td><a href="<?php echo base_url('mutation/receive_item/'.$received_transaction->code) ?>" class="btn btn-success">Accept</a></td>
 								
 							</tr>
 							<?php $i++; ?>
