@@ -9,6 +9,7 @@
         <div class="row-fluid">
           <div class="span12">
             <?php echo form_open('mutation/send_item', array('class'=>'form-horizontal', 'id'=>'mutationform' )) ?>
+            <!--HEADER OF MUTATION : FROM AND TO -->
             <div class="control-group top-control">
                 <!--ADMIN HAS FREEDOM TO CHOOSE TO AND FROM WHERE THE MUTATION GOES-->
                 <?php if($role=='admin'): ?>
@@ -49,11 +50,11 @@
                 </div>
                 <?php endif?>
             </div>
-
+            <!--HEADER ENDS-->
             <div class="control-group">    
                 <label class="control-label">Kode Produk</label>
                 <div class="controls">
-                  <input type="text" placeholder="Scan atau ketik kode produk" name="product_code" class="span11" onblur="get_product(this)">
+                  <input type="text" placeholder="Scan atau ketik kode produk yang akan dikirim" name="product_code" class="span11" onblur="get_product(this)">
                 </div>    
             </div>    
 
@@ -70,12 +71,12 @@
                                         <th data-type="numeric">No</th>
                                         <th>Kode Barang</th>
                                         <th>Nama</th>
-                                        <th data-hide="phone" data-toggle="phone">Nampan</th>
+                                        <!-- <th data-hide="phone" data-toggle="phone">Nampan</th> -->
                                         <th data-hide="phone" data-toggle="phone">Tipe</th>
                                         <th data-hide="phone" data-toggle="phone">Kategori</th>
                                         <th data-hide="phone" data-toggle="phone">Kadar</th>
                                         <th data-hide="phone" data-toggle="phone">Berat</th>
-                                        <th data-hide="phone" data-toggle="phone">Harga Jual</th>
+                                        <th data-hide="phone" data-toggle="phone">Foto</th>
                                         <th data-hide="phone" data-toggle="phone">Action</th>
                                     </tr>
                                 </thead>
@@ -151,7 +152,7 @@ function get_product(el){
                             time: 1500
                         });
                     }else{
-                        $('#table_body').append("<tr><td>"+no+"</td><td>"+data.product_code+"</td><td>"+data.name+"</td><td>"+data.tray+"</td><td>"+data.type+"</td><td>"+data.category+"</td><td>"+data.gold_amount+"</td><td>"+data.weight+"</td><td>"+data.sell_price+"</td><td>&times;</td>")
+                        $('#table_body').append("<tr><td>"+no+"</td><td>"+data.product_code+"</td><td>"+data.name+"</td><td>"+data.type+"</td><td>"+data.category+"</td><td>"+data.gold_amount+"</td><td>"+data.weight+"</td><td><img width='20' src='<?php echo base_url() ?>"+data.photo+"'></td><td>&times;</td>")
                         // $('#table_body').append("<tr><td>"+no+"</td><td><a class='photobox' href='<?php echo base_url() ?>"+data.photo+"'><img width='20' src='<?php echo base_url() ?>"+data.photo+"' alt=''/></a></td><td>"+data.product_code+"</td><td>"+data.name+"</td><td>"+data.tray+"</td><td>"+data.type+"</td><td>"+data.category+"</td><td>"+data.real_weight+"</td><td>"+data.rounded_weight+"</td><td>"+data.selling_price+"</td><td>"+data.amount_type+data.original+"->"+data.marked_up+"</td><td>"+data.outlet+"</td></tr>");
 
                         $('#mutationform').append("<input type='hidden' name='product_code[]' value='"+data.product_code+"'>");

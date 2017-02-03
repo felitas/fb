@@ -35,11 +35,12 @@ class Product_model extends CI_Model{
 		return $this->db->get()->result();
 	}
 
+	//USED BY MUTATION
 	function get_product_by_code($product_code = '', $outlet_id = ''){
 		$this->db->select('products.*,outlets.name as outlet, tray.code as tray, type.name as type, category.name as category');
 		$this->db->from('products');
 		$this->db->join('outlets','outlets.id = products.outlet_id');
-		$this->db->join('tray','tray.id = products.tray_id');
+		$this->db->join('tray','tray.id = products.tray_id','left');
 		$this->db->join('type','type.code = products.product_type','left');
 		$this->db->join('category','category.code = products.product_category','left');
 		$this->db->where('products.product_code',$product_code);

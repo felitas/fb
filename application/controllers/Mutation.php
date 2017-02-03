@@ -84,5 +84,32 @@
 			
 		}
 
+		public function receive_item($mutation_code = ''){
+			if($this->session_role == 'sales'){
+				redirect('home');	
+			}
+			if($mutation_code == ''){
+				$data['title'] = "Penerimaan Barang";
+				$data['mutation'] = $this->mutation_model->get_mutation_location($mutation_code);
+				$data['receives'] = $this->mutation_model->get_received_transactions($this->session_outlet);
+				$data['transaction_count'] = count($data['receives']);
+				$this->template->load($this->default,'mutation/receive_item',$data);
+			}else{
+				$mutation = $this->db->get_where('mutation',array('code' => $mutation_code))->row();
+
+				if($mutation->to_outlet == $this->session_outlet){
+					$this->load->model('tray_model');
+					$data['title'] = "Penerimaan Barang";
+					$data['trays'] = $this->tray_model->get_tray($this->session_outlet);
+					$data['mutation'] = $this->mutation_model->get_mutation_location($mutation->mutation_code);
+					$data['receives'] = $this->mutation_model->get_received_items($mutation->mutation_code);
+					$this->template->load($this->default,'mutation/receive_item',$data);
+				}else{
+					redirect('mutation/receive_item');
+				}
+			}
+			
+		}
+
 	}
 ?>

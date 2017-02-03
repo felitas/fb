@@ -5,6 +5,10 @@
 	.red{
 		color: red !important;
 	}
+	.btn-info,.btn-danger{
+		font-size: 11px;
+		width: 60%;
+	}
 </style>
 <div class="container-fluid">
 	<div class="row-fluid">
@@ -24,6 +28,7 @@
 						<thead>
 							<tr>
 								<th data-type="numeric">No.</th>
+								<th>Foto</th>
 								<th>Nama</th>
 								<th data-hide="phone" data-toggle="phone">Tipe</th>
 								<!-- <th data-hide="phone" data-toggle="phone">Kategori</th> -->
@@ -47,6 +52,7 @@
 								<?php foreach($products as $product): ?>
 									<tr>
 										<td><?php echo $i ?></td>
+										<td><img width="30" src="<?php echo base_url().$product->photo ?>" alt=""/></td>
 										<td><?php echo $product->name ?></td>
 										<td><?php echo $product->type ?></td>
 										<!-- <td><?php #echo $product->category ?></td> -->
@@ -64,7 +70,7 @@
 												
 										</td>
 										<td><?php echo $product->outlet ?></td>
-										<td><a href="<?php echo base_url('product/edit_product/'.$product->product_code) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_product('<?php echo $product->id ?>','<?php echo $product->name ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
+										<td><a class="btn btn-info" href="<?php echo base_url('product/edit_product/'.$product->product_code) ?>">Edit</a><a class="btn btn-danger" href="#" onclick="delete_product('<?php echo $product->id ?>','<?php echo $product->name ?>')">Hapus</a></td>
 									</tr>
 								<?php $i++; ?>
 								<?php endforeach ?>
@@ -77,7 +83,7 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="12">
+								<td colspan="13">
 									<div class="pagination pagination-centered"></div>
 								</td>
 							</tr>
