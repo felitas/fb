@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2017 at 08:33 AM
+-- Generation Time: Feb 03, 2017 at 10:33 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -87,8 +87,9 @@ CREATE TABLE `code` (
 --
 
 INSERT INTO `code` (`id`, `code`, `count`) VALUES
-(7, 'EA', 1),
-(8, 'EAKR', 1);
+(11, 'EKKR', 1),
+(15, 'BC', 1),
+(16, 'MUT', 2);
 
 -- --------------------------------------------------------
 
@@ -208,7 +209,8 @@ CREATE TABLE `diamond_type` (
 --
 
 INSERT INTO `diamond_type` (`id`, `code`, `name`) VALUES
-(0, 'RD', 'Round Diamond');
+(1, 'RD', 'Round Diamond'),
+(2, 'SD', 'Square Diamond');
 
 -- --------------------------------------------------------
 
@@ -245,6 +247,13 @@ CREATE TABLE `mutation` (
   `status` enum('Pending','Diterima','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `mutation`
+--
+
+INSERT INTO `mutation` (`id`, `code`, `product_qty`, `date`, `from_outlet`, `to_outlet`, `status`) VALUES
+(4, 'MUT00001', 1, '2017-02-03 03:42:32', 0, 1, 'Pending');
+
 -- --------------------------------------------------------
 
 --
@@ -258,6 +267,13 @@ CREATE TABLE `mutation_product` (
   `status` enum('OK','Rusak','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `mutation_product`
+--
+
+INSERT INTO `mutation_product` (`id`, `mutation_code`, `product_code`, `status`) VALUES
+(3, 'MUT00001', 'BC00001', 'OK');
+
 -- --------------------------------------------------------
 
 --
@@ -266,12 +282,12 @@ CREATE TABLE `mutation_product` (
 
 CREATE TABLE `outlets` (
   `id` int(11) NOT NULL,
-  `code` char(2) NOT NULL,
+  `code` char(2) DEFAULT NULL,
   `name` varchar(200) NOT NULL,
   `phone` varchar(200) DEFAULT NULL,
   `address` text,
-  `store_manager` varchar(200) NOT NULL,
-  `margin` int(11) NOT NULL
+  `store_manager` varchar(200) DEFAULT NULL,
+  `margin` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -279,6 +295,7 @@ CREATE TABLE `outlets` (
 --
 
 INSERT INTO `outlets` (`id`, `code`, `name`, `phone`, `address`, `store_manager`, `margin`) VALUES
+(0, '', 'Brankas', NULL, NULL, '', 0),
 (1, 'FB', 'Fajar Baru', '+6285881694188', 'Cibubur', 'Tony', 10),
 (2, 'PF', 'Pameran Fajar', '082323421142', 'Botani Square', 'Yoyoo', 10);
 
@@ -301,9 +318,9 @@ CREATE TABLE `products` (
   `gold_amount` double DEFAULT NULL,
   `weight` double DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
-  `outlet_id` int(11) DEFAULT NULL,
+  `outlet_id` int(11) DEFAULT '0',
   `tray_id` int(50) DEFAULT NULL,
-  `status` enum('available','booked','terjual','rusak') NOT NULL
+  `status` enum('available','booked','terjual','rusak','pending') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -311,8 +328,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `product_type`, `product_category`, `product_collection`, `barcode_code`, `product_code`, `name`, `purchase_price`, `sell_price`, `gold_amount`, `weight`, `photo`, `outlet_id`, `tray_id`, `status`) VALUES
-(11, 'B', NULL, NULL, 'B', 'B00001', 'HHH', 9200, 9300, 70, 34, '', 1, 1, 'available'),
-(12, 'E', 'A', 'KR', 'EAKR', 'EAKR00001', '', 1400000, 1500000, 40, 4, '', 0, 0, 'available');
+(15, 'E', 'K', 'KR', 'EKKR', 'EKKR00001', 'Kalung Emas Korea Hati', 900000, 1300000, 70, 10, 'uploads/photo/product/1/EKKR00001.jpg', 1, 1, 'available'),
+(16, 'B', 'C', '', 'BC', 'BC00001', 'Cincin Berlian Hati', 1400000, 1800000, 70, 2.001, 'uploads/photo/product//BC00001.jpg', 0, NULL, 'available');
 
 -- --------------------------------------------------------
 
@@ -333,7 +350,8 @@ CREATE TABLE `specification` (
 --
 
 INSERT INTO `specification` (`id`, `product_code`, `stone_type`, `stone_amount`, `stone_ct`) VALUES
-(1, 'B00002', 'RD', 3, 3);
+(1, 'BC00001', 'RD', 3, 4),
+(2, 'BC00001', 'SD', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -376,7 +394,7 @@ CREATE TABLE `tray` (
 
 INSERT INTO `tray` (`id`, `code`, `outlet_id`, `description`) VALUES
 (1, 'TR001', 1, 'Isi koleksi Korea'),
-(3, 'TR003', 0, 'Isi gelang kalung koleksi Dubai');
+(3, 'TR003', 1, 'Isi gelang kalung koleksi Dubai');
 
 -- --------------------------------------------------------
 
@@ -442,6 +460,12 @@ ALTER TABLE `currency_history`
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `diamond_type`
+--
+ALTER TABLE `diamond_type`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -516,7 +540,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `code`
 --
 ALTER TABLE `code`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `configuration`
 --
@@ -538,6 +562,11 @@ ALTER TABLE `currency_history`
 ALTER TABLE `customers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
+-- AUTO_INCREMENT for table `diamond_type`
+--
+ALTER TABLE `diamond_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `model`
 --
 ALTER TABLE `model`
@@ -546,27 +575,27 @@ ALTER TABLE `model`
 -- AUTO_INCREMENT for table `mutation`
 --
 ALTER TABLE `mutation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `mutation_product`
 --
 ALTER TABLE `mutation_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `outlets`
 --
 ALTER TABLE `outlets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `specification`
 --
 ALTER TABLE `specification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `suppliers`
 --
