@@ -109,6 +109,7 @@
 					$this->load->model('configuration_model');
 					$data['title'] = "Penerimaan Barang";
 					$admin_outlet = $mutation->to_outlet;
+					//this part makes the whole get product script doesnt work
 					$data['trays'] = $this->configuration_model->get_tray($admin_outlet);
 					$data['mutation'] = $this->mutation_model->get_mutation_location($mutation_code);
 					$data['received_items'] = $this->mutation_model->get_received_items($mutation_code);
