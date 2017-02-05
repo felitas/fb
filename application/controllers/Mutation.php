@@ -93,16 +93,40 @@
 				$mutation = $this->db->get_where('mutation',array('code' => $mutation_code))->row();
 				//store manager can only see mutation from their store and to their store
 				if($this->session_role!='admin'){
-					if($mutation->to_outlet == $this->session_outlet){
-						$data['title'] = "Penerimaan Barang";
-						$data['trays'] = $this->configuration_model->get_tray($this->session_outlet);
-						$data['mutation'] = $this->mutation_model->get_mutation_location($mutation_code);
-						$data['received_items'] = $this->mutation_model->get_received_items($mutation_code);
-						$this->template->load($this->default,'mutation/receive_item',$data);
+					if ($this->input->post()) {
+
+						for($i = 0; $i < count($this->input->post('checked_code')); $i++){
+							$data_update = array(
+									'tray_id' => $this->input->post('tray')[$i],
+									'outlet_id' => $this->session_outlet,
+									'status'	=> 'available'
+								);
+							$this->db->update('products',$data_update,array('product_code' => $this->input->post('checked_code')[$i]));
+						}
+
+						if($this->db->update('mutation',array('status' => 'Diterima'),array('code' => $this->input->post('mutation_code')))){
+							$this->session->set_flashdata('success',"$.Notify({
+							    caption: 'Berhasil',
+							    content: 'Barang berhasil diterima',
+							    type: 'success'
+							});");	
+
+							redirect('home');
+						}
 					}
 					else{
-						redirect('mutation');
-					}	
+						if($mutation->to_outlet == $this->session_outlet){
+							$data['title'] = "Penerimaan Barang";
+							$data['trays'] = $this->configuration_model->get_tray($this->session_outlet);
+							$data['mutation'] = $this->mutation_model->get_mutation_location($mutation_code);
+							$data['received_items'] = $this->mutation_model->get_received_items($mutation_code);
+							$this->template->load($this->default,'mutation/receive_item',$data);
+						}
+						else{
+							redirect('mutation');
+						}	
+					}
+					
 				}
 				//admin can do whatever
 				else{

@@ -110,9 +110,11 @@ $(document).ready(function(){
 });
 </script>
 <script>
+var snd = new Audio('<?php echo base_url() ?>assets/barcode.wav');
 var product_code = [];
 function get_product(el){
     if($(el).val() != ''){
+        snd.play();
         $.ajax({
           url: "<?php echo base_url('mutation/get_product_from_mutation/')?>" + $(el).val() + '/<?php echo $this->uri->segment(3) ?>',
           type: 'GET',
@@ -138,6 +140,7 @@ function get_product(el){
                     $('#code_'+data.product_code).removeAttr('name');
                     $('#code_'+data.product_code).attr('name','checked_code[]');
                     $('#tray_'+data.product_code).append("<select name='tray[]' id=''><option value=''>Pilih Baki</option><?php foreach($trays as $tray): ?><option value='<?php echo $tray->id ?>'><?php echo $tray->code ?> <?php echo $tray->description ?></option><?php endforeach; ?></select>");
+                    product_code.push(data.product_code);
                     
                     
                 }

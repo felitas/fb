@@ -156,7 +156,7 @@
 								<td><?php echo $received_transaction->from_outlet ?></td>
 								<td><?php echo $received_transaction->to_outlet ?></td>
 								<td><p class="<?php echo ($received_transaction->status=='Pending')? 'red':'' ?>"><?php echo $received_transaction->status ?></p></td>
-								<td><a href="<?php echo base_url('mutation/receive_item/'.$received_transaction->code) ?>" class="btn btn-success">Accept</a></td>
+								<td><?php if($received_transaction->status == 'Pending'): ?><a href="<?php echo base_url('mutation/receive_item/'.$received_transaction->code) ?>" class="btn btn-success">Accept</a><?php endif; ?></td>
 								
 							</tr>
 							<?php $i++; ?>
