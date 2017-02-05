@@ -134,7 +134,7 @@
 								<td><?php echo $received->from_outlet ?></td>
 								<td><?php echo $received->to_outlet ?></td>
 								<td><p class="<?php echo ($received->status=='Pending')? 'red':'' ?>"><?php echo $received->status ?></p></td>
-								<td><a href="<?php echo base_url('mutation/receive_item/'.$received->code) ?>" class="btn btn-success">Accept</a> <a href="#" class="btn btn-danger" onclick="delete_mutation('<?php echo $received->id ?>','<?php echo $received->code ?>')">Hapus</a></td>
+								<!-- <td><a href="<?php #echo base_url('mutation/receive_item/'.$received->code) ?>" class="btn btn-success">Accept</a> <a href="#" class="btn btn-danger" onclick="delete_mutation('<?php #echo $received->id ?>','<?php #echo $received->code ?>')">Hapus</a></td> -->
 							</tr>
 							<?php $i++; ?>
 							<?php endforeach; ?>
