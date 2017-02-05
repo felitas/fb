@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="form-actions text-center">
-                <input type="hidden" name="mutation_code" value="<?php echo $received_items[0]->mutation_code ?>">
+                <input type="hidden" name="mutation_code" value="<?php echo $this->uri->segment(3) ?>">
                 <input type="Submit" name="submit" class="btn btn-info" value="Submit">
             </div>
             <?php echo form_close() ?>
@@ -99,7 +99,6 @@
     </div>
   </div>    
 </div>
-
 <script>
 
 <?php if($this->session->flashdata('mutation')): ?>
@@ -115,7 +114,7 @@ var product_code = [];
 function get_product(el){
     if($(el).val() != ''){
         $.ajax({
-          url: "<?php echo base_url('mutation/get_product_from_mutation/')?>" + $(el).val() + '/<?php echo $received_items[0]->mutation_code ?>',
+          url: "<?php echo base_url('mutation/get_product_from_mutation/')?>" + $(el).val() + '/<?php echo $this->uri->segment(3) ?>',
           type: 'GET',
           cache : false,
           success: function(result){
@@ -138,7 +137,7 @@ function get_product(el){
                     $('#'+data.product_code).append("<span class='fa fa-check'></span>");
                     $('#code_'+data.product_code).removeAttr('name');
                     $('#code_'+data.product_code).attr('name','checked_code[]');
-                    $('#tray_'+data.product_code).append("<select name='tray[]' id=''><option value=''>Pilih Baki</option><?php foreach($trays as $tray): ?><option value='<?php echo $tray->id ?>'><?php echo $tray->code ?> <?php echo $tray->name ?></option><?php endforeach; ?></select>");
+                    $('#tray_'+data.product_code).append("<select name='tray[]' id=''><option value=''>Pilih Baki</option><?php foreach($trays as $tray): ?><option value='<?php echo $tray->id ?>'><?php echo $tray->code ?> <?php echo $tray->description ?></option><?php endforeach; ?></select>");
                     
                     
                 }

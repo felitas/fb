@@ -29,6 +29,7 @@
 					$this->default = 'default_sales';
 				}
 			}
+			date_default_timezone_set('Asia/Jakarta');
 
 			// $sales_photo = 'uploads/temp/sales/'.$this->session_outlet.'/'.$this->session_id.'/'.'sales'.$this->session_id.'.jpg';
 			// if(file_exists($sales_photo))
