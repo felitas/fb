@@ -162,7 +162,7 @@
 						<div class="span6">
 							<label for="" class="control-label">Berat</label>
 							<div class="controls">
-								<input type="number" placeholder="Berat Perhiasan" name="product_weight" class="span12" step="0.001" min="0">
+								<input type="number" placeholder="Berat Perhiasan" name="product_weight" class="span12" step="any" min="0">
 							</div>	
 						</div>
 					</div>
@@ -289,7 +289,7 @@
 
      //ADDING SPECIFICATIONS OF JEWELLERY
      function add_spec(){
-     	$('#specifications').append("<div class='controls'><select name='stone_type[]'><option>--Jenis Diamond--</option><?php foreach ($diamond_types as $diamond_type): ?><option value='<?php echo $diamond_type->code?>'><?php echo $diamond_type->name?></option><?php endforeach ?></select><input type='number' placeholder='Jumlah Diamond' name='stone_amount[]'><input type='number' placeholder='Jumlah Karat' name='stone_ct[]' min='0' step='0.001' ></div>");
+     	$('#specifications').append("<div class='controls'><select name='stone_type[]'><option>--Jenis Diamond--</option><?php foreach ($diamond_types as $diamond_type): ?><option value='<?php echo $diamond_type->code?>'><?php echo $diamond_type->name?></option><?php endforeach ?></select><input type='number' placeholder='Jumlah Diamond' name='stone_amount[]'><input type='number' placeholder='Jumlah Karat' name='stone_ct[]' min='0' step='any' ></div>");
      }
 
 
