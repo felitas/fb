@@ -219,9 +219,6 @@
 				redirect('home');
 			}
 			if($this->input->post()){
-				echo '<pre>';
-				print_r($this->input->post());
-				echo '</pre>';
 				$this->load->library('image_moo');
 
 				$config['allowed_types']        = 'jpg|png|jpeg';
