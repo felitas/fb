@@ -19,7 +19,7 @@
     <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
     <script src="<?php echo base_url() ?>js/jquery.ui.custom.js"></script><!--Matrix-->
     <script src="<?php echo base_url();?>js/bootstrap-wysihtml5.js"></script><!--Matrix-->
-    <script src="<?php? echo base_url();?>js/matrix.login.js"></script> 
+    <script src="<?php echo base_url();?>js/matrix.login.js"></script> 
     <script src="<?php echo base_url();?>js/jquery.gritter.min.js"></script> <!--Matrix Notification-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
