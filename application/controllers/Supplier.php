@@ -95,8 +95,9 @@
 				 		time: 2000
 				 	});");
 			
-			redirect('supplier');
+			
 			}
+			redirect('supplier');
 
 		}
 	}

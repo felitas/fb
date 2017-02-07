@@ -339,6 +339,7 @@
 				 		text:	'Produk berhasil dihapus!',
 				 		time: 1500
 				});");
+				redirect('product');
 			}
 			else{
 				$this->session->set_flashdata('product',"$.gritter.add({
@@ -346,8 +347,9 @@
 				 		text:	'Produk gagal dihapus!',
 				 		time: 1500
 				});");	
+				redirect('product');
 			}
-			redirect('product');
+			
 		}
 
 		

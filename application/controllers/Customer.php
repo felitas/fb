@@ -129,15 +129,17 @@
 				 		text:	'Customer berhasil dihapus!',
 				 		time: 2000
 				 	});");
+				redirect('customer');
 			}else{
 				$this->session->set_flashdata('customer',"$.gritter.add({
 				 		title:	'Gagal!',
 				 		text:	'Customer gagal dihapus!',
 				 		time: 2000
 				 	});");
+				redirect('customer');
 			}
 			
-			redirect('customer');
+			
 		}
 
 		
