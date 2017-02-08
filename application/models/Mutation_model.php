@@ -10,6 +10,25 @@ class Mutation_model extends CI_Model{
 		return $this->db->get()->result();
 	}
 
+	function get_all_pending_received(){
+		$this->db->select('mutation.*, o1.name as from_outlet, o2.name as to_outlet');
+		$this->db->from('mutation');
+		$this->db->join('outlets as o1','mutation.from_outlet = o1.id');
+		$this->db->join('outlets as o2','mutation.to_outlet = o2.id');
+		$this->db->where('mutation.status','pending');
+		$this->db->order_by('mutation.date','desc');
+		return $this->db->get()->result();	
+	}
+
+	function get_all_received_transactions(){
+		$this->db->select('mutation.*, o1.name as from_outlet, o2.name as to_outlet');
+		$this->db->from('mutation');
+		$this->db->join('outlets as o1','mutation.from_outlet = o1.id');
+		$this->db->join('outlets as o2','mutation.to_outlet = o2.id');
+		$this->db->order_by('mutation.status','desc');
+		return $this->db->get()->result();
+	}
+	//END FOR ADMIN
 	function get_sent_transactions($id = ''){
 		$this->db->select('mutation.*, o1.name as from_outlet, o2.name as to_outlet');
 		$this->db->from('mutation');
@@ -18,14 +37,16 @@ class Mutation_model extends CI_Model{
 		$this->db->where('mutation.from_outlet',$id);
 		return $this->db->get()->result();
 	}
-	//END FOR ADMIN
-	function get_all_received_transactions(){
+
+	function get_pending_received($id = ''){
 		$this->db->select('mutation.*, o1.name as from_outlet, o2.name as to_outlet');
 		$this->db->from('mutation');
 		$this->db->join('outlets as o1','mutation.from_outlet = o1.id');
 		$this->db->join('outlets as o2','mutation.to_outlet = o2.id');
-		$this->db->order_by('mutation.status','desc');
-		return $this->db->get()->result();
+		$this->db->where('mutation.status','pending');
+		$this->db->where('mutation.to_outlet',$id);
+		$this->db->order_by('mutation.date','desc');
+		return $this->db->get()->result();	
 	}
 
 	function get_received_transactions($id = ''){

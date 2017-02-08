@@ -21,6 +21,16 @@
 			$this->template->load($this->default,'mutation/list_mutation',$data);
 		}
 
+		public function list_receiving(){
+			$data['title'] = 'Daftar Penerimaan Barang';
+			//FOR ADMIN. SHORTENED NAME CAUSE ADMIN SENT TRANSACTION IS TOO LONG FOR VARIABLE
+			$data['all_receiveds'] = $this->mutation_model->get_all_pending_received();
+
+			$data['received_transactions'] = $this->mutation_model->get_pending_received($this->session_outlet);
+			$data['role']=$this->session_role;
+			$this->template->load($this->default,'mutation/list_receiving',$data);
+		}
+
 		public function send_item(){
 			if($this->session_role == 'sales'){
 				redirect('home');	
