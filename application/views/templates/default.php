@@ -211,7 +211,7 @@
       <li class="submenu"> <a href="#"><i class="fa fa-archive"></i><span>Mutasi</span></a>
         <ul>
           <li><a href="<?php echo base_url('mutation/send_item')?>"><i class="fa fa-paper-plane faicon"></i> Kirim</a></li>
-          <!-- <li><a href="<?php #echo base_url('mutation/received_item')?>"><i class="fa fa-truck faicon faicon"></i> Terima</a></li> -->
+          <li><a href="<?php echo base_url('mutation/received_item')?>"><i class="fa fa-truck faicon faicon"></i> Terima</a></li>
           <li><a href="<?php echo base_url('mutation')?>"><i class="fa fa-truck faicon faicon"></i> Daftar Mutasi</a></li>
         </ul>
       </li>

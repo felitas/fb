@@ -13,7 +13,7 @@
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="control-group">
-			        <input type="text" placeholder="Cari Customer" id="filter" class="span12">
+			        <input type="text" placeholder="Cari customer berdasarkan nama / tanggal lahir / tipe / telephone / email / alamat / outlet" id="filter" class="span12">
 			    </div>
 			    <div class="table-responsive toggle-circle-filled">
 			    	<table class="table table-bordered" id="table_customer" data-filter="#filter" data-page-size="10">
