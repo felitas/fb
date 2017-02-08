@@ -86,57 +86,56 @@
 
 		public function receive_item($mutation_code = ''){
 			$this->load->model('configuration_model');
+			//sales cannot access
 			if($this->session_role == 'sales'){
 				redirect('home');	
 			}
 			else{
 				$mutation = $this->db->get_where('mutation',array('code' => $mutation_code))->row();
-				//store manager can only see mutation from their store and to their store
-				if($this->session_role!='admin'){
-					if ($this->input->post()) {
+			
+				if ($this->input->post()) {
 
-						for($i = 0; $i < count($this->input->post('checked_code')); $i++){
-							$data_update = array(
-									'tray_id' => $this->input->post('tray')[$i],
-									'outlet_id' => $this->session_outlet,
-									'status'	=> 'available'
-								);
-							$this->db->update('products',$data_update,array('product_code' => $this->input->post('checked_code')[$i]));
-						}
+					for($i = 0; $i < count($this->input->post('checked_code')); $i++){
+						$data_update = array(
+								'tray_id' => $this->input->post('tray')[$i],
+								'outlet_id' => $this->session_outlet,
+								'status'	=> 'available'
+							);
+						$this->db->update('products',$data_update,array('product_code' => $this->input->post('checked_code')[$i]));
+					}
 
-						if($this->db->update('mutation',array('status' => 'Diterima'),array('code' => $this->input->post('mutation_code')))){
-							$this->session->set_flashdata('success',"$.Notify({
-							    caption: 'Berhasil',
-							    content: 'Barang berhasil diterima',
-							    type: 'success'
-							});");	
+					if($this->db->update('mutation',array('status' => 'Diterima'),array('code' => $this->input->post('mutation_code')))){
+						$this->session->set_flashdata('success',"$.gritter.add({
+							class_name : 'gritter-light',
+						    title: 'Berhasil',
+						    text: 'Barang berhasil diterima',
+						    time: 1200
+						});");	
 
-							redirect('home');
-						}
+						redirect('mutation');
+					}
+				}
+				else{
+					//EACH STORE CAN ONLY RECEIVE MUTATION TO THEIR OWN OUTLET, UNLESS ADMIN
+					if($mutation->to_outlet == $this->session_outlet){
+						$data['title'] = "Penerimaan Barang";
+						$data['trays'] = $this->configuration_model->get_tray($this->session_outlet);
+						$data['mutation'] = $this->mutation_model->get_mutation_location($mutation_code);
+						$data['received_items'] = $this->mutation_model->get_received_items($mutation_code);
+						$this->template->load($this->default,'mutation/receive_item',$data);
+					}
+					else if($this->session_role=='admin'){
+
+						$data['title'] = "Penerimaan Barang";
+						$admin_outlet = $mutation->to_outlet;
+						$data['trays'] = $this->configuration_model->get_tray($admin_outlet);
+						$data['mutation'] = $this->mutation_model->get_mutation_location($mutation_code);
+						$data['received_items'] = $this->mutation_model->get_received_items($mutation_code);
+						$this->template->load($this->default,'mutation/receive_item',$data);
 					}
 					else{
-						if($mutation->to_outlet == $this->session_outlet){
-							$data['title'] = "Penerimaan Barang";
-							$data['trays'] = $this->configuration_model->get_tray($this->session_outlet);
-							$data['mutation'] = $this->mutation_model->get_mutation_location($mutation_code);
-							$data['received_items'] = $this->mutation_model->get_received_items($mutation_code);
-							$this->template->load($this->default,'mutation/receive_item',$data);
-						}
-						else{
-							redirect('mutation');
-						}	
-					}
-					
-				}
-				//admin can do whatever
-				else{
-					$data['title'] = "Penerimaan Barang";
-					$admin_outlet = $mutation->to_outlet;
-					//this part makes the whole get product script doesnt work
-					$data['trays'] = $this->configuration_model->get_tray($admin_outlet);
-					$data['mutation'] = $this->mutation_model->get_mutation_location($mutation_code);
-					$data['received_items'] = $this->mutation_model->get_received_items($mutation_code);
-					$this->template->load($this->default,'mutation/receive_item',$data);
+						redirect('mutation');
+					}	
 				}
 			}
 		}

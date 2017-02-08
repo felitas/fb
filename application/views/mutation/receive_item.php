@@ -8,7 +8,9 @@
     <div class="widget-content nopadding">
         <div class="row-fluid">
           <div class="span12">
+            <!--  FORM FOR RECEIVING ITEM START -->
             <?php echo form_open('mutation/receive_item', array('class'=>'form-horizontal', 'id'=>'mutationform' )) ?>
+
             <!--HEADER OF MUTATION : FROM AND TO -->
             <div class="control-group top-control">
                 <div class="span6">
@@ -26,19 +28,26 @@
                 </div>
             </div>
             <!--HEADER ENDS-->
+
+            <!-- RECEIVING ITEM  FOOTABLE -->
+            <!--TO INPUT ITEM BARCODE-->
             <div class="control-group">    
                 <label class="control-label">Kode Produk</label>
                 <div class="controls">
                   <input type="text" placeholder="Scan atau ketik kode produk yang telah diterima" name="product_code" class="span11" onblur="get_product(this)">
                 </div>    
             </div>    
-
+            <!--END INPUT-->
             <div class="control-group">                
                 <div class="controls">
                     <div class="span11">
+
+                        <!--TO SEARCH FOR ITEMS IN CASE NEEDED-->
                         <div class="control-group" style="margin-bottom: 6px;">
-                            <input type="text" placeholder="Cari..." id="filter" class="span12">
+                            <input type="text" placeholder="Cari barang berdasarkan kode / nama / tipe / kategori / kadar / berat " id="filter" class="span12">
                         </div>
+                        <!--END SEARCH-->
+                        
                         <div class="table-responsive toggle-circle-filled">
                             <table class="table table-bordered" id="table_receive" data-filter="#filter" data-page-size="20">
                                 <thead>
@@ -59,6 +68,7 @@
                                     <?php if($received_items!=NULL):?>
                                         <?php $i=1;?>
                                         <?php foreach($received_items as $item):?>
+                                        <tr>
                                             <td><?php echo $i?></td>
                                             <td>
                                                 <?php echo $item->product_code?>
@@ -72,6 +82,7 @@
                                             <td><?php echo $item->weight?></td>
                                             <td><img src="<?php echo base_url().$item->photo?>" width="40px"> </td>
                                             <td id="<?php echo $item->product_code ?>"></td>
+                                        </tr>
                                         <?php $i++?>
                                         <?php endforeach;?>
                                     <?php else:?>

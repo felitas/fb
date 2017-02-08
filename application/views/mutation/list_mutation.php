@@ -4,6 +4,11 @@
 <style>
 	.red{
 		color: red !important;
+		font-weight: bold;
+	}
+	.green{
+		color: green !important;
+		font-weight: bold;
 	}
 	.btn-info,.btn-danger,.btn-success{
 		font-size: 11px;
@@ -53,7 +58,7 @@
 								<td><?php echo $sent->product_qty?></td>
 								<td><?php echo $sent->from_outlet ?></td>
 								<td><?php echo $sent->to_outlet ?></td>
-								<td><p class="<?php echo ($sent->status=='Pending')? 'red':'' ?>"><?php echo $sent->status ?></p></td>
+								<td><p class="<?php echo ($sent->status=='Pending')? 'red':'green' ?>"><?php echo $sent->status ?></p></td>
 								<td><a href="<?php echo base_url('mutation/edit_mutation/'.$sent->code) ?>" class="btn btn-info"><span class="mif mif-pencil"></span> Edit</a><a href="#" onclick="delete_mutation('<?php echo $sent->id ?>','<?php echo $sent->code ?>')" class="btn btn-danger"><span class="mif mif-bin"></span> Hapus</a></td>
 							</tr>
 							<?php $i++; ?>
@@ -75,7 +80,7 @@
 								<td><?php echo $sent_transaction->product_qty?></td>
 								<td><?php echo $sent_transaction->from_outlet ?></td>
 								<td><?php echo $sent_transaction->to_outlet ?></td>
-								<td><p class="<?php echo ($sent_transaction->status=='Pending')? 'red':'' ?>"><?php echo $sent_transaction->status ?></p></td>
+								<td><p class="<?php echo ($sent_transaction->status=='Pending')? 'red':'green' ?>"><?php echo $sent_transaction->status ?></p></td>
 								<td>
 									<a href="<?php echo base_url('mutation/edit_mutation/'.$sent_transaction->code) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_mutation('<?php echo $sent_transaction->id ?>','<?php echo $sent_transaction->code ?>')"><span class="mif mif-bin"></span> Hapus</a>
 								</td>
@@ -141,7 +146,7 @@
 								<td><?php echo $received->product_qty?></td>
 								<td><?php echo $received->from_outlet ?></td>
 								<td><?php echo $received->to_outlet ?></td>
-								<td><p class="<?php echo ($received->status=='Pending')? 'red':'' ?>"><?php echo $received->status ?></p></td>
+								<td><p class="<?php echo ($received->status=='Pending')? 'red':'green' ?>"><?php echo $received->status ?></p></td>
 								<td>
 									<?php if($received->status == 'Pending'): ?>
 										<a href="<?php echo base_url('mutation/receive_item/'.$received->code) ?>" class="btn btn-success">Accept</a> 
@@ -168,7 +173,7 @@
 								<td><?php echo $received_transaction->product_qty ?></td>
 								<td><?php echo $received_transaction->from_outlet ?></td>
 								<td><?php echo $received_transaction->to_outlet ?></td>
-								<td><p class="<?php echo ($received_transaction->status=='Pending')? 'red':'' ?>"><?php echo $received_transaction->status ?></p></td>
+								<td><p class="<?php echo ($received_transaction->status=='Pending')? 'red':'green' ?>"><?php echo $received_transaction->status ?></p></td>
 								<td>
 									<?php if($received_transaction->status == 'Pending'): ?><a href="<?php echo base_url('mutation/receive_item/'.$received_transaction->code) ?>" class="btn btn-success">Accept</a><?php endif; ?>
 								</td>
