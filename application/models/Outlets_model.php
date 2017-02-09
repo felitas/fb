@@ -15,12 +15,7 @@ class Outlets_model extends CI_Model{
 		$this->db->where(array('outlets.id !=' => $id));
 		return $this->db->get()->result();
 	}
-	function get_outlet_code($id = ''){
-		$this->db->select('code');
-		$this->db->from('outlets');
-		$this->db->where(array('id'=>$id));
-		return $this->db->get()->row();
-	}
+	
 
 }
 

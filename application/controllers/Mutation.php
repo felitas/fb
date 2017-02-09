@@ -11,22 +11,28 @@
 		public function index(){
 			$data['title'] = 'Mutasi';
 			$data['is_mobile'] = $this->is_mobile;
-			//FOR ADMIN. SHORTENED NAME CAUSE ADMIN SENT TRANSACTION IS TOO LONG FOR VARIABLE
-			$data['all_sents'] = $this->mutation_model->get_all_sent_transactions();
-			$data['all_receiveds'] = $this->mutation_model->get_all_received_transactions();
-			
 			$data['sent_transactions'] = $this->mutation_model->get_sent_transactions($this->session_outlet);
 			$data['received_transactions'] = $this->mutation_model->get_received_transactions($this->session_outlet);
+
+			//only admin can see all
+			if($this->session_role=='admin'){
+				$data['sent_transactions'] = $this->mutation_model->get_all_sent_transactions();
+				$data['received_transactions'] = $this->mutation_model->get_all_received_transactions();	
+			}
+
 			$data['role']=$this->session_role;
 			$this->template->load($this->default,'mutation/list_mutation',$data);
 		}
 
 		public function list_receiving(){
 			$data['title'] = 'Daftar Penerimaan Barang';
-			//FOR ADMIN. SHORTENED NAME CAUSE ADMIN SENT TRANSACTION IS TOO LONG FOR VARIABLE
-			$data['all_receiveds'] = $this->mutation_model->get_all_pending_received();
-
 			$data['received_transactions'] = $this->mutation_model->get_pending_received($this->session_outlet);
+
+			//only admin can see all
+			if($this->session_role=='admin'){
+				$data['received_transactions'] = $this->mutation_model->get_all_pending_received();	
+			}
+			
 			$data['role']=$this->session_role;
 			$this->template->load($this->default,'mutation/list_receiving',$data);
 		}
@@ -83,13 +89,15 @@
 
 			}else{
 				$this->load->model('outlets_model');
-				//admin has freedom to choose from which outlet to receive and send
-				$data['outlets_admin'] = $this->crud_model->get_data('outlets')->result();
-
 				$data['session_outlet']=$this->session_outlet;
 				$data['role'] = $this->session_role;
-				$data['outlet_code'] = $this->outlets_model->get_outlet_code($this->session_outlet);
+				$data['outlet_data'] = $this->outlets_model->get_outlet($this->session_outlet);
+				//CAN ONLY SEND TO OTHER OUTLET ASIDE ITSELF
 				$data['outlets'] = $this->outlets_model->get_all_outlet_except($this->session_outlet);
+				//admin has freedom to choose from which outlet to receive and send
+				if($this->session_role=='admin'){
+					$data['outlets'] = $this->crud_model->get_data('outlets')->result();	
+				}
 				$data['title'] = 'Kirim Barang';	
 				$this->template->load($this->default,'mutation/send_item',$data);
 			}

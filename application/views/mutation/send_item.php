@@ -16,42 +16,29 @@
                 <div class="span6">
                     <label class="control-label">Asal</label>
                     <div class="controls">
+                    <!--HIDDEN TO GET OUTLET CODE AS AN ADMIN-->
+                    <input type="hidden" name="from_outlet_code" value="" id="from_outlet_code">        
                       <select name="from_outlet" id="from_outlet" onchange="get_outlet_code(this)">
-                            
-                          <?php foreach ($outlets_admin as $outlet_admin): ?>
+                          <?php foreach ($outlets as $outlet_admin): ?>
                               <option value="<?php echo $outlet_admin->id?>" data-code="<?php echo $outlet_admin->code?>"><?php echo $outlet_admin->name?></option>
                           <?php endforeach ?>
                       </select>
                     </div>    
                 </div>
+                <?php endif?> 
+                <!--END ADMIN SPECIAL HEADER PART. OUTLET DATA IS ADJUSTED ACCORDING TO ROLE.-->
                 <div class="span6">
                     <label class="control-label">Tujuan</label>
                     <div class="controls">
                       <select name="to_outlet">
-                          <?php foreach ($outlets_admin as $outlet_admin): ?>
+                          <?php foreach ($outlets as $outlet_admin): ?>
                               <option value="<?php echo $outlet_admin->id?>"><?php echo $outlet_admin->name?></option>
                           <?php endforeach ?>
                       </select>
                     </div>  
                 </div>
-                <!--END ADMIN PRIVILEGE-->
-                <!--NORMAL STORE, CAN ONLY SEND FROM THEIR STORE-->
-                <?php else:?>
-                <div class="span6">
-                    <input type="hidden" name="from_outlet" value="<?php echo $session_outlet?>" id="from_outlet">    
-                    <input type="hidden" name="from_outlet_code" value="<?php echo $outlet_code?>" id="from_outlet_code">
-                    <label class="control-label">Tujuan</label>
-                    <div class="controls">
-                      <select name="to_outlet">
-                          <?php foreach ($outlets as $outlet): ?>
-                              <option value="<?php echo $outlet->id?>"><?php echo $outlet->name?></option>
-                          <?php endforeach ?>
-                      </select>
-                    </div>
-                </div>
-                <?php endif?>
-            </div>
-            <!--HEADER ENDS-->
+        </div>
+        <!--HEADER ENDS-->
             <div class="control-group">    
                 <label class="control-label">Kode Produk</label>
                 <div class="controls">

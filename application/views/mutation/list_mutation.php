@@ -39,62 +39,35 @@
 						<th data-hide="phone">Asal</th>
 						<th data-hide="phone">Tujuan</th>
 						<th data-hide="phone">Status</th>
-						<?php if($role=='admin'):?>
-							<th data-hide="phone">Action</th>
-						<?php endif?>
+						<th data-hide="phone">Action</th>
+						
 					</tr>
 				</thead>
 
 				<tbody>
-					<!-- ADMIN CAN SEE ALL THE SENDING MUTATION HAPPENING -->
-					<?php if($role=='admin'):?>
-						<?php if($all_sents!=NULL): ?>
-							<?php $i=1; ?>
-							<?php foreach($all_sents as $sent): ?>
-							<tr>
-								<td><?php echo $i ?></td>
-								<td><?php echo $sent->code ?></td>
-								<td><?php echo date('d-M-Y H:i:s',strtotime($sent->date)) ?></td>
-								<td><?php echo $sent->product_qty?></td>
-								<td><?php echo $sent->from_outlet ?></td>
-								<td><?php echo $sent->to_outlet ?></td>
-								<td><p class="<?php echo ($sent->status=='Pending')? 'red':'green' ?>"><?php echo $sent->status ?></p></td>
-								<td><a href="<?php echo base_url('mutation/edit_mutation/'.$sent->code) ?>" class="btn btn-info"><span class="mif mif-pencil"></span> Edit</a><a href="#" onclick="delete_mutation('<?php echo $sent->id ?>','<?php echo $sent->code ?>')" class="btn btn-danger"><span class="mif mif-bin"></span> Hapus</a></td>
-							</tr>
-							<?php $i++; ?>
-							<?php endforeach; ?>
-						<?php else:?>
-							<tr>
-								<td colspan="10" class="nocontent"><h3>Table kosong</h3></td>
-							</tr>
-						<?php endif;?>
-					<!--IF NOT ADMIN-->
-					<?php else: ?>
-						<?php if($sent_transactions!=NULL): ?>
-							<?php $i=1; ?>
-							<?php foreach($sent_transactions as $sent_transaction): ?>
-							<tr>
-								<td><?php echo $i ?></td>
-								<td><?php echo $sent_transaction->code ?></td>
-								<td><?php echo date('d-M-Y H:i:s',strtotime($sent_transaction->date)) ?></td>
-								<td><?php echo $sent_transaction->product_qty?></td>
-								<td><?php echo $sent_transaction->from_outlet ?></td>
-								<td><?php echo $sent_transaction->to_outlet ?></td>
-								<td><p class="<?php echo ($sent_transaction->status=='Pending')? 'red':'green' ?>"><?php echo $sent_transaction->status ?></p></td>
-								<td>
-									<a href="<?php echo base_url('mutation/edit_mutation/'.$sent_transaction->code) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_mutation('<?php echo $sent_transaction->id ?>','<?php echo $sent_transaction->code ?>')"><span class="mif mif-bin"></span> Hapus</a>
-								</td>
-							
-								
-							</tr>
-							<?php $i++; ?>
-							<?php endforeach; ?>
-						<?php else:?>
-							<tr>
-								<td colspan="10" class="nocontent"><h3>Table kosong</h3></td>
-							</tr>
-						<?php endif; ?>
+					<?php if($sent_transactions!=NULL): ?>
+						<?php $i=1; ?>
+						<?php foreach($sent_transactions as $sent_transaction): ?>
+						<tr>
+							<td><?php echo $i ?></td>
+							<td><?php echo $sent_transaction->code ?></td>
+							<td><?php echo date('d-M-Y H:i:s',strtotime($sent_transaction->date)) ?></td>
+							<td><?php echo $sent_transaction->product_qty?></td>
+							<td><?php echo $sent_transaction->from_outlet ?></td>
+							<td><?php echo $sent_transaction->to_outlet ?></td>
+							<td><p class="<?php echo ($sent_transaction->status=='Pending')? 'red':'green' ?>"><?php echo $sent_transaction->status ?></p></td>
+							<td>
+								<a href="<?php echo base_url('mutation/edit_mutation/'.$sent_transaction->code) ?>" class="btn btn-info"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_mutation('<?php echo $sent_transaction->id ?>','<?php echo $sent_transaction->code ?>')" class="btn btn-danger"><span class="mif mif-bin"></span> Hapus</a>
+							</td>	
+						</tr>
+						<?php $i++; ?>
+						<?php endforeach; ?>
+					<?php else:?>
+						<tr>
+							<td colspan="10" class="nocontent"><h3>Table kosong</h3></td>
+						</tr>
 					<?php endif; ?>
+					
 				</tbody>
 				<tfoot>
 					<tr>
@@ -134,59 +107,30 @@
 				</thead>
 
 				<tbody>
-				<!-- ADMIN CAN SEE ALL THE RECEIVING MUTATION HAPPENING -->
-					<?php if($role=='admin'):?>
-						<?php if($all_receiveds!=NULL): ?>
-							<?php $i=1; ?>
-							<?php foreach($all_receiveds as $received): ?>
-							<tr>
-								<td><?php echo $i ?></td>
-								<td><?php echo $received->code ?></td>
-								<td><?php echo date('d-M-Y H:i:s',strtotime($received->date)) ?></td>
-								<td><?php echo $received->product_qty?></td>
-								<td><?php echo $received->from_outlet ?></td>
-								<td><?php echo $received->to_outlet ?></td>
-								<td><p class="<?php echo ($received->status=='Pending')? 'red':'green' ?>"><?php echo $received->status ?></p></td>
-								<td>
-									<?php if($received->status == 'Pending'): ?>
-										<a href="<?php echo base_url('mutation/receive_item/'.$received->code) ?>" class="btn btn-success">Accept</a> 
-									<?php endif?>
-									<a href="#" class="btn btn-danger" onclick="delete_mutation('<?php #echo $received->id ?>','<?php echo $received->code ?>')">Hapus</a></td>
-							</tr>
-							<?php $i++; ?>
-							<?php endforeach; ?>
-						<?php else:?>
-							<tr>
-								<td colspan="10" class="nocontent"><h3>Table kosong</h3></td>
-							</tr>
-						<?php endif;?>
-				<!--end admin-->		
-				<!--IF NOT ADMIN-->
-					<?php else: ?>
-						<?php if($received_transactions!=NULL): ?>
-							<?php $i=1; ?>
-							<?php foreach($received_transactions as $received_transaction): ?>
-							<tr>
-								<td><?php echo $i ?></td>
-								<td><?php echo $received_transaction->code ?></td>
-								<td><?php echo date('d-M-Y H:i:s',strtotime($received_transaction->date)) ?></td>
-								<td><?php echo $received_transaction->product_qty ?></td>
-								<td><?php echo $received_transaction->from_outlet ?></td>
-								<td><?php echo $received_transaction->to_outlet ?></td>
-								<td><p class="<?php echo ($received_transaction->status=='Pending')? 'red':'green' ?>"><?php echo $received_transaction->status ?></p></td>
-								<td>
-									<?php if($received_transaction->status == 'Pending'): ?><a href="<?php echo base_url('mutation/receive_item/'.$received_transaction->code) ?>" class="btn btn-success">Accept</a><?php endif; ?>
-								</td>
-								
-							</tr>
-							<?php $i++; ?>
-							<?php endforeach; ?>
-						<?php else:?>
-							<tr>
-								<td colspan="10" class="nocontent"><h3>Table kosong</h3></td>
-							</tr>
-						<?php endif; ?>
+					<?php if($received_transactions!=NULL): ?>
+						<?php $i=1; ?>
+						<?php foreach($received_transactions as $received_transaction): ?>
+						<tr>
+							<td><?php echo $i ?></td>
+							<td><?php echo $received_transaction->code ?></td>
+							<td><?php echo date('d-M-Y H:i:s',strtotime($received_transaction->date)) ?></td>
+							<td><?php echo $received_transaction->product_qty ?></td>
+							<td><?php echo $received_transaction->from_outlet ?></td>
+							<td><?php echo $received_transaction->to_outlet ?></td>
+							<td><p class="<?php echo ($received_transaction->status=='Pending')? 'red':'green' ?>"><?php echo $received_transaction->status ?></p></td>
+							<td>
+								<?php if($received_transaction->status == 'Pending'): ?><a href="<?php echo base_url('mutation/receive_item/'.$received_transaction->code) ?>" class="btn btn-success">Accept</a><?php endif; ?>
+							</td>
+							
+						</tr>
+						<?php $i++; ?>
+						<?php endforeach; ?>
+					<?php else:?>
+						<tr>
+							<td colspan="10" class="nocontent"><h3>Table kosong</h3></td>
+						</tr>
 					<?php endif; ?>
+					
 				</tbody>
 				<tfoot>
 					<tr>
