@@ -1,6 +1,15 @@
 <?php 
 	
 class Product_model extends CI_Model{
+	//get all code except mutation
+	function get_product_code(){
+		$this->db->select('*');
+		$this->db->from('code');
+		$this->db->where('code.code!=','%MUT');
+		return $this->db->get()->result();
+	}
+
+
 	//TO GET PRODUCT DETAIL ALONG WITH TRAY AND OUTLET NAME AND TYPE
 	//collection is other phrase for model
 	function get_product_all_outlet(){

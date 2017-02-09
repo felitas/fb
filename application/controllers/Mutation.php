@@ -45,7 +45,8 @@
 						'date'			=> date('Y-m-d H:i:s')
 					);
 
-				$outlet_code = $this->db->get_where('outlets',array('id' => $this->session_outlet))->row('code');
+
+				$outlet_code = $this->input->post('from_outlet_code');
 				$code = $this->db->get_where('code',array('code' => $outlet_code.'MUT'))->row();
 
 				if($code){
@@ -87,6 +88,7 @@
 
 				$data['session_outlet']=$this->session_outlet;
 				$data['role'] = $this->session_role;
+				$data['outlet_code'] = $this->outlets_model->get_outlet_code($this->session_outlet);
 				$data['outlets'] = $this->outlets_model->get_all_outlet_except($this->session_outlet);
 				$data['title'] = 'Kirim Barang';	
 				$this->template->load($this->default,'mutation/send_item',$data);
@@ -108,7 +110,7 @@
 					for($i = 0; $i < count($this->input->post('checked_code')); $i++){
 						$data_update = array(
 								'tray_id' => $this->input->post('tray')[$i],
-								'outlet_id' => $this->session_outlet,
+								'outlet_id' => $this->input->post('to_outlet_id'),
 								'status'	=> 'available'
 							);
 						$this->db->update('products',$data_update,array('product_code' => $this->input->post('checked_code')[$i]));

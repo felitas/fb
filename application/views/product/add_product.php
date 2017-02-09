@@ -35,7 +35,7 @@
 				            </div>
 						</div>
 					</div>
-					<div class="control-group" id="product_barcode_row">
+					<div class="control-group">
 						<div class="span12">
 							<label for="" class="control-label">Nama Barang</label>
 							<div class="controls">
@@ -59,7 +59,7 @@
 						<div class="span6">
 							<label for="" class="control-label">Kategori Barang</label>
 							<div class="controls">
-								<select name="product_category" id="category" onchange="fill_category(this)">
+								<select name="product_category" id="product_category" onchange="fill_category(this)">
 									<option value="x">--Pilih Kategori--</option>
 									<?php foreach ($categories as $category): ?>
 										<option value="<?php echo $category->code?>"><?php echo $category->code?> - <?php echo $category->name?></option>	
@@ -233,12 +233,12 @@
 		//function to show all new barcoode fields
 		$('#new_barcode').change(function(){
 			if(this.checked){
-				$('#product_barcode_row').hide();
+				
 				$('.new-barcode').show();
 				$('#product_barcode')[0].selectize.disable();
 			}
 			else{
-				$('#product_barcode_row').show();
+				
 				$('.new-barcode').hide();
 				$('#product_barcode')[0].selectize.enable();
 			}
@@ -248,6 +248,8 @@
 	        rules:{
 	            product_name: "required",
 	            product_code: "required",
+	            product_type: "required",
+	            product_category: "required"
 	        },
 	        messages:{
 	        	product_code: "Pilih kode produk yang sudah ada atau generate barcode baru"
@@ -271,17 +273,17 @@
      //IF MASUK BRANKAS IS CHECKED, NORMALIZE AND DISABLE ALL UNNECESSARY FIELDS
      function warehouse(el){
      	if($(el).is(":checked")){
-     		$('#product_outlet').val('0');
-     		$('#product_outlet').attr("disabled","disabled");
-     		$('#product_tray').val('0');
      		$('#product_tray').empty();
-     		$('#product_tray').append("<option>Pilih Outlet terlebih dahulu</option>");
-     		$('#product_tray').attr("disabled","disabled");
+     		$('#product_tray').val('0');
+     		$('#product_outlet').val('0');
+     		$('#product_tray').append("<option value='0'>Pilih Outlet terlebih dahulu</option>");
+     		$('#product_tray').attr("readonly","readonly");
+     		$('#product_outlet').attr("readonly","readonly");
      		$('#outlet_tray').hide();
      	}
      	else{
-     		$('#product_tray').removeAttr("disabled");
-     		$('#product_outlet').removeAttr("disabled");
+     		$('#product_tray').removeAttr("readonly");
+     		$('#product_outlet').removeAttr("readonly");
      		$('#outlet_tray').show();
      	}
      }
@@ -294,6 +296,7 @@
 
 
      //AJAX FUNCTIONS PRIOR TO GENERATING BARCODE, FILLING THE TEXT FIELDS AND FETCHING THE DATA WITH AJAX
+     //FILL THE TYPE FIELD
      function fill_type(el){
      	if($(el).val()=='x'){
             $("input[name='model_code[0]']").val('');
@@ -303,7 +306,7 @@
 		}
 		
      }
-
+     //FILL THE CATEGORY FIELD
      function fill_category(el){
      	if($(el).val()=='x'){
             $("input[name='model_code[1]']").val('');
@@ -312,7 +315,7 @@
             $("input[name='model_code[1]']").val($(el).val());
 		}
      }
-
+     //FILL THE MODEL FIELD
      function fill_model(el){
      	if($(el).val()!=''){
      		$("input[name='model_code[2]']").val($(el).val());
@@ -321,8 +324,9 @@
      		$("input[name='model_code[2]']").val("");	
      	}	
      }
-     //AJAX FUNCTION TO TAKE COUNT VALUE FROM SELECT OPTION
+     //AJAX FUNCTION TO TAKE COUNT VALUE FROM SELECT OPTION, FILL THE FIELD WITH CHOSEN BARCODE
      function get_barcode(el){
+     	var code = $(el).val();
      	$('#product_code').val();
      	$.ajax({
      		url: "<?php echo base_url('product/get_code_count/')?>" + $(el).val(),
@@ -331,7 +335,12 @@
             success: function(result){ 
             	count = +result + +1;
               	$('#product_count').val(count);
-              	$('#product_code').val($(el).val()+'0000'+ $('#product_count').val());	
+              	$('#product_code').val(code+'0000'+ $('#product_count').val());
+              	//fill the type category and model with the matching code from chosen barcode
+              	$('#product_type').val(code.charAt(0));
+              	$('#product_category').val(code.charAt(1));
+              	$('#product_model').val(code.charAt(2)+code.charAt(3));
+              	$('#product_barcode_code').val(code);
             }
      	});
      }

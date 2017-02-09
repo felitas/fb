@@ -16,10 +16,10 @@
                 <div class="span6">
                     <label class="control-label">Asal</label>
                     <div class="controls">
-                      <select name="from_outlet" id="from_outlet">
-                            <option value="0">Brankas</option>
+                      <select name="from_outlet" id="from_outlet" onchange="get_outlet_code(this)">
+                            
                           <?php foreach ($outlets_admin as $outlet_admin): ?>
-                              <option value="<?php echo $outlet_admin->id?>"><?php echo $outlet_admin->name?></option>
+                              <option value="<?php echo $outlet_admin->id?>" data-code="<?php echo $outlet_admin->code?>"><?php echo $outlet_admin->name?></option>
                           <?php endforeach ?>
                       </select>
                     </div>    
@@ -39,6 +39,7 @@
                 <?php else:?>
                 <div class="span6">
                     <input type="hidden" name="from_outlet" value="<?php echo $session_outlet?>" id="from_outlet">    
+                    <input type="hidden" name="from_outlet_code" value="<?php echo $outlet_code?>" id="from_outlet_code">
                     <label class="control-label">Tujuan</label>
                     <div class="controls">
                       <select name="to_outlet">
@@ -166,4 +167,14 @@ function get_product(el){
             });
         }
     }
+function get_outlet_code(el){
+    if($(el).val()!=''){
+        var code = $(el).find(':selected').data('code');
+        $('#from_outlet_code').val(code);    
+    }
+    else{
+        $('#from_outlet_code').val('');       
+    }
+    
+}
 </script>

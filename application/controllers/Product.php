@@ -173,7 +173,7 @@
 				$data['models'] = $this->crud_model->get_data('model')->result();
 				$data['outlets']=$this->crud_model->get_data('outlets')->result();
 				$data['role']=$this->session_role;
-				$data['codes'] = $this->crud_model->get_data('code')->result();
+				$data['codes'] = $this->product_model->get_product_code();
 				// $data['gold_amount'] = $this->db->get('gold_amount')->result();
 				$this->template->load($this->default,'product/add_product',$data);
 			}

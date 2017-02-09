@@ -7,6 +7,7 @@ class Mutation_model extends CI_Model{
 		$this->db->from('mutation');
 		$this->db->join('outlets as o1','mutation.from_outlet = o1.id');
 		$this->db->join('outlets as o2','mutation.to_outlet = o2.id');
+		$this->db->order_by('mutation.date','desc');
 		return $this->db->get()->result();
 	}
 
@@ -25,7 +26,7 @@ class Mutation_model extends CI_Model{
 		$this->db->from('mutation');
 		$this->db->join('outlets as o1','mutation.from_outlet = o1.id');
 		$this->db->join('outlets as o2','mutation.to_outlet = o2.id');
-		$this->db->order_by('mutation.status','desc');
+		$this->db->order_by('mutation.date','desc');
 		return $this->db->get()->result();
 	}
 	//END FOR ADMIN
@@ -35,6 +36,7 @@ class Mutation_model extends CI_Model{
 		$this->db->join('outlets as o1','mutation.from_outlet = o1.id');
 		$this->db->join('outlets as o2','mutation.to_outlet = o2.id');
 		$this->db->where('mutation.from_outlet',$id);
+		$this->db->order_by('mutation.date','desc');
 		return $this->db->get()->result();
 	}
 
@@ -55,12 +57,12 @@ class Mutation_model extends CI_Model{
 		$this->db->join('outlets as o1','mutation.from_outlet = o1.id');
 		$this->db->join('outlets as o2','mutation.to_outlet = o2.id');
 		$this->db->where('mutation.to_outlet',$id);
-		$this->db->order_by('mutation.status','desc');
+		$this->db->order_by('mutation.date','desc');
 		return $this->db->get()->result();
 	}
 
 	function get_mutation_location($mutation_code=''){
-		$this->db->select('mutation.*,o1.name as from_outlet, o2.name as to_outlet');
+		$this->db->select('mutation.*,o1.name as from_outlet_name, o2.name as to_outlet_name');
 		$this->db->from('mutation');
 		$this->db->join('outlets as o1','mutation.from_outlet = o1.id');
 		$this->db->join('outlets as o2','mutation.to_outlet = o2.id');

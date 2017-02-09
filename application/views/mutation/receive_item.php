@@ -16,14 +16,15 @@
                 <div class="span6">
                     <label class="control-label">Asal</label>
                     <div class="controls">
-                        <input type="text" name="from_outlet" readonly="readonly" value="<?php echo $mutation->from_outlet ?>">
+                        <input type="text" name="from_outlet" readonly="readonly" value="<?php echo $mutation->from_outlet_name ?>">
                       
                     </div>    
                 </div>
                 <div class="span6">
                     <label class="control-label">Tujuan</label>
                     <div class="controls">
-                      <input type="text" name="from_outlet" readonly="readonly" value="<?php echo $mutation->to_outlet ?>">
+                      <input type="text" name="to_outlet" readonly="readonly" value="<?php echo $mutation->to_outlet_name ?>">
+                      <input type="hidden" name="to_outlet_id" value="<?php echo $mutation->to_outlet?>">
                     </div>  
                 </div>
             </div>

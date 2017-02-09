@@ -176,17 +176,17 @@
      //IF MASUK BRANKAS IS CHECKED, NORMALIZE AND DISABLE ALL UNNECESSARY FIELDS
      function warehouse(el){
      	if($(el).is(":checked")){
-     		$('#product_outlet').val('0');
-     		$('#product_outlet').attr("disabled","disabled");
-     		$('#product_tray').val('0');
      		$('#product_tray').empty();
+     		$('#product_tray').val('0');
+     		$('#product_outlet').val('0');
      		$('#product_tray').append("<option>Pilih Outlet terlebih dahulu</option>");
-     		$('#product_tray').attr("disabled","disabled");
+     		$('#product_tray').attr("readonly","readonly");
+     		$('#product_outlet').attr("readonly","readonly");
      		$('#outlet_tray').hide();
      	}
      	else{
-     		$('#product_tray').removeAttr("disabled");
-     		$('#product_outlet').removeAttr("disabled");
+     		$('#product_tray').removeAttr("readonly");
+     		$('#product_outlet').removeAttr("readonly");
      		$('#outlet_tray').show();
      	}
      }
