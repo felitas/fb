@@ -2,6 +2,13 @@
 <link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
 
+<style type="text/css">
+	.btn-info,.btn-danger{
+		width: 60%;
+		font-size: 11px;
+	}
+</style>
+
 <div class="container-fluid">
 	<div class="row-fluid">
     	<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
@@ -20,8 +27,9 @@
 			    		<thead>
 							<tr>
 								<th data-type="numeric">No</th>
+								<th>Kode Pelanggan</th>
 								<th>Nama</th>
-								<th>Tanggal Lahir</th>
+								<th data-hide="phone">Tanggal Lahir</th>
 								<th data-hide="phone">Tipe</th>
 								<th data-hide="phone">Telephone</th>
 								<th data-hide="phone">Email</th>
@@ -39,6 +47,7 @@
 								<?php foreach($customers as $customer): ?>
 								<tr>
 									<td><?php echo $i ?></td>
+									<td><?php echo $customer->customer_code?></td>
 									<td><?php echo $customer->name ?></td>
 									<td>
 										<?php if($customer->birthday!=NULL):?>
@@ -59,19 +68,19 @@
 									<?php if($role=='admin'):?>
 										<td data-hide="phone"><?php echo $customer->grade ?></td>
 									<?php endif?>
-									<td><a href="<?php echo base_url('customer/edit_customer/'.$customer->id) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_customer('<?php echo $customer->id ?>','<?php echo $customer->name ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
+									<td><a href="<?php echo base_url('customer/edit_customer/'.$customer->id) ?>" class="btn btn-info">Edit</a><a class="btn btn-danger" href="#" onclick="delete_customer('<?php echo $customer->id ?>','<?php echo $customer->name ?>')">Hapus</a></td>
 								</tr>
 								<?php $i++; ?>
 								<?php endforeach; ?>
 							<?php else:?>
 								<tr>
-									<td colspan="10" class="nocontent"><h3>Table kosong</h3></td>
+									<td colspan="11" class="nocontent"><h3>Table kosong</h3></td>
 								</tr>
 							<?php endif; ?>
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="10">
+								<td colspan="11">
 									<div class="pagination pagination-centered"></div>
 								</td>
 							</tr>

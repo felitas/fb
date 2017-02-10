@@ -10,7 +10,7 @@
 			//customer main page
 			
 			$data['title'] = 'Customer';
-			$data['role']= $this->session_role; //admin can see, add and edit customer grade
+			$data['role']= $this->session_role;
 			$data['is_mobile'] = $this->is_mobile;
 			$data['customers'] = $this->crud_model->get_data('customers')->result();
 			$this->template->load($this->default,'customer/list_customer',$data);
@@ -18,32 +18,33 @@
 		}
 
 		public function add_customer(){
-			$data['role']= $this->session_role; //admin can see, add and edit customer grade
+			$data['role']= $this->session_role; 
 			if($this->input->post()){
-				if($data['role']=='admin'){
-					$data_customer = array(
-	            		'name' => $this->input->post('customer_name'),
-	            		'birthday'=> $this->input->post('customer_birthday'),
-	            		'type' => $this->input->post('customer_type'),
-	            		'phone' => $this->input->post('customer_phone'),
-	            		'email' => $this->input->post('customer_email'),
-	            		'address' =>$this->input->post('customer_address'),
-	            		'grade'=> $this->input->post('customer_grade'),
-	            		'outlet_id' => $this->session->user_outlet
-	            	);	
-				}else{
-					$data_customer = array(
-	            		'name' => $this->input->post('customer_name'),
-	            		'birthday'=> $this->input->post('customer_birthday'),
-	            		'type' => $this->input->post('customer_type'),
-	            		'phone' => $this->input->post('customer_phone'),
-	            		'email' => $this->input->post('customer_email'),
-	            		'address' =>$this->input->post('customer_address'),
-	            		'outlet_id' => $this->session->user_outlet
-	            	);
-				}
-	            
+				$code = $this->db->get_where('code',array('code' => 'FBC'))->row();
 
+				if($code){
+					$customer_code = $code->code.sprintf("%05d", $code->count);
+					$this->db->update('code',array('count' => $code->count+1),array('code' => $code->code));
+
+					
+				}else{
+					$this->db->insert('code',array('code' =>'FBC','count' => 1));
+					$customer_code = 'FBC'.sprintf("%05d", 1);
+					$this->db->update('code',array('count' => 2),array('code' => 'FBC'));
+				}
+
+				$data_customer = array(
+					'customer_code' =>$customer_code,
+            		'name' => $this->input->post('customer_name'),
+            		'birthday'=> $this->input->post('customer_birthday'),
+            		'type' => $this->input->post('customer_type'),
+            		'phone' => $this->input->post('customer_phone'),
+            		'email' => $this->input->post('customer_email'),
+            		'address' =>$this->input->post('customer_address'),
+            		'grade'=> $this->input->post('customer_grade'),
+            		'outlet_id' => $this->session->user_outlet
+            	);	
+				
 	            if($this->crud_model->insert_data('customers',$data_customer)){
 	            	$this->session->set_flashdata('customer', "$.gritter.add({
 						class_name : 'gritter-light',
@@ -143,6 +144,16 @@
 		}
 
 		
+		//used in new sale ajax
+		public function get_customer($code = ''){
+			$customer = $this->db->get_where('customers',array('code' => $code))->row();
+			if($customer == NULL){
+				echo 'not found';
+			}else{
+				$customer = (Object) $customer;
+				echo json_encode($customer);	
+			}
+		}
 
 	}
 

@@ -183,16 +183,6 @@
 		
 		}
 
-		public function get_customer($code = ''){
-			$customer = $this->db->get_where('customers',array('code' => $code))->row();
-			if($customer == NULL){
-				echo 'not found';
-			}else{
-				$customer = (Object) $customer;
-				echo json_encode($customer);	
-			}
-		}
-
 		public function get_new_customer_code(){
 			$code = $this->db->get_where('code',array('code' => 'MKM'))->row();
 			if($code){

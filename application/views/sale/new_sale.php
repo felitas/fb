@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
     <div class="row-fluid">
         <a href="<?php echo base_url('sale') ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar penjualan</a>
@@ -17,13 +18,13 @@
                         <input type="hidden" name="hidden_count" value="<?php echo $hidden_count ?>">            
                     </div>    
                 </div>
-                <div class="span4">
+                <div class="span5">
                     <label class="control-label">Kode Customer</label>
                     <div class="controls">
-                        <input type="text" name="customer_code" placeholder="Scan atau masukkan kode pelanggan" id="customer_code" onblur="get_customer(this)">
+                        <input type="text" name="customer_code" placeholder="Masukkan kode pelanggan" id="customer_code" onblur="get_customer(this)" class="span12">
                     </div>            
                 </div>
-                <div class="span4">
+                <div class="span3">
                     <label class="control-label">Customer Baru</label>
                     <div class="controls">
                         <input type="checkbox" name="new_customer" onchange="data_new_customer(this)">
@@ -31,17 +32,17 @@
                 </div>  
             </div>
             <!--///////////////////////DATA NEW CUSTOMER//////////////////////////////////////////////-->
-            <div class="control-group">
+            <div class="control-group new-customer hide-field">
                 <div class="span6">
                     <label class="control-label">Nama Customer</label>
                     <div class="controls">
-                        <input type="text" placeholder="Nama Customer" name="customer_name">
+                        <input type="text" placeholder="Nama Customer" name="customer_name" class="span12" id="customer_name">
                     </div>    
                 </div>
                 <div class="span6">
                     <label class="control-label">Tipe Customer</label>
                     <div class="controls">
-                        <select name="customer_type" id="">
+                        <select name="customer_type" id="customer_type" class="span11">
                             <option value="Regular">Customer Biasa</option>
                             <option value="Member">Member</option>
                         </select>
@@ -49,32 +50,32 @@
                 </div>
             </div>
 
-            <div class="control-group">
+            <div class="control-group new-customer hide-field">
                 <div class="span6">
                     <label for="" class="control-label">Email</label>
                     <div class="controls">
-                        <input type="email" placeholder="Email Customer" name="customer_email">
+                        <input type="email" placeholder="Email Customer" name="customer_email" class="span12" id="customer_email">
                     </div>    
                 </div>
                 <div class="span6">
                     <label class="control-label">No. Telepon</label>
                     <div class="controls">
-                        <input type="text" placeholder="Nomor Telepon Customer" name="customer_phone">
+                        <input type="text" placeholder="Nomor Telepon Customer" name="customer_phone" class="span11" id="customer_phone">
                     </div>
                 </div>   
             </div>
 
-            <div class="control-group">
+            <div class="control-group new-customer hide-field">
                 <div class="span6">
                     <label for="" class="control-label">Alamat</label>
                     <div class="controls">
-                        <textarea placeholder="Alamat Customer" name="customer_address"></textarea>
+                        <textarea placeholder="Alamat Customer" name="customer_address" class="span12" id="customer_address"></textarea>
                     </div>
                 </div>
                 <div class="span6">
                     <label class="control-label">Tanggal Lahir</label>
                     <div class="controls">
-                        <input type="date" name="customer_birthday">
+                        <input type="date" name="customer_birthday" class="span11" id="customer_birthday">
                     </div>        
                 </div>
             </div>
@@ -143,13 +144,59 @@
        <?php echo $this->session->flashdata('customer') ?>
 
     <?php endif; ?>
+
+</script>
+<script type="text/javascript">
+    var snd = new Audio('<?php echo base_url() ?>assets/barcode.wav');
+    function get_customer(el){
+        if($(el).val() != ''){
+            snd.play();
+            $.ajax({
+              url: "<?php echo base_url('customer/get_customer/')?>" + $(el).val(),
+              type: 'GET',
+              cache : false,
+              success: function(result){
+                if(result == 'not found'){
+                    $.gritter.add({
+                        title: 'Error',
+                        text: 'Customer Tidak Ditemukan',
+                        time:1200
+                    });
+                    $('#customer_name').val('');
+                    $('#customer_type').val('');
+                    $('#customer_email').val('');
+                    $('#customer_phone').val('');
+                    $('#customer_address').val('');
+                    $('#customer_birthday').val('');
+                }else{
+                    var data = JSON.parse(result);
+                    
+                    $('#customer_name').val(data.name);
+                    $('#customer_phone').val(data.phone);
+                    $('#customer_email').val(data.email);
+                    $('#customer_type').val(data.type);
+                    $('#customer_birthday').val(data.birthday);
+                    $('#customer_address').val(data.address);   
+
+                }   
+                    
+                
+                
+              }
+            
+            });
+        }
+    }
+
 </script>
 <script>
+    var snd = new Audio('<?php echo base_url() ?>assets/barcode.wav');
     //vars for get product func
     var no = 1;
     var product_code = [];
     function get_product(el){
             if($(el).val() != ''){
+                snd.play();
                 $.ajax({
                   url: "<?php echo base_url('product/get_product_by_code/')?>"+$(el).val()+"/"+$('#from_outlet').val(),
                   type: 'GET',
