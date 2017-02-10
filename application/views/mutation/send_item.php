@@ -25,6 +25,8 @@
                       </select>
                     </div>    
                 </div>
+                <?php else:?>
+                    <input type="hidden" name="from_outlet" value="<?php echo $session_outlet?>" id="from_outlet">
                 <?php endif?> 
                 <!--END ADMIN SPECIAL HEADER PART. OUTLET DATA IS ADJUSTED ACCORDING TO ROLE.-->
                 <div class="span6">
@@ -37,7 +39,7 @@
                       </select>
                     </div>  
                 </div>
-        </div>
+            </div>
         <!--HEADER ENDS-->
             <div class="control-group">    
                 <label class="control-label">Kode Produk</label>
