@@ -504,6 +504,63 @@
 				$this->template->load($this->default,'configuration/sales_target/edit_target',$data);
 			}
 		}
+		/*========================END SALES TARGET=========================*/
+		/*========================CUSTOMER SETTINGS=========================*/
+		public function customer_settings(){
+			if($this->input->post('submit')){
+				$data=array(
+					'name'=>$this->input->post('target_name'),
+					'target'=>$this->input->post('target_amount'),
+					'description'=>$this->input->post('target_desc')
+				);
+				$this->crud_model->insert_data('sales_target',$data);
+				$this->session->set_flashdata('customer_setting',"$.gritter.add({
+					class_name : 'gritter-light',
+					title:'Success',
+					text:'Target telah ditambahkan',
+					time: 1500
+				});");
+				redirect('configuration/sales_target');
+			}
+			else{
+				$data['title'] = 'Customer Settings';
+				$data['is_mobile']=$this->is_mobile;
+				$data['grades'] = $this->crud_model->get_data('customer_grade')->result();
+				$this->template->load($this->default,'configuration/customer_settings/list_customer_grade_point',$data);	
+			}
+		}
+		public function edit_grade($id=''){
+			if($this->input->post('submit')){
+				$data=array(
+					'name'=>$this->input->post('grade_name'),
+					'target'=>$this->input->post('grade_amount')
+				);
+				if($this->crud_model->update_data('customer_grade',$data,array('id'=>$id))){
+					$this->session->set_flashdata('customer_setting',"$.gritter.add({
+						class_name:'gritter-light',
+						title:'Success',
+						text:'Grade telah diubah',
+						time:1500
+					});");
+					redirect('configuration/customer_settings');	
+				}
+				else{
+					$this->session->set_flashdata('customer_setting',"$.gritter.add({
+						title:'Gagal',
+						text:'Grade gagal diubah',
+						time:1500
+					});");
+					redirect('configuration/customer_settings');		
+				}
+				
+			}
+			else{
+				$data['title']='Edit Grade';
+				$data['is_mobile']=$this->is_mobile;
+				$data['grade']=$this->crud_model->get_by_condition('customer_grade',array('id'=>$id))->row();
+				$this->template->load($this->default,'configuration/customer_settings/edit_customer_grade',$data);
+			}
+		}
 
 	}
 

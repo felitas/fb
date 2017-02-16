@@ -235,7 +235,7 @@
           <li><a href="<?php echo base_url('configuration/model') ?>"><i class="fa fa-tags faicon"></i> Koleksi/Model Perhiasan</a></li>
           <!--End barcode elements-->
           <li><a href="error500.html"><i class="fa fa-users faicon"></i> Sales Goal</a></li>
-          <li><a href="<?php echo base_url('configuration/member_point') ?>"><i class="fa fa-user-circle faicon"></i> Membership</a></li>
+          <li><a href="<?php echo base_url('configuration/customer_settings') ?>"><i class="fa fa-user-circle faicon"></i> Poin & Grade Customer</a></li>
         </ul>
       </li>
       <!-- <li class="content"> <span>Monthly Bandwidth Transfer</span>

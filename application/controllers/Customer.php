@@ -4,6 +4,7 @@
 	class Customer extends MY_Controller{
 		function __construct(){
 			parent::__construct();
+			$this->load->model('customer_model');
 		}
 
 		public function index(){
@@ -12,7 +13,7 @@
 			$data['title'] = 'Customer';
 			$data['role']= $this->session_role;
 			$data['is_mobile'] = $this->is_mobile;
-			$data['customers'] = $this->crud_model->get_data('customers')->result();
+			$data['customers'] = $this->customer_model->get_all_customers();
 			$this->template->load($this->default,'customer/list_customer',$data);
 		
 		}

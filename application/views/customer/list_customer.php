@@ -66,7 +66,7 @@
 										?>
 									</td>
 									<?php if($role=='admin'):?>
-										<td data-hide="phone"><?php echo $customer->grade ?></td>
+										<td data-hide="phone"><?php echo $customer->customer_grade ?></td>
 									<?php endif?>
 									<td><a href="<?php echo base_url('customer/edit_customer/'.$customer->id) ?>" class="btn btn-info">Edit</a><a class="btn btn-danger" href="#" onclick="delete_customer('<?php echo $customer->id ?>','<?php echo $customer->name ?>')">Hapus</a></td>
 								</tr>
