@@ -1,6 +1,7 @@
 <!--Both are css for alertify-->
 <link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
+<!--FOR FANCYBOX-->
 <link  href="<?php echo base_url() ?>fancybox/source/jquery.fancybox.css" rel="stylesheet">
 
 <style>

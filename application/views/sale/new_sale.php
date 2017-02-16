@@ -1,4 +1,9 @@
+<!--Both are css for alertify-->
+<link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
+<!--selectize-->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/selectize.css')?>">
+
 <div class="container-fluid">
     <div class="row-fluid">
         <a href="<?php echo base_url('sale') ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar penjualan</a>
@@ -109,42 +114,40 @@
             </div>    
 
             <div class="control-group">                
-                
-                    <div class="span12">
-                        <div class="table-responsive toggle-circle-filled">
-                            <table class="table table-bordered" id="table_sale" data-filter="#filter" data-page-size="20">
-                                <thead>
-                                    <tr>
-                                        <th data-type="numeric">No</th>
-                                        <th>Kode Barang</th>
-                                        <th>Nama</th>
-                                        <th data-hide="phone" data-toggle="phone">Foto</th>
-                                        <th data-hide="phone" data-toggle="phone">Kadar</th>
-                                        <th data-hide="phone" data-toggle="phone">Berat</th>
-                                        <th data-hide="phone" data-toggle="phone">Harga/gram</th>
-                                        <th data-hide="phone" data-toggle="phone">Harga</th>
-                                        <th data-hide="phone" data-toggle="phone">Diskon</th>
-                                        <th data-hide="phone" data-toggle="phone">Harga Deal</th>
-                                        <th data-hide="phone" data-toggle="phone"></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table_body">
-                                    
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="11">
-                                            <div class="pagination pagination-centered"></div>
-                                        </td>
-                                    </tr>
-                                </tfoot>    
-                            </table>
-                        </div>
+                <div class="span12">
+                    <div class="table-responsive toggle-circle-filled">
+                        <table class="table table-bordered" id="table_sale" data-filter="#filter" data-page-size="20">
+                            <thead>
+                                <tr>
+                                    <th data-type="numeric">No</th>
+                                    <th>Kode Barang</th>
+                                    <th>Nama</th>
+                                    <th data-hide="phone" data-toggle="phone">Foto</th>
+                                    <th data-hide="phone" data-toggle="phone">Kadar</th>
+                                    <th data-hide="phone" data-toggle="phone">Berat</th>
+                                    <th data-hide="phone" data-toggle="phone">Harga</th>
+                                    <th data-hide="phone" data-toggle="phone">Diskon</th>
+                                    <th data-hide="phone" data-toggle="phone">Harga Deal</th>
+                                    <th data-hide="phone" data-toggle="phone"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_body">
+                                
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="10">
+                                        <div class="pagination pagination-centered"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>    
+                        </table>
                     </div>
-                
+                </div>
             </div>
 
             <div class="form-actions text-center">
+                <input type="hidden" name="total_price" id="hidden_total">
                 <input type="Submit" name="submit" class="btn btn-info" value="Submit">
             </div>
             <?php echo form_close(); ?>
@@ -153,6 +156,7 @@
     </div>
     </div>
 </div>
+<script src="<?php echo base_url() ?>js/alertify.min.js"></script>
 <script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
 <script src="<?php echo base_url() ?>js/selectize.min.js"></script>
 <script>
@@ -277,7 +281,7 @@
                                 time: 1500
                             });
                         }else{
-                            $('#table_body').append("<tr><td>"+no+"</td><td>"+data.product_code+"</td><td>"+data.name+"</td><td><img width='20' src='<?php echo base_url() ?>"+data.photo+"'></td><td>"+data.gold_amount+"%</td><td>"+data.weight+"gr</td><td>"+data.weight+"</td><td>Rp "+data.sell_price+",00</td><td>Rp "+data.sell_price+",00</td><td><input type='number' name='discount[]' id='discount'></td><td>&times;</td>");
+                            $('#table_body').append("<tr id='row_"+data.id+"'><td>"+no+"</td><td>"+data.product_code+"</td><td>"+data.name+"</td><td><img width='20' src='<?php echo base_url() ?>"+data.photo+"'></td><td>"+data.gold_amount+"%</td><td>"+data.weight+"</td><td>Rp "+data.sell_price+",00</td><td>Rp <span id='discount_"+data.id+"'></span></td><td><input type='number' name='product_deal_"+data.id+"' id='discount'></td><td><a onclick='remove_row("+data.id+")' style='cursor:pointer'>&times;</a></td>");
 
                             
                         }
@@ -293,4 +297,25 @@
                 });
             }
         }
+    function remove_row(id){
+        alertify.confirm("Apakah anda yakin ingin menghapus barang ini ? ",
+              function(){
+                var index = product_code.indexOf(id.toString());
+                if(index > -1){
+                    product_code.splice(index,1);
+                }
+                var subtotal = $('#total_'+id).html();
+                var total = $('#total_price').html();
+                total = total.replace(/\./g, '');
+                subtotal = subtotal.replace(/\./g, '');
+                total = +total - +subtotal;
+                $('#total_price').html(total);
+                $('#hidden_total').val(total);
+                $('#row_'+id).remove();
+              },
+              function(){
+                $.gritter.add({title: 'Gagal !', text: 'Produk gagal dihapus', time: 1500});
+              });       
+        
+    }
 </script>

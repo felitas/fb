@@ -83,8 +83,7 @@
 		public function new_sale(){
 			
 			if($this->input->post()){
-				print_r($this->input->post());
-				exit;
+				
 				/**kalo ada customer baru di insert**/
 				
 				if($this->input->post('new_customer') == 'on'){
@@ -103,24 +102,23 @@
 
 				
 
-				if($this->input->post('customer_type') == 'Member' || $this->input->post('customer_type_hidden') == 'Member' ){
+				// if($this->input->post('customer_type') == 'Member' || $this->input->post('customer_type_hidden') == 'Member' ){
 					
-					$member_point = $this->db->get_where('member_point',array('active' => 1))->row();
+				// 	$member_point = $this->db->get_where('member_point',array('active' => 1))->row();
 
-					if($this->input->post('total_price') >= $member_point->target){
-						$add_point = floor($this->input->post('total_price') / $member_point->target);
-						$curr_point = $this->db->get_where('customers',array('code' => $this->input->post('customer_code')))->row('member_point');
+				// 	if($this->input->post('total_price') >= $member_point->target){
+				// 		$add_point = floor($this->input->post('total_price') / $member_point->target);
+				// 		$curr_point = $this->db->get_where('customers',array('code' => $this->input->post('customer_code')))->row('member_point');
 
-						$this->db->update('customers',array('member_point' => $curr_point+$add_point),array('code' => $this->input->post('customer_code')));
-					}
-				}
+				// 		$this->db->update('customers',array('member_point' => $curr_point+$add_point),array('code' => $this->input->post('customer_code')));
+				// 	}
+				// }
 
 				$data_sale = array(
 						'sale_code' => $this->input->post('sale_code'),
 						'date' => date('Y-m-d H:i'),
 						'outlet_id' => $this->session_outlet,
 						'sales_id' => $this->input->post('sales_id'),
-						'cashier_id' => $this->session_id,
 						'customer_code' => $this->input->post('customer_code'),
 						'qty' => count($this->input->post('product_code')),
 						'total_price' => $this->input->post('total_price')
