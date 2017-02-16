@@ -51,18 +51,20 @@
 						'date'			=> date('Y-m-d H:i:s')
 					);
 
-
+				$year = date('y');
+				$month= date('m');
 				$outlet_code = $this->input->post('from_outlet_code');
-				$code = $this->db->get_where('code',array('code' => $outlet_code.'MUT'))->row();
+				$code = $this->db->get_where('code',array('code' => $outlet_code.'MT'.$year.$month))->row();
+				
 
 				if($code){
-					$data_mutation['code'] = $code->code.sprintf("%05d", $code->count);
+					$data_mutation['code'] = $code->code.sprintf("%04d", $code->count);
 					$this->db->update('code',array('count' => $code->count+1),array('code' => $code->code));
 					
 				}else{
-					$this->db->insert('code',array('code' => $outlet_code.'MUT','count' => 1));
-					$data_mutation['code'] = $outlet_code.'MUT'.sprintf("%05d", 1);
-					$this->db->update('code',array('count' => 2),array('code' => $outlet_code.'MUT'));
+					$this->db->insert('code',array('code' => $outlet_code.'MT'.$year.$month,'count' => 1));
+					$data_mutation['code'] = $outlet_code.'MT'.$year.$month.sprintf("%04d", 1);
+					$this->db->update('code',array('count' => 2),array('code' => $outlet_code.'MT'.$year.$month));
 				}
 
 				$this->db->insert('mutation',$data_mutation);

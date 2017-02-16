@@ -10,8 +10,8 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
-        <a id="add_link" class="pull-right" style="cursor: pointer;">Tambah target sales baru <span class="fa fa-plus-circle"></span></a>
-        <h2>Daftar Target Grade Customer</h2>
+        <a id="add_link" class="pull-right" style="cursor: pointer;">Tambah target point member baru <span class="fa fa-plus-circle"></span></a>
+        <h2>Daftar Target Poin Customer</h2>
 	</div>
 	<!--widget box for the table for customer grade list-->
 	<div class="widget-box">

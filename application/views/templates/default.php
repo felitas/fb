@@ -225,7 +225,6 @@
       </li>
       <li class="submenu"> <a href="#"><i class="fa fa-gear"></i><span>Konfigurasi</span></a>
         <ul>
-          <li><a href="error403.html"><i class="fa fa-bank faicon"></i> Toko</a></li>
           <li><a href="<?php echo base_url('configuration/Currency') ?>"><i class="fa fa-dollar faicon"></i> Kurs</a></li>
           <li><a href="<?php echo base_url('configuration/gold_amount') ?>"><i class="fa fa-gg faicon"></i> Gold</a></li>
           <li><a href="<?php echo base_url('configuration/diamond_type')?>"><i class="fa fa-diamond faicon"></i>Spesifikasi Diamond</a></li>
@@ -235,7 +234,8 @@
           <li><a href="<?php echo base_url('configuration/model') ?>"><i class="fa fa-tags faicon"></i> Koleksi/Model Perhiasan</a></li>
           <!--End barcode elements-->
           <li><a href="error500.html"><i class="fa fa-users faicon"></i> Sales Goal</a></li>
-          <li><a href="<?php echo base_url('configuration/customer_settings') ?>"><i class="fa fa-user-circle faicon"></i> Poin & Grade Customer</a></li>
+          <li><a href="<?php echo base_url('configuration/customer_settings') ?>"><i class="fa fa-user-circle faicon"></i>Grade Customer</a></li>
+          <li><a href="<?php echo base_url('configuration/member_points') ?>"><i class="fa fa-user-circle faicon"></i>Point Member</a></li>
         </ul>
       </li>
       <!-- <li class="content"> <span>Monthly Bandwidth Transfer</span>

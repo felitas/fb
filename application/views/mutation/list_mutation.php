@@ -15,6 +15,9 @@
 		width: 70%;
 		
 	}
+	#action{
+		text-align: center;
+	}
 </style>
 <div class="container-fluid">
 	<div class="row-fluid">
@@ -56,8 +59,8 @@
 							<td><?php echo $sent_transaction->from_outlet ?></td>
 							<td><?php echo $sent_transaction->to_outlet ?></td>
 							<td><p class="<?php echo ($sent_transaction->status=='Pending')? 'red':'green' ?>"><?php echo $sent_transaction->status ?></p></td>
-							<td>
-								<a href="<?php echo base_url('mutation/edit_mutation/'.$sent_transaction->code) ?>" class="btn btn-info"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_mutation('<?php echo $sent_transaction->id ?>','<?php echo $sent_transaction->code ?>')" class="btn btn-danger"><span class="mif mif-bin"></span> Hapus</a>
+							<td id="action">
+								<a href="<?php echo base_url('mutation/edit_mutation/'.$sent_transaction->code) ?>" class="btn btn-info"><span class="mif mif-pencil"></span> Edit</a><a href="#" onclick="delete_mutation('<?php echo $sent_transaction->id ?>','<?php echo $sent_transaction->code ?>')" class="btn btn-danger"><span class="mif mif-bin"></span> Hapus</a>
 							</td>	
 						</tr>
 						<?php $i++; ?>

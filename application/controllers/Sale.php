@@ -159,16 +159,18 @@
 				}
 
 			}else{
+				$year = date('y');
+				$month = date('m');
 				$outlet_code = $this->db->get_where('outlets',array('id' => $this->session_outlet))->row('code');
-				$code = $this->db->get_where('code',array('code' => $outlet_code.'SL'))->row();
+				$code = $this->db->get_where('code',array('code' => $outlet_code.'SL'.$year.$month))->row();
 				if($code){
-					$data['sale_code'] = $code->code.sprintf("%010d", $code->count);
+					$data['sale_code'] = $code->code.sprintf("%06d", $code->count);
 					$data['hidden_code'] = $code->code;
 					$data['hidden_count'] = $code->count;
 				}else{
-					$this->db->insert('code',array('code' => $outlet_code.'SL','count' => 1));
-					$data['sale_code'] = $outlet_code.'SL'.sprintf("%010d", 1);
-					$data['hidden_code'] = $outlet_code.'SL';
+					$this->db->insert('code',array('code' => $outlet_code.'SL'.$year.$month,'count' => 1));
+					$data['sale_code'] = $outlet_code.'SL'.$year.$month.sprintf("%06d", 1);
+					$data['hidden_code'] = $outlet_code.'SL'.$year.$month;
 					$data['hidden_count'] = 1;	
 				}
 				$this->load->model('sales_model');
@@ -184,12 +186,12 @@
 		public function get_new_customer_code(){
 			$code = $this->db->get_where('code',array('code' => 'MKM'))->row();
 			if($code){
-				$data['customer_code'] = $code->code.sprintf("%07d", $code->count);
+				$data['customer_code'] = $code->code.sprintf("%010d", $code->count);
 				$data['hidden_customer_code'] = $code->code;
 				$data['hidden_customer_count'] = $code->count;
 			}else{
 				$this->db->insert('code',array('code' => 'MKM','count' => 1));
-				$data['customer_code'] = 'MKM'.sprintf("%07d", 1);
+				$data['customer_code'] = 'MKM'.sprintf("%010d", 1);
 				$data['hidden_customer_code'] = 'MKM';
 				$data['hidden_customer_count'] = 1;
 			}

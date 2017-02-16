@@ -505,7 +505,7 @@
 			}
 		}
 		/*========================END SALES TARGET=========================*/
-		/*========================CUSTOMER SETTINGS=========================*/
+		/*========================CUSTOMER SETTINGS (for customer grade)=========================*/
 		public function customer_settings(){
 			if($this->input->post('submit')){
 				$data=array(
@@ -526,7 +526,7 @@
 				$data['title'] = 'Customer Settings';
 				$data['is_mobile']=$this->is_mobile;
 				$data['grades'] = $this->crud_model->get_data('customer_grade')->result();
-				$this->template->load($this->default,'configuration/customer_settings/list_customer_grade_point',$data);	
+				$this->template->load($this->default,'configuration/customer_settings/list_customer_grade',$data);	
 			}
 		}
 		public function edit_grade($id=''){
@@ -561,7 +561,31 @@
 				$this->template->load($this->default,'configuration/customer_settings/edit_customer_grade',$data);
 			}
 		}
-
+		/*======================== END CUSTOMER SETTINGS (for customer grade)=========================*/
+		/*========================MEMBER POINT SETTINGS=========================*/
+		public function member_point_target(){
+			if($this->input->post('submit')){
+				$data=array(
+					'name'=>$this->input->post('point_name'),
+					'target'=>$this->input->post('point_target'),
+					'point'=>$this->input->post('point_amount')
+				);
+				$this->crud_model->insert_data('member_point_target',$data);
+				$this->session->set_flashdata('member_point',"$.gritter.add({
+					class_name : 'gritter-light',
+					title:'Success',
+					text:'Target member point telah ditambahkan',
+					time: 1500
+				});");
+				redirect('configuration/sales_target');
+			}
+			else{
+				$data['title'] = 'Customer Settings';
+				$data['is_mobile']=$this->is_mobile;
+				$data['points'] = $this->crud_model->get_data('member_point_target')->result();
+				$this->template->load($this->default,'configuration/customer_settings/list_customer_grade_point',$data);	
+			}
+		}
 	}
 
  ?>
