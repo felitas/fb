@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
 <link  href="<?php echo base_url() ?>fancybox/source/jquery.fancybox.css" rel="stylesheet">
-<script src="<?php echo base_url() ?>fancybox/source/jquery.fancybox.js"></script>
+
 <style>
 	.red{
 		color: red !important;
@@ -98,7 +98,7 @@
 	</div>
 </div>
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
-
+<script src="<?php echo base_url() ?>fancybox/source/jquery.fancybox.js"></script>
 
 <script>
 	function delete_product(id,name){

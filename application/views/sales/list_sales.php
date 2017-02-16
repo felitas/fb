@@ -1,6 +1,8 @@
 <!--Both are css for alertify-->
 <link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
 <link rel="stylesheet" href="<?php echo base_url() ?>css/default.min.css">
+<!--FOR FANCYBOX-->
+<link  href="<?php echo base_url() ?>fancybox/source/jquery.fancybox.css" rel="stylesheet">
 
 <div class="container-fluid">
 	<div class="row-fluid">
@@ -22,6 +24,7 @@
 								<th data-type="numeric">No.</th>
 								<th>Nama</th>
 								<th>Kode Sales</th>
+								<th data-hide="phone" data-toggle="phone">Foto</th>
 								<th data-hide="phone" data-toggle="phone">Telephone</th>
 								<th data-hide="phone" data-toggle="phone">Email</th>
 								<th data-hide="phone" data-toggle="phone">Alamat</th>
@@ -37,6 +40,8 @@
 										<td><?php echo $i ?></td>
 										<td><?php echo $row->name ?></td>
 										<td><?php echo $row->sales_code ?></td>
+										<td><a id="sales_photo" href="<?php echo base_url().$row->photo ?>"><img width="30" src="<?php echo base_url().$row->photo ?>" alt=""/></a></td>
+										
 										<td><a href="tel:<?php echo $row->phone ?>"><?php echo $row->phone ?></a></td>
 										<td><?php echo $row->email ?></td>
 										<td><?php echo $row->address ?></td>
@@ -48,13 +53,13 @@
 							
 							<?php else:?>
 								<tr>
-									<td colspan="8" class="text-center"><h3 class="text-center">Table kosong</h3></td>
+									<td colspan="9" class="text-center"><h3 class="text-center">Table kosong</h3></td>
 								</tr>
 							<?php endif; ?>
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="8">
+								<td colspan="9">
 									<div class="pagination pagination-centered"></div>
 								</td>
 							</tr>
@@ -66,6 +71,9 @@
 	</div>
 	</div>
 </div>
+
+<script src="<?php echo base_url() ?>fancybox/source/jquery.fancybox.js"></script>
+
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
 
 
@@ -92,6 +100,7 @@
 	    <?php endif; ?>
 
 	    $('#table_sales').footable();
+	    $("#sales_photo").fancybox();
 	});
 	
 </script>
