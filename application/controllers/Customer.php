@@ -23,7 +23,7 @@
 				$code = $this->db->get_where('code',array('code' => 'FBC'))->row();
 
 				if($code){
-					$customer_code = $code->code.sprintf("%05d", $code->count);
+					$customer_code = $code->code.sprintf("%07d", $code->count);
 					$this->db->update('code',array('count' => $code->count+1),array('code' => $code->code));
 
 					
@@ -146,13 +146,29 @@
 		
 		//used in new sale ajax
 		public function get_customer($code = ''){
-			$customer = $this->db->get_where('customers',array('code' => $code))->row();
+			$customer = $this->db->get_where('customers',array('customer_code' => $code))->row();
 			if($customer == NULL){
 				echo 'not found';
 			}else{
 				$customer = (Object) $customer;
 				echo json_encode($customer);	
 			}
+		}
+
+		public function get_new_customer_code(){
+			$code = $this->db->get_where('code',array('code' => 'FBC'))->row();
+			if($code){
+				$data['customer_code'] = $code->code.sprintf("%07d", $code->count);
+				$data['hidden_customer_code'] = $code->code;
+				$data['hidden_customer_count'] = $code->count;
+			}else{
+				$this->db->insert('code',array('code' => 'FBC','count' => 1));
+				$data['customer_code'] = 'FBC'.sprintf("%07d", 1);
+				$data['hidden_customer_code'] = 'FBC';
+				$data['hidden_customer_count'] = 1;
+			}
+			$data = (Object) $data;
+			echo json_encode($data);
 		}
 
 	}

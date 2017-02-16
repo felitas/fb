@@ -1,4 +1,4 @@
-<script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
+
 <div class="container-fluid">
     <div class="row-fluid">
         <a href="<?php echo base_url('sales') ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar sales</a>
@@ -13,13 +13,13 @@
                 <div class="span6">
                     <label for="" class="control-label">Nama Sales</label>
                     <div class="controls">
-                        <input type="text" placeholder="Nama Lengkap Sales" name="sales_name">
+                        <input type="text" placeholder="Nama Lengkap Sales" name="sales_name" class="span12">
                     </div>
                 </div>
                 <div class="span6">
                     <label for="" class="control-label">Username</label>
                     <div class="controls">
-                        <input type="text" placeholder="Username Sales" onblur="check_username(this)" name="sales_username"> 
+                        <input type="text" placeholder="Username Sales" onblur="check_username(this)" name="sales_username" id="sales_username" class="span11"> 
                     </div>    
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 <div class="span6">
                     <label for="" class="control-label">Password</label>
                     <div class="controls">
-                        <input type="password" placeholder="Password Sales" name="sales_password"> 
+                        <input type="password" placeholder="Password Sales" name="sales_password" class="span11"> 
                     </div>        
                 </div>
             </div>
@@ -49,7 +49,7 @@
                 <div class="span6">
                     <label for="" class="control-label">Email</label>
                     <div class="controls">
-                        <input type="email" placeholder="Email Sales" name="sales_email"> 
+                        <input type="email" placeholder="Email Sales" name="sales_email" class="span11"> 
                     </div>
                 </div>
             </div>
@@ -68,13 +68,13 @@
                 <div class="span6">
                     <label for="" class="control-label">No. Telepon</label>
                     <div class="controls">
-                        <input type="text" placeholder="Nomor Telephone Sales" name="sales_phone"> 
+                        <input type="text" placeholder="Nomor Telephone Sales" name="sales_phone" class="span12"> 
                     </div>    
                 </div>
                 <div class="span6">
                     <label for="" class="control-label">Tempat Bekerja</label>
                     <div class="controls">
-                        <select name="sales_outlet" id="">
+                        <select name="sales_outlet" id="" class="span11">
                             <option value="" selected="selected">--Pilih Outlet--</option>
                             <?php foreach ($outlets as $outlet): ?>
                                 <option value="<?php echo $outlet->id ?>"><?php echo $outlet->name; ?></option>
@@ -84,9 +84,17 @@
                 </div>
             </div>
             <div class="control-group">
+                <div class="span6">
+                    <label for="" class="control-label">Kode Sales</label>
+                    <div class="controls">
+                        <input type="text" placeholder="Kode sebagai identitas sales" name="sales_code" id="sales_code" class="span12" onblur="check_code(this)"> 
+                    </div>    
+                </div>
+            </div>
+            <div class="control-group">
                 <label for="" class="control-label">Alamat</label>
                 <div class="controls">
-                    <textarea name="sales_address" placeholder="Alamat Sales" id="" cols="30" rows="10"></textarea> 
+                    <textarea name="sales_address" placeholder="Alamat Sales" id="" cols="30" rows="6" class="span11"></textarea> 
                 </div>
             </div>
         </div>
@@ -104,7 +112,20 @@
 </div>
 
 <script src="<?php echo base_url() ?>js/webcam.min.js"></script>
+<script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
 
+<script>
+    $(document).ready(function(){
+        $('#salesform').validate({
+            rules:{
+                sales_name:"required",
+                sales_username:"required",
+                sales_password:"required",
+                sales_code:"required"
+            }
+        });
+    });
+</script>
 <script>
     function check_username(el){
         if($(el).val() != ''){
@@ -119,6 +140,7 @@
                         text: 'Username sudah terpakai',
                         sticky: false
                     });
+                    $('#sales_username').val('');
                 }else{
                     $.gritter.add({
                         class_name:'gritter-light',
@@ -131,6 +153,36 @@
             });    
         }
     }
+</script>
+<script>
+    function check_code(el){
+        if($(el).val() != ''){
+            $.ajax({
+              url: "<?php echo base_url('sales/check_sales_code/')?>" + $(el).val(),
+              type: 'GET',
+              cache : false,
+              success: function(result){
+                if(result == 'taken'){
+                    $.gritter.add({
+                        title: 'Error !',
+                        text: 'Code sudah diambil',
+                        sticky: false
+                    });
+                    $('#sales_code').val('');
+                }else{
+                    $.gritter.add({
+                        class_name:'gritter-light',
+                        title: 'Success !',
+                        text: 'Code bisa dipakai',
+                        sticky: false
+                    });
+                }
+              }
+            });    
+        }
+    }
+</script>
+<script>
 
     function show_cam(el){
         if($(el).is(":checked") ){
@@ -146,15 +198,6 @@
     <?php if($this->session->flashdata('sales')): ?>
        <?php echo $this->session->flashdata('sales') ?>
     <?php endif; ?>
-    $(document).ready(function(){
-        $('#salesform').validate({
-            rules:{
-                sales_name:"required",
-                sales_username:"required",
-                sales_password:"required"
-            }
-        });
-    });
 </script>
 
 <script language="JavaScript">

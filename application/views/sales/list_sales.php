@@ -21,6 +21,7 @@
 							<tr>
 								<th data-type="numeric">No.</th>
 								<th>Nama</th>
+								<th>Kode Sales</th>
 								<th data-hide="phone" data-toggle="phone">Telephone</th>
 								<th data-hide="phone" data-toggle="phone">Email</th>
 								<th data-hide="phone" data-toggle="phone">Alamat</th>
@@ -35,6 +36,7 @@
 									<tr>
 										<td><?php echo $i ?></td>
 										<td><?php echo $row->name ?></td>
+										<td><?php echo $row->sales_code ?></td>
 										<td><a href="tel:<?php echo $row->phone ?>"><?php echo $row->phone ?></a></td>
 										<td><?php echo $row->email ?></td>
 										<td><?php echo $row->address ?></td>
@@ -46,13 +48,13 @@
 							
 							<?php else:?>
 								<tr>
-									<td colspan="7" class="text-center"><h3 class="text-center">Table kosong</h3></td>
+									<td colspan="8" class="text-center"><h3 class="text-center">Table kosong</h3></td>
 								</tr>
 							<?php endif; ?>
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="7">
+								<td colspan="8">
 									<div class="pagination pagination-centered"></div>
 								</td>
 							</tr>

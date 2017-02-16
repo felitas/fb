@@ -22,6 +22,15 @@ class Sales_model extends CI_Model{
 		return $this->db->get()->result();
 	}
 
+
+	function check_code($code=''){
+		if($this->db->get_where('accounts',array('sales_code' => $code))->num_rows() > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 }
 
 ?>

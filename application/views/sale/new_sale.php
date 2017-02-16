@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/selectize.css')?>">
 <div class="container-fluid">
     <div class="row-fluid">
         <a href="<?php echo base_url('sale') ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar penjualan</a>
@@ -10,7 +10,7 @@
             
             <?php echo form_open('sale/new_sale', array('class'=>'form-horizontal')) ?>
             <div class="control-group top-control">
-                <div class="span4">
+                <div class="span6">
                     <label class="control-label">Kode Penjualan</label>
                     <div class="controls">
                         <input type="text" name="sale_code" value="<?php echo $sale_code ?>" readonly="readonly">
@@ -18,20 +18,40 @@
                         <input type="hidden" name="hidden_count" value="<?php echo $hidden_count ?>">            
                     </div>    
                 </div>
-                <div class="span5">
-                    <label class="control-label">Kode Customer</label>
+                <div class="span6">
+                    <label class="control-label">Sales</label>
                     <div class="controls">
-                        <input type="text" name="customer_code" placeholder="Masukkan kode pelanggan" id="customer_code" onblur="get_customer(this)" class="span12">
-                    </div>            
-                </div>
-                <div class="span3">
+                        <select name="sale_sales" id="sale_sales" class="span11">
+                            <?php if ($sales==''): ?>
+                                <option value="x">Tidak ada sales di outlet ini</option>    
+                            <?php else:?>
+                                <option value="choose">--Pilih Sales--</option>
+                                <?php foreach ($sales as $row): ?>
+                                    <option value="<?php echo $row->sales_code ?>"><?php echo $row->name ?> - <?php echo $row->sales_code?></option>
+                                <?php endforeach ?>
+                            <?php endif;?>
+                        </select>
+                    </div>    
+                </div>  
+            </div>
+            <div class="control-group">
+                <div class="span6">
                     <label class="control-label">Customer Baru</label>
                     <div class="controls">
                         <input type="checkbox" name="new_customer" onchange="data_new_customer(this)">
+                        <input type="hidden" name="hidden_customer_code" id="hidden_customer_code">
+                        <input type="hidden" name="hidden_customer_count" id="hidden_customer_count">
                     </div>            
-                </div>  
+                </div>
+                <div class="span6">
+                    <label class="control-label">Kode Customer</label>
+                    <div class="controls">
+                        <input type="text" name="customer_code" placeholder="Masukkan kode pelanggan" id="customer_code" onblur="get_customer(this)" class="span11">
+                    </div>            
+                </div>
+                
             </div>
-            <!--///////////////////////DATA NEW CUSTOMER//////////////////////////////////////////////-->
+            <!--///////////////////////FIELDS SHOWING CUSTOMER DATA//////////////////////////////////////////////-->
             <div class="control-group new-customer hide-field">
                 <div class="span6">
                     <label class="control-label">Nama Customer</label>
@@ -80,19 +100,17 @@
                 </div>
             </div>
             <!--///////////////////////END DATA NEW CUSTOMER//////////////////////////////////////////////-->
+            
             <div class="control-group">    
                 <label class="control-label">Kode Produk</label>
                 <div class="controls">
-                  <input type="text" placeholder="Scan atau ketik kode produk yang akan dikirim" name="product_code" class="span11" onblur="get_product(this)">
-                </div>    
+                  <input type="text" placeholder="Scan atau ketik kode produk" name="product_code" class="span11" onblur="get_product(this)">
+                </div>        
             </div>    
 
             <div class="control-group">                
-                <div class="controls">
-                    <div class="span11">
-                        <div class="control-group" style="margin-bottom: 6px;">
-                            <input type="text" placeholder="Cari..." id="filter" class="span12">
-                        </div>
+                
+                    <div class="span12">
                         <div class="table-responsive toggle-circle-filled">
                             <table class="table table-bordered" id="table_sale" data-filter="#filter" data-page-size="20">
                                 <thead>
@@ -100,13 +118,14 @@
                                         <th data-type="numeric">No</th>
                                         <th>Kode Barang</th>
                                         <th>Nama</th>
-                                        <!-- <th data-hide="phone" data-toggle="phone">Nampan</th> -->
-                                        <th data-hide="phone" data-toggle="phone">Tipe</th>
-                                        <th data-hide="phone" data-toggle="phone">Kategori</th>
+                                        <th data-hide="phone" data-toggle="phone">Foto</th>
                                         <th data-hide="phone" data-toggle="phone">Kadar</th>
                                         <th data-hide="phone" data-toggle="phone">Berat</th>
-                                        <th data-hide="phone" data-toggle="phone">Foto</th>
-                                        <th data-hide="phone" data-toggle="phone">Action</th>
+                                        <th data-hide="phone" data-toggle="phone">Harga/gram</th>
+                                        <th data-hide="phone" data-toggle="phone">Harga</th>
+                                        <th data-hide="phone" data-toggle="phone">Diskon</th>
+                                        <th data-hide="phone" data-toggle="phone">Harga Deal</th>
+                                        <th data-hide="phone" data-toggle="phone"></th>
                                     </tr>
                                 </thead>
                                 <tbody id="table_body">
@@ -114,7 +133,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="10">
+                                        <td colspan="11">
                                             <div class="pagination pagination-centered"></div>
                                         </td>
                                     </tr>
@@ -122,7 +141,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                
             </div>
 
             <div class="form-actions text-center">
@@ -134,16 +153,56 @@
     </div>
     </div>
 </div>
-
+<script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
+<script src="<?php echo base_url() ?>js/selectize.min.js"></script>
 <script>
     $(document).ready(function(){
         $('#table_sale').footable();
+        $('#sale_sales').selectize();
     });
     <?php if($this->session->flashdata('customer')): ?>
 
        <?php echo $this->session->flashdata('customer') ?>
 
     <?php endif; ?>
+
+    function data_new_customer(el){
+        if($(el).is(":checked")){
+            $('#customer_code').val('');
+            $('#customer_name').val('');
+            $('#customer_type').val('Regular').attr('selected',true);
+            $('#customer_email').val('');
+            $('#customer_phone').val('');
+            $('#customer_address').val('');
+            $('#customer_birthday').val('');
+            $.ajax({
+              url: "<?php echo base_url('customer/get_new_customer_code/')?>" + $(el).val(),
+              type: 'GET',
+              cache : false,
+              success: function(result){
+                
+                    var data = JSON.parse(result);
+                    
+                    $('#customer_code').val(data.customer_code);
+                    $('#hidden_customer_code').val(data.hidden_customer_code);
+                    $('#hidden_customer_count').val(data.hidden_customer_count);
+                    
+                }
+            
+            });
+        }
+        else{
+            $('#customer_code').val('');
+            $('#hidden_customer_code').val('');
+            $('#hidden_customer_count').val('');
+            $('#customer_name').val('');
+            $('#customer_type').val('Regular').attr('selected',true);
+            $('#customer_email').val('');
+            $('#customer_phone').val('');
+            $('#customer_address').val('');
+            $('#customer_birthday').val('');
+        }
+    }
 
 </script>
 <script type="text/javascript">
@@ -174,7 +233,7 @@
                     $('#customer_name').val(data.name);
                     $('#customer_phone').val(data.phone);
                     $('#customer_email').val(data.email);
-                    $('#customer_type').val(data.type);
+                    $('#customer_type').val(data.type).attr('selected',true);
                     $('#customer_birthday').val(data.birthday);
                     $('#customer_address').val(data.address);   
 
@@ -218,12 +277,8 @@
                                 time: 1500
                             });
                         }else{
-                            $('#table_body').append("<tr><td>"+no+"</td><td>"+data.product_code+"</td><td>"+data.name+"</td><td>"+data.type+"</td><td>"+data.category+"</td><td>"+data.gold_amount+"</td><td>"+data.weight+"</td><td><img width='20' src='<?php echo base_url() ?>"+data.photo+"'></td><td>&times;</td>")
-                            // $('#table_body').append("<tr><td>"+no+"</td><td><a class='photobox' href='<?php echo base_url() ?>"+data.photo+"'><img width='20' src='<?php echo base_url() ?>"+data.photo+"' alt=''/></a></td><td>"+data.product_code+"</td><td>"+data.name+"</td><td>"+data.tray+"</td><td>"+data.type+"</td><td>"+data.category+"</td><td>"+data.real_weight+"</td><td>"+data.rounded_weight+"</td><td>"+data.selling_price+"</td><td>"+data.amount_type+data.original+"->"+data.marked_up+"</td><td>"+data.outlet+"</td></tr>");
+                            $('#table_body').append("<tr><td>"+no+"</td><td>"+data.product_code+"</td><td>"+data.name+"</td><td><img width='20' src='<?php echo base_url() ?>"+data.photo+"'></td><td>"+data.gold_amount+"%</td><td>"+data.weight+"gr</td><td>"+data.weight+"</td><td>Rp "+data.sell_price+",00</td><td>Rp "+data.sell_price+",00</td><td><input type='number' name='discount[]' id='discount'></td><td>&times;</td>");
 
-                            $('#mutationform').append("<input type='hidden' name='product_code[]' value='"+data.product_code+"'>");
-                                 product_code.push(data.product_code);
-                                 no++;
                             
                         }
                             

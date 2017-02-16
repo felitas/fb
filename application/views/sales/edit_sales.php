@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<?php echo base_url() ?>fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
 <style type="text/css">
     .circleimg{
         background:url('<?php echo base_url().$sales->photo ?>?timestamp=<?php echo rand(0,999999) ?>');
@@ -15,7 +16,7 @@
     <div class="widget-content nopadding">
         <div class="row-fluid">
             <div class="span12">
-                <?php echo form_open_multipart('sales/edit_sales/'.$sales->id,array('class'=>'form-horizontal')) ?>
+                <?php echo form_open_multipart('sales/edit_sales/'.$sales->id,array('class'=>'form-horizontal','id'=>'salesform')) ?>
                 
                 <div class="control-group top-control">
                     <div class="circleimg">
@@ -26,13 +27,13 @@
                     <div class="span6">
                         <label for="" class="control-label">Nama Sales</label>
                         <div class="controls">
-                            <input type="text" placeholder="Nama Lengkap Sales" name="sales_name" class="tip-bottom" value="<?php echo $sales->name ?>">
+                            <input type="text" placeholder="Nama Lengkap Sales" name="sales_name" class="span12" value="<?php echo $sales->name ?>">
                         </div>    
                     </div>
                     <div class="span6">
                         <label for="" class="control-label">Username</label>
                         <div class="controls">
-                            <input type="text" placeholder="Username Sales" onblur="check_username(this)" name="sales_username" value="<?php echo $sales->username ?>" readonly="readonly" class="tip-bottom"> 
+                            <input type="text" placeholder="Username Sales" onblur="check_username(this)" name="sales_username" value="<?php echo $sales->username ?>" readonly="readonly" class="span11"> 
                         </div>  
                     </div>
                     
@@ -71,7 +72,7 @@
                     <div class="span6">
                         <label for="" class="control-label">Tempat Bekerja</label>
                         <div class="controls">
-                            <select name="sales_outlet" id="">
+                            <select name="sales_outlet" id="" class="span11">
                                 <option value="" selected="selected">--Pilih Outlet--</option>
                                 <?php foreach ($outlets as $outlet): ?>
                                     <option value="<?php echo $outlet->id ?>" <?php echo ($outlet->id == $sales->outlet_id) ? 'selected' : '' ?>><?php echo $outlet->name; ?></option>
@@ -92,21 +93,29 @@
                 </div>
                 <?php endif ?>        
                 <div class="control-group">
-                    <label for="" class="control-label">No. Telepon</label>
-                    <div class="controls">
-                        <input type="text" placeholder="Nomor Telephone Sales" name="sales_phone" value="<?php echo $sales->phone ?>" class="tip-bottom"> 
+                    <div class="span6">
+                        <label for="" class="control-label">No. Telepon</label>
+                        <div class="controls">
+                            <input type="text" placeholder="Nomor Telephone Sales" name="sales_phone" value="<?php echo $sales->phone ?>" class="span12"> 
+                        </div>
                     </div>
+                    <div class="span6">
+                        <label for="" class="control-label">Email</label>
+                        <div class="controls">
+                            <input type="text" placeholder="Email Sales" name="sales_email" value="<?php echo $sales->email ?>" class="span11"> 
+                        </div>    
+                    </div>    
                 </div>
                 <div class="control-group">
-                    <label for="" class="control-label">Email</label>
+                    <label for="" class="control-label">Kode Sales</label>
                     <div class="controls">
-                        <input type="text" placeholder="Email Sales" name="sales_email" value="<?php echo $sales->email ?>" class="tip-bottom"> 
+                        <input type="text" placeholder="Kode sebagai identitas sales" name="sales_code" id="sales_code" class="span11" onblur="check_code(this)" value="<?php echo $sales->sales_code ?>"> 
                     </div>
                 </div>
                 <div class="control-group">
                     <label for="" class="control-label">Alamat</label>
                     <div class="controls">
-                        <textarea name="sales_address" placeholder="Alamat Sales" id="" cols="30" rows="10"><?php echo $sales->address ?></textarea> 
+                        <textarea name="sales_address" placeholder="Alamat Sales" id="" cols="30" rows="6" class="span11"><?php echo $sales->address ?></textarea> 
                     </div>
                 </div>
                 <div class="form-actions text-center">
@@ -120,13 +129,20 @@
 </div>
 
 <script src="<?php echo base_url() ?>js/webcam.min.js"></script>
-
-<link rel="stylesheet" href="<?php echo base_url() ?>fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
 <script type="text/javascript" src="<?php echo base_url() ?>fancybox/source/jquery.fancybox.pack.js"></script>
+<script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
 
 <script>
     $(document).ready(function(){
         $('.fancybox').fancybox();
+        $('#salesform').validate({
+            rules:{
+                sales_name:"required",
+                sales_username:"required",
+                sales_password:"required",
+                sales_code:"required"
+            }
+        });
     });
     function change_password(el){
         if($(el).is(":checked") ){

@@ -108,6 +108,7 @@
 	            		'username'	=> $this->input->post('sales_username'),
 	            		'password'	=> hash_password($this->input->post('sales_password')),
 	            		'outlet_id'	=> $this->input->post('sales_outlet'),
+	            		'sales_code' => $this->input->post('sales_code'),
 	            		'role'		=> 'sales'
 	            	);
 
@@ -197,6 +198,7 @@
 	            		'email'		=> $this->input->post('sales_email'),
 	            		'username'	=> $this->input->post('sales_username'),
 	            		'outlet_id'	=> $this->input->post('sales_outlet'),
+	            		'sales_code' => $this->input->post('sales_code'),
 	            		'role'		=> 'sales'
 	            	);
 
@@ -267,6 +269,16 @@
 
 		}
 
+		public function check_sales_code($code = ''){
+			if ($code != '') {
+				if ($this->sales_model->check_code($code)) {
+					echo 'taken';
+				}
+				else{
+					echo 'available';
+				}
+			}
+		}
 			
 		
 
