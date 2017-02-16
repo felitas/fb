@@ -234,9 +234,8 @@
           <li><a href="<?php echo base_url('configuration/category') ?>"><i class="fa fa-puzzle-piece faicon"></i> Kategori Produk</a></li>
           <li><a href="<?php echo base_url('configuration/model') ?>"><i class="fa fa-tags faicon"></i> Koleksi/Model Perhiasan</a></li>
           <!--End barcode elements-->
-          <li><a href="error500.html"><i class="fa fa-opencart faicon"></i> Promo</a></li>
-          <li><a href="error500.html"><i class="fa fa-users faicon"></i> Sales</a></li>
-          <li><a href="error500.html"><i class="fa fa-user-circle faicon"></i> Member</a></li>
+          <li><a href="error500.html"><i class="fa fa-users faicon"></i> Sales Goal</a></li>
+          <li><a href="<?php echo base_url('configuration/member_point') ?>"><i class="fa fa-user-circle faicon"></i> Membership</a></li>
         </ul>
       </li>
       <!-- <li class="content"> <span>Monthly Bandwidth Transfer</span>

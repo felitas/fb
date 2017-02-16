@@ -444,6 +444,66 @@
 				}
 			}
 		}
+		/*MODEL ENDS*/
+		/*========================SALES TARGET=========================*/
+		/*LIST AND ADD*/
+		public function sales_target(){
+			if($this->input->post('submit')){
+				$data=array(
+					'name'=>$this->input->post('target_name'),
+					'target'=>$this->input->post('target_amount'),
+					'description'=>$this->input->post('target_desc')
+				);
+				$this->crud_model->insert_data('sales_target',$data);
+				$this->session->set_flashdata('target',"$.gritter.add({
+					class_name : 'gritter-light',
+					title:'Success',
+					text:'Target telah ditambahkan',
+					time: 1500
+				});");
+				redirect('configuration/sales_target');
+			}
+			else{
+				$data['title'] = 'Target Sales';
+				$data['is_mobile']=$this->is_mobile;
+				$data['targets'] = $this->crud_model->get_data('sales_target')->result();
+				$this->template->load($this->default,'configuration/sales_target/list_add_sales_target',$data);	
+			}
+		}
+		/*EDIT*/
+		public function edit_target($id=''){
+			if($this->input->post('submit')){
+				$data=array(
+					'name'=>$this->input->post('target_name'),
+					'target'=>$this->input->post('target_amount'),
+					'description'=>$this->input->post('target_desc')
+				);
+				if($this->crud_model->update_data('sales_target',$data,array('id'=>$id))){
+					$this->session->set_flashdata('target',"$.gritter.add({
+						class_name:'gritter-light',
+						title:'Success',
+						text:'Target telah diubah',
+						time:1500
+					});");
+					redirect('configuration/sales_target');	
+				}
+				else{
+					$this->session->set_flashdata('target',"$.gritter.add({
+						title:'Gagal',
+						text:'Model gagal diubah',
+						time:1500
+					});");
+					redirect('configuration/sales_target');		
+				}
+				
+			}
+			else{
+				$data['title']='Edit Target';
+				$data['is_mobile']=$this->is_mobile;
+				$data['target']=$this->crud_model->get_by_condition('sales_target',array('id'=>$id))->row();
+				$this->template->load($this->default,'configuration/sales_target/edit_target',$data);
+			}
+		}
 
 	}
 

@@ -192,14 +192,8 @@
           <li><a href=""><i class="fa fa-arrows-h faicon"></i> Buyback Baru</a></li>
         </ul>
       </li>
-      <li class="submenu"> <a href="#"><i class="fa fa-bank"></i><span>Outlet</span></a>
-        <ul>
-          <li><a href="<?php echo base_url('outlets') ?>"><i class="fa fa-file-text faicon"></i> Daftar Outlet</a></li>
-          <li><a href="<?php echo base_url('outlets/add_outlet') ?>"><i class="fa fa-plus-square faicon"></i> Outlet Baru</a></li>
-          <li><a href="<?php echo base_url('sales') ?>"><i class="fa fa-users faicon"></i> Daftar Sales</a></li>
-          <li><a href="<?php echo base_url('sales/add_sales') ?>"><i class="fa fa-user-plus faicon"></i> Sales Baru</a></li>
-        </ul>
-      </li>
+      <!--THE OUTLETS MENU IS NO USE for managers-->
+      <li> <a href="<?php echo base_url('sales') ?>"><i class="fa fa-users"></i><span>Daftar Sales</span></a></li>
       <li class="submenu"> <a href="#"><i class="fa fa-cubes"></i><span>Inventori</span></a>
         <ul>
           <li><a href="<?php echo base_url('product') ?>"><i class="fa fa-file-text faicon"></i> Daftar Produk</a></li>
@@ -215,30 +209,21 @@
           <li><a href="<?php echo base_url('mutation')?>"><i class="fa fa-truck faicon faicon"></i> Daftar Mutasi</a></li>
         </ul>
       </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-hand-stop-o"></i><span>Absensi</span></a>
+        <ul>
+          <li><a href="<?php echo base_url('customer') ?>"><i class="fa fa-vcard faicon"></i> Daftar Absensi</a></li>
+          <li><a href="<?php echo base_url('customer/add_customer') ?>"><i class="fa fa-user-plus faicon"></i> Absensi Masuk</a></li>
+          <li><a href="<?php echo base_url('supplier') ?>"><i class="fa fa-file-text faicon"></i> Absensi Keluar</a></li>
+        </ul>
+      </li>
       <li class="submenu"> <a href="#"><i class="fa fa-address-book"></i><span>Kontak</span></a>
         <ul>
           <li><a href="<?php echo base_url('customer') ?>"><i class="fa fa-user-circle faicon"></i> Daftar Customer</a></li>
           <li><a href="<?php echo base_url('customer/add_customer') ?>"><i class="fa fa-user-plus faicon"></i> Tambah Customer</a></li>
           <li><a href="<?php echo base_url('supplier') ?>"><i class="fa fa-file-text faicon"></i> Daftar Supplier</a></li>
-          <li><a href="<?php echo base_url('supplier/add_supplier') ?>"><i class="fa fa-male faicon"></i> Tambah Supplier</a></li>
         </ul>
       </li>
-      <li class="submenu"> <a href="#"><i class="fa fa-gear"></i><span>Konfigurasi</span></a>
-        <ul>
-          <li><a href="error403.html"><i class="fa fa-bank faicon"></i> Toko</a></li>
-          <li><a href="<?php echo base_url('configuration/Currency') ?>"><i class="fa fa-dollar faicon"></i> Kurs</a></li>
-          <li><a href="<?php echo base_url('configuration/gold_amount') ?>"><i class="fa fa-gg faicon"></i> Gold</a></li>
-          <li><a href="<?php echo base_url('configuration/diamond_type')?>"><i class="fa fa-diamond faicon"></i>Spesifikasi Diamond</a></li>
-          <!--the 3 below are essential for product barcode-->
-          <li><a href="<?php echo base_url('configuration/product_type') ?>"><i class="fa fa-empire faicon"></i> Tipe Produk</a></li>
-          <li><a href="<?php echo base_url('configuration/category') ?>"><i class="fa fa-puzzle-piece faicon"></i> Kategori Produk</a></li>
-          <li><a href="<?php echo base_url('configuration/model') ?>"><i class="fa fa-tags faicon"></i> Koleksi/Model Perhiasan</a></li>
-          <!--End barcode elements-->
-          <li><a href="error500.html"><i class="fa fa-opencart faicon"></i> Promo</a></li>
-          <li><a href="error500.html"><i class="fa fa-users faicon"></i> Sales</a></li>
-          <li><a href="error500.html"><i class="fa fa-user-circle faicon"></i> Member</a></li>
-        </ul>
-      </li>
+      
       <!-- <li class="content"> <span>Monthly Bandwidth Transfer</span>
         <div class="progress progress-mini progress-danger active progress-striped">
           <div style="width: 77%;" class="bar"></div>

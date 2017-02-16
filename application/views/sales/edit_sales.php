@@ -109,7 +109,7 @@
                 <div class="control-group">
                     <label for="" class="control-label">Kode Sales</label>
                     <div class="controls">
-                        <input type="text" placeholder="Kode sebagai identitas sales" name="sales_code" id="sales_code" class="span11" onblur="check_code(this)" value="<?php echo $sales->sales_code ?>"> 
+                        <input type="text" placeholder="Kode sebagai identitas sales" name="sales_code" id="sales_code" class="span11" onblur="check_code(this)" value="<?php echo $sales->workers_code ?>"> 
                     </div>
                 </div>
                 <div class="control-group">

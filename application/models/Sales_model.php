@@ -24,7 +24,7 @@ class Sales_model extends CI_Model{
 
 
 	function check_code($code=''){
-		if($this->db->get_where('accounts',array('sales_code' => $code))->num_rows() > 0){
+		if($this->db->get_where('accounts',array('workers_code' => $code))->num_rows() > 0){
 			return true;
 		}else{
 			return false;

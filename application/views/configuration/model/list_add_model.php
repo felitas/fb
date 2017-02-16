@@ -33,7 +33,7 @@
 			<div class="form-actions text-center">
 				<input type="Submit" name="submit" class="btn btn-info" value="Submit">
 			</div>
-		</div>
+	</div>
 	</div>
 	<?php echo form_close()?>
 	<!--End Form-->
@@ -68,7 +68,7 @@
 									#echo $outlet;
 								?>
 							</td> -->
-							<td><a href="<?php echo base_url('configuration/edit_model/'.$model->id) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_model('<?php echo $model->id ?>','<?php echo $model->code ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
+							<td><a href="<?php echo base_url('configuration/edit_model/'.$model->id) ?>"><span class="mif mif-pencil"></span> Edit</a> - <a href="#" onclick="delete_model('<?php echo $model->id ?>','<?php echo $model->name ?>')"><span class="mif mif-bin"></span> Hapus</a></td>
 						</tr>
 						<?php $i++; ?>
 						<?php endforeach; ?>
@@ -133,7 +133,7 @@
 		  },
 		  function(){
 		    $.gritter.add({
-		    	title: 'Gagal !', text: 'Kategori gagal dihapus', time:1500
+		    	title: 'Gagal !', text: 'Model gagal dihapus', time:1500
 		    });
 		  });
 	}

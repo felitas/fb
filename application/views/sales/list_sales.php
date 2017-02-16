@@ -39,7 +39,7 @@
 									<tr>
 										<td><?php echo $i ?></td>
 										<td><?php echo $row->name ?></td>
-										<td><?php echo $row->sales_code ?></td>
+										<td><?php echo $row->workers_code ?></td>
 										<td><a id="sales_photo" href="<?php echo base_url().$row->photo ?>"><img width="30" src="<?php echo base_url().$row->photo ?>" alt=""/></a></td>
 										
 										<td><a href="tel:<?php echo $row->phone ?>"><?php echo $row->phone ?></a></td>
