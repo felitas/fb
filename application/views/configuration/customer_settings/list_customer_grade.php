@@ -10,8 +10,7 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
-        <a id="add_link" class="pull-right" style="cursor: pointer;">Tambah target point member baru <span class="fa fa-plus-circle"></span></a>
-        <h2>Daftar Target Poin Customer</h2>
+        <h2>Daftar Pengaturan Target untuk Grade Customer</h2>
 	</div>
 	<!--widget box for the table for customer grade list-->
 	<div class="widget-box">
@@ -86,16 +85,6 @@
         <?php endif; ?>
     });
 
-    $('#add_link').click(function(){
-    	if($('#append_target').hasClass('closed-add')){
-    		$('#append_target').show();	
-			$('#append_target').removeClass('closed-add');
-    	}
-    	else{
-    		$('#append_target').hide();	
-			$('#append_target').addClass('closed-add');
-    	}
-    });
     
 	function delete_target(id,name){
 		alertify.confirm("Apakah anda yakin ingin menghapus target "+name+" ?",

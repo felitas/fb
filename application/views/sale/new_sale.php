@@ -32,7 +32,7 @@
                             <?php else:?>
                                 <option value="choose">--Pilih Sales--</option>
                                 <?php foreach ($sales as $row): ?>
-                                    <option value="<?php echo $row->sales_code ?>"><?php echo $row->name ?> - <?php echo $row->sales_code?></option>
+                                    <option value="<?php echo $row->workers_code ?>"><?php echo $row->name ?> - <?php echo $row->workers_code?></option>
                                 <?php endforeach ?>
                             <?php endif;?>
                         </select>

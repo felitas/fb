@@ -563,12 +563,12 @@
 		}
 		/*======================== END CUSTOMER SETTINGS (for customer grade)=========================*/
 		/*========================MEMBER POINT SETTINGS=========================*/
-		public function member_point_target(){
+		public function member_points(){
 			if($this->input->post('submit')){
 				$data=array(
 					'name'=>$this->input->post('point_name'),
 					'target'=>$this->input->post('point_target'),
-					'point'=>$this->input->post('point_amount')
+					'amount'=>$this->input->post('point_amount')
 				);
 				$this->crud_model->insert_data('member_point_target',$data);
 				$this->session->set_flashdata('member_point',"$.gritter.add({
@@ -577,13 +577,46 @@
 					text:'Target member point telah ditambahkan',
 					time: 1500
 				});");
-				redirect('configuration/sales_target');
+				redirect('configuration/member_points');
 			}
 			else{
 				$data['title'] = 'Customer Settings';
 				$data['is_mobile']=$this->is_mobile;
-				$data['points'] = $this->crud_model->get_data('member_point_target')->result();
-				$this->template->load($this->default,'configuration/customer_settings/list_customer_grade_point',$data);	
+				$data['point_targets'] = $this->crud_model->get_data('member_point_target')->result();
+				$this->template->load($this->default,'configuration/member_points/list_member_points',$data);	
+			}
+		}
+		public function edit_member_points($id=''){
+			if($this->input->post('submit')){
+				$data=array(
+					'name'=>$this->input->post('point_name'),
+					'target'=>$this->input->post('point_target'),
+					'amount'=>$this->input->post('point_amount')
+				);
+				if($this->crud_model->update_data('member_point_target',$data,array('id'=>$id))){
+					$this->session->set_flashdata('member_point',"$.gritter.add({
+						class_name:'gritter-light',
+						title:'Success',
+						text:'Target point member telah diubah',
+						time:1500
+					});");
+					redirect('configuration/member_points');	
+				}
+				else{
+					$this->session->set_flashdata('member_point',"$.gritter.add({
+						title:'Gagal',
+						text:'Target poin member gagal diubah',
+						time:1500
+					});");
+					redirect('configuration/member_points');		
+				}
+				
+			}
+			else{
+				$data['title']='Edit Target Point Member';
+				$data['is_mobile']=$this->is_mobile;
+				$data['point']=$this->crud_model->get_by_condition('member_point_target',array('id'=>$id))->row();
+				$this->template->load($this->default,'configuration/member_points/edit_member_points',$data);
 			}
 		}
 	}
