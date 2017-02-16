@@ -178,8 +178,8 @@
       <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-home"></i><span>Home</span></a> </li>
       <li class="submenu"> <a href="#"><i class="fa fa-shopping-bag"></i><span>Penjualan</span></a>
         <ul>
-          <li><a href=""><i class="fa fa-file-text faicon"></i> Daftar Penjualan</a></li>
-          <li><a href=""><i class="fa fa-plus-square faicon"></i> Penjualan Baru</a></li>
+          <li><a href="<?php echo base_url('sale')?>"><i class="fa fa-file-text faicon"></i> Daftar Penjualan</a></li>
+          <li><a href="<?php echo base_url('sale/new_sale')?>"><i class="fa fa-plus-square faicon"></i> Penjualan Baru</a></li>
           <li><a href=""><i class="fa fa-calendar-check-o faicon"></i> Daftar Booking</a></li>
           <li><a href=""><i class="fa fa-check-square faicon"></i> Booking Baru</a></li>
         </ul>
