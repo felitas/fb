@@ -1,5 +1,14 @@
 <link rel="stylesheet" href="<?php echo base_url() ?>css/alertify.min.css">
-
+<style>
+	.btn-info,.btn-danger,.btn-success{
+		font-size: 11px;
+		width: 70%;
+		
+	}
+	#action{
+		text-align: center;
+	}
+</style>
 <div class="container-fluid">
 	<div class="row-fluid">
 		<a href="<?php echo base_url() ?>" ><span class="fa fa-arrow-circle-o-left"></span> Kembali ke Home</a>
@@ -71,7 +80,7 @@
 							<td><?php echo $target->name ?></td>
 							<td><?php echo $target->target ?></td>
 							<td><?php echo $target->description ?></td>
-							<td><a href="<?php echo base_url('configuration/edit_target/'.$target->id) ?>">Edit</a> - <a href="#" onclick="delete_target('<?php echo $target->id ?>','<?php echo $target->name ?>')">Hapus</a></td>
+							<td><a href="<?php echo base_url('configuration/edit_target/'.$target->id) ?>">Edit</a><a href="#" onclick="delete_target('<?php echo $target->id ?>','<?php echo $target->name ?>')">Hapus</a></td>
 						</tr>
 						<?php $i++; ?>
 						<?php endforeach; ?>

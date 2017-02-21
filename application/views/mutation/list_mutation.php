@@ -10,9 +10,9 @@
 		color: green !important;
 		font-weight: bold;
 	}
-	.btn-info,.btn-danger,.btn-success{
+	.btn-info,.btn-danger,.btn-success,.btn-warning{
 		font-size: 11px;
-		width: 70%;
+		width: 60%;
 		
 	}
 	#action{
@@ -60,7 +60,7 @@
 							<td><?php echo $sent_transaction->to_outlet ?></td>
 							<td><p class="<?php echo ($sent_transaction->status=='Pending')? 'red':'green' ?>"><?php echo $sent_transaction->status ?></p></td>
 							<td id="action">
-								<a href="<?php echo base_url('mutation/edit_mutation/'.$sent_transaction->code) ?>" class="btn btn-info"><span class="mif mif-pencil"></span> Edit</a><a href="#" onclick="delete_mutation('<?php echo $sent_transaction->id ?>','<?php echo $sent_transaction->code ?>')" class="btn btn-danger"><span class="mif mif-bin"></span> Hapus</a>
+								<a href="<?php echo base_url('mutation/edit_mutation/'.$sent_transaction->code) ?>" class="btn btn-warning"><span class="mif mif-pencil"></span> View Detail</a><a href="#" onclick="delete_mutation('<?php echo $sent_transaction->id ?>','<?php echo $sent_transaction->code ?>')" class="btn btn-danger"><span class="mif mif-bin"></span> Cancel</a>
 							</td>	
 						</tr>
 						<?php $i++; ?>
@@ -161,7 +161,7 @@
     });
 
     
-	function delete_customer(id,code){
+	function delete_mutation(id,code){
 		alertify.confirm("Apakah anda yakin ingin menghapus data mutasi "+code+"?",
 		  function(){
 		    window.location.assign("<?php echo base_url() ?>mutation/delete_mutation/"+id);

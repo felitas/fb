@@ -169,7 +169,7 @@
        <?php echo $this->session->flashdata('customer') ?>
 
     <?php endif; ?>
-
+    //FUNCTION TO INSERT NEW CUSTOMER DATA
     function data_new_customer(el){
         if($(el).is(":checked")){
             $('#customer_code').val('');
@@ -210,6 +210,7 @@
 
 </script>
 <script type="text/javascript">
+    //FUNCTION TO GET CUSTOMER DATA WHEN THE CODE IS INSERTED
     var snd = new Audio('<?php echo base_url() ?>assets/barcode.wav');
     function get_customer(el){
         if($(el).val() != ''){

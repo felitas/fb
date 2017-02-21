@@ -171,5 +171,24 @@
 				echo json_encode($product);	
 			}
 		}
+
+		public function cancel_mutation($mutation_code = ''){
+			if($this->crud_model->update_data('mutation',array('status'=>'Batal'),array('code'=>$mutation_code))){
+				$this->session->set_flashdata('customer',"$.gritter.add({
+						class_name : 'gritter-light',
+				 		title:	'Berhasil!',
+				 		text:	'Mutasi berhasil dibatalkan!',
+				 		time: 2000
+				 	});");
+				redirect('customer');
+			}else{
+				$this->session->set_flashdata('customer',"$.gritter.add({
+				 		title:	'Gagal!',
+				 		text:	'Mutasi gagal dibatalkan!',
+				 		time: 2000
+				 	});");
+				redirect('customer');
+			}
+		}
 	}
 ?>
