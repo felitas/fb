@@ -128,6 +128,7 @@
                                     <th data-hide="phone" data-toggle="phone">Harga</th>
                                     <th data-hide="phone" data-toggle="phone">Diskon</th>
                                     <th data-hide="phone" data-toggle="phone">Harga Deal</th>
+                                    <th data-hide="phone" data-toggle="phone">Subtotal</th>
                                     <th data-hide="phone" data-toggle="phone"></th>
                                 </tr>
                             </thead>
@@ -136,10 +137,10 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="10">
-                                        <div class="pagination pagination-centered"></div>
-                                    </td>
+                                    <td colspan="9"><strong class="pull-right">Total </strong></td>
+                                    <td colspan="2">Rp <span id="total_price">0</span></td>
                                 </tr>
+                                
                             </tfoot>    
                         </table>
                     </div>
@@ -282,7 +283,18 @@
                                 time: 1500
                             });
                         }else{
-                            $('#table_body').append("<tr id='row_"+data.id+"'><td>"+no+"</td><td>"+data.product_code+"</td><td>"+data.name+"</td><td><img width='20' src='<?php echo base_url() ?>"+data.photo+"'></td><td>"+data.gold_amount+"%</td><td>"+data.weight+"</td><td>Rp "+data.sell_price+",00</td><td>Rp <span id='discount_"+data.id+"'></span></td><td><input type='number' name='product_deal_"+data.id+"' id='discount'></td><td><a onclick='remove_row("+data.id+")' style='cursor:pointer'>&times;</a></td>");
+                            $('#table_body').append("<tr id='row_"+data.id+"'><td>"+no+"</td><td>"+data.product_code+"</td><td>"+data.name+"</td><td><img width='20' src='<?php echo base_url() ?>"+data.photo+"'></td><td>"+data.gold_amount+"%</td><td>"+data.weight+"</td><td>Rp <span id='price_"+data.id+"'>"+data.sell_price+"</span></td><td>Rp <span id='potongan_"+data.id+"'></span></td><td>Rp <input type='number' name='deal[]' value='' id='deal_"+data.id+"' onblur='calc_price("+data.id+")'></td><td>Rp <span id='total_"+data.id+"'>"+data.sell_price+"</span></td><input type='hidden' name='product_code[]' value='"+data.product_code+"'><input type='hidden' name='product_price[]' value='"+data.sell_price+"'><td><a onclick='remove_row("+data.id+")' style='cursor:pointer'>&times;</a></td></tr>");
+
+                            var total = $('#total_price').html();
+                            var price = data.sell_price;
+                            price = price.replace(/\./g,'');
+                            total = total.replace('.','');
+                            total = +total + +price;
+                            $('#total_price').empty();
+                            $('#total_price').html(total);
+                            $('#hidden_total').val(total);
+                            product_code.push(data.id);
+                            no++;
 
                             
                         }
@@ -297,7 +309,36 @@
                 
                 });
             }
+    }
+    //RUN WHEN HARGA DEAL FIELD IS FILLED AND FOCUSED OUT
+    function calc_price(id){
+        var price = $('#price_'+id).html();     
+        var subtotal = $('#total_'+id).html();
+        var total = $('#total_price').html();
+        
+        var deal = $('#deal_'+id).val();
+        
+        total = total.replace(/\./g, '');
+        subtotal = subtotal.replace(/\./g, '');
+
+        price = +price - +deal;
+        total = +total - +subtotal;
+        
+        if(deal >= 0){
+            total = +total + +deal;
+            $('#total_'+id).empty();
+            $('#total_'+id).html(deal);
+            $('#total_price').empty();
+            $('#total_price').html(total);
+            $('#hidden_total').val(total);
+        }else{
+            $('#deal_'+id).val('');
         }
+        
+
+
+    }
+    //RUN WHEN THE X BUTTON BESIDE EACH ROW IS PRESSED
     function remove_row(id){
         alertify.confirm("Apakah anda yakin ingin menghapus barang ini ? ",
               function(){
