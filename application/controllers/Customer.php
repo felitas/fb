@@ -158,15 +158,16 @@
 		}
 
 		public function get_new_customer_code(){
-			$code = $this->db->get_where('code',array('code' => 'FBC'))->row();
+			$year = date('y');
+			$code = $this->db->get_where('code',array('code' => 'FBC'.$year))->row();
 			if($code){
 				$data['customer_code'] = $code->code.sprintf("%07d", $code->count);
 				$data['hidden_customer_code'] = $code->code;
 				$data['hidden_customer_count'] = $code->count;
 			}else{
-				$this->db->insert('code',array('code' => 'FBC','count' => 1));
-				$data['customer_code'] = 'FBC'.sprintf("%07d", 1);
-				$data['hidden_customer_code'] = 'FBC';
+				$this->db->insert('code',array('code' => 'FBC'.$year,'count' => 1));
+				$data['customer_code'] = 'FBC'.$year.sprintf("%07d", 1);
+				$data['hidden_customer_code'] = 'FBC'.$year;
 				$data['hidden_customer_count'] = 1;
 			}
 			$data = (Object) $data;

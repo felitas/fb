@@ -7,7 +7,7 @@
     <div class="widget-content nopadding">
         <div class="row-fluid">
             
-                <?php echo form_open('customer/add_customer', array('class'=>'form-horizontal')) ?>
+                <?php echo form_open('customer/add_customer', array('class'=>'form-horizontal', 'id'=>'customerform')) ?>
                 <div class="control-group top-control">
                     <div class="row-fluid">
                         <div class="span6">
@@ -84,8 +84,19 @@
     </div>
     </div>
 </div>
-
+<script src="<?php echo base_url() ?>js/jquery.validate.js"></script>
 <script>
+$(document).ready(function(){
+    $('#customerform').validate({
+        rules:{
+            customer_name: "required",
+            customer_birthday: "required",
+            customer_type: "required",
+            customer_phone: "required",
+            customer_address: "required"
+        }
+    });
+});
     <?php if($this->session->flashdata('customer')): ?>
 
        <?php echo $this->session->flashdata('customer') ?>

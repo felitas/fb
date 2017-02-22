@@ -186,14 +186,13 @@
 					
 				
 				<div class="control-group">
-						
 					<label for="" class="control-label">Upload Photo</label>
 					<div class="controls">
 						<input type="file" accept="image/*" name="capture" id="capture" capture="camera">
 					</div>	
-						
-
 				</div>
+				
+				<?php if (!$is_mobile): ?>
 				<div class="control-group">
 					<label class="control-label">Ambil Foto</label>
 					<div class="controls">
@@ -201,8 +200,6 @@
 		                <span class="check"></span>
 		            </div>
 				</div>
-			
-				<?php if (!$is_mobile): ?>
 	            <div class="control-group text-center" id="snapshot" style="display: none">
 	                <div class="span6">
 	                    <div id="my_camera" style="width:320px; height:240px; margin:auto"></div>
@@ -258,18 +255,7 @@
 	});
 	
 	
-	//TURN ON THE WEB CAM TO TAKE PHOTO OF PRODUCT
-    function show_cam(el){
-        if($(el).is(":checked") ){
-            $('#snapshot').show();
-            Webcam.attach('#my_camera');
-            $('#capture').attr('disabled','disabled');
-        }else{
-            $('#snapshot').hide();
-            $('#capture').removeAttr('disabled');
-            Webcam.reset();            
-        }
-     }
+	
      //IF MASUK BRANKAS IS CHECKED, NORMALIZE AND DISABLE ALL UNNECESSARY FIELDS
      function warehouse(el){
      	if($(el).is(":checked")){
@@ -408,7 +394,20 @@
 
     <?php endif; ?>
 
-
+</script>
+<script>
+	//TURN ON THE WEB CAM TO TAKE PHOTO OF PRODUCT
+    function show_cam(el){
+        if($(el).is(":checked") ){
+            $('#snapshot').show();
+            Webcam.attach('#my_camera');
+            $('#capture').attr('disabled','disabled');
+        }else{
+            $('#snapshot').hide();
+            $('#capture').removeAttr('disabled');
+            Webcam.reset();            
+        }
+     }
     function take_snapshot() {
         Webcam.snap( function(data_uri) {
             document.getElementById('my_result').innerHTML = '<img src="'+data_uri+'"/>';

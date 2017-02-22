@@ -7,7 +7,6 @@
 			parent::__construct();
 			
 			$this->load->model('loan_model');
-			$this->load->model('sales_model');
 		
 		}
 
@@ -102,7 +101,7 @@
 					$data['hidden_count'] = 1;	
 				}
 				$this->load->model('sales_model');
-
+				$data['is_mobile'] = $this->is_mobile;
 				$data['sales'] = $this->sales_model->get_outlet_sales($this->session_outlet);
 				$data['title'] = 'Gadai';
 				$this->template->load($this->default,'loan/new_loan',$data);	
