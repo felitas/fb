@@ -21,17 +21,18 @@
 		public function add_customer(){
 			$data['role']= $this->session_role; 
 			if($this->input->post()){
-				$code = $this->db->get_where('code',array('code' => 'FBC'))->row();
-
+				$year = date('y');
+				$code = $this->db->get_where('code',array('code' => 'FBC'.$year))->row();
+				
 				if($code){
-					$customer_code = $code->code.sprintf("%07d", $code->count);
+					$customer_code = $code->code.sprintf("%06d", $code->count);
 					$this->db->update('code',array('count' => $code->count+1),array('code' => $code->code));
 
 					
 				}else{
-					$this->db->insert('code',array('code' =>'FBC','count' => 1));
-					$customer_code = 'FBC'.sprintf("%05d", 1);
-					$this->db->update('code',array('count' => 2),array('code' => 'FBC'));
+					$this->db->insert('code',array('code' =>'FBC'.$year,'count' => 1));
+					$customer_code = 'FBC'.$year.sprintf("%06d", 1);
+					$this->db->update('code',array('count' => 2),array('code' => 'FBC'.$year));
 				}
 
 				$data_customer = array(

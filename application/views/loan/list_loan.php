@@ -20,67 +20,68 @@
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="control-group">
-			        <input type="text" placeholder="Cari customer berdasarkan nama / tanggal lahir / tipe / telephone / email / alamat / outlet" id="filter" class="span12">
+			        <input type="text" placeholder="Cari transaksi..." id="filter" class="span12">
 			    </div>
 			    <div class="table-responsive toggle-circle-filled">
 			    	<table class="table table-bordered" id="table_loan" data-filter="#filter" data-page-size="10">
 			    		<thead>
 							<tr>
 								<th data-type="numeric">No</th>
-								<th>Kode Pelanggan</th>
-								<th>Nama</th>
-								<th data-hide="phone">Tanggal Lahir</th>
-								<th data-hide="phone">Tipe</th>
-								<th data-hide="phone">Telephone</th>
-								<th data-hide="phone">Email</th>
-								<th data-hide="phone">Alamat</th>
-								<th data-hide="phone">Outlet</th>
+								<th>Kode Gadai</th>
+								<th data-hide="phone">Kode Customer</th>
+								<th data-hide="phone">Start</th>
+								<th data-hide="phone">Due Date</th>
+								<th data-hide="phone">Jumlah Barang</th>
+								<th data-hide="phone">Total Pinjaman</th>
+								<th data-hide="phone">Status</th>
+								<th data-hide="phone">Keterangan</th>
 								<?php if($role=='admin'):?>
-									<th data-hide="phone">Grade</th>
+									<th data-hide="phone">Outlet</th>
 								<?php endif?>
 								<th data-hide="phone">Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php if($customers!=NULL): ?>
+							<?php if($loans!=NULL): ?>
 								<?php $i=1; ?>
-								<?php foreach($customers as $customer): ?>
+								<?php foreach($loans as $loan): ?>
 								<tr>
 									<td><?php echo $i ?></td>
-									<td><?php echo $customer->customer_code?></td>
-									<td><?php echo $customer->name ?></td>
+									<td><?php echo $loan->loan_code?></td>
+									<td><?php echo $loan->customer_code ?></td>
+									<td><?php echo $loan->date_start ?></td>
+									<td><?php echo $loan->date_due ?></td>
+									<td><?php echo $loan->total_item ?></td>
+									<td><?php echo $loan->total_loan ?></td>
+									<td><?php echo $loan->status ?></td>
 									<td>
-										<?php if($customer->birthday!=NULL):?>
-											<?php echo date('d M Y',strtotime($customer->birthday)) ?>
+										<?php if($loan->description!=NULL):?>
+											<?php echo $loan->description ?>
 										<?php else:?>
 											<?php echo '-' ?>
 										<?php endif;?>
 									</td>
-									<td><?php echo $customer->type ?></td>
-									<td><a href="tel:<?php echo $customer->phone ?>"><?php echo $customer->phone ?></a></td>
-									<td><?php echo $customer->email ?></td>
-									<td><?php echo $customer->address ?></td>
-									<td>
-										<?php $outlet = $this->crud_model->get_by_condition('outlets', array('id'=>$customer->outlet_id))->row('name');
-											echo $outlet;
-										?>
-									</td>
 									<?php if($role=='admin'):?>
-										<td data-hide="phone"><?php echo $customer->customer_grade ?></td>
+										<td><?php echo $loan->outlet ?></td>
 									<?php endif?>
-									<td><a href="<?php echo base_url('customer/edit_customer/'.$customer->id) ?>" class="btn btn-info">Edit</a><a class="btn btn-danger" href="#" onclick="delete_customer('<?php echo $customer->id ?>','<?php echo $customer->name ?>')">Hapus</a></td>
+									<td>
+										<a href="<?php echo base_url('loan/edit_loan/'.$loan->code) ?>" class="btn btn-info">Edit</a>
+										<?php if($role!='sales'):?>
+											<a class="btn btn-danger" href="#" onclick="delete_loan('<?php echo $loan->id ?>','<?php echo $loan->code ?>')">Hapus</a>
+										<?php endif?>
+									</td>
 								</tr>
 								<?php $i++; ?>
 								<?php endforeach; ?>
 							<?php else:?>
 								<tr>
-									<td colspan="11" class="nocontent"><h3>Table kosong</h3></td>
+									<td colspan="<?php echo ($role=='admin')?'11':'10' ?>" class="nocontent"><h3>Table kosong</h3></td>
 								</tr>
 							<?php endif; ?>
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="11">
+								<td colspan="<?php echo ($role=='admin')?'11':'10' ?>">
 									<div class="pagination pagination-centered"></div>
 								</td>
 							</tr>
@@ -96,23 +97,23 @@
 <script>
 
     $(document).ready(function(){
-        <?php if($this->session->flashdata('customer')): ?>
-            <?php echo $this->session->flashdata('customer') ?>
+        <?php if($this->session->flashdata('loan')): ?>
+            <?php echo $this->session->flashdata('loan') ?>
         <?php endif; ?>
 
         $('#table_loan').footable();
     });
 
     
-	function delete_customer(id,name){
-		alertify.confirm("Apakah anda yakin ingin menghapus customer "+name+"?",
+	function delete_loan(id,code){
+		alertify.confirm("Apakah anda yakin ingin menghapus transaksi gadai"+code+"?",
 		  function(){
-		    window.location.assign("<?php echo base_url() ?>customer/delete_customer/"+id);
+		    window.location.assign("<?php echo base_url() ?>loan/delete_loan/"+id);
 		  },
 		  function(){
 		    $.gritter.add({
 		    	title: 'Gagal!',
-		    	text: 'Customer tidak jadi dihapus',
+		    	text: 'Transaksi tidak jadi dihapus',
 		    	sticky: false
 		    });
 		  });

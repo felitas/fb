@@ -66,12 +66,14 @@
                         <label for="" class="control-label">Grade</label>
                         <div class="controls">
                             <select name="customer_grade" id="" class="span4">
-                                <option value="regular">Regular</option>
-                                <option value="gold">Gold</option>
-                                <option value="platinum">Platinum</option>
+                                <option value="1">Regular</option>
+                                <option value="2">Gold</option>
+                                <option value="3">Platinum</option>
                             </select>
                         </div>
                     </div>
+                <?php else:?>
+                    <input type="hidden" name="customer_grade" value="1">
                 <?php endif?>
                 <div class="form-actions text-center">
                     <input type="submit" name="submit" class="btn btn-info" value="Submit">

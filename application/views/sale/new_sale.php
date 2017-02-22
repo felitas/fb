@@ -30,7 +30,7 @@
                             <?php if ($sales==''): ?>
                                 <option value="x">Tidak ada sales di outlet ini</option>    
                             <?php else:?>
-                                <option value="choose">--Pilih Sales--</option>
+                                <option value="choose">Ketik Kode Sales</option>
                                 <?php foreach ($sales as $row): ?>
                                     <option value="<?php echo $row->workers_code ?>"><?php echo $row->name ?> - <?php echo $row->workers_code?></option>
                                 <?php endforeach ?>
@@ -39,7 +39,13 @@
                     </div>    
                 </div>  
             </div>
-            <div class="control-group">
+            <div class="control-group">                
+                <div class="span6">
+                    <label class="control-label">Kode Customer</label>
+                    <div class="controls">
+                        <input type="text" name="customer_code" placeholder="Masukkan kode pelanggan" id="customer_code" onblur="get_customer(this)" class="span12">
+                    </div>            
+                </div>
                 <div class="span6">
                     <label class="control-label">Customer Baru</label>
                     <div class="controls">
@@ -47,14 +53,7 @@
                         <input type="hidden" name="hidden_customer_code" id="hidden_customer_code">
                         <input type="hidden" name="hidden_customer_count" id="hidden_customer_count">
                     </div>            
-                </div>
-                <div class="span6">
-                    <label class="control-label">Kode Customer</label>
-                    <div class="controls">
-                        <input type="text" name="customer_code" placeholder="Masukkan kode pelanggan" id="customer_code" onblur="get_customer(this)" class="span11">
-                    </div>            
-                </div>
-                
+                </div>                
             </div>
             <!--///////////////////////FIELDS SHOWING CUSTOMER DATA//////////////////////////////////////////////-->
             <div class="control-group new-customer hide-field">
