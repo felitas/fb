@@ -276,7 +276,7 @@
                     }else{
                         var data = JSON.parse(result);
                     
-                        if(product_code.indexOf(data.product_code) > -1){
+                        if(product_code.indexOf(data.id) > -1){
                            $.gritter.add({
                                 title: 'Error',
                                 text: 'Barang sudah terdaftar',
