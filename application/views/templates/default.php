@@ -192,6 +192,12 @@
           <li><a href=""><i class="fa fa-arrows-h faicon"></i> Buyback Baru</a></li>
         </ul>
       </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-exchange"></i><span>Gadai</span></a>
+        <ul>
+          <li><a href="<?php echo base_url('loan')?>"><i class="fa fa-file-text faicon"></i> Daftar Gadai</a></li>
+          <li><a href="<?php echo base_url('loan/new_loan')?>"><i class="fa fa-exchange faicon"></i> Gadai Baru</a></li>
+        </ul>
+      </li>
       <li class="submenu"> <a href="#"><i class="fa fa-bank"></i><span>Outlet</span></a>
         <ul>
           <li><a href="<?php echo base_url('outlets') ?>"><i class="fa fa-file-text faicon"></i> Daftar Outlet</a></li>
