@@ -12,6 +12,9 @@
     .btn-warning:hover{
         background-color: rgba(52, 152, 219,1.0) !important;   
     }
+    .item-title{
+        background-color: #f1c40f !important;
+    }
 </style>
 
 <div class="container-fluid">
@@ -19,10 +22,8 @@
         <a href="<?php echo base_url('loan') ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar transaksi gadai</a>
         <h2>Transaksi Gadai baru</h2>
     </div>
-    <div class="widget-box">
-    
-            
     <?php echo form_open('loan/new_loan', array('class'=>'form-horizontal')) ?>
+    <div class="widget-box">
     <div class="widget-content nopadding">
         <div class="row-fluid">
                 <div class="control-group top-control">
@@ -54,16 +55,45 @@
                     <div class="span6">
                         <label class="control-label">Date</label>
                         <div class="controls">
-                            <input type="date" name="loan_start" class="span12" >
+                            <input type="date" name="loan_start" class="span12" id="dateStart">
                         </div>
                     </div>
                     <div class="span6">
                         <label class="control-label">Due Date</label>
                         <div class="controls">
-                            <input type="date" name="loan_due" class="span11">
+                            <input type="date" name="loan_due" class="span11" id="dateDue">
                         </div>
                     </div>
                 </div>
+                <?php if (!$is_mobile): ?>
+                <div class="control-group">                
+                    <div class="span6">
+                        <label for="" class="control-label">Upload Photo</label>
+                        <div class="controls">
+                            <input type="file" accept="image/*" name="capture" id="capture" capture="camera">
+                        </div>  
+                    </div>
+                    <div class="span6">
+                        <label class="control-label">Ambil Foto</label>
+                        <div class="controls">
+                            <input type="checkbox" onchange="show_cam(this)">
+                            <span class="check"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--CAN ONLY TAKE PHOTO WITH LAPTOP WEBCAM-->
+                <div class="control-group text-center" id="snapshot" style="display: none">
+                    <div class="span6">
+                        <div id="my_camera" style="width:320px; height:240px; margin:auto"></div>
+                        <a style="margin-top: 10px;margin-bottom: 10px;" class="btn btn-info bg_ls" href="javascript:void(take_snapshot())"><span class="mif mif-camera"></span> Ambil Foto</a>    
+                    </div>
+                    <div class="span6">
+                        <div id="my_result" style="margin:auto"></div>        
+                    </div> 
+                </div>
+            
+                <?php endif ?>
+
         </div>
     </div>
 
@@ -143,47 +173,21 @@
     <!--////////////////////////////////////////DATA LOAN ITEMS//////////////////////////////////////////////-->
     <div class="widget-title">
         <h5>Daftar Item</h5>
-        <h5 class="btn btn-warning">+ Tambah Item</h5>
+        <h5 class="btn btn-warning" onclick="addItem(this)">+ Tambah Item</h5>
     </div>
-    <div class="widget-content nopadding">
-        <div class="row-fluid">
+    <div class="widget-content nopadding" id="itemform">
+        <input type="hidden" name="item_count" value="1" id="item_count" readonly="readonly">
+        <div class="widget-title item-title">
+            <h5>Item 1</h5>
+        </div>
+        <div class="row-fluid itemdata">
             <div class="control-group top-control">
                     <label for="" class="control-label">Nama item</label>
                     <div class="controls">
                         <input type="text" name="item_name" placeholder="Nama item yang akan digadai" class="span11">
                     </div>
             </div>
-            <div class="control-group">
-                <div class="span6">
-                    <label for="" class="control-label">Upload Photo</label>
-                    <div class="controls">
-                        <input type="file" accept="image/*" name="capture" id="capture" capture="camera">
-                    </div>  
-                </div>
-                <?php if (!$is_mobile): ?>
-                <div class="span6">
-                    <label class="control-label">Ambil Foto</label>
-                    <div class="controls">
-                        <input type="checkbox" onchange="show_cam(this)">
-                        <span class="check"></span>
-                    </div>
-                </div>
-                <?php endif ?>
-            </div>
             
-            <!--CAN ONLY TAKE PHOTO WITH LAPTOP WEBCAM-->
-            <?php if (!$is_mobile): ?>
-                
-                <div class="control-group text-center" id="snapshot" style="display: none">
-                    <div class="span6">
-                        <div id="my_camera" style="width:320px; height:240px; margin:auto"></div>
-                        <a style="margin-top: 10px;margin-bottom: 10px;" class="btn btn-info bg_ls" href="javascript:void(take_snapshot())"><span class="mif mif-camera"></span> Ambil Foto</a>    
-                    </div>
-                    <div class="span6">
-                        <div id="my_result" style="margin:auto"></div>        
-                    </div> 
-                </div>
-            <?php endif ?>
 
             <div class="control-group">
                 <div class="span6">
@@ -233,15 +237,16 @@
                     </div>    
                 </div>
             </div>
-
-            <!--FORM FOOTER-->
-            <div class="form-actions text-center">
-                    <input type="submit" name="submit" class="btn btn-info" value="Submit">
-            </div>
         </div><!--row fluid close-->
     </div><!--widget content close-->
-    <?php echo form_close(); ?>
+    <div class="row-fluid">
+        <!--FORM FOOTER-->
+        <div class="form-actions text-center">
+                <input type="submit" name="submit" class="btn btn-info" value="Submit">
+        </div>
+    </div><!--row fluid close-->
     </div><!--widget box close-->
+    <?php echo form_close(); ?>
 </div>
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
 <script src="<?php echo base_url() ?>js/jquery.validate.js"></script> 
@@ -252,11 +257,13 @@
         $('#table_sale').footable();
         $('#loan_sales').selectize();
     });
+
     <?php if($this->session->flashdata('customer')): ?>
 
        <?php echo $this->session->flashdata('customer') ?>
 
     <?php endif; ?>
+
     //FUNCTION TO INSERT NEW CUSTOMER DATA
     function data_new_customer(el){
         if($(el).is(":checked")){
@@ -363,4 +370,36 @@
         } );
         
     }    
+</script>
+<script type="text/javascript">
+    //SET ALL THE DATE TO TODAY
+    function setInputDate(_id){
+        var _dat = document.querySelector(_id);
+        var hoy = new Date(),
+            d = hoy.getDate(),
+            m = hoy.getMonth()+1, 
+            y = hoy.getFullYear(),
+            data;
+
+        if(d < 10){
+            d = "0"+d;
+        };
+        if(m < 10){
+            m = "0"+m;
+        };
+
+        data = y+"-"+m+"-"+d;
+        _dat.value = data;
+    };
+    setInputDate('#dateStart');
+    setInputDate('#dateDue');
+</script>
+<script type="text/javascript">
+    //DUPLICATE THE ITEM FIELDS
+    function addItem(el){
+        var count = parseInt($('#item_count').val())+1;
+        $('#item_count').val(count);
+        $('#itemform').append('<div class="widget-title item-title"><h5>Item '+count+'</h5></div>')
+        $('.itemdata').clone().appendTo('#itemform');
+    }
 </script>
