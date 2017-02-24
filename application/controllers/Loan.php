@@ -19,7 +19,7 @@
 				$data['loans'] = $this->loan_model->get_loan_all_outlet();
 			}
 			else{
-				$data['loans'] = $this->load_model->get_loan_this_outlet($this->session_outlet);
+				$data['loans'] = $this->loan_model->get_loan_this_outlet($this->session_outlet);
 			}
 			$this->template->load($this->default,'loan/list_loan',$data);
 		}
@@ -34,58 +34,160 @@
 		}
 		/****Detail Transaksi Penjualan END****/
 
+
 		/**** LOAN START ****/
+		public function upload(){
+			//upload image via webcam
+
+			$this->load->library('image_moo');
+
+			$config['allowed_types']        = 'jpg|png|jpeg';
+            $config['max_size']             = 5000;					
+			$config['upload_path']          = 'uploads/temp/loan/'.$this->session_outlet;
+			$config['overwrite']			= True;
+			$config['file_name']			= 'loan_items_'.$this->session_outlet.'.jpg';
+			$this->upload->initialize($config);
+
+			//Check if the folder for the upload existed
+			if(!file_exists($config['upload_path']))
+			{
+				//if not make the folder so the upload is possible
+				mkdir($config['upload_path'], 0777, true);
+			}
+
+            if($this->upload->do_upload('webcam'))
+            {
+                //Get the link for the database
+                $photo = $config ['upload_path'] . '/' . $config ['file_name'];
+            }
+
+            //resize image
+            $this->image_moo
+				->load($photo)
+				->resize_crop(400,400)
+				->save($photo,TRUE);
+
+		}
+
+
 		public function new_loan(){
-			
 			if($this->input->post()){
-				
-				/**kalo ada customer baru di insert**/
-				
+
+				$this->load->library('image_moo');
+
+				$config['allowed_types']        = 'jpg|png|jpeg';
+	            $config['max_size']             = 5000;					
+				$config['upload_path']          = 'uploads/photo/loan/'.$this->session_outlet;
+				$config['overwrite']			= false;
+				$config['file_name']			= $this->input->post('loan_code').'.jpg';
+				$this->upload->initialize($config);
+
+				//Check if the folder for the upload existed
+				if(!file_exists($config['upload_path']))
+				{
+					//if not make the folder so the upload is possible
+					mkdir($config['upload_path'], 0777, true);
+				}
+
+	            if($this->upload->do_upload('capture'))
+	            {
+	                //Get the link for the database
+	                $photo = $config ['upload_path'] . '/' . $config ['file_name'];
+	            }else{
+
+	            	$photo = $config ['upload_path'] . '/' . $config ['file_name'];
+
+					rename('uploads/temp/loan/'.$this->session_outlet.'/'.'loan_items_'.$this->session_outlet.'.jpg' , $photo);	
+					
+	            }
+
+	             //resize image
+            	$this->image_moo
+					->load($photo)
+					->resize_crop(400,400)
+					->save($photo,TRUE);
+
+	            //check if user upload a photo or not.
+				if(!file_exists($photo))
+				{
+					
+					$photo = '';
+				}
+				//---------------------------DATA INSERTING----------------------//
+	            /**kalo ada customer baru di insert**/
 				if($this->input->post('new_customer') == 'on'){
 					$data_customer = array(
-							'code'		=> $this->input->post('customer_code'),
+							'customer_code'		=> $this->input->post('customer_code'),
 							'name'		=> $this->input->post('customer_name'),
 							'phone'		=> $this->input->post('customer_phone'),
 							'email'		=> $this->input->post('customer_email'),
 							'address'	=> $this->input->post('customer_address'),
-							'type'		=> $this->input->post('customer_type')
+							'type'		=> $this->input->post('customer_type'),
+							'birthday'=> $this->input->post('customer_birthday')
 						);
 
 					$this->db->insert('customers', $data_customer);
 					$this->db->update('code',array('count' => $this->input->post('hidden_customer_count') + 1 ),array('code' => $this->input->post('hidden_customer_code')));
 				}
+            	//input loan item/s//
+            	for($i = 0; $i < count($this->input->post('item_name')); $i++){
+            		$data_item = array(
+            			'loan_code' 	=> $this->input->post('loan_code'),
+            			'item_name'	 	=> $this->input->post('item_name')[$i],
+            			'weight' 		=> $this->input->post('item_weight')[$i],
+            			'gold_amount' 	=> $this->input->post('item_gold_amount')[$i],
+            			'loan_price' 	=> $this->input->post('item_loan_price')[$i],
+            			'interest_rate'	=> $this->input->post('item_interest_rate')[$i],
+            			'description' 	=> $this->input->post('item_description')[$i]
 
-				if($this->db->insert('loan',$data_loan)){
-					for($i = 0; $i < count($this->input->post('product_code')); $i++){
-						$data_detail = array(
-								'product_code' => $this->input->post('product_code')[$i],
-								'discount' => $this->input->post('discount')[$i],
-								'sale_code' => $this->input->post('sale_code'),
-								'selling_price' => $this->input->post('product_price')[$i],
-								'total_price' => $this->input->post('discount')[$i],
-							);
-						$this->db->insert('loan_detail',$data_detail);
-					}
+            		);
+            		$this->db->insert('loan_detail',$data_item);
+            	}
 
-					$this->session->set_flashdata('loan',"$.gritter.add({
-						class_name : 'gritter-light'
+
+	          	$code_count = array(
+          			'code' => $this->input->post('hidden_code'),
+          			'count'=> 1
+	          	);
+
+
+	          	$data_loan = array(
+	          		'outlet_id' 	=> $this->session_outlet,
+	          		'workers_code'	=> $this->input->post('loan_sales'),
+	          		'loan_code' 	=> $this->input->post('loan_code'),
+	          		'customer_code'	=> $this->input->post('customer_code'),
+	          		'date_due'		=> $this->input->post('loan_due'),
+	          		'total_loan'	=> $this->input->post('loan_total'),
+	          		'total_item'	=> $this->input->post('loan_item_total'),
+	          		'items_photo'	=> $photo,
+	          		'description'	=> $this->input->post('loan_description')
+	          	);
+	          	//input loan data and update code count
+	            if($this->crud_model->insert_data('loan',$data_loan)){
+	            	if($this->db->get_where('code',array('code'=>$this->input->post('hidden_code')))->num_rows()>0){
+	            		$count = $this->db->get_where('code',array('code'=>$this->input->post('hidden_code')))->row('count');
+	            		$this->db->update('code',array('count'=> $count+1),array('code'=>$this->input->post('hidden_code')));
+		            }else{
+		            	$this->crud_model->insert_data('code',$code_count);
+		            }
+	            	$this->session->set_flashdata('loan',"$.gritter.add({
+	            		class_name : 'gritter-light',
 					    title: 'Berhasil',
-					    text: 'Gadai berhasil di input',
-					    time : 1500
-					});");
-
-					redirect('loan');
-				}else{
-					$this->session->set_flashdata('loan',"$.gritter.add({
+					    text: 'Berhasil input transaksi gadai',
+					    time: 1200
+					});");	
+	            }else{
+	            	$this->session->set_flashdata('loan',"$.gritter.add({
 					    title: 'Gagal',
-					    text: 'Gagal transaksi',
-					    time: 1500
+					    text: 'Transaksi gagal diinput',
+					    time: 1200
 					});");
+	            }
+	            
+	            redirect('loan/new_loan');
 
-					redirect('loan/new_loan');
-				}
-
-			}else{
+			}
+			else{
 				$year = date('y');
 				$month = date('m');
 				$outlet_code = $this->db->get_where('outlets',array('id' => $this->session_outlet))->row('code');
@@ -106,50 +208,43 @@
 				$data['title'] = 'Gadai';
 				$this->template->load($this->default,'loan/new_loan',$data);	
 			}
+		}
+
+		/*DELETE LOAN AJAX*/
+		public function delete_loan($code=''){
+			$loan = $this->crud_model->get_by_condition('loan',array('loan_code' => $code))->row();
+			if($loan){
+				if($loan->photo){
+					$dir = 'uploads/photo/loan/'.$this->session_outlet;
+					unlink($loan->photo);
+					rmdir($dir);	
+				}
+				if($this->crud_model->delete_data('loan',array('loan_code'=>$code)) && $this->crud_model->delete_data('loan_detail',array('loan_code'=>$code)) ){
+					$this->session->set_flashdata('loan',"$.gritter.add({
+							class_name : 'gritter-light',
+					 		title:	'Berhasil!',
+					 		text:	'Transaksi gadai berhasil dihapus!',
+					 		time: 1200
+					});");
+					
+				}
+				else{
+					$this->session->set_flashdata('loan',"$.gritter.add({
+					 		title:	'Gagal',
+					 		text:	'Transaksi gadai gagal dihapus!',
+					 		time: 1200
+					});");	
+					
+				}	
+			}else{
+				$this->session->set_flashdata('loan',"$.gritter.add({
+				 		title:	'Gagal',
+				 		text:	'Transaksi gadai gagal dihapus!',
+				 		time: 1200
+				});");	
 				
-		
-		}
-
-		public function get_new_customer_code(){
-			$code = $this->db->get_where('code',array('code' => 'MKM'))->row();
-			if($code){
-				$data['customer_code'] = $code->code.sprintf("%010d", $code->count);
-				$data['hidden_customer_code'] = $code->code;
-				$data['hidden_customer_count'] = $code->count;
-			}else{
-				$this->db->insert('code',array('code' => 'MKM','count' => 1));
-				$data['customer_code'] = 'MKM'.sprintf("%010d", 1);
-				$data['hidden_customer_code'] = 'MKM';
-				$data['hidden_customer_count'] = 1;
 			}
-			$data = (Object) $data;
-			echo json_encode($data);
-		}
-
-		/**** SELLING ENDS ****/
-		
-		public function get_sale_by_outlet($outlet_id = ''){
-			$sale = $this->sale->get_sale_by_outlet($outlet_id);
-			if($sale == NULL){
-				echo 'not found';
-			}else{
-				$sale = (Object) $sale;
-				echo json_encode($sale);	
-			}
-			
-		}
-		
-		public function get_sale_by_type($type_id = ''){
-			$type = $this->type->get($type_id);
-
-			$sale = $this->sale->get_sale_by_type($type_id,$type->name);
-			if($sale == NULL){
-				echo 'not found';
-			}else{
-				$sale = (Object) $sale;
-				echo json_encode($sale);	
-			} 
-			
+			redirect('loan');
 		}
 
 		

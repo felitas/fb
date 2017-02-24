@@ -7,6 +7,9 @@
 		width: 60%;
 		font-size: 11px;
 	}
+	.action{
+		text-align: center !important;
+	}
 </style>
 
 <div class="container-fluid">
@@ -26,15 +29,15 @@
 			    	<table class="table table-bordered" id="table_loan" data-filter="#filter" data-page-size="10">
 			    		<thead>
 							<tr>
-								<th data-type="numeric">No</th>
+								<th data-type="numeric"></th>
 								<th>Kode Gadai</th>
-								<th data-hide="phone">Kode Customer</th>
-								<th data-hide="phone">Start</th>
+								<th data-hide="phone">Customer</th>
+								<th data-hide="phone">Start Date</th>
 								<th data-hide="phone">Due Date</th>
 								<th data-hide="phone">Jumlah Barang</th>
 								<th data-hide="phone">Total Pinjaman</th>
 								<th data-hide="phone">Status</th>
-								<th data-hide="phone">Keterangan</th>
+								<!-- <th data-hide="phone">Keterangan</th> -->
 								<?php if($role=='admin'):?>
 									<th data-hide="phone">Outlet</th>
 								<?php endif?>
@@ -48,26 +51,26 @@
 								<tr>
 									<td><?php echo $i ?></td>
 									<td><?php echo $loan->loan_code?></td>
-									<td><?php echo $loan->customer_code ?></td>
-									<td><?php echo $loan->date_start ?></td>
-									<td><?php echo $loan->date_due ?></td>
+									<td><?php echo $loan->customer ?></td>
+									<td><?php echo date('d-M-Y',strtotime($loan->date_start)) ?></td>
+									<td><?php echo date('d-M-Y',strtotime($loan->date_due)) ?></td>
 									<td><?php echo $loan->total_item ?></td>
-									<td><?php echo $loan->total_loan ?></td>
+									<td><?php echo 'Rp '. number_format($loan->total_loan,2,',','.') ?></td>
 									<td><?php echo $loan->status ?></td>
-									<td>
-										<?php if($loan->description!=NULL):?>
-											<?php echo $loan->description ?>
-										<?php else:?>
-											<?php echo '-' ?>
-										<?php endif;?>
-									</td>
+									<!-- <td>
+										<?php #if($loan->description!=NULL):?>
+											<?php #echo $loan->description ?>
+										<?php #else:?>
+											<?php #echo '-' ?>
+										<?php #endif;?>
+									</td> -->
 									<?php if($role=='admin'):?>
 										<td><?php echo $loan->outlet ?></td>
 									<?php endif?>
-									<td>
-										<a href="<?php echo base_url('loan/edit_loan/'.$loan->code) ?>" class="btn btn-info">Edit</a>
+									<td class="action">
+										<a href="<?php echo base_url('loan/update_loan/'.$loan->loan_code) ?>" class="btn btn-info">Update</a>
 										<?php if($role!='sales'):?>
-											<a class="btn btn-danger" href="#" onclick="delete_loan('<?php echo $loan->id ?>','<?php echo $loan->code ?>')">Hapus</a>
+											<a class="btn btn-danger" href="#" onclick="delete_loan('<?php echo $loan->id ?>','<?php echo $loan->loan_code ?>')">Hapus</a>
 										<?php endif?>
 									</td>
 								</tr>
@@ -75,13 +78,13 @@
 								<?php endforeach; ?>
 							<?php else:?>
 								<tr>
-									<td colspan="<?php echo ($role=='admin')?'11':'10' ?>" class="nocontent"><h3>Table kosong</h3></td>
+									<td colspan="<?php echo ($role=='admin')?'10':'9' ?>" class="nocontent"><h3>Table kosong</h3></td>
 								</tr>
 							<?php endif; ?>
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="<?php echo ($role=='admin')?'11':'10' ?>">
+								<td colspan="<?php echo ($role=='admin')?'10':'9' ?>">
 									<div class="pagination pagination-centered"></div>
 								</td>
 							</tr>
@@ -105,16 +108,16 @@
     });
 
     
-	function delete_loan(id,code){
-		alertify.confirm("Apakah anda yakin ingin menghapus transaksi gadai"+code+"?",
+	function delete_loan(code,code){
+		alertify.confirm("Apakah anda yakin ingin menghapus transaksi gadai "+code+"?",
 		  function(){
-		    window.location.assign("<?php echo base_url() ?>loan/delete_loan/"+id);
+		    window.location.assign("<?php echo base_url() ?>loan/delete_loan/"+code);
 		  },
 		  function(){
 		    $.gritter.add({
 		    	title: 'Gagal!',
 		    	text: 'Transaksi tidak jadi dihapus',
-		    	sticky: false
+		    	time: 1200
 		    });
 		  });
 	}

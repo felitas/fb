@@ -15,6 +15,12 @@
     .item-title{
         background-color: #f1c40f !important;
     }
+    #itemform{
+        margin-top: 0px !important;
+    }
+    .selectize-control{
+        margin-left: 0px !important;
+    }
 </style>
 
 <div class="container-fluid">
@@ -22,40 +28,40 @@
         <a href="<?php echo base_url('loan') ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar transaksi gadai</a>
         <h2>Transaksi Gadai baru</h2>
     </div>
-    <?php echo form_open('loan/new_loan', array('class'=>'form-horizontal')) ?>
+    <?php echo form_open('loan/new_loan', array('class'=>'form-horizontal', 'id'=>'loanform')) ?>
     <div class="widget-box">
     <div class="widget-content nopadding">
         <div class="row-fluid">
                 <div class="control-group top-control">
-                    <div class="span6">
-                        <label class="control-label">Kode Gadai</label>
-                        <div class="controls">
-                            <input type="text" name="loan_code" value="<?php echo $loan_code ?>" readonly="readonly">
-                            <input type="hidden" name="hidden_code" value="<?php echo $hidden_code ?>">
-                            <input type="hidden" name="hidden_count" value="<?php echo $hidden_count ?>">            
-                        </div>    
-                    </div>
-                    <div class="span6">
-                        <label class="control-label">Sales</label>
-                        <div class="controls">
-                            <select name="loan_sales" id="loan_sales" class="span11">
-                                <?php if ($sales==''): ?>
-                                    <option value="x">Tidak ada sales di outlet ini</option>    
-                                <?php else:?>
-                                    <option value="choose">Ketik/Scan Kode Sales</option>
-                                    <?php foreach ($sales as $row): ?>
-                                        <option value="<?php echo $row->workers_code ?>"><?php echo $row->name ?> - <?php echo $row->workers_code?></option>
-                                    <?php endforeach ?>
-                                <?php endif;?>
-                            </select>
-                        </div>    
-                    </div>  
+                    <label class="control-label">Kode Gadai</label>
+                    <div class="controls">
+                        <input type="text" name="loan_code" value="<?php echo $loan_code ?>" readonly="readonly" class="span11">
+                        <input type="hidden" name="hidden_code" value="<?php echo $hidden_code ?>">
+                        <input type="hidden" name="hidden_count" value="<?php echo $hidden_count ?>">            
+                    </div>    
                 </div>
+
+                <div class="control-group">
+                    <label class="control-label">Sales</label>
+                    <div class="controls">
+                        <select name="loan_sales" id="loan_sales" class="span11">
+                            <?php if ($sales==''): ?>
+                                <option value="x">Tidak ada sales di outlet ini</option>    
+                            <?php else:?>
+                                <option value="">Masukkan kode/nama Pegawai</option>
+                                <?php foreach ($sales as $row): ?>
+                                    <option value="<?php echo $row->workers_code ?>"><?php echo $row->name ?> - <?php echo $row->workers_code?></option>
+                                <?php endforeach ?>
+                            <?php endif;?>
+                        </select>
+                    </div>    
+                </div>
+
                 <div class="control-group">
                     <div class="span6">
                         <label class="control-label">Date</label>
                         <div class="controls">
-                            <input type="date" name="loan_start" class="span12" id="dateStart">
+                            <input type="date" name="loan_start" class="span12" id="dateStart" readonly="readonly">
                         </div>
                     </div>
                     <div class="span6">
@@ -65,7 +71,6 @@
                         </div>
                     </div>
                 </div>
-                <?php if (!$is_mobile): ?>
                 <div class="control-group">                
                     <div class="span6">
                         <label for="" class="control-label">Upload Photo</label>
@@ -73,15 +78,19 @@
                             <input type="file" accept="image/*" name="capture" id="capture" capture="camera">
                         </div>  
                     </div>
-                    <div class="span6">
-                        <label class="control-label">Ambil Foto</label>
-                        <div class="controls">
-                            <input type="checkbox" onchange="show_cam(this)">
-                            <span class="check"></span>
+                    <?php if (!$is_mobile): ?>
+                        <div class="span6">
+                            <label class="control-label">Ambil Foto</label>
+                            <div class="controls">
+                                <input type="checkbox" onchange="show_cam(this)">
+                                <span class="check"></span>
+                            </div>
                         </div>
-                    </div>
+                    <?php endif ?>
                 </div>
+
                 <!--CAN ONLY TAKE PHOTO WITH LAPTOP WEBCAM-->
+                <?php if (!$is_mobile): ?>
                 <div class="control-group text-center" id="snapshot" style="display: none">
                     <div class="span6">
                         <div id="my_camera" style="width:320px; height:240px; margin:auto"></div>
@@ -91,8 +100,32 @@
                         <div id="my_result" style="margin:auto"></div>        
                     </div> 
                 </div>
-            
                 <?php endif ?>
+
+                <div class="control-group">
+                    <label class="control-label">Keterangan</label>
+                    <div class="controls">
+                        <input type="text" name="loan_description" class="span11">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="span6">
+                        <label class="control-label">Total Item</label>
+                        <div class="controls">
+                            <input type="number" name="loan_item_total" id="loan_item_total" class="span12" readonly="readonly" value="1">
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <label class="control-label">Total Pinjaman</label>
+                        <div class="controls">
+                            <div class="input-prepend">
+                                <span class="add-on">Rp</span>
+                                <input type="number" name="loan_total" id="loan_total" class="span12" readonly="readonly" value="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
         </div>
     </div>
@@ -175,16 +208,16 @@
         <h5>Daftar Item</h5>
         <h5 class="btn btn-warning" onclick="addItem(this)">+ Tambah Item</h5>
     </div>
-    <div class="widget-content nopadding" id="itemform">
-        <input type="hidden" name="item_count" value="1" id="item_count" readonly="readonly">
-        <div class="widget-title item-title">
-            <h5>Item 1</h5>
-        </div>
-        <div class="row-fluid itemdata">
+    <div class="widget-content nopadding">
+        <div class="row-fluid" id="itemform">
+            <div class="widget-title item-title">
+                <h5>Item 1</h5>
+            </div>
+        
             <div class="control-group top-control">
                     <label for="" class="control-label">Nama item</label>
                     <div class="controls">
-                        <input type="text" name="item_name" placeholder="Nama item yang akan digadai" class="span11">
+                        <input type="text" name="item_name[]" placeholder="Nama item yang akan digadai" class="span11">
                     </div>
             </div>
             
@@ -213,7 +246,7 @@
             <div class="control-group">
                 <label class="control-label">Keterangan</label>
                 <div class="controls">
-                    <input type="text" name="item_description[]" placeholder="keterangan dari item yang digadai" class="span11">    
+                    <input type="text" name="item_description[]" placeholder="Keterangan dari item yang digadai" class="span11">    
                 </div>
             </div>
             <div class="control-group">
@@ -222,7 +255,7 @@
                     <div class="controls">    
                         <div class="input-prepend"> 
                             <span class="add-on">Rp</span>
-                            <input type="number" step="any" name="loan_price[]" class="span12" placeholder="Pinjaman yang didapat">
+                            <input type="number" step="any" name="item_loan_price[]" class="span12" placeholder="Pinjaman yang didapat" onblur="loan_calc(this)">
                         </div>
                     </div>    
                 </div>
@@ -230,15 +263,15 @@
                     <label class="control-label">Bunga</label>
                     <div class="controls">
                         <div class="input-prepend">
-                            <input type="number" step="any" name="interest_rate[]" class="span12" placeholder="Bunga pinjaman">
+                            <input type="number" step="any" name="item_interest_rate[]" class="span11" placeholder="Bunga pinjaman">
                             <span class="add-on">%</span>    
                         </div>
                         
                     </div>    
                 </div>
             </div>
-        </div><!--row fluid close-->
-    </div><!--widget content close-->
+        </div><!--widget content close-->
+    </div><!--row fluid close-->
     <div class="row-fluid">
         <!--FORM FOOTER-->
         <div class="form-actions text-center">
@@ -256,11 +289,26 @@
     $(document).ready(function(){
         $('#table_sale').footable();
         $('#loan_sales').selectize();
+        $('#loanform').validate({
+            ignore: [],
+            rules:{
+                loan_sales:"required",
+                loan_total:"required",
+                customer_code:"required",
+                customer_name: "required",
+                customer_birthday: "required",
+                customer_type: "required",
+                customer_phone: "required",
+                customer_address: "required",
+                'item_name[]':"required",
+                'item_loan_price[]':"required"
+            }
+        });
     });
 
-    <?php if($this->session->flashdata('customer')): ?>
+    <?php if($this->session->flashdata('loan')): ?>
 
-       <?php echo $this->session->flashdata('customer') ?>
+       <?php echo $this->session->flashdata('loan') ?>
 
     <?php endif; ?>
 
@@ -397,9 +445,24 @@
 <script type="text/javascript">
     //DUPLICATE THE ITEM FIELDS
     function addItem(el){
-        var count = parseInt($('#item_count').val())+1;
-        $('#item_count').val(count);
-        $('#itemform').append('<div class="widget-title item-title"><h5>Item '+count+'</h5></div>')
-        $('.itemdata').clone().appendTo('#itemform');
+        var count = parseInt($('#loan_item_total').val())+1;
+        $('#loan_item_total').val(count);
+        $('#itemform').append('<div class="widget-title item-title"><h5>Item '+count+'</h5></div>');
+        
+        $('#itemform').append("<div class='control-group top-control'><label class='control-label'>Nama item</label><div class='controls'><input type='text' name='item_name[]' placeholder='Nama item yang akan digadai' class='span11'></div></div>");
+        $('#itemform').append("<div class='control-group'><div class='span6'><label class='control-label'>Berat</label><div class='controls'><div class='input-prepend'><input type='number' step='any' name='item_weight[]' placeholder='Berat item' class='span12'><span class='add-on'>gr</span></div></div></div><div class='span6'><label class='control-label'>Kadar</label><div class='controls'><div class='input-prepend'><input type='number' step='any' name='item_gold_amount[]' placeholder='Kadar emas item' class='span12'><span class='add-on'>%</span></div></div></div></div>");
+        $('#itemform').append('<div class="control-group"><label class="control-label">Keterangan</label><div class="controls"><input type="text" name="item_description[]" placeholder="Keterangan dari item yang digadai" class="span11"></div></div>');
+        $('#itemform').append('<div class="control-group"><div class="span6"><label class="control-label">Pinjaman</label><div class="controls"><div class="input-prepend"><span class="add-on">Rp</span><input type="number" step="any" name="item_loan_price[]" class="span12" placeholder="Pinjaman yang didapat" onblur="loan_calc(this)"></div></div></div><div class="span6"><label class="control-label">Bunga</label><div class="controls"><div class="input-prepend"><input type="number" step="any" name="item_interest_rate[]" class="span12" placeholder="Bunga pinjaman"><span class="add-on">%</span></div></div></div></div>');
+    }
+</script>
+<script type="text/javascript">
+    //CALCULATE TOTAL LOAN
+    function loan_calc(el){
+        var total=0;
+        var prices = document.querySelectorAll("#loanform input[name='item_loan_price[]']");
+        for (i = 0; i < prices.length; i++) {
+            total = total + parseInt(prices[i].value);
+        }
+        $('#loan_total').val(total);
     }
 </script>

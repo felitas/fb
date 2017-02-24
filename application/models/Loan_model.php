@@ -3,17 +3,19 @@
 class Loan_model extends CI_Model{
 	//for admin can see all loan from any outlet
 	function get_loan_all_outlet(){
-		$this->db->select('loan.*,outlets.name as outlet');
+		$this->db->select('loan.*,outlets.name as outlet,customers.name as customer');
 		$this->db->from('loan');
 		$this->db->join('outlets','outlets.id = loan.outlet_id','left');
+		$this->db->join('customers','customers.customer_code = loan.customer_code');
 		$this->db->order_by('loan.date_due','asc');
 		return $this->db->get()->result();
 	}
 	//all other roles
 	function get_loan_this_outlet($outlet_id = ''){
-		$this->db->select('loan.*,outlets.name as outlet');
+		$this->db->select('loan.*,outlets.name as outlet,customers.name as customer');
 		$this->db->from('loan');
 		$this->db->join('outlets','outlets.id = loan.outlet_id','left');
+		$this->db->join('customers','customers.customer_code = loan.customer_code');
 		$this->db->where('loan.outlet_id',$outlet_id);		
 		$this->db->order_by('loan.date_due','asc');
 		return $this->db->get()->result();

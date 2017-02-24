@@ -332,24 +332,34 @@
 		
 		/*DELETE PRODUCT AJAX*/
 		public function delete_product($id=''){
-			if($this->crud_model->delete_data('products',array('id'=>$id))){
-				$this->session->set_flashdata('product',"$.gritter.add({
-						class_name : 'gritter-light',
-				 		title:	'Berhasil!',
-				 		text:	'Produk berhasil dihapus!',
-				 		time: 1500
-				});");
-				redirect('product');
-			}
-			else{
+			$product = $this->crud_model->get_by_condition('products',array('id' => $id))->row();
+			if($product){
+				$dir = 'uploads/photo/product/'.$product->tray_id;
+				unlink($product->photo);
+				rmdir($dir);
+				if($this->crud_model->delete_data('products',array('id'=>$id))){
+					$this->session->set_flashdata('product',"$.gritter.add({
+							class_name : 'gritter-light',
+					 		title:	'Berhasil!',
+					 		text:	'Produk berhasil dihapus!',
+					 		time: 1500
+					});");
+				}
+				else{
+					$this->session->set_flashdata('product',"$.gritter.add({
+					 		title:	'Gagal',
+					 		text:	'Produk gagal dihapus!',
+					 		time: 1500
+					});");	
+				}	
+			}else{
 				$this->session->set_flashdata('product',"$.gritter.add({
 				 		title:	'Gagal',
 				 		text:	'Produk gagal dihapus!',
 				 		time: 1500
 				});");	
-				redirect('product');
 			}
-			
+			redirect('product');
 		}
 
 		
