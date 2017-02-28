@@ -25,15 +25,6 @@
 		}
 		/****list loan END****/
 
-		/****Detail Transaksi Penjualan****/
-		public function detail($code = ''){
-			$data['title'] = 'Detail Penjualan';
-			$data['details'] = $this->sale->get_sale_detail($this->session_outlet,$code);
-			
-			$this->template->load($this->default,'sale/sale_detail',$data);
-		}
-		/****Detail Transaksi Penjualan END****/
-
 
 		/**** LOAN START ****/
 		public function upload(){
@@ -245,6 +236,14 @@
 				
 			}
 			redirect('loan');
+		}
+
+		public function loan_detail($code = ''){
+			$data['title']	= 'Detail Gadai';
+			$data['loan']	= $this->loan_model->get_loan_data($code);
+			$data['loan_details'] = $this->loan_model->get_loan_details($code);
+			$data['loan_histories'] = $this->loan_model->get_loan_history($code);
+			$this->template->load($this->default,'loan/loan_detail',$data);
 		}
 
 		

@@ -9,6 +9,13 @@ class Customer_model extends CI_Model{
 		return $this->db->get()->result();
 	}
 
+	function get_customer_detail($code = ''){
+		$this->db->select('customers.*');
+		$this->db->from('customers');
+		$this->db->where('customers.code',$code);
+		return $this->db->get()->row();
+	}
+
 
 }
 

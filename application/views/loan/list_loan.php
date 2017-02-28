@@ -32,7 +32,7 @@
 								<th data-type="numeric"></th>
 								<th>Kode Gadai</th>
 								<th data-hide="phone">Customer</th>
-								<th data-hide="phone">Start Date</th>
+								<th data-hide="phone">Issue Date</th>
 								<th data-hide="phone">Due Date</th>
 								<th data-hide="phone">Jumlah Barang</th>
 								<th data-hide="phone">Total Pinjaman</th>
@@ -50,7 +50,7 @@
 								<?php foreach($loans as $loan): ?>
 								<tr>
 									<td><?php echo $i ?></td>
-									<td><?php echo $loan->loan_code?></td>
+									<td><a href="<?php echo base_url('loan/loan_detail/').$loan->loan_code?>"><?php echo $loan->loan_code?></a></td>
 									<td><?php echo $loan->customer ?></td>
 									<td><?php echo date('d-M-Y',strtotime($loan->date_start)) ?></td>
 									<td><?php echo date('d-M-Y',strtotime($loan->date_due)) ?></td>
