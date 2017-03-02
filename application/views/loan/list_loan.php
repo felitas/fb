@@ -13,6 +13,13 @@
 	.loan_detail{
 		color: #3498db !important;
 	}
+	.green{
+		color: green !important;
+	}
+	.yellow{
+		color: #f1c40f !important;
+	}
+
 </style>
 
 <div class="container-fluid">
@@ -59,7 +66,7 @@
 									<td><?php echo date('d-M-Y',strtotime($loan->date_due)) ?></td>
 									<td><?php echo $loan->total_item ?></td>
 									<td><?php echo 'Rp '. number_format($loan->total_loan,2,',','.') ?></td>
-									<td><?php echo $loan->status ?></td>
+									<td><p class="<?php echo ($loan->status=='Lunas')?'green':'yellow'?>"><strong><?php echo $loan->status ?></strong></p></td>
 									<!-- <td>
 										<?php #if($loan->description!=NULL):?>
 											<?php #echo $loan->description ?>
