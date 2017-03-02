@@ -9,11 +9,17 @@
             
                 <?php echo form_open('customer/add_customer', array('class'=>'form-horizontal', 'id'=>'customerform')) ?>
                 <div class="control-group top-control">
+                    <label class="control-label">Nama Customer</label>
+                    <div class="controls">
+                        <input type="text" placeholder="Nama Customer" name="customer_name" class="span11">
+                    </div>
+                </div>
+                <div class="control-group">
                     <div class="row-fluid">
                         <div class="span6">
-                            <label class="control-label">Nama Customer</label>
+                            <label class="control-label">No KTP</label>
                             <div class="controls">
-                                <input type="text" placeholder="Nama Customer" name="customer_name" class="span12">
+                                <input type="text" name="customer_ktp" class="span12" placeholder="Nomor KTP customer">
                             </div>            
                         </div>    
                         <div class="span6">
@@ -37,10 +43,18 @@
                             </div>  
                         </div>
                         <div class="span6">
-                            <label class="control-label">No. Telepon</label>
-                            <div class="controls">
-                                <input type="text" placeholder="Nomor Telepon Customer" name="customer_phone" class="span11">
-                            </div>        
+                            <?php if($role=='admin'):?>
+                                    <label for="" class="control-label">Grade</label>
+                                    <div class="controls">
+                                        <select name="customer_grade" id="" class="span11">    
+                                            <?php foreach ($grades as $grade): ?>
+                                                <option value="<?php echo $grade->id?>"><?php echo $grade->name?></option>
+                                            <?php endforeach ?>
+                                        </select>
+                                    </div>
+                            <?php else:?>
+                                <input type="hidden" name="customer_grade" value="1">
+                            <?php endif?>
                         </div>
                     </div>
                 </div>
@@ -53,28 +67,21 @@
                             </div>        
                         </div>
                         <div class="span6">
-                            <label for="" class="control-label">Alamat</label>
+                            <label class="control-label">No. Telepon</label>
                             <div class="controls">
-                                <textarea placeholder="Alamat Customer" name="customer_address" class="span11"></textarea>
+                                <input type="text" placeholder="Nomor Telepon Customer" name="customer_phone" class="span11">
                             </div>        
                         </div>
                     </div>
                 </div>
+                <div class="control-group">
+                    <label for="" class="control-label">Alamat</label>
+                    <div class="controls">
+                        <textarea placeholder="Alamat Customer" name="customer_address" class="span11"></textarea>
+                    </div>                           
+                </div>
+ 
                 
-                <?php if($role=='admin'):?>
-                    <div class="control-group">
-                        <label for="" class="control-label">Grade</label>
-                        <div class="controls">
-                            <select name="customer_grade" id="" class="span4">
-                                <option value="1">Regular</option>
-                                <option value="2">Gold</option>
-                                <option value="3">Platinum</option>
-                            </select>
-                        </div>
-                    </div>
-                <?php else:?>
-                    <input type="hidden" name="customer_grade" value="1">
-                <?php endif?>
                 <div class="form-actions text-center">
                     <input type="submit" name="submit" class="btn btn-info" value="Submit">
                 </div>
@@ -90,9 +97,9 @@ $(document).ready(function(){
     $('#customerform').validate({
         rules:{
             customer_name: "required",
+            customer_ktp: "required",
             customer_birthday: "required",
             customer_type: "required",
-            customer_phone: "required",
             customer_address: "required"
         }
     });

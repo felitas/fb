@@ -39,6 +39,7 @@
 					'customer_code' =>$customer_code,
             		'name' => $this->input->post('customer_name'),
             		'birthday'=> $this->input->post('customer_birthday'),
+            		'ktp'=>$this->input->post('customer_ktp'),
             		'type' => $this->input->post('customer_type'),
             		'phone' => $this->input->post('customer_phone'),
             		'email' => $this->input->post('customer_email'),
@@ -66,6 +67,7 @@
 
 			}else{
 				$data['title'] = 'Customer';
+				$data['grades'] = $this->crud_model->get_data('customer_grade')->result();
 				$data['is_mobile'] = $this->is_mobile;
 				$this->template->load($this->default,'customer/add_customer',$data);
 			}
@@ -78,6 +80,7 @@
 					$data_customer = array(
 	            		'name' => $this->input->post('customer_name'),
 	            		'birthday'=> $this->input->post('customer_birthday'),
+	            		'ktp'=>$this->input->post('customer_ktp'),
 	            		'type' => $this->input->post('customer_type'),
 	            		'phone' => $this->input->post('customer_phone'),
 	            		'email' => $this->input->post('customer_email'),
@@ -119,6 +122,7 @@
 				$data['title'] = 'Customer';
 				$data['is_mobile'] = $this->is_mobile;
 				$data['customer'] = $this->crud_model->get_by_condition('customers',array('id' => $cust_id))->row();
+				$data['grades']	= $this->crud_model->get_data('customer_grade')->result();
 				$this->template->load($this->default,'customer/edit_customer',$data);
 			}
 		}
