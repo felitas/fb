@@ -180,7 +180,7 @@
         <ul>
           <li><a href="<?php echo base_url('sale')?>"><i class="fa fa-file-text faicon"></i> Daftar Penjualan</a></li>
           <li><a href="<?php echo base_url('sale/new_sale')?>"><i class="fa fa-plus-square faicon"></i> Penjualan Baru</a></li>
-          <li><a href=""><i class="fa fa-calendar-check-o faicon"></i> Daftar Booking</a></li>
+          <li><a href=""><i class="fa fa-file-text faicon"></i> Daftar Booking</a></li>
           <li><a href=""><i class="fa fa-check-square faicon"></i> Booking Baru</a></li>
         </ul>
       </li>
@@ -227,6 +227,12 @@
           <li><a href="<?php echo base_url('customer/add_customer') ?>"><i class="fa fa-user-plus faicon"></i> Tambah Customer</a></li>
           <li><a href="<?php echo base_url('supplier') ?>"><i class="fa fa-file-text faicon"></i> Daftar Supplier</a></li>
           <li><a href="<?php echo base_url('supplier/add_supplier') ?>"><i class="fa fa-male faicon"></i> Tambah Supplier</a></li>
+        </ul>
+      </li>
+      <li class="submenu"> <a href="#"><i class="fa fa-address-card-o"></i><span>Absensi</span></a>
+        <ul>
+          <li><a href="<?php echo base_url('absence/new_absence') ?>"><i class="fa fa-calendar-check-o faicon"></i> Absensi</a></li>
+          <li><a href="<?php echo base_url('absence') ?>"><i class="fa fa-file-text faicon"></i> Daftar Absensi</a></li>
         </ul>
       </li>
       <li class="submenu"> <a href="#"><i class="fa fa-gear"></i><span>Konfigurasi</span></a>
