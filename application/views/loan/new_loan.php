@@ -153,12 +153,18 @@
                 </div>
                 
             <!--///////////////////////FIELDS SHOWING CUSTOMER DATA//////////////////////////////////////////////-->
-            <div class="control-group new-customer hide-field">
+            <div class="control-group new-customer">
+                <label class="control-label">Nama Customer</label>
+                <div class="controls">
+                    <input type="text" placeholder="Nama Customer" name="customer_name" class="span11" id="customer_name">
+                </div>
+            </div>
+            <div class="control-group new-customer">
                 <div class="span6">
-                    <label class="control-label">Nama Customer</label>
+                    <label class="control-label">No. KTP</label>
                     <div class="controls">
-                        <input type="text" placeholder="Nama Customer" name="customer_name" class="span12" id="customer_name">
-                    </div>    
+                        <input type="text" placeholder="Nomor KTP customer" name="customer_ktp" class="span12" id="customer_ktp"> 
+                    </div>      
                 </div>
                 <div class="span6">
                     <label class="control-label">Tipe Customer</label>
@@ -171,7 +177,7 @@
                 </div>
             </div>
 
-            <div class="control-group new-customer hide-field">
+            <div class="control-group new-customer">
                 <div class="span6">
                     <label for="" class="control-label">Email</label>
                     <div class="controls">

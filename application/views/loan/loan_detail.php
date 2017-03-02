@@ -1,8 +1,3 @@
-<style type="text/css">
-	.table-items>thead>tr>th{
-		font-size: 14px !important;
-	}
-</style>
 <div class="container-fluid">
 	<div class="row-fluid">
     	<a href="<?php echo base_url('loan') ?>"><span class="fa fa-arrow-circle-o-left"></span> Kembali ke daftar transaksi gadai</a>
@@ -93,16 +88,17 @@
         </div>
         <div class="row-fluid">
         	<div class="span12">
-                <table class="table table-bordered table-items">
+            	<div class="table-responsive toggle-circle-filled">
+                <table class="table table-bordered" id="table_loan" data-filter="#filter" data-page-size="10">
                   <thead>
-                    <tr>
+                    
                       <th>Nama Barang</th>
-                      <th>Berat</th>
-                      <th>Kadar Emas</th>
+                      <th data-hide="phone">Berat</th>
+                      <th data-hide="phone">Kadar Emas</th>
                       <th>Pinjaman</th>
                       <th>Bunga</th>
-                      <th>Keterangan</th>
-                    </tr>
+                      <th data-hide="phone">Keterangan</th>
+                    
                   </thead>
                   <tbody>
                   	<?php foreach($loan_details as $detail):?>
@@ -116,11 +112,64 @@
                   		</tr>
                   	<?php endforeach?>
                   </tbody>
+                  <tfoot>
+	                    <tr>
+	                        <td colspan="6">
+	                            <div class="pagination pagination-centered"></div>
+	                        </td>
+	                    </tr>
+                  </tfoot>
                 </table>
+                </div>
             </div>
         </div>
     </div>
 	</div>
+	<!--WIDGET BOX FOR HISTORY-->
+    <div class="widget-box">
+        <div class="widget-title">
+            <h5>Update History</h5>
+        </div>
+        <div class="widget-content">
+            <div class="row-fluid">
+                <div class="table-responsive toggle-circle-filled">
+                    <table class="table table-bordered" id="table_history" data-filter="#filter" data-page-size="10">
+                        <thead>
+                            <th data-type="numeric">Date</th>
+                            <th>Kode Sales</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th data-hide="phone">Keterangan</th>
+                        </thead>
+                        <tbody>
+                            <?php if($loan_histories!=NULL):?>
+                                <?php foreach($loan_histories as $history):?>
+                                    <tr>
+                                        <td><?php echo date('d-M-Y H:i:s',strtotime($history->date))?></td>
+                                        <td><?php echo $history->workers_code?></td>
+                                        <td><?php echo date('d-M-Y',strtotime($history->date_due))?></td>
+                                        <td><?php echo $history->status?></td>
+                                        <td><?php echo $history->description?></td>
+                                    </tr>
+                                <?php endforeach?>
+                            <?php else:?>
+                                <tr>
+                                    <td colspan="5" class="nocontent"><h3>Table kosong</h3></td>
+                                </tr>
+                            <?php endif?>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    <div class="pagination pagination-centered"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="<?php echo base_url() ?>js/alertify.min.js"></script>
 <script>
@@ -129,7 +178,7 @@
         <?php if($this->session->flashdata('loan')): ?>
             <?php echo $this->session->flashdata('loan') ?>
         <?php endif; ?>
-
         $('#table_loan').footable();
+        $('#table_history').footable();
     });
 </script>

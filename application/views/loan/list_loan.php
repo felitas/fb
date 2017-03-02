@@ -10,6 +10,9 @@
 	.action{
 		text-align: center !important;
 	}
+	.loan_detail{
+		color: #3498db !important;
+	}
 </style>
 
 <div class="container-fluid">
@@ -50,7 +53,7 @@
 								<?php foreach($loans as $loan): ?>
 								<tr>
 									<td><?php echo $i ?></td>
-									<td><a href="<?php echo base_url('loan/loan_detail/').$loan->loan_code?>"><?php echo $loan->loan_code?></a></td>
+									<td><a href="<?php echo base_url('loan/loan_detail/').$loan->loan_code?>" class="loan_detail"><?php echo $loan->loan_code?></a></td>
 									<td><?php echo $loan->customer ?></td>
 									<td><?php echo date('d-M-Y',strtotime($loan->date_start)) ?></td>
 									<td><?php echo date('d-M-Y',strtotime($loan->date_due)) ?></td>

@@ -114,7 +114,8 @@
 							'email'		=> $this->input->post('customer_email'),
 							'address'	=> $this->input->post('customer_address'),
 							'type'		=> $this->input->post('customer_type'),
-							'birthday'=> $this->input->post('customer_birthday')
+							'birthday'=> $this->input->post('customer_birthday'),
+							'ktp'		=> $this->input->post('customer_ktp')
 						);
 
 					$this->db->insert('customers', $data_customer);
@@ -237,7 +238,7 @@
 			}
 			redirect('loan');
 		}
-
+		//to see all detail of the loan
 		public function loan_detail($code = ''){
 			$data['title']	= 'Detail Gadai';
 			$data['loan']	= $this->loan_model->get_loan_data($code);
@@ -245,8 +246,50 @@
 			$data['loan_histories'] = $this->loan_model->get_loan_history($code);
 			$this->template->load($this->default,'loan/loan_detail',$data);
 		}
-
-		
+		//update loan due date and sales
+		public function update_loan($code = ''){
+			if($this->input->post()){
+				$data_history	= array(
+					'loan_code'		=> $code,
+					'workers_code'	=> $this->input->post('loan_sales'),
+					'date_due'		=> $this->input->post('loan_due'),
+					'status'	=> $this->input->post('loan_status'),
+					'description'	=> $this->input->post('loan_description')
+				);
+				$data_loan	= array(
+					'workers_code'	=> $this->input->post('loan_sales'),
+					'date_due'		=> $this->input->post('loan_due'),
+					'status'	=> $this->input->post('loan_status'),
+					'description'	=> $this->input->post('loan_description')
+				);
+				if($this->crud_model->update_data('loan',$data_loan,array('loan_code'=>$code))){
+					$this->crud_model->insert_data('loan_history',$data_history);
+					$this->session->set_flashdata('loan',"$.gritter.add({
+							class_name : 'gritter-light',
+					 		title:	'Berhasil!',
+					 		text:	'Transaksi gadai berhasil di update!',
+					 		time: 1200
+					});");
+				}
+				else{
+					$this->session->set_flashdata('loan',"$.gritter.add({
+					 		title:	'Gagal!',
+					 		text:	'Transaksi gadai gagal di update!',
+					 		time: 1200
+					});");
+				}
+				redirect('loan');
+			}
+			else{
+				$this->load->model('sales_model');
+				$data['title']	=	'Update Gadai';
+				$data['loan']	= $this->loan_model->get_loan_data($code);
+				$data['loan_histories'] = $this->loan_model->get_loan_history($code);
+				$data['sales'] = $this->sales_model->get_outlet_sales($this->session_outlet);
+				$data['loan_histories'] = $this->loan_model->get_loan_history($code);
+				$this->template->load($this->default,'loan/update_loan',$data);	
+			}
+		}
 
 	}
 

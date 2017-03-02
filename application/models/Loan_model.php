@@ -44,6 +44,7 @@ class Loan_model extends CI_Model{
 		$this->db->from('loan_history');
 		$this->db->join('accounts','accounts.workers_code=loan_history.workers_code');
 		$this->db->where('loan_history.loan_code',$code);
+		$this->db->order_by('loan_history.date','desc');
 		return $this->db->get()->result();
 	}
 
